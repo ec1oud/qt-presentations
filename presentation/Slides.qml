@@ -2,7 +2,6 @@ import QtQuick 2.1
 import Qt.labs.presentation 1.0
 
 import "examples/mouse"
-import "examples/key"
 
 Presentation {
     id: presentation
@@ -24,26 +23,22 @@ Presentation {
         titleColor: "white"
         title: "Input and Qt Quick"
         centeredText: "
-Mouse, Touch and Keyboard handling in Qt Quick
+Touch-oriented application development in Qt Quick
 
-Qt Developer Days 2013
+Open Source Developers Conference 2015
 
-Frederik Gladhorn
-frederik.gladhorn@digia.com"
+Shawn Rutledge
+shawn.rutledge@theqtcompany.com"
     }
 
     Slide {
         title: "About me"
-        Image { anchors.right: parent.right; source: "images/frederik.jpg";
-            height: parent.height
-            fillMode: Image.PreserveAspectFit
-        }
         content: [
-            "KDE since ~2005",
-            "Digia - Oslo",
-            "Qt Accessibility",
-            "Enginio",
-            "Qt Quick Controls input",
+            "Qt user since ~2004",
+            "The Qt Company - Oslo",
+            "Touch",
+            "X11 and OS X",
+            "Qt Quick Controls and Dialogs",
         ]
     }
 
@@ -52,8 +47,7 @@ frederik.gladhorn@digia.com"
         content: [
             "",
             "Mouse",
-            "Touch",
-            "Keyboard",
+            "Touch"
         ]
     }
 
@@ -210,8 +204,6 @@ frederik.gladhorn@digia.com"
         ]
     }
 
-    Cam {}
-
     Slide {
         title: "MultiPointTouchArea"
         content: [
@@ -219,8 +211,6 @@ frederik.gladhorn@digia.com"
             "low level events",
         ]
     }
-
-    Cam {}
 
     Slide {
         title: "Touch and Mouse Event Delivery"
@@ -237,142 +227,7 @@ frederik.gladhorn@digia.com"
     }
 
     Slide {
-        centeredText: "Keyboard"
-        fontScale: 2
-    }
-//    Slide {
-//        title: "Keyboard"
-//        content: [
-//            "Basics",
-//            "Focus",
-//            "Shortcuts",
-//        ]
-//    }
-    Slide {
-        title: "Attached properties"
-        content: [
-            "Keys.onSpacePressed",
-            "Keys.onPressed (not accepted by default!)",
-            "Keys.onReleased (not accepted by default!)",
-            "KeyNavigation",
-        ]
-    }
-
-    CodeSlide {
-        title: "Press space and ..."
-        sourceFile: "examples/key/Simple1.qml"
-    }
-    CodeSlide {
-        title: "Focus"
-        sourceFile: "examples/key/Simple2.qml"
-    }
-    Slide {
-        centeredText: "What happens if two items have \"focus: true\"?"
-    }
-
-//    Slide {
-//        title: "No Focus no Keys"
-//        content: [
-//            "active focus item",
-//            "exclusive",
-//            "scoping of focus"
-//        ]
-//    }
-//    Slide {
-//        title: "Focus and two Rectangles?"
-//        //sourceFile: "examples/key/TwoRects.qml"
-//        TwoRects { anchors.centerIn: parent; Component.onCompleted: forceActiveFocus() }
-//    }
-
-//    Slide {
-//        title: "Example: Tree of items"
-//        Image { anchors.centerIn: parent; source: "images/focus_tree.png"
-//        }
-//    }
-//    CodeSlideLong {
-//        title: "A tree of objects"
-//        sourceFile: "examples/key/Tree.qml"
-//    }
-//    CodeSlideLong {
-//        title: "A tree with focus scopes"
-//        sourceFile: "examples/key/TreeFocusScopes.qml"
-//    }
-
-    Tree {
-        property bool isSlide: true
-        visible: false
-        anchors.centerIn: parent
-    }
-    TreeFocusScopes {
-        property bool isSlide: true
-        visible: false
-        anchors.centerIn: parent
-    }
-
-    Slide {
-        title: "Settig the Focus in Qt Quick"
-        content: [
-            "activeFocus: the focus item",
-            "forceActiveFocus(): function to set the focus to item and all it's parents",
-            "focus: items that have the focus in their respective parent focus scope",
-        ]
-    }
-    Slide {
-        title: "FocusScope"
-        content: [
-            "partitions the hierarchy",
-            "lists, loaders, tabs, stacks",
-            "forwards focus to child when it gets \"focus: true\"",
-        ]
-    }
-//    Slide {
-//        title: "KeyNavigation"
-//        content: [
-//            "arrow keys",
-//            "tab and back-tab",
-//        ]
-//    }
-    CodeSlideLong {
-        title: "KeyNavigation"
-        sourceFile: "examples/key/KeyNavigation.qml"
-    }
-//    Slide {
-//        title: "activeFocusOnTab"
-//        content: [
-//            "Focus chain",
-//            "Like a walk in the graph, picks the next item with activeFocusOnTab set",
-//            "Just works, except when the order is not order of creation, then manual override needed...",
-//        ]
-//    }
-    CodeSlideLong {
-        title: "activeFocusOnTab"
-        sourceFile: "examples/key/ActiveFocusOnTab.qml"
-    }
-
-    Slide {
-        title: "Action!"
-        content: [
-            "Qt Quick.Controls",
-            "ShortcutOverride",
-        ]
-    }
-    CodeSlideLong {
-        title: "Actions (Qt Quick Controls)"
-        sourceFile: "examples/key/Actions.qml"
-    }
-    Slide {
-        title: "ShortcutOverride"
-        content: [
-            "event",
-            "sent to active focus item/widget",
-            "just before shortcut would trigger",
-            "when accepted delivered as regular key event",
-        ]
-    }
-
-    Slide {
         title: "Questions?"
-        centeredText: "Frederik Gladhorn\nfrederik.gladhorn@digia.com\n\nfregl on #qt-labs (freenode irc)"
-
+        centeredText: "Shawn Rutledge\nshawn.rutledge@theqtcompany.com\n\necloud on #qt-labs (freenode irc)"
     }
 }

@@ -1,5 +1,5 @@
 TEMPLATE = subdirs
-SUBDIRS = src helper
+SUBDIRS = src helper presentation
 
 
 
