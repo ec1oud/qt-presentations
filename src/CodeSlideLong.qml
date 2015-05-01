@@ -83,7 +83,7 @@ Rectangle {
         id: titleText
         font.pixelSize: titleFontSize
         text: title;
-        anchors.right: background.right
+        anchors.horizontalCenter: background.horizontalCenter
         anchors.top: background.top
         anchors.topMargin: 10
         anchors.rightMargin: 15
