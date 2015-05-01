@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.0
 import Qt.labs.presentation 1.0
 
 import "examples/mouse"
@@ -86,7 +86,7 @@ shawn.rutledge@theqtcompany.com"
 //            "steal",
 //        ]
 //    }
-    CodeSlideLong {
+    CodeSlide {
         id: mouseHoverSlide
         title: "Hover"
         sourceFile: "examples/mouse/MouseHover.qml"
@@ -105,8 +105,14 @@ shawn.rutledge@theqtcompany.com"
 //        ]
 //    }
     CodeSlideLong {
+        id: roundMouseAreaSlide
         title: "Round MouseArea"
         sourceFile: "examples/mouse/MouseCustomShape.qml"
+    }
+    MouseCustomShape {
+        visible: roundMouseAreaSlide.visible
+               anchors.right: presentation.right; anchors.top: presentation.top; border.color: "black";
+               width: 300; height: 300
     }
 
     Slide {
@@ -194,6 +200,18 @@ shawn.rutledge@theqtcompany.com"
 //            "stealing",
 //        ]
 //    }
+
+    CodeSlide {
+        id: flickableSlide
+        title: "Flickable"
+        sourceFile: "examples/mouse/Flickable.qml"
+    }
+    Flick {
+        visible: flickableSlide.visible
+               anchors.right: presentation.right; anchors.top: presentation.top; border.color: "black";
+               width: 300; height: 300
+    }
+
     Slide {
         title: "PinchArea"
         content: [
