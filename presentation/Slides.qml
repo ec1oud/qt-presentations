@@ -11,13 +11,14 @@ Presentation {
 //    height: 720
 
     SlideCounter {}
-    Clock{}
+    Clock {}
 
     Image {
         anchors.fill: parent
         source: "images/template.png"
         visible: title.visible
     }
+
     Slide {
         id: title
         titleColor: "white"
@@ -64,55 +65,42 @@ shawn.rutledge@theqtcompany.com"
             "custom component inheriting QQuickItem",
         ]
     }
-    CodeSlide {
-        id: mouseAreaSlide
+
+    CodeSlideInteractive {
         title: "MouseArea"
         sourceFile: "examples/mouse/Mouse.qml"
     }
-    Mouse { visible: mouseAreaSlide.visible
-        anchors.right: presentation.right; anchors.top: presentation.top; border.color: "black";
-        width: 300; height: 300
+
+    Slide {
+        title: "MouseArea"
+        content: [
+            "non-visual QQuickItem",
+            "geometry",
+            "handlers for mouse events",
+            "stacking possible",
+            'hover',
+            "grab",
+            "steal",
+        ]
     }
 
-//    Slide {
-//        title: "MouseArea"
-//        content: [
-//            "non-visual QQuickItem",
-//            "geometry",
-//            "handlers for mouse events",
-//            "stacking possible",
-//            'hover',
-//            "grab",
-//            "steal",
-//        ]
-//    }
-    CodeSlide {
-        id: mouseHoverSlide
+    CodeSlideInteractive {
         title: "Hover"
         sourceFile: "examples/mouse/MouseHover.qml"
     }
-    MouseHover {
-        visible: mouseHoverSlide.visible
-               anchors.right: presentation.right; anchors.top: presentation.top; border.color: "black";
-               width: 300; height: 300
+
+    Slide {
+        title: "MouseArea - geometry"
+        content: [
+            "anchors.fill: parent",
+            "can be made custom shaped by not accepting events",
+            "inverse paint order when stacked",
+        ]
     }
-//    Slide {
-//        title: "MouseArea - geometry"
-//        content: [
-//            "anchors.fill: parent",
-//            "can be made custom shaped by not accepting events",
-//            "inverse paint order when stacked",
-//        ]
-//    }
-    CodeSlideLong {
-        id: roundMouseAreaSlide
+
+    CodeSlideInteractive {
         title: "Round MouseArea"
         sourceFile: "examples/mouse/MouseCustomShape.qml"
-    }
-    MouseCustomShape {
-        visible: roundMouseAreaSlide.visible
-               anchors.right: presentation.right; anchors.top: presentation.top; border.color: "black";
-               width: 300; height: 300
     }
 
     Slide {
@@ -125,6 +113,7 @@ shawn.rutledge@theqtcompany.com"
             "events by default accepted",
         ]
     }
+
     Slide {
         title: "MouseArea"
         Row {
@@ -150,18 +139,20 @@ shawn.rutledge@theqtcompany.com"
             }
         }
     }
-    CodeSlideLong {
+
+    CodeSlideInteractive {
         title: "Two MouseAreas"
         sourceFile: "examples/mouse/MouseStack.qml"
     }
-    CodeSlideLong {
+
+    CodeSlideInteractive {
         title: "Events, Pressed and Hover"
         sourceFile: "examples/mouse/MouseStack2.qml"
     }
 
-    CodeSlideLong {
+    CodeSlideInteractive {
         title: "Flickable"
-        sourceFile: "examples/mouse/Flickable.qml"
+        sourceFile: "examples/mouse/Flick.qml"
     }
     Slide {
         title: "Flickable"
@@ -172,7 +163,8 @@ shawn.rutledge@theqtcompany.com"
             "prevent grab",
         ]
     }
-    CodeSlideLong {
+
+    CodeSlideInteractive {
         title: "Prevent Stealing"
         sourceFile: "examples/mouse/Flickable2.qml"
     }
@@ -192,24 +184,19 @@ shawn.rutledge@theqtcompany.com"
             "Custom C++",
         ]
     }
-//    Slide {
-//        title: "Touch"
-//        content: [
-//            "synth mouse",
-//            "propagation",
-//            "stealing",
-//        ]
-//    }
 
-    CodeSlide {
-        id: flickableSlide
+    Slide {
+        title: "Touch"
+        content: [
+            "synth mouse",
+            "propagation",
+            "stealing",
+        ]
+    }
+
+    CodeSlideInteractive {
         title: "Flickable"
         sourceFile: "examples/mouse/Flickable.qml"
-    }
-    Flick {
-        visible: flickableSlide.visible
-               anchors.right: presentation.right; anchors.top: presentation.top; border.color: "black";
-               width: 300; height: 300
     }
 
     Slide {

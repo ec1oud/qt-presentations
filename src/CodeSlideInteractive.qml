@@ -45,8 +45,9 @@ import Qt.labs.presentation.helper 1.0
 
 import QtQuick.Controls 1.0
 import QtQuick.Window 2.1
+import QtGraphicalEffects 1.0
 
-Slide {
+Item {
     id: slide;
 
     // Either set an example file
@@ -57,13 +58,50 @@ Slide {
     property string codeFontFamily: parent.codeFontFamily;
     property real codeFontSize: baseFontSize * 0.6;
 
-    Rectangle {
-        id: background
-        border.color: slide.textColor;
-        border.width: 1
-        width: parent.width
-        height: codeLineHeight * listModel.count
-        color: "#eee"
+    property bool isSlide: true;
+
+    property string title;
+    property variant content: []
+    property string centeredText
+    property string writeInText;
+    property string notes;
+
+    property real fontSize: parent.height * 0.05
+    property real fontScale: 1
+
+    property real baseFontSize: fontSize * fontScale
+    property real titleFontSize: fontSize * 1.2 * fontScale
+    property real bulletSpacing: 1
+
+    property real contentWidth: width
+
+    // Define the slide to be the "content area"
+    x: parent.width * 0.01
+    y: parent.height * 0.1
+    width: parent.width * 0.98
+    height: parent.height * 0.89
+
+    property real masterWidth: parent.width
+    property real masterHeight: parent.height
+
+    property color titleColor: parent.titleColor;
+    property color textColor: parent.textColor;
+    property string fontFamily: parent.fontFamily;
+
+    visible: false
+
+    Text {
+        id: titleText
+        font.pixelSize: titleFontSize
+        text: title;
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.top
+        anchors.bottomMargin: parent.fontSize * 0.5
+        font.bold: true;
+        font.family: slide.fontFamily
+        color: slide.titleColor
+        horizontalAlignment: Text.Center
+        z: 1
     }
 
     Text {
@@ -79,10 +117,11 @@ Slide {
         listModel.clear();
         var codeLines = slide.code.split("\n");
         for (var i=0; i<codeLines.length; ++i) {
-            listModel.append({
-                                line: i,
-                                code: codeLines[i]
-                             });
+            if (codeLines[i].length > 0 || i < codeLines.length - 1)
+                listModel.append({
+                                    line: i,
+                                    code: codeLines[i]
+                                 });
         }
     }
 
@@ -99,7 +138,7 @@ Slide {
         id: listView;
 
         anchors.fill: parent;
-        anchors.margins: background.radius / 2
+//        anchors.margins: background.radius / 2
         clip: true
 
         model: listModel;
@@ -163,52 +202,27 @@ Slide {
         }
     }
 
-//    Button {
-//        id: b
-//        text: "Run"
-//        anchors.right: parent.right
-//        anchors.bottom: parent.bottom
-//        visible: helper.source.length > 0
-
-//        onClicked: {
-//            ex.visible = true
-//            loader.source = "" // force reload
-//            loader.source = helper.sourcePath
-//        }
-//    }
-
-    Action {
-        enabled: slide.visible
-        shortcut: "x"
-        onTriggered: {
-            ex.visible = true
-            loader.source = "" // force reload
-            loader.source = helper.sourcePath
-        }
-    }
-    Action {
-        enabled: slide.visible
-        shortcut: "r"
-        onTriggered: {
-            ex.visible = true
-            loader.source = "" // force reload
-            loader.source = helper.sourcePath
-        }
-    }
-
     ExampleHelper {
         id: helper
         source: slide.visible ? sourceFile : ""
     }
 
-    Window {
-        id: ex
-        width: loader.width
-        height: loader.height
+    RectangularGlow {
+        color: "white"
+        spread: 0.2
+        glowRadius: 30
+        cornerRadius: 50
+        anchors.right: parent.right
+        anchors.top: parent.top
+        width: 300
+        height: 300
 
         Loader {
             id: loader
             focus: true
+            anchors.centerIn: parent
+            source: slide.visible ? helper.sourcePath : ""
         }
+//        Component.onCompleted: parent = parent.parent
     }
 }
