@@ -1,14 +1,14 @@
 import QtQuick 2.0
 
 Rectangle {
-    width: 600; height: width
+    width: 260; height: width
     color: parentMouse.pressed ? "green" : "yellow"
     MouseArea { id: parentMouse; anchors.fill: parent }
 
     Rectangle {
         id: rect
         anchors.centerIn: parent
-        width: 320; height: width; radius: width / 2
+        width: 300; height: width; radius: width / 2
         color: mouse.pressed ? "blue" : "lightsteelblue"
 
         MouseArea {

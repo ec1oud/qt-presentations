@@ -64,8 +64,8 @@ Text {
     font.family: fontFamily;
     font.pixelSize: fontSize * fontScale;
 
-    anchors.bottom: parent.bottom;
-    anchors.left: parent.left;
+    anchors.top: parent.top;
+    anchors.right: parent.right;
     anchors.margins: font.pixelSize;
 
     Timer {
