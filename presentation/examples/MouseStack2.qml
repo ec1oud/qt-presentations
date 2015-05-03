@@ -1,10 +1,10 @@
 import QtQuick 2.0
 
-Rectangle {
-    width: 600; height: 600;
+Item {
+    x: 50; y: 200;  width: 250; height: 250;
     Rectangle {
-        x: 100; y: 100; width: 300; height: 300;
-        color: mouse.containsMouse ? "blue" : "lightsteelblue"
+        width: 200; height: 200;
+        color: mouse.pressed ? "red" : (mouse.containsMouse ? "blue" : "lightsteelblue")
         MouseArea {
             id: mouse
             anchors.fill: parent
@@ -12,14 +12,14 @@ Rectangle {
         }
     }
     Rectangle {
-        x: 200; y: 200; width: 300; height: 300;
+        x: 50; y: 50; width: 200; height: 200;
         color: mouse2.containsMouse ? "green" : "aquamarine"
 
         MouseArea {
             id: mouse2
             anchors.fill: parent
             hoverEnabled: true
-
+            onPressed: mouse.accepted = false
         }
     }
 }
