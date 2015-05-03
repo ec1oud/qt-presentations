@@ -4,6 +4,7 @@
 #include "pointingfilter.h"
 #include <QDebug>
 #include <QQuickView>
+#include <QQuickItem>
 
 int main(int argc, char ** argv)
 {
@@ -12,11 +13,11 @@ int main(int argc, char ** argv)
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     PointingFilter *filter = new PointingFilter(&view);
     view.rootContext()->setContextProperty(QLatin1String("pointingFilter"), filter);
+    view.setSource(QUrl("main.qml"));
     if (app.arguments().count() > 1) {
         int startWith = (app.arguments()[1]).toInt();
-        qDebug() << "would like to start with slide" << startWith;
+        view.rootObject()->setProperty("currentSlide", startWith - 1);
     }
-    view.setSource(QUrl("main.qml"));
     view.show();
 
     return app.exec();

@@ -5,6 +5,7 @@ Rectangle {
     width: 1280
     height: 720
     visible: true
+    property alias currentSlide: slides.currentSlide
 
     Repeater {
         model: pointingFilter.touchPoints.length
@@ -22,5 +23,7 @@ Rectangle {
         }
     }
 
-    Slides {}
+    Slides {
+        id: slides
+    }
 }

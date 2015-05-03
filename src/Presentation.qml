@@ -47,7 +47,8 @@ Item {
     id: root
 
     property variant slides: []
-    property int currentSlide;
+    property int currentSlide: 0
+    property int lastSlide: 0
 
     property bool showNotes: false;
 
@@ -74,29 +75,23 @@ Item {
         root._userNum = 0;
 
         // Make first slide visible...
-        if (root.slides.length > 0) {
-            root.currentSlide = 0;
+        if (root.slides.length > 0)
             root.slides[root.currentSlide].visible = true;
-        }
     }
 
-    function switchSlides(from, to, forward) {
-        from.visible = false
-        to.visible = true
-        return true
+    onCurrentSlideChanged: {
+        root.slides[lastSlide].visible = false
+        root.slides[currentSlide].visible = true
+        lastSlide = currentSlide
     }
 
     function goToNextSlide() {
         root._userNum = 0
         if (_faded)
             return
-        if (root.currentSlide + 1 < root.slides.length) {
-            var from = slides[currentSlide]
-            var to = slides[currentSlide + 1]
-            if (switchSlides(from, to, true)) {
-                currentSlide = currentSlide + 1;
-                root.focus = true;
-            }
+        if (currentSlide + 1 < root.slides.length) {
+            ++currentSlide;
+            root.focus = true;
         }
     }
 
@@ -104,13 +99,9 @@ Item {
         root._userNum = 0
         if (root._faded)
             return
-        if (root.currentSlide - 1 >= 0) {
-            var from = slides[currentSlide]
-            var to = slides[currentSlide - 1]
-           if (switchSlides(from, to, false)) {
-                currentSlide = currentSlide - 1;
-               root.focus = true;
-           }
+        if (currentSlide - 1 >= 0) {
+            --currentSlide;
+           root.focus = true;
         }
     }
 
@@ -120,14 +111,8 @@ Item {
             return
         if (_userNum < 0)
             goToNextSlide()
-        else if (root.currentSlide != _userNum) {
-            var from = slides[currentSlide]
-            var to = slides[_userNum]
-           if (switchSlides(from, to, _userNum > currentSlide)) {
-                currentSlide = _userNum;
-               root.focus = true;
-           }
-        }
+        else
+            currentSlide = _userNum;
     }
 
     focus: true
