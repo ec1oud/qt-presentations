@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import Qt.labs.presentation 1.0
 
-import "examples/mouse"
+import "examples"
 
 Presentation {
     id: presentation
@@ -37,8 +37,8 @@ shawn.rutledge@theqtcompany.com"
         content: [
             "Qt user since ~2004",
             "The Qt Company - Oslo",
-            "Touch",
-            "X11 and OS X",
+            "Pointing devices: touch, Wacom tablets",
+            "Linux/X11 and OS X",
             "Qt Quick Controls and Dialogs",
         ]
     }
@@ -46,29 +46,17 @@ shawn.rutledge@theqtcompany.com"
     Slide {
         title: "Contents"
         content: [
-            "",
-            "Mouse",
-            "Touch"
-        ]
-    }
-
-    Slide {
-        centeredText: "Mouse"
-        fontScale: 2
-    }
-
-    Slide {
-        title: "Mouse"
-        content: [
+            "Demo: Taborca",
             "MouseArea",
             "Flickable",
-            "custom component inheriting QQuickItem",
+            "PinchArea",
+            "MultiPointTouchArea"
         ]
     }
 
     CodeSlideInteractive {
         title: "MouseArea"
-        sourceFile: "examples/mouse/Mouse.qml"
+        sourceFile: "examples/Mouse.qml"
     }
 
     Slide {
@@ -86,7 +74,7 @@ shawn.rutledge@theqtcompany.com"
 
     CodeSlideInteractive {
         title: "Hover"
-        sourceFile: "examples/mouse/MouseHover.qml"
+        sourceFile: "examples/MouseHover.qml"
     }
 
     Slide {
@@ -100,7 +88,7 @@ shawn.rutledge@theqtcompany.com"
 
     CodeSlideInteractive {
         title: "Round MouseArea"
-        sourceFile: "examples/mouse/MouseCustomShape.qml"
+        sourceFile: "examples/MouseCustomShape.qml"
     }
 
     Slide {
@@ -108,6 +96,7 @@ shawn.rutledge@theqtcompany.com"
         content: [
             "clicked, pressed, mouseX, mouseY, released",
             "doubleClicked, wheel",
+            "drag.target",
             "canceled",
             "QQuickMouseEvent (in QML: mouse)",
             "events by default accepted",
@@ -140,19 +129,19 @@ shawn.rutledge@theqtcompany.com"
         }
     }
 
-    CodeSlideInteractive {
-        title: "Two MouseAreas"
-        sourceFile: "examples/mouse/MouseStack.qml"
-    }
+//    CodeSlideInteractive {
+//        title: "Two MouseAreas"
+//        sourceFile: "examples/MouseStack.qml"
+//    }
 
     CodeSlideInteractive {
         title: "Events, Pressed and Hover"
-        sourceFile: "examples/mouse/MouseStack2.qml"
+        sourceFile: "examples/MouseStack2.qml"
     }
 
     CodeSlideInteractive {
         title: "Flickable"
-        sourceFile: "examples/mouse/Flick.qml"
+        sourceFile: "examples/Flick.qml"
     }
     Slide {
         title: "Flickable"
@@ -166,37 +155,7 @@ shawn.rutledge@theqtcompany.com"
 
     CodeSlideInteractive {
         title: "Prevent Stealing"
-        sourceFile: "examples/mouse/Flickable2.qml"
-    }
-
-    Slide {
-        centeredText: "Touch"
-        fontScale: 2
-    }
-
-    Slide {
-        title: "Touch Items"
-        content: [
-            "MouseArea",
-            "Flickable",
-            "PinchArea",
-            "MultiPointTouchArea",
-            "Custom C++",
-        ]
-    }
-
-    Slide {
-        title: "Touch"
-        content: [
-            "synth mouse",
-            "propagation",
-            "stealing",
-        ]
-    }
-
-    CodeSlideInteractive {
-        title: "Flickable"
-        sourceFile: "examples/mouse/Flickable.qml"
+        sourceFile: "examples/Flickable2.qml"
     }
 
     Slide {
@@ -215,6 +174,11 @@ shawn.rutledge@theqtcompany.com"
             "choice of # points",
             "low level events",
         ]
+    }
+
+    CodeSlideInteractive {
+        title: "MultiPointTouchArea"
+        sourceFile: "examples/multiparticles.qml"
     }
 
     Slide {

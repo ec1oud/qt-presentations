@@ -207,22 +207,12 @@ Item {
         source: slide.visible ? sourceFile : ""
     }
 
-    RectangularGlow {
-        color: "white"
-        spread: 0.2
-        glowRadius: 30
-        cornerRadius: 50
+    Loader {
+        id: loader
+        focus: true
         anchors.right: parent.right
         anchors.top: parent.top
-        width: 300
-        height: 300
-
-        Loader {
-            id: loader
-            focus: true
-            anchors.centerIn: parent
-            source: slide.visible ? helper.sourcePath : ""
-        }
-//        Component.onCompleted: parent = parent.parent
+        source: slide.visible ? helper.sourcePath : ""
     }
+//        Component.onCompleted: parent = parent.parent
 }
