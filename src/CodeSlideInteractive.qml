@@ -211,10 +211,8 @@ Item {
     Loader {
         id: loader
         focus: true
-        anchors.right: parent.right
+        anchors.fill: parent
         anchors.rightMargin: -horizontalMargin
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
         source: slide.visible ? helper.sourcePath : ""
     }
 //        Component.onCompleted: parent = parent.parent
