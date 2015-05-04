@@ -40,7 +40,7 @@
 ****************************************************************************/
 
 
-import QtQuick 2.0
+import QtQuick 2.5
 import QtQuick.Window 2.0
 
 Item {
@@ -51,6 +51,7 @@ Item {
     property int lastSlide: 0
 
     property bool showNotes: false;
+    property alias mouseNavigation: mouseArea.enabled
 
     property color titleColor: textColor;
     property color textColor: "black"
@@ -122,7 +123,7 @@ Item {
 //    Keys.onDownPressed: goToNextSlide()
     Keys.onLeftPressed: goToPreviousSlide()
 //    Keys.onUpPressed: goToPreviousSlide()
-    Keys.onEscapePressed: Qt.quit()
+//    Keys.onEscapePressed: Qt.quit()
     Keys.onPressed: {
         if (event.key >= Qt.Key_0 && event.key <= Qt.Key_9)
             _userNum = 10 * _userNum + (event.key - Qt.Key_0)
@@ -136,6 +137,8 @@ Item {
             _userNum = 0;
         }
     }
+
+    Shortcut { sequence: StandardKey.Quit; onActivated: Qt.quit() }
 
     Rectangle {
         z: 1000
