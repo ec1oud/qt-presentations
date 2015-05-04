@@ -6,6 +6,7 @@ import "examples"
 Presentation {
     id: presentation
     anchors.fill: parent
+    mouseNavigation: false
 
 //    width: 1280
 //    height: 720
@@ -140,9 +141,20 @@ shawn.rutledge@theqtcompany.com"
     }
 
     CodeSlideInteractive {
+        title: "Dragging: Slider"
+        sourceFile: "examples/slider.qml"
+    }
+
+    CodeSlideInteractive {
+        title: "Slide panel with MouseArea"
+        sourceFile: "examples/DraggableSlidePanel.qml"
+    }
+
+    CodeSlideInteractive {
         title: "Flickable"
         sourceFile: "examples/Flick.qml"
     }
+
     Slide {
         title: "Flickable"
         content: [
@@ -156,6 +168,11 @@ shawn.rutledge@theqtcompany.com"
     CodeSlideInteractive {
         title: "Prevent Stealing"
         sourceFile: "examples/Flickable2.qml"
+    }
+
+    CodeSlideInteractive {
+        title: "Slide panel with Flickable"
+        sourceFile: "examples/FlickableSlidePanel.qml"
     }
 
     Slide {

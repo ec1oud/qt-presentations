@@ -78,7 +78,8 @@ Item {
     // Define the slide to be the "content area"
     x: parent.width * 0.01
     y: parent.height * 0.1
-    width: parent.width * 0.98
+    property real horizontalMargin: 6
+    width: parent.width - horizontalMargin * 2
     height: parent.height * 0.89
 
     property real masterWidth: parent.width
@@ -211,7 +212,9 @@ Item {
         id: loader
         focus: true
         anchors.right: parent.right
+        anchors.rightMargin: -horizontalMargin
         anchors.top: parent.top
+        anchors.bottom: parent.bottom
         source: slide.visible ? helper.sourcePath : ""
     }
 //        Component.onCompleted: parent = parent.parent
