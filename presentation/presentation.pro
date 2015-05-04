@@ -1,5 +1,5 @@
 QT += qml quick
-TARGET = ../present
+TARGET = present
 TEMPLATE = app
 SOURCES += main.cpp \
     pointingfilter.cpp

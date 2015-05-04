@@ -185,6 +185,11 @@ shawn.rutledge@theqtcompany.com"
         ]
     }
 
+    CodeSlideInteractive {
+        title: "PinchArea"
+        sourceFile: "examples/photosurface.qml"
+    }
+
     Slide {
         title: "MultiPointTouchArea"
         content: [
