@@ -73,6 +73,20 @@ shawn.rutledge@theqtcompany.com"
         ]
     }
 
+    Slide {
+        title: "Touch and Mouse Event Delivery"
+        content: [
+            "each item gets a touch event offered",
+            "if not accepted, a mouse event",
+            "continue with next item if not accepted"
+        ]
+        Image {
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            source: "images/touch_mouse_event.png"
+        }
+    }
+
     CodeSlideInteractive {
         title: "Hover"
         sourceFile: "examples/MouseHover.qml"
@@ -142,7 +156,12 @@ shawn.rutledge@theqtcompany.com"
 
     CodeSlideInteractive {
         title: "Dragging: Slider"
-        sourceFile: "examples/slider.qml"
+        sourceFile: "examples/Slider.qml"
+    }
+
+    CodeSlideInteractive {
+        title: "Multiple Sliders"
+        sourceFile: "examples/multislider.qml"
     }
 
     CodeSlideInteractive {
@@ -190,6 +209,11 @@ shawn.rutledge@theqtcompany.com"
         sourceFile: "examples/photosurface.qml"
     }
 
+    CodeSlideInteractive {
+        title: "PinchArea with nested MouseArea for single-finger dragging"
+        sourceFile: "examples/photosurface2.qml"
+    }
+
     Slide {
         title: "MultiPointTouchArea"
         content: [
@@ -203,18 +227,21 @@ shawn.rutledge@theqtcompany.com"
         sourceFile: "examples/multiparticles.qml"
     }
 
-    Slide {
-        title: "Touch and Mouse Event Delivery"
-        content: [
-            "each item gets a touch event offered",
-            "if not accepted, a mouse event",
-            "continue with next item if not accepted"
-        ]
-        Image {
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            source: "images/touch_mouse_event.png"
-        }
+    CodeSlideInteractive {
+        expandContentVertically: false; horizontalMargin: 16
+        title: "MultiPointTouchArea substituting for MouseArea"
+        sourceFile: "examples/MultiButton.qml"
+    }
+
+    CodeSlideInteractive {
+        horizontalMargin: 16
+        title: "MultiPointTouchArea substituting for MouseArea"
+        sourceFile: "examples/multibuttons.qml"
+    }
+
+    CodeSlideInteractive {
+        title: "MultiPointTouchArea: recognize horizontal swipes"
+        sourceFile: "examples/GestureRecognizer.qml"
     }
 
     Slide {

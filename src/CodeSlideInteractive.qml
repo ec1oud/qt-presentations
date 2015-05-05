@@ -74,6 +74,7 @@ Item {
     property real bulletSpacing: 1
 
     property real contentWidth: width
+    property bool expandContentVertically: true
 
     // Define the slide to be the "content area"
     x: parent.width * 0.01
@@ -211,7 +212,8 @@ Item {
     Loader {
         id: loader
         focus: true
-        anchors.fill: parent
+        anchors.fill: expandContentVertically ? parent : undefined
+        anchors.right: expandContentVertically ? undefined : parent.right
         anchors.rightMargin: -horizontalMargin
         source: slide.visible ? helper.sourcePath : ""
     }

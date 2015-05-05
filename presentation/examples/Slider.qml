@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.6
 
 Rectangle {
     id: slider
@@ -6,6 +6,7 @@ Rectangle {
     property int value: 50
     property int minimumValue: 0
     property int maximumValue: 99
+    property alias label: label.text
 
     Image {
         source: "../images/fader-knob.png"
@@ -19,6 +20,7 @@ Rectangle {
             drag.axis: Drag.YAxis
             drag.minimumY: slot.y
             drag.maximumY: slot.height + slot.y - height
+            multiPointTouchEnabled: true // Qt 5.6 - planned
         }
         property real multiplier: slider.maximumValue / (dragArea.drag.maximumY - dragArea.drag.minimumY)
         onYChanged: slider.value = slider.maximumValue - (y - dragArea.drag.minimumY) * multiplier
@@ -37,7 +39,7 @@ Rectangle {
     }
 
     Text {
-        font.family: "LCD"; font.pixelSize: 16; color: "red"
+        font.family: "LCD"; font.pixelSize: 36; color: "red"
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         text: slider.value
@@ -46,7 +48,7 @@ Rectangle {
     Text {
         id: label
         font.family: "LCD"
-        font.pixelSize: 12
+        font.pixelSize: 24
         color: "red"
         anchors.top: parent.top
         anchors.topMargin: 5
