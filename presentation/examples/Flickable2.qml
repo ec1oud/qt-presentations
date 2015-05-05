@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 Flickable {
-    width: 400; height: parent.height; contentHeight: col.implicitHeight * 2
+    width: 400; height: 600; contentHeight: col.implicitHeight * 2
     Column {
         id: col; spacing: 50
         Rectangle {
