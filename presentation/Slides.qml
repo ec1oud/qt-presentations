@@ -197,7 +197,7 @@ shawn.rutledge@theqtcompany.com"
     Slide {
         title: "PinchArea"
         content: [
-            "two finger gestures",
+            "two-finger gestures",
             "rotate",
             "scale",
             "drag",
@@ -227,21 +227,23 @@ shawn.rutledge@theqtcompany.com"
         sourceFile: "examples/multiparticles.qml"
     }
 
+    // Too many problems with this one
+//    CodeSlideInteractive {
+//        expandContent: true
+//        title: "MultiPointTouchArea: recognize horizontal swipes"
+//        sourceFile: "examples/GestureRecognizer.qml"
+//    }
+
     CodeSlideInteractive {
-        expandContentVertically: false; horizontalMargin: 16
+        horizontalMargin: 16
         title: "MultiPointTouchArea substituting for MouseArea"
         sourceFile: "examples/MultiButton.qml"
     }
 
     CodeSlideInteractive {
-        horizontalMargin: 16
+        horizontalMargin: 16; expandContent: true
         title: "MultiPointTouchArea substituting for MouseArea"
         sourceFile: "examples/multibuttons.qml"
-    }
-
-    CodeSlideInteractive {
-        title: "MultiPointTouchArea: recognize horizontal swipes"
-        sourceFile: "examples/GestureRecognizer.qml"
     }
 
     Slide {
