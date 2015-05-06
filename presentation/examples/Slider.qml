@@ -1,21 +1,22 @@
 import QtQuick 2.6
+import QtGraphicalEffects 1.0
 
 Rectangle {
     id: slider
-    width: 150; height: 600; color: "#222222"
+    width: 150; height: 600; color: "#444"
     property int value: 50
     property int minimumValue: 0
     property int maximumValue: 99
     property alias label: label.text
 
     Image {
-        source: "../images/fader-knob.png"
-        x: slot.x - width / 2 + slot.width / 2; z: 1
+        id: knob; source: "../images/fader-knob.png"
+        x: slot.x - width / 2 + slot.width / 2; z: 2
         transformOrigin: Item.Center
         MouseArea {
             id: dragArea
             anchors.fill: parent
-            anchors.margins: -10
+            anchors.margins: -20
             drag.target: parent
             drag.axis: Drag.YAxis
             drag.minimumY: slot.y
@@ -25,6 +26,12 @@ Rectangle {
         property real multiplier: slider.maximumValue / (dragArea.drag.maximumY - dragArea.drag.minimumY)
         onYChanged: slider.value = slider.maximumValue - (y - dragArea.drag.minimumY) * multiplier
         Component.onCompleted: y = dragArea.drag.maximumY - slider.value / multiplier
+    }
+
+    RectangularGlow {
+        anchors.fill: knob; z: 1; visible: dragArea.pressed
+        glowRadius: 10; color: "cyan"; opacity: 0.7
+        cornerRadius: glowRadius
     }
 
     Rectangle {
