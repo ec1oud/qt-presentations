@@ -5,4 +5,6 @@ Presentation 1.0 Presentation.qml
 Slide 1.0 Slide.qml
 SlideCounter 1.0 SlideCounter.qml
 Clock 1.0 Clock.qml
+TextSlide 1.0 TextSlide.qml
+ImageSlide 1.0 ImageSlide.qml
 

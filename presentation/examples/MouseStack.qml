@@ -18,7 +18,7 @@ Item {
         MouseArea {
             id: mouse2
             anchors.fill: parent
-            hoverEnabled: true
+//            hoverEnabled: true
         }
     }
 }

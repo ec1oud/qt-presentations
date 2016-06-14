@@ -134,6 +134,8 @@ Item {
                 goToPreviousSlide();
             else if (event.key == Qt.Key_C)
                 root._faded = !root._faded;
+//            else if (event.key == Qt.Key_P)
+//                printCurrentSlide();
             _userNum = 0;
         }
     }

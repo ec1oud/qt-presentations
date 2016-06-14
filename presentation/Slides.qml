@@ -14,240 +14,143 @@ Presentation {
     SlideCounter {}
     Clock {}
 
-    Image {
-        anchors.fill: parent
-        source: "images/template.png"
-        visible: title.visible
-    }
-
     Slide {
         id: title
         titleColor: "white"
-        title: "Input and Qt Quick"
         centeredText: "
-Touch-oriented application development in Qt Quick
+Pointer Handlers in Qt Quick
 
-Open Source Developers Conference 2015
+Project Fair April 2016
 
 Shawn Rutledge
-shawn.rutledge@theqtcompany.com"
+shawn.rutledge@qt.io
+ecloud on #qt-labs"
     }
 
     Slide {
-        title: "About me"
+        title: "Long-term Goals"
         content: [
-            "Qt user since ~2004",
-            "The Qt Company - Oslo",
-            "Pointing devices: touch, Wacom tablets",
-            "Linux/X11 and OS X",
-            "Qt Quick Controls and Dialogs",
+            "make it easy to handle mouse, touch and tablet agnostically",
+            "guarantee that events always have velocity",
+            "plan on unified QPointingEvent delivery in Qt 6: make sure current changes are compatible",
+            "plan on multiple seats/users and support for multiple mice etc. in Qt 6",
+            "proper support for Wacom tablets: draw paths in Qt Quick",
+            "remove the need for touch -> mouse synthesis"
         ]
     }
 
     Slide {
-        title: "Contents"
+        title: "Idea: handler objects"
         content: [
-            "Demo: Taborca",
-            "MouseArea",
-            "Flickable",
-            "PinchArea",
-            "MultiPointTouchArea"
+            "make mouse/touch more like the Keys attached prop",
+            "(but attached properties are limiting, and inefficient)",
+//            "no need to bind the geometry: proxy for the attachee Item",
+            "easy stuff is easy",
+            "lots of small, understandable handlers instead of monolithic MouseArea etc.",
+            "preferred: handlers for gestures (tap, drag, pinch etc.)",
+            "but also: some for mouse only, some for touch only, just in case",
+            "it's completely different, so minimizes compatibility risks"
         ]
     }
 
     CodeSlideInteractive {
-        title: "MouseArea"
-        sourceFile: "examples/Mouse.qml"
+        title: "Plain PointerHandler"
+        sourceFile: "/home/rutledge/dev/qt5/qtdeclarative/tests/manual/pointer/pointer.qml"
+    }
+
+    CodeSlideInteractive {
+        title: "DragHandler"
+        sourceFile: "/home/rutledge/dev/qt5/qtdeclarative/tests/manual/pointer/joystick.qml"
     }
 
     Slide {
-        title: "MouseArea"
+        title: "Touch Event Delivery in Qt <= 5.7"
         content: [
-            "non-visual QQuickItem",
-            "geometry",
-            "handlers for mouse events",
-            "stacking possible",
-            'hover',
-            "grab",
-            "steal",
-        ]
-    }
-
-    Slide {
-        title: "Touch and Mouse Event Delivery"
-        content: [
-            "each item gets a touch event offered",
-            "if not accepted, a mouse event",
-            "continue with next item if not accepted"
+            "each item under the touchpoint gets a touch event\n(and ignores by default)",
+            "if not accepted, the item gets a synthetic mouse event",
+            "continue with next item (in reverse paint order)\nif still not accepted"
+//            "problem: need to duplicate a massive amount of logic to handle both mouse and touch",
+//            "tablet events? fuhgetaboutit"
         ]
         Image {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            source: "images/touch_mouse_event.png"
+            source: "/home/rutledge/dev/presentations/projectfair-201604-pointerhandlers/presentation/images/touch_mouse_event.png"
         }
     }
 
-    CodeSlideInteractive {
-        title: "Hover"
-        sourceFile: "examples/MouseHover.qml"
+    ImageSlide {
+        title: "Existing QEvent hierarchy"
+        source: "/home/rutledge/dev/presentations/projectfair-201604-pointerhandlers/presentation/images/event-hierarchy-before.png"
+    }
+
+    ImageSlide {
+        title: "Many parallel event delivery paths (and some missing)"
+        source: "/home/rutledge/dev/presentations/projectfair-201604-pointerhandlers/presentation/images/event-delivery-before.png"
+    }
+
+    ImageSlide {
+        title: "Possible hierarchy for Qt 6"
+        source: "/home/rutledge/dev/presentations/projectfair-201604-pointerhandlers/presentation/images/event-hierarchy-qt6.png"
     }
 
     Slide {
-        title: "MouseArea - geometry"
+        title: "Simulate it for now: QQuickPointerEvent"
         content: [
-            "anchors.fill: parent",
-            "can be made custom shaped by not accepting events",
-            "inverse paint order when stacked",
+            "preferred event for Items is QQuickPointerEvent (synthetic for now)",
+            "multi-touch, tablet and mouse handling are agnostic until you need to distinguish them"
         ]
-    }
-
-    CodeSlideInteractive {
-        title: "Round MouseArea"
-        sourceFile: "examples/MouseCustomShape.qml"
+        Image {
+            anchors {
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+            fillMode: Image.PreserveAspectFit
+            source: "/home/rutledge/dev/presentations/projectfair-201604-pointerhandlers/presentation/images/pointerevent-delivery.png"
+        }
     }
 
     Slide {
-        title: "MouseArea"
+        title: "Handler hierarchy so far"
         content: [
-            "clicked, pressed, mouseX, mouseY, released",
-            "doubleClicked, wheel",
-            "drag.target",
-            "canceled",
-            "QQuickMouseEvent (in QML: mouse)",
-            "events by default accepted",
         ]
-    }
-
-    Slide {
-        title: "MouseArea"
-        Row {
-            spacing: 50
+        Flickable {
+            contentHeight: phClassHier.implicitHeight
+            anchors.fill: parent
             Image {
-                source: "images/mouse_event.png"
-            }
-            MousePropagationDemo {
-                acc: true
-                Text {
-                    anchors.top: parent.bottom
-                    text: "Event accepted"
-                    font.pixelSize: 22
-                }
-            }
-            MousePropagationDemo {
-                acc: false
-                Text {
-                    anchors.top: parent.bottom
-                    text: "Event not accepted\nby top\nMouseArea"
-                    font.pixelSize: 22
-                }
+                id: phClassHier
+                fillMode: Image.PreserveAspectFit
+                source: "/home/rutledge/dev/presentations/projectfair-201604-pointerhandlers/presentation/images/pointer-handlers-classes.png"
+//                source: "/home/rutledge/dev/presentations/projectfair-201604-pointerhandlers/presentation/images/class_q_quick_pointer_handler__inherit__graph.png"
             }
         }
     }
 
+    TextSlide {
+        title: "QQuickPointerEvent"
+        sourceFile: "/home/rutledge/dev/qt5/qtdeclarative/src/quick/items/qquickevents_p_p.h"
+    }
+
+    Slide {
+        title: "Velocity"
+        content: [
+            "every event should have valid velocity values",
+            "QTouchEvent already has velocity but it is almost never valid (but TUIO has it)",
+            "should we synthesize it in the platform plugins? or cross-platform?",
+            "but QMouseEvent and QTabletEvent do not have velocity...should we add it?",
+            "or, synthesize it when creating QQuickPointerEvents",
+            "or, use a generic VelocityCalculator in QML"
+        ]
+    }
+
+    TextSlide {
+        title: "Fling Animation using VelocityCalculator"
+        sourceFile: "/home/rutledge/dev/presentations/projectfair-201604-pointerhandlers/presentation/fling-animation-with-velocity-calculator.qml"
+    }
+
 //    CodeSlideInteractive {
-//        title: "Two MouseAreas"
-//        sourceFile: "examples/MouseStack.qml"
+//        title: "Events, Pressed and Hover"
+//        sourceFile: "examples/MouseStack2.qml"
 //    }
-
-    CodeSlideInteractive {
-        title: "Events, Pressed and Hover"
-        sourceFile: "examples/MouseStack2.qml"
-    }
-
-    CodeSlideInteractive {
-        title: "Dragging: Slider"
-        sourceFile: "examples/Slider.qml"
-    }
-
-    CodeSlideInteractive {
-        title: "Multiple Sliders"
-        sourceFile: "examples/multislider.qml"
-    }
-
-    CodeSlideInteractive {
-        title: "Slide panel with MouseArea"
-        sourceFile: "examples/DraggableSlidePanel.qml"
-    }
-
-    CodeSlideInteractive {
-        title: "Flickable"
-        sourceFile: "examples/Flick.qml"
-    }
-
-    Slide {
-        title: "Flickable"
-        content: [
-            "mouse grabber",
-            "filtersChildMouseEvents",
-            "stealing",
-            "prevent grab",
-        ]
-    }
-
-    CodeSlideInteractive {
-        title: "Prevent Stealing"
-        sourceFile: "examples/Flickable2.qml"
-    }
-
-    CodeSlideInteractive {
-        title: "Slide panel with Flickable"
-        sourceFile: "examples/FlickableSlidePanel.qml"
-    }
-
-    Slide {
-        title: "PinchArea"
-        content: [
-            "two-finger gestures",
-            "rotate",
-            "scale",
-            "drag",
-        ]
-    }
-
-    CodeSlideInteractive {
-        title: "PinchArea"
-        sourceFile: "examples/photosurface.qml"
-    }
-
-    CodeSlideInteractive {
-        title: "PinchArea with nested MouseArea for single-finger dragging"
-        sourceFile: "examples/photosurface2.qml"
-    }
-
-    Slide {
-        title: "MultiPointTouchArea"
-        content: [
-            "choice of # points",
-            "low level events",
-        ]
-    }
-
-    CodeSlideInteractive {
-        title: "MultiPointTouchArea"
-        sourceFile: "examples/multiparticles.qml"
-    }
-
-    // Too many problems with this one
-//    CodeSlideInteractive {
-//        expandContent: true
-//        title: "MultiPointTouchArea: recognize horizontal swipes"
-//        sourceFile: "examples/GestureRecognizer.qml"
-//    }
-
-    CodeSlideInteractive {
-        horizontalMargin: 16
-        title: "MultiPointTouchArea substituting for MouseArea"
-        sourceFile: "examples/MultiButton.qml"
-    }
-
-    CodeSlideInteractive {
-        horizontalMargin: 16; expandContent: true
-        title: "MultiPointTouchArea substituting for MouseArea"
-        sourceFile: "examples/multibuttons.qml"
-    }
-
-    Slide {
-        title: "Questions?"
-        centeredText: "Shawn Rutledge\nshawn.rutledge@theqtcompany.com\n\necloud on #qt-labs (freenode irc)"
-    }
 }

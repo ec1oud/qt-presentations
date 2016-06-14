@@ -5,11 +5,12 @@
 #include <QDebug>
 #include <QQuickView>
 #include <QQuickItem>
+#include "../tools/printslides/slideview.h"
 
 int main(int argc, char ** argv)
 {
     QGuiApplication app(argc, argv);
-    QQuickView view;
+    SlideView view;
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.connect(view.engine(), SIGNAL(quit()), &app, SLOT(quit()));
     PointingFilter *filter = new PointingFilter(&view);

@@ -19,6 +19,7 @@ Item {
             id: mouse2
             anchors.fill: parent
             hoverEnabled: true
+            // Should it be possible to reject hover too?
             onPressed: mouse.accepted = false
         }
     }

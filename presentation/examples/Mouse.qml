@@ -8,5 +8,16 @@ Rectangle {
     MouseArea {
         id: mouse
         anchors.fill: parent
+        acceptedButtons: Qt.AllButtons
+        onClicked: note.text = "clicked " + mouse.button
+        onDoubleClicked: note.text = "double-clicked"
+        onPressAndHold: note.text = "long press"
+        onWheel: note.text = "wheel\ndelta " + wheel.angleDelta.y + "°"
+    }
+
+    Text {
+        id: note
+        anchors.centerIn: parent
+        font.pointSize: 18
     }
 }
