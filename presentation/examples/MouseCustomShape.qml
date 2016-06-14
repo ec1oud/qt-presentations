@@ -16,11 +16,19 @@ Rectangle {
             anchors.fill: parent
             property int radius: parent.width/2
             onPressed: {
+                note.text = ""
                 var distance = Math.sqrt(Math.pow(mouse.x - radius, 2)
                                        + Math.pow(mouse.y - radius, 2))
                 if (distance > radius)
                     mouse.accepted = false
             }
+            onCanceled: note.text = "canceled"
+        }
+
+        Text {
+            id: note
+            anchors.centerIn: parent
+            font.pointSize: 24
         }
     }
 }

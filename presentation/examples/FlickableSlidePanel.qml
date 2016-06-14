@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
 Flickable {
@@ -30,6 +30,17 @@ Flickable {
             color: "black"
             radius: 10
             antialiasing: true
+
+            MouseArea {
+                width: parent.width / 4
+                height: width
+                y: 6
+                x: y
+                Rectangle {
+                    anchors.fill: parent
+                    color: parent.pressed ? "green" : "transparent"
+                }
+            }
         }
     }
 }

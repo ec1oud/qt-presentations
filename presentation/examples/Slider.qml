@@ -3,7 +3,7 @@ import QtGraphicalEffects 1.0
 
 Rectangle {
     id: slider
-    width: 150; height: 600; color: "#444"
+    width: 150; height: 600; color: "#ddd"
     property int value: 50
     property int minimumValue: 0
     property int maximumValue: 99
@@ -20,8 +20,8 @@ Rectangle {
             drag.target: parent
             drag.axis: Drag.YAxis
             drag.minimumY: slot.y
-            drag.maximumY: slot.height + slot.y - height
-            multiPointTouchEnabled: true // Qt 5.6 - planned
+            drag.maximumY: slot.height + slot.y - parent.height
+            // multiPointTouchEnabled: true // Qt 5.6 - planned
         }
         property real multiplier: slider.maximumValue / (dragArea.drag.maximumY - dragArea.drag.minimumY)
         onYChanged: slider.value = slider.maximumValue - (y - dragArea.drag.minimumY) * multiplier
@@ -38,7 +38,7 @@ Rectangle {
         id: slot
         anchors {
             top: parent.top; bottom: parent.bottom
-            margins: 10; topMargin: 30; bottomMargin: 30
+            margins: 10; topMargin: 40; bottomMargin: 46
             horizontalCenter: parent.horizontalCenter
         }
         width: 10; radius: width / 2

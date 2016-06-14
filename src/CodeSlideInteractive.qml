@@ -148,9 +148,10 @@ Item {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: {
+            onPressed: {
                 listView.focus = true;
                 listView.currentIndex = listView.indexAt(mouse.x, mouse.y + listView.contentY);
+                mouse.accepted = false  // workaround to ensure that flicking works
             }
         }
 

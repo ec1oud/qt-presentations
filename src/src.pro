@@ -7,6 +7,8 @@ QML_FILES = \
     CodeSlideLong.qml \
     Presentation.qml \
     Slide.qml \
-    SlideCounter.qml
+    SlideCounter.qml \
+    TextSlide.qml \
+    ImageSlide.qml \
 
 load(qml_module)

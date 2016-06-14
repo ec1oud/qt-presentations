@@ -47,8 +47,8 @@
 #include <QScreen>
 #include "slideview.h"
 
-SlideView::SlideView(QWindow* parent): QQuickView(parent),
-m_slidesLeft(0), m_printedSlides(0) {
+SlideView::SlideView(QWindow* parent)
+  : QQuickView(parent), m_slidesLeft(0), m_printedSlides(0) {
     connect (this, SIGNAL(statusChanged(QQuickView::Status)),
         this, SLOT(updateStatus(QQuickView::Status)));
 }
@@ -66,8 +66,9 @@ void SlideView::updateStatus(QQuickView::Status status) {
     QList<QVariant> slides = ri->property("slides").toList();
     m_slidesLeft = slides.size();
     qDebug() << "SlideCount: " << m_slidesLeft;
+    m_printer.setPageSize(QPageSize(QSizeF(1445, 822), QPageSize::Point));
     qDebug() << "Printer's Page rect size (and suggested resolution of your presentation): " << m_printer.pageRect().size();
-    m_printer.setOrientation(QPrinter::Landscape);
+//    m_printer.setOrientation(QPrinter::Landscape);
     m_printer.setFullPage(true);
     m_printer.setOutputFileName("slides.pdf");
     m_painter.begin(&m_printer);
@@ -86,7 +87,7 @@ void SlideView::updateStatus(QQuickView::Status status) {
     //ri->setWidth(width());
 
     // start timer to print out pages once every 2 seconds.
-    m_tid = startTimer(2000);
+//    m_tid = startTimer(2000);
 }
 
 void SlideView::timerEvent(QTimerEvent*) {
@@ -106,19 +107,27 @@ void SlideView::timerEvent(QTimerEvent*) {
 
 }
 
-
 void SlideView::printCurrentSlide() {
     QImage pix = grabWindow();
+    if (m_printedSlides > 0)
+        m_printer.newPage();
     qDebug() << "Printing slide#" << m_printedSlides + 1 << "Resolution:" << pix.size();
-
     QRect pageRect = m_printer.pageRect();
     QSize targetSize = pix.size();
-    targetSize.scale(pageRect.width(), pageRect.height(), Qt::KeepAspectRatio);
+//    targetSize.scale(pageRect.width(), pageRect.height(), Qt::KeepAspectRatio);
 
-    m_painter.drawImage(QRectF(pageRect.topLeft(), targetSize), pix);
+    m_painter.drawImage(pageRect.topLeft(), pix);
+    ++m_printedSlides;
 }
 
 void SlideView::goToNextSlide() {
     static const QMetaObject* meta = rootObject()->metaObject();
     meta->invokeMethod(rootObject(), "goToNextSlide");
+}
+
+void SlideView::keyPressEvent(QKeyEvent *e)
+{
+    if (e->key() == Qt::Key_P)
+        printCurrentSlide();
+    else QQuickView::keyPressEvent(e);
 }

@@ -62,6 +62,9 @@ public slots:
     void printCurrentSlide();
     void goToNextSlide();
 
+protected:
+    void keyPressEvent(QKeyEvent * e);
+
 private:
     int m_slidesLeft;
     int m_printedSlides;

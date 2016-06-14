@@ -40,15 +40,21 @@
 ****************************************************************************/
 
 
-import QtQuick 2.0
+import QtQuick 2.1
+
+import QtQuick.Controls 1.0
+import QtQuick.Window 2.1
+import QtGraphicalEffects 1.0
 
 Item {
-    /*
-      Slides can only be instantiated as a direct child of a Presentation {} as they rely on
-      several properties there.
-     */
+    id: slide;
 
-    id: slide
+    // Either set a file
+    property string sourceFile;
+    // or directly set the text here
+    property alias text: text.text;
+
+    property real textFontSize: 18;
 
     property bool isSlide: true;
 
@@ -66,12 +72,14 @@ Item {
     property real bulletSpacing: 1
 
     property real contentWidth: width
+    property bool expandContent: false
 
     // Define the slide to be the "content area"
-    x: parent.width * 0.05
-    y: parent.height * 0.2
-    width: parent.width * 0.9
-    height: parent.height * 0.7
+    x: parent.width * 0.01
+    y: parent.height * 0.1
+    property real horizontalMargin: 6
+    width: parent.width - horizontalMargin * 2
+    height: parent.height * 0.89
 
     property real masterWidth: parent.width
     property real masterHeight: parent.height
@@ -88,7 +96,7 @@ Item {
         text: title;
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.top
-        anchors.bottomMargin: parent.fontSize * 1.5
+        anchors.bottomMargin: parent.fontSize * 0.5
         font.bold: true;
         font.family: slide.fontFamily
         color: slide.titleColor
@@ -96,73 +104,43 @@ Item {
         z: 1
     }
 
-    Text {
-        id: centeredId
-        width: parent.width
-        anchors.centerIn: parent
-        anchors.verticalCenterOffset: - parent.y / 3
-        text: centeredText
-        horizontalAlignment: Text.Center
-        font.pixelSize: baseFontSize
-        font.family: slide.fontFamily
-        color: slide.textColor
-        wrapMode: Text.Wrap
-    }
-
-    Text {
-        id: writeInTextId
-        property int length;
-        font.family: slide.fontFamily
-        font.pixelSize: baseFontSize
-        color: slide.textColor
-
-        anchors.fill: parent;
-        wrapMode: Text.Wrap
-
-        text: slide.writeInText.substring(0, length);
-
-        NumberAnimation on length {
-            from: 0;
-            to: slide.writeInText.length;
-            duration: slide.writeInText.length * 30;
-            running: slide.visible && parent.visible && slide.writeInText.length > 0
-        }
-
-        visible: slide.writeInText != undefined;
-    }
-
-
-    Column {
-        id: contentId
+    Flickable {
+        id: flick
         anchors.fill: parent
-
-        Repeater {
-            model: content.length
-
-            Row {
-                id: row
-
-                function decideIndentLevel(s) { return s.charAt(0) == " " ? 1 + decideIndentLevel(s.substring(1)) : 0 }
-                property int indentLevel: decideIndentLevel(content[index])
-                property int nextIndentLevel: index < content.length - 1 ? decideIndentLevel(content[index+1]) : 0
-                property real indentFactor: (10 - row.indentLevel * 2) / 10;
-
-                height: text.height + (nextIndentLevel == 0 ? 1 : 0.3) * slide.baseFontSize * slide.bulletSpacing
-                x: slide.baseFontSize * indentLevel
-
-                Text {
-                    id: text
-                    width: slide.contentWidth - parent.x
-                    font.pixelSize: baseFontSize * row.indentFactor
-                    text: "• " + content[index]
-                    textFormat: Text.PlainText
-                    wrapMode: Text.WordWrap
-                    color: slide.textColor
-                    horizontalAlignment: Text.AlignLeft
-                    font.family: slide.fontFamily
-                }
-            }
+        anchors.margins: 6
+        contentWidth: width
+        contentHeight: text.implicitHeight
+        Text {
+            id: text
+            wrapMode: Text.WordWrap
+            font.pointSize: textFontSize
+            text: "foo bar"
+            width: parent.width
         }
     }
 
+    Rectangle {
+        id: verticalScrollDecorator
+        anchors.right: parent.right
+        anchors.margins: 2
+        color: "grey"
+        border.color: "black"
+        border.width: 1
+        width: 5
+        radius: 2
+        antialiasing: true
+        height: flick.height * (flick.height / flick.contentHeight) - (width - anchors.margins) * 2
+        y:  flick.contentY * (flick.height / flick.contentHeight)
+    }
+
+    // http://rschroll.github.io/beru/2013/08/12/opening-a-file-in-qml.html
+    Component.onCompleted: {
+        var request = new XMLHttpRequest()
+        request.open('GET', slide.sourceFile)
+        request.onreadystatechange = function(event) {
+            if (request.readyState === XMLHttpRequest.DONE)
+                text.text = request.responseText
+        }
+        request.send()
+    }
 }
