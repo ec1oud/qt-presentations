@@ -247,14 +247,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="926.05075"
+     inkscape:cx="866.63323"
      inkscape:cy="201.26254"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1614"
      inkscape:window-height="1032"
-     inkscape:window-x="2122"
+     inkscape:window-x="300"
      inkscape:window-y="0"
      inkscape:window-maximized="0" />
   <metadata
@@ -358,7 +358,7 @@
        sodipodi:linespacing="125%"><textPath
          xlink:href="#path5971"
          id="textPath6637"
-         style="font-size:27.5px;fill:#740081;fill-opacity:1">synth QQuickPointingEvent ②</textPath></text>
+         style="font-size:27.5px;fill:#740081;fill-opacity:1">synth QPointingEvent ②</textPath></text>
     <path
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
@@ -547,7 +547,7 @@
        transform="translate(481.84277,4.0406104)"><textPath
          style="font-size:27.5px;fill:#740081;fill-opacity:1"
          id="textPath13587"
-         xlink:href="#path5971">synth QQuickPointingEvent ②</textPath></text>
+         xlink:href="#path5971">synth QPointingEvent ②</textPath></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5973)"
        d="M 591.00803,869.33385 C 556.87642,699.41781 853.38065,538.72772 860.71876,646.09014"
@@ -700,7 +700,7 @@
        transform="translate(1000.051,-2.0203024)"><textPath
          xlink:href="#path5971"
          id="textPath13655"
-         style="font-size:27.5px;fill:#740081;fill-opacity:1">synth QQuickPointingEvent ②</textPath></text>
+         style="font-size:27.5px;fill:#740081;fill-opacity:1">synth QPointingEvent ②</textPath></text>
     <path
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
