@@ -53,7 +53,7 @@ Item {
     // Either set an example file
     property string sourceFile;
     // or directly set the code here
-    property string code: helper.content;
+    property string code: helper.contentWithoutComments;
 
     property string codeFontFamily: parent.codeFontFamily;
     property real codeFontSize: baseFontSize * 0.6;
