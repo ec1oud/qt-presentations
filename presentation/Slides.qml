@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.5
 import Qt.labs.presentation 1.0
 
 import "examples"
@@ -8,11 +8,11 @@ Presentation {
     anchors.fill: parent
     mouseNavigation: false
 
-//    width: 1280
-//    height: 720
+    width: 1280
+    height: 720
 
     SlideCounter {}
-    Clock {}
+    Clock { fontFamily: "WindsorDemi" }
 
     Slide {
         id: title
@@ -20,21 +20,22 @@ Presentation {
         centeredText: "
 Pointer Handlers in Qt Quick
 
-Project Fair June 2016
+Contributors' Summit 2016
 
 Shawn Rutledge
 shawn.rutledge@qt.io
-ecloud on #qt-labs"
+ecloud on #qt-labs, #qt-quick etc."
     }
 
     Slide {
-        title: "Long-term Goals"
+        title: "Goals"
         content: [
-            "make it easy to handle mouse, touch and tablet agnostically",
-            "plan on unified QPointerEvent delivery in Qt 6: make sure current changes are compatible",
-            "plan on multiple seats/users and support for multiple mice etc. in Qt 6",
+            "make it easy to handle mouse, touch and tablet agnostically or in device-specific ways",
+            "both QML and C++ APIs",
             "guarantee that events always have velocity",
             "proper support for Wacom tablets: draw paths in Qt Quick",
+            "refine APIs so that they'll work for Qt 6",
+            "plan on multiple seats/users and support for multiple mice etc. in Qt 6",
             "remove the need for touch -> mouse synthesis"
         ]
     }
@@ -47,33 +48,37 @@ ecloud on #qt-labs"
             "easy stuff is easy",
             "multiple small, understandable handlers instead of monolithic MouseArea etc.",
             "preferred: declarative handlers for gestures (tap, drag, pinch etc.)",
-            "but also: some for mouse only, some for touch only, just in case",
+            "but also: some for mouse only, some for touch only",
+            "subclass Handlers in C++ for the less-mainstream cases",
             "it's completely different, so minimizes compatibility risks"
         ]
     }
 
-    CodeSlideInteractive {
-        title: "Plain PointerHandler"
-        sourceFile: "/home/rutledge/dev/qt5/qtdeclarative/tests/manual/pointer/pointerHandler.qml"
-    }
+//    CustomCodeSlide {
+//        title: "Plain PointerHandler"
+//        qtSourceModule: "qtdeclarative"
+//        sourceFile: "tests/manual/pointer/pointerHandler.qml"
+//    }
 
-    CodeSlideInteractive {
+    CustomCodeSlide {
         title: "DragHandler"
-        sourceFile: "/home/rutledge/dev/qt5/qtdeclarative/tests/manual/pointer/joystick.qml"
+        qtSourceModule: "qtdeclarative"
+        sourceFile: "tests/manual/pointer/joystick.qml"
     }
 
-    CodeSlideInteractive {
+    CustomCodeSlide {
         title: "TapHandler"
-        sourceFile: "/home/rutledge/dev/qt5/qtdeclarative/tests/manual/pointer/tapHandler.qml"
+        qtSourceModule: "qtdeclarative"
+        sourceFile: "tests/manual/pointer/tapHandler.qml"
     }
 
-    CodeSlideInteractive {
-        title: "MouseHandler"
-        sourceFile: "examples/mouseHandler.qml"
-    }
+//    CustomCodeSlide {
+//        title: "MouseHandler"
+//        sourceFile: "examples/mouseHandler.qml"
+//    }
 
     Slide {
-        title: "Touch Event Delivery in Qt <= 5.7"
+        title: "Touch Event Delivery in Qt <= 5.8"
         content: [
             "each item under the touchpoint gets a touch event (and ignores by default)",
             "if not accepted, the item gets a synthetic mouse event",
@@ -85,23 +90,23 @@ ecloud on #qt-labs"
         Image {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            source: "/home/rutledge/dev/presentations/projfair-201606-pointerhandlers/presentation/images/touch_mouse_event.png"
+            source: "images/touch_mouse_event.png"
         }
     }
 
     ImageSlide {
         title: "Existing QEvent hierarchy"
-        source: "/home/rutledge/dev/presentations/projfair-201606-pointerhandlers/presentation/images/event-hierarchy-before.png"
+        source: "images/event-hierarchy-before.png"
     }
 
     ImageSlide {
         title: "Many parallel event delivery paths (and some missing)"
-        source: "/home/rutledge/dev/presentations/projfair-201606-pointerhandlers/presentation/images/event-delivery-before.png"
+        source: "images/event-delivery-before.png"
     }
 
     ImageSlide {
         title: "WIP hierarchy for QtQuick 2.8 Tech Preview"
-        source: "/home/rutledge/dev/presentations/projfair-201606-pointerhandlers/presentation/images/event-hierarchy-qt5.8.png"
+        source: "images/event-hierarchy-qt5.8.png"
     }
 
     Slide {
@@ -117,29 +122,18 @@ ecloud on #qt-labs"
                 bottom: parent.bottom
             }
             fillMode: Image.PreserveAspectFit
-            source: "/home/rutledge/dev/presentations/projfair-201606-pointerhandlers/presentation/images/pointerevent-delivery.png"
+            source: "images/pointerevent-delivery.png"
         }
     }
 
-    Slide {
+    ImageSlide {
         title: "Handler hierarchy so far"
-        content: [
-        ]
-        Flickable {
-            contentHeight: phClassHier.implicitHeight
-            anchors.fill: parent
-            Image {
-                id: phClassHier
-                fillMode: Image.PreserveAspectFit
-                source: "/home/rutledge/dev/presentations/projfair-201606-pointerhandlers/presentation/images/pointer-handlers-classes.png"
-//                source: "/home/rutledge/dev/presentations/projfair-201606-pointerhandlers/presentation/images/class_q_quick_pointer_handler__inherit__graph.png"
-            }
-        }
+        source: "images/pointer-handlers-classes.png"
     }
 
 //    TextSlide {
 //        title: "QQuickPointerEvent"
-//        sourceFile: "/home/rutledge/dev/qt5/qtdeclarative/src/quick/items/qquickevents_p_p.h"
+//        sourceFile: "src/quick/items/qquickevents_p_p.h"
 //    }
 
 //    Slide {
@@ -156,10 +150,10 @@ ecloud on #qt-labs"
 
 //    TextSlide {
 //        title: "Fling Animation using VelocityCalculator"
-//        sourceFile: "/home/rutledge/dev/presentations/projfair-201606-pointerhandlers/presentation/fling-animation-with-velocity-calculator.qml"
+//        sourceFile: "fling-animation-with-velocity-calculator.qml"
 //    }
 
-//    CodeSlideInteractive {
+//    CustomCodeSlide {
 //        title: "Events, Pressed and Hover"
 //        sourceFile: "examples/MouseStack2.qml"
 //    }
