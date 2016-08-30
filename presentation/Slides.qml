@@ -8,11 +8,19 @@ Presentation {
     anchors.fill: parent
     mouseNavigation: false
 
-    width: 1280
-    height: 720
+    width: 1920
+    height: 1080
 
-    SlideCounter {}
-    Clock { fontFamily: "WindsorDemi" }
+    Image {
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
+        fillMode: Image.PreserveAspectFit
+        source: "images/top-banner.png"
+        visible: currentSlide === 0
+    }
 
     Slide {
         id: title
@@ -157,4 +165,20 @@ ecloud on #qt-labs, #qt-quick etc."
 //        title: "Events, Pressed and Hover"
 //        sourceFile: "examples/MouseStack2.qml"
 //    }
+
+
+    SlideCounter { id: slideCounter }
+
+    Clock { id: clock }
+
+    Image {
+        anchors {
+            bottom: slideCounter.bottom
+            right: slideCounter.left
+            rightMargin: 20
+        }
+        fillMode: Image.PreserveAspectFit
+        source: "images/bottom-logo.png"
+    }
+
 }
