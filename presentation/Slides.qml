@@ -161,11 +161,15 @@ ecloud on #qt-labs, #qt-quick etc."
 //        sourceFile: "fling-animation-with-velocity-calculator.qml"
 //    }
 
-//    CustomCodeSlide {
-//        title: "Events, Pressed and Hover"
-//        sourceFile: "examples/MouseStack2.qml"
-//    }
-
+    CodeSlide {
+        title: "Pressing Multiple Buttons"
+        sourceFile: "examples/MultiButton.qml"
+//        sourceFile: "examples/multibuttons.qml"
+        Loader {
+            anchors.right: parent.right
+            source: "examples/multibuttons.qml"
+        }
+    }
 
     SlideCounter { id: slideCounter }
 
