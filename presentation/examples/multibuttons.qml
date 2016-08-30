@@ -1,5 +1,5 @@
 import QtQuick 2.0
-//import QtQuick.Particles 2.0
+import QtQuick.Particles 2.0
 import QtQuick.Layouts 1.0
 
 Item {
@@ -25,7 +25,6 @@ Item {
             Layout.fillWidth: true
         }
     }
-/*
     ParticleSystem {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
@@ -45,5 +44,4 @@ Item {
         ImageParticle { source: "images/missile.png"; autoRotation: true; rotation: 90 }
         Emitter { anchors.bottom: parent.bottom; enabled: missilesButton.pressed; lifeSpan: 5000; size: 128
             emitRate: 10; velocity: PointDirection { x: -1000; y: -350; yVariation: 200; xVariation: 50 } } }
-            */
 }
