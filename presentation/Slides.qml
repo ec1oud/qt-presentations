@@ -15,11 +15,13 @@ Presentation {
         anchors {
             top: parent.top
             left: parent.left
-            right: parent.right
         }
+        height: parent.height / 6
         fillMode: Image.PreserveAspectFit
         source: "images/top-banner.png"
         visible: currentSlide === 0
+        antialiasing: true
+        smooth: true
     }
 
     Slide {
@@ -181,8 +183,11 @@ ecloud on #qt-labs, #qt-quick etc."
             right: slideCounter.left
             rightMargin: 20
         }
+        height: slideCounter.height * 1.5
         fillMode: Image.PreserveAspectFit
         source: "images/bottom-logo.png"
+        antialiasing: true
+        smooth: true
     }
 
 }
