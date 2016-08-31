@@ -4,5 +4,6 @@ import Qt.labs.presentation 1.0
 QmlCodeSlide {
     background: Rectangle { color: "#ffe" }
     margins: -20
-    codeFontSize: 24
+    horizontalMargin: -20
+    codeFontSize: height * 0.03
 }
