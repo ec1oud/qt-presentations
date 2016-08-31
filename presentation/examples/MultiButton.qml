@@ -32,7 +32,7 @@ Rectangle {
 
     Text {
         id: label
-        font.pointSize: 18
+        font.pointSize: 14
         text: "Button"
         anchors.centerIn: parent
     }
