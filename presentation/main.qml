@@ -1,11 +1,18 @@
 import QtQuick 2.0
 import QtQuick.Window 2.1
+import Qt.labs.presentation.helper 1.0
 
 Rectangle {
+    id: root
     width: 1280
     height: 720
     visible: true
     property alias currentSlide: slides.currentSlide
+
+    PointingFilter {
+        id: pointingFilter
+        target: root.Window.window
+    }
 
     Repeater {
         model: pointingFilter.touchPoints.length
