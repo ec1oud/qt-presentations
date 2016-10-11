@@ -6,6 +6,7 @@ QML_FILES = \
     CodeSlideInteractive.qml \
     CodeSlideLong.qml \
     Presentation.qml \
+    QmlCodeSlide.qml \
     Slide.qml \
     SlideCounter.qml \
     TextSlide.qml \

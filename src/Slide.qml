@@ -52,14 +52,28 @@ Item {
 
     property bool isSlide: true;
 
+    property bool delayPoints: false;
+    property int _pointCounter: 0;
+    function _advance() {
+        if (!parent.allowDelay)
+            return false;
+
+        _pointCounter = _pointCounter + 1;
+        if (_pointCounter < content.length)
+            return true;
+        _pointCounter = 0;
+        return false;
+    }
+
     property string title;
     property variant content: []
     property string centeredText
+    property alias centeredTextFormat: centeredId.textFormat
     property string writeInText;
     property string notes;
 
     property real fontSize: parent.height * 0.05
-    property real fontScale: 1
+    property real fontScale: parent.fontScale
 
     property real baseFontSize: fontSize * fontScale
     property real titleFontSize: fontSize * 1.2 * fontScale
@@ -79,6 +93,7 @@ Item {
     property color titleColor: parent.titleColor;
     property color textColor: parent.textColor;
     property string fontFamily: parent.fontFamily;
+    property int textFormat: Text.PlainText
 
     visible: false
 
@@ -149,13 +164,31 @@ Item {
 
                 height: text.height + (nextIndentLevel == 0 ? 1 : 0.3) * slide.baseFontSize * slide.bulletSpacing
                 x: slide.baseFontSize * indentLevel
+                visible: (!slide.parent.allowDelay || !delayPoints) || index <= _pointCounter
+
+                Rectangle {
+                    id: dot
+                    anchors.baseline: text.baseline
+                    anchors.baselineOffset: -text.font.pixelSize / 2
+                    width: text.font.pixelSize / 3
+                    height: text.font.pixelSize / 3
+                    color: slide.textColor
+                    radius: width / 2
+                    opacity: text.text.length == 0 ? 0 : 1
+                }
+
+                Item {
+                    id: space
+                    width: dot.width * 1.5
+                    height: 1
+                }
 
                 Text {
                     id: text
-                    width: slide.contentWidth - parent.x
+                    width: slide.contentWidth - parent.x - dot.width - space.width
                     font.pixelSize: baseFontSize * row.indentFactor
-                    text: "• " + content[index]
-                    textFormat: Text.PlainText
+                    text: content[index]
+                    textFormat: slide.textFormat
                     wrapMode: Text.WordWrap
                     color: slide.textColor
                     horizontalAlignment: Text.AlignLeft

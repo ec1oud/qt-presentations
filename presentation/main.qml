@@ -15,7 +15,7 @@ Rectangle {
     }
 
     Repeater {
-        model: pointingFilter.touchPoints.length
+        model: pointingFilter.touchPoints === undefined ? 0 : pointingFilter.touchPoints.length
         AnimatedSprite {
             source: "images/fingersprite.png"
             width: frameWidth
