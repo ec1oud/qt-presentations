@@ -1,7 +1,6 @@
 #include <QtGui/QGuiApplication>
 #include <QtQml/QQmlApplicationEngine>
 #include <QtQml/QQmlContext>
-#include "pointingfilter.h"
 #include <QDebug>
 #include <QQuickView>
 #include <QQuickItem>
@@ -13,8 +12,6 @@ int main(int argc, char ** argv)
     SlideView view;
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.connect(view.engine(), SIGNAL(quit()), &app, SLOT(quit()));
-    PointingFilter *filter = new PointingFilter(&view);
-    view.rootContext()->setContextProperty(QLatin1String("pointingFilter"), filter);
     view.setSource(QUrl("main.qml"));
     view.show();
     foreach (const QString &arg, app.arguments()) {

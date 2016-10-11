@@ -1,7 +1,7 @@
 /****************************************************************************
 **
-** Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
-** Contact: http://www.qt-project.org/legal
+** Copyright (C) 2016 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the QML Presentation System.
 **
@@ -39,12 +39,8 @@
 **
 ****************************************************************************/
 
-
-import QtQuick 2.1
+import QtQuick 2.5
 import Qt.labs.presentation.helper 1.0
-
-import QtQuick.Controls 1.0
-import QtQuick.Window 2.1
 
 Slide {
     id: slide;
@@ -52,28 +48,39 @@ Slide {
     // Either set an example file
     property string sourceFile;
     // or directly set the code here
-    property string code: helper.content;
+    property string code: helper.contentWithoutComments;
+//    property alias qtSourceModule: helper.qtSourceModule
+    property string qtSourceModule
+    property Component background: gradientBackground
 
     property string codeFontFamily: parent.codeFontFamily;
     property real codeFontSize: baseFontSize * 0.6;
+    property real margins: 6
 
-    Rectangle {
-        id: background
-        border.color: slide.textColor;
-        border.width: 1
-        width: parent.width
-        height: codeLineHeight * listModel.count
-        color: "#eee"
+    property alias __helper: helper
+
+    Component {
+        id: gradientBackground
+        Rectangle {
+            id: background
+            anchors.fill: parent
+            radius: 12
+            gradient: Gradient {
+                GradientStop { position: 0; color: Qt.rgba(0.8, 0.8, 0.8, 0.5); }
+                GradientStop { position: 1; color: Qt.rgba(0.2, 0.2, 0.2, 0.5); }
+            }
+            border.color: slide.textColor;
+            border.width: height / 250;
+            antialiasing: true
+        }
     }
 
-    Text {
-        id: fontMetrics
-        visible: false
-        text: "X"
-        font.pixelSize: (parent && parent.codeFontSize > 0)? slide.codeFontSize : 10
-        font.family: slide.codeFontFamily
+    Loader {
+        sourceComponent: background
+        anchors.fill: parent
+        anchors.margins: slide.margins
+        clip: true
     }
-    property int codeLineHeight: fontMetrics.height
 
     onCodeChanged: {
         listModel.clear();
@@ -99,7 +106,7 @@ Slide {
         id: listView;
 
         anchors.fill: parent;
-        anchors.margins: background.radius / 2
+        anchors.margins: slide.margins
         clip: true
 
         model: listModel;
@@ -117,7 +124,7 @@ Slide {
 
             id: itemDelegate
 
-            height: codeLineHeight
+            height: lineLabel.height
             width: parent.width
 
             Rectangle {
@@ -163,52 +170,8 @@ Slide {
         }
     }
 
-//    Button {
-//        id: b
-//        text: "Run"
-//        anchors.right: parent.right
-//        anchors.bottom: parent.bottom
-//        visible: helper.source.length > 0
-
-//        onClicked: {
-//            ex.visible = true
-//            loader.source = "" // force reload
-//            loader.source = helper.sourcePath
-//        }
-//    }
-
-    Action {
-        enabled: slide.visible
-        shortcut: "x"
-        onTriggered: {
-            ex.visible = true
-            loader.source = "" // force reload
-            loader.source = helper.sourcePath
-        }
-    }
-    Action {
-        enabled: slide.visible
-        shortcut: "r"
-        onTriggered: {
-            ex.visible = true
-            loader.source = "" // force reload
-            loader.source = helper.sourcePath
-        }
-    }
-
     ExampleHelper {
         id: helper
         source: slide.visible ? sourceFile : ""
-    }
-
-    Window {
-        id: ex
-        width: loader.width
-        height: loader.height
-
-        Loader {
-            id: loader
-            focus: true
-        }
     }
 }

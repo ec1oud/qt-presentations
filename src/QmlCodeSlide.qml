@@ -41,16 +41,18 @@
 
 import QtQuick 2.5
 
-Slide {
+CodeSlide {
     id: slide
 
-    property alias source: image.source
-    property bool autoScale: false
+    property real horizontalMargin: 6
+    property bool expandContent: false
 
-    Image {
-        id: image
-        anchors.centerIn: slide.autoScale ? undefined : parent
-        anchors.fill: slide.autoScale ? parent : undefined
-        fillMode: Image.PreserveAspectFit
+    Loader {
+        id: loader
+        focus: true
+        anchors.fill: expandContent ? parent : undefined
+        anchors.right: expandContent ? undefined : parent.right
+        anchors.rightMargin: -horizontalMargin
+        source: slide.visible ? __helper.sourcePath : ""
     }
 }

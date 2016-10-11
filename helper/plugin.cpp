@@ -42,6 +42,7 @@
 #include <QtQml/qqmlextensionplugin.h>
 
 #include "examplehelper.h"
+#include "pointingfilter.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -54,8 +55,9 @@ public:
     {
         Q_ASSERT(QLatin1String(uri) == QLatin1String("Qt.labs.presentation.helper"));
         Q_UNUSED(uri);
-
+qDebug() << "registering stuff for " << uri;
         qmlRegisterType<ExampleHelper>(uri, 1, 0, "ExampleHelper");
+        qmlRegisterType<PointingFilter>(uri, 1, 0, "PointingFilter");
     }
 };
 
