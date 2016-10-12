@@ -35,6 +35,7 @@ void PointingFilter::setTarget(QQuickWindow *target)
     if (m_target)
         m_target->removeEventFilter(this);
     m_target = target;
+qDebug() << "target" << target;
     m_engine = target->incubationController()->engine();
     m_target->installEventFilter(this);
     emit targetChanged();

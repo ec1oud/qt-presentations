@@ -1,20 +1,26 @@
 import QtQml 2.2
 import QtQuick 2.0
+import QtQuick.Controls.Material 2.0
 import QtQuick.Window 2.1
 import Qt.labs.presentation.helper 1.0
 
-Rectangle {
+//ApplicationWindow {
+Window {
     id: root
     width: 1280
     height: 720
     visible: true
     property alias currentSlide: slides.currentSlide
+    Material.accent: Material.Green
 
     PointingFilter {
         id: pointingFilter
-        target: root.Window.window
-//        Component.onCompleted: target = root.Window.window
-//        target: root.visible ? root.Window.window : null
+//        target: root
+//        target: root.Window.window
+    }
+    Timer {
+        interval: 2000; running: true
+        onTriggered: pointingFilter.target = root
     }
 
     Repeater {
@@ -32,24 +38,6 @@ Rectangle {
             z: 10000
         }
     }
-
-//    Instantiator {
-//        model: pointingFilter.touchPoints
-//        delegate: AnimatedSprite {
-//            source: "images/fingersprite.png"
-//            width: frameWidth
-//            height: frameHeight
-//            frameWidth: 43
-//            frameHeight: 64
-//            frameCount: 3
-//            frameRate: 5
-//            x: modelData.x - 19
-//            y: modelData.y - 12
-//            z: 10000
-//            parent: root
-//        }
-//        onObjectAdded: console.log("i " + index + " o " + object)
-//    }
 
     Slides {
         id: slides

@@ -1,4 +1,4 @@
-QT += qml quick widgets printsupport
+QT += qml quick widgets printsupport quickcontrols2
 TARGET = present
 TEMPLATE = app
 SOURCES += main.cpp ../tools/printslides/slideview.cpp
