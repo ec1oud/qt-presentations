@@ -4,44 +4,40 @@ import QtQuick.Particles 2.0
 
 T.Button {
     id: control
-    text: qsTr("Button")
-    implicitWidth: 100
-    implicitHeight: 30
 
     contentItem: Text {
-        id: label
         text: control.text
         opacity: enabled ? 1.0 : 0.3
         color: control.down ? "black" : "#111"
+        font.pointSize: 36
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        elide: Text.ElideRight
     }
 
     background: Rectangle {
-        clip: true; antialiasing: true
+        clip: true; antialiasing: true; radius: 4; border.width: 3
         border.color: control.down ? "black" : "transparent"
-        radius: 4
         BorderImage {
             clip: true
-            anchors.fill: parent; anchors.margins: 1
+            anchors.fill: parent; anchors.margins: 2
             source: "images/button-fill.png"
-            border.left: 5 ; border.top: 1
-            border.right: 5 ; border.bottom: 1
-            ParticleSystem { id: bubbles }
+            border { left: 5; top: 1; right: 5; bottom: 1 }
+            ParticleSystem {
+                id: bubbles
+            }
             ImageParticle {
                 system: bubbles
                 source: "images/bubble.png"
-                opacity: 0.7
+                opacity: 0.5
             }
             Emitter {
                 system: bubbles
                 anchors.fill: parent
                 enabled: control.down
-                size: 4
-                sizeVariation: 4
+                size: 12
+                sizeVariation: 8
                 acceleration: PointDirection { y: -6; xVariation: 3 }
-                emitRate: 100
+                emitRate: 20
                 lifeSpan: 3000
             }
         }

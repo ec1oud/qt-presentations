@@ -10,6 +10,7 @@ Presentation {
     mouseNavigation: false
     fontFamily: "TitilliumWeb"
     fontScale: 0.7
+    showNotes: true
 
     width: 1920
     height: 1080
@@ -60,6 +61,86 @@ Shawn Rutledge<br/>
             " Dedicated OpenGL scenegraph",
             " Primitive building blocks"
         ]
+        notes: "Qt Quick is a UI framework that enables development of user interfaces using a declarative language.
+
+It is built on a dedicated scene graph based on OpenGL that fully utilises the GPU.
+
+Using primitive building blocks, you can create custom, animated user interfaces with full control over every pixel.
+
+opengl, dx12, cpu rendering"
+    }
+
+    Slide {
+        title: "Introduction"
+        content: [
+            "What are Qt Quick Controls?",
+            "High level UI building blocks such as Buttons and Sliders",
+            "Use style templates or fully customize the style",
+            "Rendered via the Qt Quick scene graph"
+        ]
+        notes: "Qt Quick Controls 2 complements Qt Quick by providing higher level templates for common UI elements such as buttons and sliders.
+
+The template system was designed for visualising controls with a minimal amount of effort, which leads to excellent performance on any platform.
+
+It comes with ready-made styles that fill in the templates. Examples of these styles are Google’s Material and Microsoft’s Universal designs.
+"
+    }
+
+    Slide {
+        title: "Behind the scenes"
+        content: [
+            "Benchmarks",
+            " QObject count",
+            " No more Loaders, separate style objects",
+            " Logic in C++, Visuals in QML",
+            " QML mandatory attached objects vs C++ lazy loaded"
+        ]
+        notes: "Let’s take a look at how we achieved good performance on low-end devices.
+
+To find the bottlenecks in Qt Quick Controls 1, we wrote some benchmarks.
+We saw that some controls were creating obscenely large numbers of QObjects and Items.
+
+Slider, the amount of items and objects:
+    - Qt Quick Controls 1
+        - Base style: QQuickItems: 37 (total of QObjects: 114)
+        - Desktop style: QQuickItems: 7 (total of QObjects: 30)
+    - Qt Quick Controls 2
+        - Default style: QQuickItems: 3 (total of QObjects: 4)
+        - Universal style: QQuickItems: 5 (total of QObjects: 6)
+        - Material style: QQuickItems: 6 (total of QObjects: 8)
+
+Another thing that we discovered is that Loaders really ate into performance when scrolling e.g. a TableView.
+We replaced the separate styling objects with a system that is much simpler and actually more flexible.
+Instead of the delegates for each control being loaded dynamically, they are simply declared statically and automatically parented to the control.
+
+We ensure that we keep the logic in C++ and the visuals in QML. Simple declarative bindings are faster than full-fledged JavaScript blocks.
+In one case, we were able to reduce the creation time of a control b 30% by replacing imperative code with declarative bindings.
+
+Controls 1 handles accessibility via attached properties, whereas Controls 2 does it in C++ conditionally, and accessibility can be disabled if appropriate.
+
+We have used these findings to guide the development of Qt Quick Controls 2, with some of them even being enforced by CI thanks to some auto tests.
+"
+    }
+
+    Slide {
+        title: "Interesting features"
+        content: [
+            "Property inheritance/propagation",
+            "Static styling system based on file selectors",
+            "Run any style on any platform",
+            "Possible to mix and match Controls 1 with Controls 2",
+            "Custom styles have full control"
+        ]
+        notes: "The C++ foundation allows us to inherit style attributes from parent to children. We’ve used the same system for font and locale inheritance.
+
+Using file selectors, we load the correct style at startup, when the first Qt Quick Controls 2 import is found by the QML engine. Besides being faster, this is not too different from Qt Quick Controls 1. However, since we add our custom selectors (material, universal) to QFileSelector, it means that you can also use these selectors in your application to provide efficiently-loaded, style-specific variants of certain parts of your UI.
+
+Each style is 100% cross-platform. For example, you can use the Material style on an embedded Linux device like the Raspberry Pi. This also means that end users get more style options.
+
+Being able to mix and match Controls 1 and 2 was one of the release/acceptance criterias. We modified the QML engine to allow importing two different major versions of the same QML namespace.
+
+In Controls 1, the style panel would determine the layout, whereas in Controls 2, you have full control over it. In Controls 1, the style object was in a separate context, which meant that you could not modify properties of the control. In Controls 2, a style for a control is the control, so it can set default values for any properties of the control.
+"
     }
 
 //    ImageSlide {
@@ -79,9 +160,14 @@ Shawn Rutledge<br/>
     }
 
     CustomCodeSlide {
-        // TODO show the style definition instead
         title: "Custom Style"
-        sourceFile: "examples/customStyle.qml"
+        loaded: false
+        sourceFile: "examples/customstyle/Button.qml"
+        Loader {
+            anchors.right: parent.right
+            anchors.rightMargin: -40
+            source: "examples/customStyle.qml"
+        }
     }
 
     Slide {

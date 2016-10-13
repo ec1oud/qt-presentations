@@ -4,12 +4,14 @@ import QtQuick.Layouts 1.0
 
 Item {
     visible: true
-    width: 640
+    width: 200
     height: 480
 
     Column {
         anchors.fill: parent
         Button {
+            width: 200; height: 100
+//            font.pixelSize: 36
             text: "Button"
         }
 
