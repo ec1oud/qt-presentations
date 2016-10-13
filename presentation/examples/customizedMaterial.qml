@@ -3,10 +3,10 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 
-Item {
+Item { // typically ApplicationWindow
     id: window
     width: 640
-    height: 1080
+    height: 1280
     visible: true
 
     Material.accent: Material.Green

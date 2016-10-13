@@ -1,23 +1,16 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.0
 
-Item {
-    visible: true
-    width: 200
-    height: 480
+Column {
+    width: 200; height: 480; spacing: 20
+    Button {
+        text: "Button"
+        enabled: checkbox.checked
+    }
 
-    Column {
-        anchors.fill: parent
-        Button {
-            width: 200; height: 100
-//            font.pixelSize: 36
-            text: "Button"
-        }
-
-        Slider {
-
-        }
-
+    CheckBox {
+        id: checkbox
+        text: "enable"
+        checked: true
     }
 }
