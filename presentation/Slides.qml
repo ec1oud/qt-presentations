@@ -198,6 +198,7 @@ In Controls 1, the style panel (?) would determine the layout, whereas in Contro
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/><br/>
+This presentation: <tt>https://github.com/ec1oud/qt-presentations/tree/controls2</tt>
 
 J P Nurmi<br/>
 <tt>jp.nurmi@qt.io</tt><br/>
