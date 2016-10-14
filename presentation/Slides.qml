@@ -89,6 +89,13 @@ It comes with ready-made styles that fill in the templates. Examples of these st
 "
     }
 
+//    Slide {
+        LotsaControls {
+//            anchors.fill: parent
+            property bool isSlide: true
+        }
+//    }
+
     Slide {
         title: "Behind the scenes"
         content: [
