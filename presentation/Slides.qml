@@ -20,13 +20,11 @@ Presentation {
         anchors {
             top: parent.top
             left: parent.left
+            right: parent.right
         }
-        height: parent.height / 6
         fillMode: Image.PreserveAspectFit
         source: "images/top-banner.png"
         visible: currentSlide === 0
-        antialiasing: true
-        smooth: true
     }
 
     Slide {
@@ -212,17 +210,39 @@ J P Nurmi<br/>
 
     Clock { id: clock }
 
+    property bool bottomStuffVisible: currentSlide < 5 || currentSlide === presentation.slides.length - 1
+
+    Rectangle {
+        id: rule
+        visible: bottomStuffVisible
+        color: "#f3f3f4"; height: 5
+        anchors.bottom: leftLogo.top
+        anchors.left: parent.left; anchors.leftMargin: 65
+        anchors.right: slideCounter.right
+        anchors.bottomMargin: 16
+    }
+
     Image {
+        id: leftLogo
+        visible: bottomStuffVisible
+        anchors {
+            verticalCenter: slideCounter.verticalCenter
+            left: rule.left
+            rightMargin: 20
+        }
+        fillMode: Image.PreserveAspectFit
+        source: "images/bottom-logo-left.png"
+    }
+
+    Image {
+        id: rightLogo
         anchors {
             verticalCenter: slideCounter.verticalCenter
             right: slideCounter.left
             rightMargin: 20
         }
-        height: slideCounter.height * 1.5
         fillMode: Image.PreserveAspectFit
-        source: "images/bottom-logo.png"
-        antialiasing: true
-        smooth: true
+        source: "images/bottom-logo-right.png"
     }
 
 }
