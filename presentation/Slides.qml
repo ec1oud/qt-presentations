@@ -3,6 +3,7 @@ import QtQuick 2.8
 import QtQuick.Controls 2.0
 
 import "examples"
+import "diagrams"
 
 Presentation {
     id: presentation
@@ -103,8 +104,14 @@ It comes with ready-made styles that fill in the templates. Examples of these st
             source: "images/barchart.png"
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            width: implicitWidth * 1.5
-            height: implicitHeight * 1.5
+            width: parent.width * 0.5
+            height: parent.height * 0.6
+            fillMode: Image.PreserveAspectFit
+        }
+        BarchartObjectCount {
+            width: parent.width * 0.5
+            height: parent.height * 0.6
+            anchors.bottom: parent.bottom
         }
         notes: "Let’s take a look at how we achieved good performance on low-end devices.
 

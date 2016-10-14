@@ -1,4 +1,4 @@
-#include <QtGui/QGuiApplication>
+#include <QApplication>
 #include <QtQml/QQmlApplicationEngine>
 #include <QtQml/QQmlContext>
 #include <QDebug>
@@ -9,7 +9,7 @@
 
 int main(int argc, char ** argv)
 {
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
     QQuickStyle::setStyle("examples/customstyle", "Material");
 
     QQmlApplicationEngine engine;
