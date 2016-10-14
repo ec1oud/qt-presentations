@@ -8,8 +8,9 @@ the original rather than this fork.
 
 # Requirements
 
-* Qt 5.8
-  * qtbase, qtdeclarative, qtcharts, qtquickcontrols, qtquickcontrols2
+* Qt 5.9
+  * qtbase, qtcharts, qtquickcontrols, qtquickcontrols2
+  * qtdeclarative: wip/pointerhandler branch plus latest uncommitted patches
 
 # Running
 
