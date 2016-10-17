@@ -31,7 +31,7 @@ Presentation {
         centeredText: "<html>
 <H1>Pointer Handlers in Qt Quick</H1>
 
-<H2>Contributors' Summit 2016</H2>
+<H2>Qt World Summit 2016</H2>
 
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
@@ -75,14 +75,12 @@ Shawn Rutledge<br/>
 
     CustomCodeSlide {
         title: "DragHandler"
-        qtSourceModule: "qtdeclarative"
-        sourceFile: "tests/manual/pointer/joystick.qml"
+        sourceFile: "examples/joystick.qml"
     }
 
     CustomCodeSlide {
         title: "TapHandler"
-        qtSourceModule: "qtdeclarative"
-        sourceFile: "tests/manual/pointer/tapHandler.qml"
+        sourceFile: "examples/tapHandler.qml"
     }
 
     CustomCodeSlide {
@@ -92,8 +90,7 @@ Shawn Rutledge<br/>
 
     CustomCodeSlide {
         title: "PinchHandler"
-        qtSourceModule: "qtdeclarative"
-        sourceFile: "tests/manual/pointer/pinchHandler.qml"
+        sourceFile: "examples/pinchHandler.qml"
     }
 
 //    CustomCodeSlide {
@@ -174,7 +171,7 @@ Shawn Rutledge<br/>
             "so far, an Item must grab a press to be able to get an update<br/>this leads us to monolithic Areas and childMouseEventFilter and grab-stealing",
             "PointerHandlers: we want to mostly let events propagate; exclusive grab should be less common",
             "virtual bool wantsPointerEvent(QQuickPointerEvent *) and wantsEventPoint(QQuickEventPoint *) don't imply grabbing<br/>(but then, it won't get updates if something else does grab)",
-            "signals press(eventPoint), update(eventPoint), release(eventPoint) allow setting accepted to false<br/>means wantsEventPoint() will return false, ungrab if grabbed",
+            "signals press(eventPoint), update(eventPoint), release(eventPoint) might allow setting accepted to false<br/>means wantsEventPoint() will return false, ungrab if grabbed",
             "if wantsPointerEvent() returns true, handlePointerEventImpl() will be called"
         ]
     }
@@ -208,11 +205,8 @@ Shawn Rutledge<br/>
         title: "Velocity"
         content: [
             "every event should have valid velocity values",
-            "QTouchEvent already has velocity but it is almost never valid (but TUIO has it)",
-            "should we synthesize it in the platform plugins? or cross-platform?",
-            "but QMouseEvent and QTabletEvent do not have velocity...should we add it?",
-            "probably, synthesize it when creating QQuickPointerEvents"
-//            "or, use a generic VelocityCalculator in QML"
+            "we plan to synthesize it when creating QQuickPointerEvents",
+            "future FlickHandler won't need to calculate it like Flickable does"
         ]
     }
 
@@ -240,7 +234,7 @@ Shawn Rutledge<br/>
             "FlickHandler",
             "scroll & wheel events",
             "native gestures",
-            "weak (non-exclusive) grab concept?",
+            "validate the weak (non-exclusive) grab concept",
             "get ready for public C++ API (create private-impl classes etc.)",
             "research Reactive Programming more: any good ideas? are we doing it all wrong then?"
         ]
@@ -253,12 +247,13 @@ Shawn Rutledge<br/>
         centeredText: "<html>
 <H1>Pointer Handlers in Qt Quick</H1>
 
-<H2>Contributors' Summit 2016</H2>
+<H2>Qt World Summit 2016</H2>
 
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/>
-Follow progress: wip/pointerhandler branch of qtdeclarative
+Follow progress: wip/pointerhandler branch of qtdeclarative<br/>
+This presentation: <tt>https://github.com/ec1oud/qt-presentations/tree/pointerhandlers</tt><br/><br/>
 </html>"
     }
 
@@ -266,7 +261,7 @@ Follow progress: wip/pointerhandler branch of qtdeclarative
 
     Clock { id: clock }
 
-    property bool bottomStuffVisible: currentSlide < 5 || currentSlide === presentation.slides.length - 1
+    property bool bottomStuffVisible: currentSlide < 3 || currentSlide === presentation.slides.length - 1
 
     Rectangle {
         id: rule

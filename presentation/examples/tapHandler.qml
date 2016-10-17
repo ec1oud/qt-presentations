@@ -47,31 +47,34 @@ Item {
     height: 320
 
     Rectangle {
-        TapHandler {
-            acceptedButtons: Qt.LeftButton
-            enabled: leftAllowedCB.checked
-            onTapped: rect.animateTap(tapCount, "green")
-        }
+        id: rect
+        anchors.fill: parent; anchors.margins: 40
+        border.width: 3; border.color: "transparent"
+        color: handler.isPressed ? "lightsteelblue" : "#22222222"
 
         TapHandler {
-            acceptedButtons: Qt.MiddleButton
-            enabled: middleAllowedCB.checked
-            onTapped: rect.animateTap(tapCount, "orange")
-        }
-
-        TapHandler {
-            acceptedButtons: Qt.RightButton
-            enabled: rightAllowedCB.checked
-            onTapped: rect.animateTap(tapCount, "magenta")
-        }
-
-        function animateTap(tapCount, color) {
-            if (tapCount > 1) {
-                tapCountLabel.text = tapCount
-                flashAnimation.start()
-            } else {
-                borderBlink.blinkColor = color
+            id: handler
+            acceptedButtons: (leftAllowedCB.checked ? Qt.LeftButton : Qt.NoButton) |
+                             (middleAllowedCB.checked ? Qt.MiddleButton : Qt.NoButton) |
+                             (rightAllowedCB.checked ? Qt.RightButton : Qt.NoButton)
+            onCanceled: {
+                console.log("canceled @ " + pos)
+                borderBlink.blinkColor = "red"
                 borderBlink.start()
+            }
+            onTapped: {
+                console.log("tapped @ " + point.pos + " button(s) " + point.event.button + " tapCount " + tapCount)
+                if (tapCount > 1) {
+                    tapCountLabel.text = tapCount
+                    flashAnimation.start()
+                } else {
+                    switch (point.event.button) {
+                        case Qt.LeftButton: borderBlink.blinkColor = "green"; break;
+                        case Qt.MiddleButton: borderBlink.blinkColor = "orange"; break;
+                        case Qt.RightButton: borderBlink.blinkColor = "magenta"; break;
+                    }
+                    borderBlink.start()
+                }
             }
         }
 
@@ -101,10 +104,6 @@ Item {
                 }
             }
         }
-
-        id: rect
-        anchors.fill: parent; anchors.margins: 40
-        border.width: 3; border.color: "transparent"; color: "lightgrey"
 
         SequentialAnimation {
             id: borderBlink
