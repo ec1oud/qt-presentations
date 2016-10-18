@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 Rectangle {
-    width: 312; height: 800; color: "transparent"; border.width: 2
+    width: 312; height: 730; color: "transparent"; border.width: 2
     border.color: flick.dragging ? "green" : "#ddd"
     Flickable {
         id: flick

@@ -8,11 +8,13 @@ Item {
     ColumnLayout {
         anchors.right: parent.right
         spacing: 20
+        Text { text: "protagonist"; font.pointSize: 12 }
         MultiButton {
             id: balloonsButton
             label: "Launch Balloons"
             Layout.fillWidth: true
         }
+        Text { text: "the goons"; font.pointSize: 12 }
         MultiButton {
             id: missilesButton
             label: "Launch Missiles"
@@ -30,6 +32,7 @@ Item {
         anchors.leftMargin: 150
         ImageParticle { source: "images/balloon.png" }
         Emitter { anchors.bottom: parent.bottom; enabled: balloonsButton.pressed; lifeSpan: 5000; size: 64
+            maximumEmitted: 99
             emitRate: 50; velocity: PointDirection { x: 10; y: -150; yVariation: 30; xVariation: 50 } } }
     ParticleSystem {
         anchors.verticalCenter: parent.verticalCenter

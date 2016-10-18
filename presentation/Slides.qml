@@ -40,9 +40,61 @@ Shawn Rutledge<br/>
     }
 
     Slide {
-        title: "Goals"
+        title: "About me"
         content: [
-            "make it easy to handle mouse, touch and tablet agnostically or in device-specific ways",
+            "Qt user since ~2004",
+            "The Qt Company - Oslo",
+            "Pointing devices: touch, Wacom tablets",
+            "Linux/X11 and OS X",
+            "Qt Quick Controls and Dialogs",
+            "Future: maybe printing, maybe some new graphical Items, PDF, etc.",
+        ]
+    }
+
+    Slide {
+        title: "Agenda"
+        content: [
+            "What's wrong with existing mouse & touch handling",
+            "Goals",
+            "Introduction to PointerHandlers",
+            "Demos of several PointerHandlers",
+            "Conceptual comparison",
+            "Remaining work",
+            "Q&A"
+        ]
+    }
+
+//    Slide {
+//        // TODO examples
+//        title: "What's wrong with existing mouse & touch handling"
+//        content: [
+//        ]
+//    }
+
+    CustomCodeSlide {
+        title: "Flickable and MouseArea: hover and grab"
+        sourceFile: "examples/Flick.qml"
+    }
+
+    CustomCodeSlide {
+        title: "Flickable and MouseArea: grab, filter and steal"
+        sourceFile: "examples/Flickable2.qml"
+    }
+
+    ImageSlide {
+        title: "Existing QEvent hierarchy"
+        source: "images/event-hierarchy-before.png"
+    }
+
+    ImageSlide {
+        title: "Many parallel event delivery paths (and some missing)"
+        source: "images/event-delivery-before.png"
+    }
+
+    Slide {
+        title: "Goals: what we need to fix"
+        content: [
+            "make it easy to handle mouse, touch and stylus agnostically or in device-specific ways",
             "common event delivery code for mouse and touch in QQuickWindow",
             "both QML and C++ APIs",
             "guarantee that events always have velocity",
@@ -56,22 +108,41 @@ Shawn Rutledge<br/>
     Slide {
         title: "Idea: handler objects"
         content: [
-            "the old core idea: make mouse/touch more like the Keys attached prop",
-            "but you can't have more than one attached object of a given type per Item... so let's have child objects",
+            "the original idea: make mouse/touch more like the Keys attached prop",
+            ' Keys.onLeftPressed: console.log("move left")'
+//            ' so maybe color: Mouse.onLeftButtonPressed ? "red" : "blue" ?'
+        ]
+    }
+
+    Slide {
+        title: "Handler objects"
+        content: [
+            "but no more than one attached object of a given type per Item... so let's have 'child' objects",
+            ' Rectangle { TapHandler { id: th } color: th.isPressed ? "red" : "blue" }',
+            ' Rectangle { DragHandler { } }',
+            ' Image { PinchHandler { } }'
+        ]
+    }
+
+    Slide {
+        title: "Features"
+        content: [
             "easy stuff is easy",
-            "multiple small, understandable handlers instead of monolithic MouseArea etc.",
+            "plain QObject 'child' is lighter than Item or attached",
+            "multiple small, lightweight, understandable handlers instead of monolithic MouseArea etc.",
+            "default target, use its bounds"
+        ]
+    }
+
+    Slide {
+        title: "Features"
+        content: [
             "preferred: declarative handlers for gestures (tap, drag, pinch etc.)",
             "but also: some for mouse only, some for touch only",
             "subclass Handlers in C++ for the less-mainstream cases",
             "it's completely different, so minimizes compatibility risks"
         ]
     }
-
-//    CustomCodeSlide {
-//        title: "Plain PointerHandler"
-//        qtSourceModule: "qtdeclarative"
-//        sourceFile: "tests/manual/pointer/pointerHandler.qml"
-//    }
 
     CustomCodeSlide {
         title: "DragHandler"
@@ -93,6 +164,13 @@ Shawn Rutledge<br/>
         sourceFile: "examples/pinchHandler.qml"
     }
 
+    CustomCodeSlide {
+        title: "PinchHandler on a map"
+        sourceFile: "examples/map.qml"
+    }
+
+    // TODO photo surface
+
 //    CustomCodeSlide {
 //        title: "MouseHandler"
 //        sourceFile: "examples/mouseHandler.qml"
@@ -105,8 +183,8 @@ Shawn Rutledge<br/>
             "each item under the touchpoint gets a touch event (and ignores by default)",
             "if not accepted, the item gets a synthetic mouse event",
             "continue with next item (in reverse paint order) if still not accepted",
-            "problem: need to duplicate a massive amount of logic<br/>to handle both mouse and touch",
-            "grabbing and stealing across real touch events and synth-mouse events<br/>is problematic",
+            "problem: duplicate logic for mouse and touch",
+            "grabbing and stealing across real touch events and synth-mouse events",
             "tablet events? fuhgetaboutit"
         ]
         Image {
@@ -139,17 +217,18 @@ Shawn Rutledge<br/>
     Slide {
         title: "Conceptual Changes: Handlers vs. Areas"
         textFormat: Text.StyledText
-        bulletSpacing: 0.6
+//        bulletSpacing: 0.6
         content: [
             "either an Handler or an Item can be the grabber",
             "if number of touchpoints changes: ignore the grab,<br/>start over with event delivery",
-            "don't need parent-filtering: Handler gives up the grab when<br/>constraints aren't satisfied: start over with delivery",
-            "define a vector of Items in visitation-order before we start delivery",
-            "prefix the old-style child-filtering Items to that vector",
-            "deliver mouse as a QQuickPointerEvent with one point inside",
-            "PointerHandler receives the complete event (all points, not just those inside)",
-            "PointerHandler must explicitly accept the event... or maybe must explicitly grab/ungrab"
+//            "don't need parent-filtering: Handler gives up the grab when<br/>constraints aren't satisfied: start over with delivery",
+//            "define a vector of Items in visitation-order before we start delivery",
+//            "prefix the old-style child-filtering Items to that vector",
+            "mouse: QQuickPointerEvent with one point inside",
+            "PointerHandler receives the complete event (all points)",
+            "PointerHandler must explicitly accept, may grab/ungrab"
         ]
+        /*
         Image {
             anchors {
                 verticalCenter: parent.verticalCenter
@@ -161,29 +240,20 @@ Shawn Rutledge<br/>
             source: "images/whiteboard-cutout.jpg"
             z: -1
         }
+        */
     }
 
     Slide {
         title: "Wanting vs. grabbing"
         textFormat: Text.StyledText
-        bulletSpacing: 0.6
+//        bulletSpacing: 0.6
         content: [
             "so far, an Item must grab a press to be able to get an update<br/>this leads us to monolithic Areas and childMouseEventFilter and grab-stealing",
             "PointerHandlers: we want to mostly let events propagate; exclusive grab should be less common",
-            "virtual bool wantsPointerEvent(QQuickPointerEvent *) and wantsEventPoint(QQuickEventPoint *) don't imply grabbing<br/>(but then, it won't get updates if something else does grab)",
+            "virtual bool wantsEventPoint(QQuickEventPoint *)",
             "signals press(eventPoint), update(eventPoint), release(eventPoint) might allow setting accepted to false<br/>means wantsEventPoint() will return false, ungrab if grabbed",
-            "if wantsPointerEvent() returns true, handlePointerEventImpl() will be called"
+            "if wantsPointerEvent() returns true, virtual handlePointerEventImpl() will be called"
         ]
-    }
-
-    ImageSlide {
-        title: "Existing QEvent hierarchy"
-        source: "images/event-hierarchy-before.png"
-    }
-
-    ImageSlide {
-        title: "Many parallel event delivery paths (and some missing)"
-        source: "images/event-delivery-before.png"
     }
 
     ImageSlide {
@@ -201,14 +271,14 @@ Shawn Rutledge<br/>
 //        sourceFile: "src/quick/items/qquickevents_p_p.h"
 //    }
 
-    Slide {
-        title: "Velocity"
-        content: [
-            "every event should have valid velocity values",
-            "we plan to synthesize it when creating QQuickPointerEvents",
-            "future FlickHandler won't need to calculate it like Flickable does"
-        ]
-    }
+//    Slide {
+//        title: "Velocity"
+//        content: [
+//            "every event should have valid velocity values",
+//            "we plan to synthesize it when creating QQuickPointerEvents",
+//            "future FlickHandler won't need to calculate it like Flickable does"
+//        ]
+//    }
 
 //    TextSlide {
 //        title: "Fling Animation using VelocityCalculator"
@@ -218,6 +288,7 @@ Shawn Rutledge<br/>
     CustomCodeSlide {
         title: "Pressing Multiple Buttons"
         sourceFile: "examples/MultiButton.qml"
+        live: false
 //        sourceFile: "examples/multibuttons.qml"
         Loader {
             anchors.right: parent.right
@@ -235,8 +306,12 @@ Shawn Rutledge<br/>
             "scroll & wheel events",
             "native gestures",
             "validate the weak (non-exclusive) grab concept",
+            "monitor without grabbing",
+            "grab pre-emptively at any time",
             "get ready for public C++ API (create private-impl classes etc.)",
+            "how to manipulate inner Handlers? attached objects?",
             "research Reactive Programming more: any good ideas? are we doing it all wrong then?"
+            // TODO where did Reactive originate?  most popular frameworks now?
         ]
     }
 
@@ -259,7 +334,11 @@ This presentation: <tt>https://github.com/ec1oud/qt-presentations/tree/pointerha
 
     SlideCounter { id: slideCounter }
 
-    Clock { id: clock }
+    Clock {
+        anchors.top: undefined
+        anchors.verticalCenter: slideCounter.verticalCenter
+        anchors.right: rightLogo.left;
+    }
 
     property bool bottomStuffVisible: currentSlide < 3 || currentSlide === presentation.slides.length - 1
 
