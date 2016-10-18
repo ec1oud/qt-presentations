@@ -6,6 +6,7 @@ import QtGraphicalEffects 1.0
 T.Button {
     id: control
     implicitWidth: 200; implicitHeight: 100
+    hoverEnabled: true
 
     contentItem: Text {
         text: control.text
@@ -19,7 +20,7 @@ T.Button {
     background: RectangularGlow {
         cornerRadius: 8
         glowRadius: 20
-        color: "green" //control.hovered ? "green" : "white"
+        color: control.hovered ? "green" : "white"
         Rectangle {
             anchors.fill: parent; clip: true; antialiasing: true; radius: 4; border.width: 3
             color: "transparent"; border.color: control.down ? "black" : "transparent"

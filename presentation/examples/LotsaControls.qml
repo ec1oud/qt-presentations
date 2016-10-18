@@ -1,13 +1,16 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.1
+import QtQuick.Controls.Material 2.0
 
 Item {
-    width: 1920; height: 1080
+    width: 1920; height: 1000
     visible: false
     StackView {
         id: stackView
-        width: 1920 //; height: 1080
+        anchors.fill: parent
+        font.pointSize: 18
+
         initialItem: Page {
             header: ToolBar {
                 Row {
@@ -63,10 +66,11 @@ Item {
 
                 ComboBox {
                     textRole: "key"
+                    Layout.preferredWidth: 240
                     model: ListModel {
                         ListElement { key: "ComboBox"; value: 123 }
-                        ListElement { key: "Second"; value: 456 }
-                        ListElement { key: "Third"; value: 789 }
+                        ListElement { key: "has selections"; value: 456 }
+                        ListElement { key: "in a box"; value: 789 }
                     }
                 }
 
@@ -83,7 +87,7 @@ Item {
                 Frame {
                     ColumnLayout {
                         anchors.fill: parent
-                        CheckBox { text: qsTr("check") }
+                        CheckBox { text: qsTr("check"); checked: true }
                         CheckBox { text: qsTr("box") }
                     }
                 }
@@ -122,6 +126,41 @@ Item {
                     }
                 }
 
+                Frame {
+                    Layout.preferredWidth: 240
+                    Layout.preferredHeight: 200
+                    SwipeView {
+                         id: view
+                         clip: true
+
+                         currentIndex: 1
+                         anchors.fill: parent
+
+                         Rectangle { color: "lightgrey" }
+                         Rectangle {
+                             color: "beige"
+                             Label {
+                                 text: "SwipeView in a Frame with a PageIndicator underneath"
+                                 font.pointSize: 14
+                                 horizontalAlignment: Text.AlignHCenter
+                                 wrapMode: Text.WordWrap
+                                 anchors.fill: parent
+                             }
+                         }
+                         Rectangle { color: "lightsteelblue" }
+                     }
+
+                     PageIndicator {
+                         id: indicator
+
+                         count: view.count
+                         currentIndex: view.currentIndex
+
+                         anchors.bottom: view.bottom
+                         anchors.horizontalCenter: parent.horizontalCenter
+                     }
+                }
+
                 PageIndicator {
                     count: 4
                     currentIndex: 2
@@ -145,7 +184,7 @@ Item {
                     first.value: 0.25
                     second.value: 0.75
                     Timer {
-                        interval: 400; running: !parent.pressed; repeat: true
+                        interval: 400; running: !rangeSlider.pressed; repeat: true
                         onTriggered: {
                             parent.first.value = Math.random() * 0.25
                             parent.second.value = Math.random() * 0.25 + 0.75
@@ -156,10 +195,10 @@ Item {
                 Flickable {
                     clip: true
                     height: rangeSlider.height
-                    width: 200
+                    width: 240
                     contentWidth: width * 1.5
                     contentHeight: height * 1.1
-                    Label { text: "ScrollBar                                          ..." }
+                    Label { text: "ScrollBar . . . . . . . . . . . . . . . . . . . . . . . . . ." }
                     ScrollBar.horizontal: ScrollBar { active: true }
                     ScrollBar.vertical: ScrollBar { active: true }
                 }
@@ -167,10 +206,10 @@ Item {
                 Flickable {
                     clip: true
                     height: rangeSlider.height
-                    width: 200
+                    width: 240
                     contentWidth: width * 1.5
                     contentHeight: height * 1.1
-                    Label { text: "ScrollIndicator                                          ..." }
+                    Label { text: "ScrollIndicator . . . . . . . . . . . . . . . . . . . . . . . . . ." }
                     ScrollIndicator.horizontal: ScrollIndicator { active: true }
                     ScrollIndicator.vertical: ScrollIndicator { active: true }
                 }
@@ -233,17 +272,15 @@ Item {
 
                 Button {
                     text: qsTr("ToolTip")
+                    hoverEnabled: true
 
-                    ToolTip.visible: pressed
+                    ToolTip.visible: hovered
                     ToolTip.text: qsTr("A descriptive tool tip of what the button does")
                 }
 
                 Tumbler {
-                    model: ListModel {
-                        ListElement { key: "ComboBox"; value: 123 }
-                        ListElement { key: "Second"; value: 456 }
-                        ListElement { key: "Third"; value: 789 }
-                    }
+                    model: ["Tumbler", "drifting", "along", "with the", "tumbling"]
+                    Layout.preferredWidth: 200
                 }
             }
         }

@@ -10,7 +10,10 @@
 int main(int argc, char ** argv)
 {
     QApplication app(argc, argv);
-    QQuickStyle::setStyle("examples/customstyle", "Material");
+//    QQuickStyle::setStyle("examples/customstyle", "Material");
+    QQuickStyle::setStyle("Material");
+    qputenv("QT_QUICK_CONTROLS_1_STYLE", "Flat");
+//    app.setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QLatin1String("main.qml")));

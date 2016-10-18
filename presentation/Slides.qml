@@ -45,6 +45,7 @@ Shawn Rutledge<br/>
         title: "Agenda"
         content: [
             "Introduction",
+            "Performance",
             "Behind the scenes",
             "Interesting features",
             "Styling demo",
@@ -93,11 +94,12 @@ It comes with ready-made styles that fill in the templates. Examples of these st
         LotsaControls {
 //            anchors.fill: parent
             property bool isSlide: true
+            property string notes: ""
         }
 //    }
 
     Slide {
-        title: "Behind the scenes"
+        title: "Performance comparison"
         content: [
             "Benchmarks",
             " QObject count",
@@ -204,8 +206,8 @@ In Controls 1, the style panel (?) would determine the layout, whereas in Contro
 
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
-<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/><br/>
-This presentation: <tt>https://github.com/ec1oud/qt-presentations/tree/controls2</tt>
+<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/>
+This presentation: <tt>https://github.com/ec1oud/qt-presentations/tree/controls2</tt><br/><br/>
 
 J P Nurmi<br/>
 <tt>jp.nurmi@qt.io</tt><br/>
@@ -216,13 +218,17 @@ J P Nurmi<br/>
 
     SlideCounter { id: slideCounter }
 
-    Clock { id: clock }
+    Clock {
+        anchors.top: undefined
+        anchors.verticalCenter: slideCounter.verticalCenter
+        anchors.right: rightLogo.left;
+    }
 
-    property bool bottomStuffVisible: currentSlide < 5 || currentSlide === presentation.slides.length - 1
+    property bool bottomRuleVisible: currentSlide < 4 || currentSlide === presentation.slides.length - 1
 
     Rectangle {
         id: rule
-        visible: bottomStuffVisible
+        visible: bottomRuleVisible
         color: "#f3f3f4"; height: 5
         anchors.bottom: leftLogo.top
         anchors.left: parent.left; anchors.leftMargin: 65
@@ -232,7 +238,7 @@ J P Nurmi<br/>
 
     Image {
         id: leftLogo
-        visible: bottomStuffVisible
+        visible: bottomRuleVisible
         anchors {
             verticalCenter: slideCounter.verticalCenter
             left: rule.left

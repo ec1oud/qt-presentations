@@ -2,6 +2,8 @@ import QtQuick 2.0
 import QtCharts 2.1
 import QtQuick.Controls 1.4 as QQC1
 import QtQuick.Controls 2.0 as QQC2
+import QtQuick.Controls.Material 2.0
+import QtQuick.Controls.Styles 1.1 as QQC1S
 
 ChartView {
     title: "Total Object Count for One Slider"
@@ -42,6 +44,15 @@ ChartView {
                 anchors.topMargin: 13
                 width: parent.width
                 value: 0.5
+                style: QQC1S.SliderStyle {
+                    groove: Rectangle {
+                        implicitWidth: 200
+                        implicitHeight: 8
+                        color: "#599d19"
+                        radius: 3
+                        antialiasing: true
+                    }
+                }
             }
         }
         Rectangle {
@@ -57,6 +68,7 @@ ChartView {
                 anchors.top: parent.bottom
                 width: parent.width
                 value: 0.5
+                Material.accent: "#ff420f"
             }
         }
     }
