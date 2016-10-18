@@ -6,7 +6,7 @@ import Qt.labs.presentation.helper 1.0
 
 //ApplicationWindow {
 Window {
-    id: root
+    id: rootWindow
     width: 1280
     height: 720
     visible: true
@@ -15,12 +15,12 @@ Window {
 
     PointingFilter {
         id: pointingFilter
-//        target: root
-//        target: root.Window.window
+//        target: rootWindow
+//        target: rootWindow.Window.window
     }
     Timer {
         interval: 2000; running: true
-        onTriggered: pointingFilter.target = root
+        onTriggered: pointingFilter.target = rootWindow
     }
 
     Repeater {

@@ -9,20 +9,13 @@ Item { // typically ApplicationWindow
     height: 1280
     visible: true
 
-    Material.accent: Material.Green
+    Material.accent: group.checkedButton.color //Material.Green
 
     Column {
-        anchors.right: parent.right
-        RadioButton {
-            checked: true
-            text: "Option 1"
-        }
-        RadioButton {
-            text: "Option 2"
-        }
-        RadioButton {
-            text: "Option 3"
-        }
+        id: column; anchors.right: parent.right; width: slider.width
+        RadioButton { text: "Lime";       property var color: Material.Lime }
+        RadioButton { text: "DeepOrange"; property var color: Material.DeepOrange; checked: true }
+        RadioButton { text: "Indigo";     property var color: Material.Indigo }
     }
 
     Drawer {
@@ -30,7 +23,7 @@ Item { // typically ApplicationWindow
         width: window.width * 0.33
         height: window.height
 
-//        Material.accent: Material.Green
+        // Material.accent is inherited from ApplicationWindow
         Material.theme: Material.Dark
 
         ListView {
@@ -48,5 +41,21 @@ Item { // typically ApplicationWindow
             }
             ScrollIndicator.vertical: ScrollIndicator { }
         }
+    }
+
+    Column {
+        anchors.top: column.bottom
+        anchors.left: column.left
+        Switch { checked: true; text: "Bluetooth"; enabled: enableCB.checked }
+        Switch { text: "WiFi"; enabled: enableCB.checked }
+        Slider { id: slider; value: 0.5; enabled: enableCB.checked }
+        CheckBox { id: enableCB; text: "enabled"; checked: true }
+    }
+
+    ButtonGroup {
+        id: group
+        buttons: column.children
+        // cheat: couldn't easily do this declaratively
+        onCheckedButtonChanged: rootWindow.Material.accent = checkedButton.color
     }
 }
