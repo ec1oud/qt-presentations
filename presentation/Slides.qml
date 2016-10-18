@@ -102,13 +102,10 @@ It comes with ready-made styles that fill in the templates. Examples of these st
 "
     }
 
-//    Slide {
-        LotsaControls {
-//            anchors.fill: parent
-            property bool isSlide: true
-            property string notes: ""
-        }
-//    }
+    LotsaControls {
+        property bool isSlide: true
+        property string notes: ""
+    }
 
     Slide {
         title: "Performance comparison"
@@ -179,17 +176,6 @@ Being able to mix and match Controls 1 and 2 was one of the release/acceptance c
 In Controls 1, the style panel (?) would determine the layout, whereas in Controls 2, you have full control over it. In Controls 1, the style object was in a separate context, which meant that you could not modify properties of the control. In Controls 2, a style for a control is the control, so it can set default values for any properties of the control.
 "
     }
-
-//    ImageSlide {
-//        title: "Handler hierarchy so far"
-//        source: "images/pointer-handlers-classes.png"
-//    }
-
-
-//    TextSlide {
-//        title: "Fling Animation using VelocityCalculator"
-//        sourceFile: "fling-animation-with-velocity-calculator.qml"
-//    }
 
     CustomCodeSlide {
         title: "Customizing Material Style"
