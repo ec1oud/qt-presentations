@@ -42,6 +42,18 @@ Shawn Rutledge<br/>
     }
 
     Slide {
+        title: "About me"
+        content: [
+            "Qt user since ~2004",
+            "The Qt Company - Oslo",
+            "Pointing devices: touch, Wacom tablets",
+            "Linux/X11 and OS X",
+            "Qt Quick Controls and Dialogs",
+            "Future: maybe printing, maybe some new graphical Items, PDF, etc.",
+        ]
+    }
+
+    Slide {
         title: "Agenda"
         content: [
             "Introduction",
