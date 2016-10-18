@@ -161,11 +161,6 @@ Item {
                      }
                 }
 
-                PageIndicator {
-                    count: 4
-                    currentIndex: 2
-                }
-
                 ProgressBar {
                     value: 0.5
                     Timer {
@@ -184,7 +179,7 @@ Item {
                     first.value: 0.25
                     second.value: 0.75
                     Timer {
-                        interval: 400; running: !rangeSlider.pressed; repeat: true
+                        interval: 400; running: !rangeSlider.left.pressed && !rangeSlider.right.pressed; repeat: true
                         onTriggered: {
                             parent.first.value = Math.random() * 0.25
                             parent.second.value = Math.random() * 0.25 + 0.75
