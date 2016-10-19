@@ -58,7 +58,9 @@ Shawn Rutledge<br/>
             "Goals",
             "Introduction to PointerHandlers",
             "Demos of several PointerHandlers",
+            "Event delivery",
             "Conceptual comparison",
+            "Weak and strong grabbing",
             "Remaining work",
             "Q&A"
         ]
@@ -77,7 +79,7 @@ Shawn Rutledge<br/>
     }
 
     CustomCodeSlide {
-        title: "Flickable and MouseArea: grab, filter and steal"
+        title: "Flickable: filter, grab, steal or prevent"
         sourceFile: "examples/Flickable2.qml"
     }
 
@@ -98,6 +100,12 @@ Shawn Rutledge<br/>
             "common event delivery code for mouse and touch in QQuickWindow",
             "both QML and C++ APIs",
             "guarantee that events always have velocity",
+        ]
+    }
+
+    Slide {
+        title: "Forward-looking goals"
+        content: [
             "proper support for Wacom tablets: draw paths in Qt Quick",
             "refine APIs so that they'll work for Qt 6",
             "plan on multiple seats/users and support for multiple mice etc. in Qt 6",
@@ -224,9 +232,10 @@ Shawn Rutledge<br/>
 //            "don't need parent-filtering: Handler gives up the grab when<br/>constraints aren't satisfied: start over with delivery",
 //            "define a vector of Items in visitation-order before we start delivery",
 //            "prefix the old-style child-filtering Items to that vector",
-            "mouse: QQuickPointerEvent with one point inside",
-            "PointerHandler receives the complete event (all points)",
-            "PointerHandler must explicitly accept, may grab/ungrab"
+            "Handler gives up the grab when constraints aren't satisfied",
+            "mouse event -> QQuickPointerEvent with one point inside",
+            "PointerHandler receives the complete event",
+            "PointerHandler can explicitly accept, grab/ungrab"
         ]
         /*
         Image {

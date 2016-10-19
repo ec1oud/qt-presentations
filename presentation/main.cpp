@@ -10,6 +10,7 @@ int main(int argc, char ** argv)
 {
     QGuiApplication app(argc, argv);
     SlideView view;
+    view.setFlags(view.flags() | Qt::WindowFullscreenButtonHint);
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.connect(view.engine(), SIGNAL(quit()), &app, SLOT(quit()));
     view.setSource(QUrl("main.qml"));
