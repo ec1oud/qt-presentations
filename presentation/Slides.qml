@@ -107,6 +107,11 @@ It comes with ready-made styles that fill in the templates. Examples of these st
         property string notes: ""
     }
 
+    CustomCodeSlide {
+        title: "Example: network config with ConnMan"
+        sourceFile: "examples/connman.qml"
+    }
+
     Slide {
         title: "Performance comparison"
         content: [
