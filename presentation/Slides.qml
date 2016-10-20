@@ -198,6 +198,12 @@ In Controls 1, the style panel would determine the layout, whereas in Controls 2
         }
     }
 
+    CustomCodeSlide {
+        title: "main.cpp"
+        loaded: false
+        sourceFile: "main.cpp"
+    }
+
     Slide {
         id: lastSlide
         titleColor: "white"

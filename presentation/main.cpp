@@ -1,39 +1,22 @@
 #include <QApplication>
 #include <QtQml/QQmlApplicationEngine>
-#include <QtQml/QQmlContext>
-#include <QDebug>
-#include <QQuickView>
-#include <QQuickItem>
 #include <QQuickStyle>
-#include "../tools/printslides/slideview.h"
 
 int main(int argc, char ** argv)
 {
+    // QApplication if you need any widget features, otherwise QGuiApplication
+    // (Controls 1 desktop style, widget-based dialogs)
     QApplication app(argc, argv);
-//    QQuickStyle::setStyle("examples/customstyle", "Material");
+
+    // Custom style for the whole application:
+    // QQuickStyle::setStyle("examples/customstyle", "Material");
     QQuickStyle::setStyle("Material");
+
+    // Controls 1: env variable
     qputenv("QT_QUICK_CONTROLS_1_STYLE", "Flat");
-//    app.setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QLatin1String("main.qml")));
-
-//    SlideView view;
-//    view.setResizeMode(QQuickView::SizeRootObjectToView);
-//    view.connect(view.engine(), SIGNAL(quit()), &app, SLOT(quit()));
-//    view.setSource(QUrl("main.qml"));
-//    view.show();
-//    foreach (const QString &arg, app.arguments()) {
-//        if (arg.startsWith(QChar('-'))) {
-//            if (arg == QLatin1String("-f"))
-//                view.setWindowState(Qt::WindowFullScreen);
-//        } else {
-//            bool ok = false;
-//            int startWith = arg.toInt(&ok);
-//            if (ok)
-//                view.rootObject()->setProperty("currentSlide", startWith - 1);
-//        }
-//    }
 
     return app.exec();
 }
