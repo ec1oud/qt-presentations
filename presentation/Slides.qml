@@ -45,20 +45,21 @@ Shawn Rutledge<br/>
             "Qt user since ~2004",
             "The Qt Company - Oslo",
             "Pointing devices: touch, Wacom tablets",
-            "Linux/X11 and OS X",
+            "Linux/X11 and macOS",
             "Qt Quick Controls and Dialogs",
-            "Future: maybe printing, maybe some new graphical Items, PDF, etc.",
+            "Future: maybe some new graphical Items, PDF, maybe printing, etc.",
         ]
     }
 
     Slide {
         title: "Agenda"
+        bulletSpacing: 0.6
         content: [
             "What's wrong with existing mouse & touch handling",
             "Goals",
             "Introduction to PointerHandlers",
             "Demos of several PointerHandlers",
-            "Event delivery",
+//            "Event delivery",
             "Conceptual comparison",
             "Weak and strong grabbing",
             "Remaining work",
@@ -81,11 +82,6 @@ Shawn Rutledge<br/>
     CustomCodeSlide {
         title: "Flickable: filter, grab, steal or prevent"
         sourceFile: "examples/Flickable2.qml"
-    }
-
-    ImageSlide {
-        title: "Existing QEvent hierarchy"
-        source: "images/event-hierarchy-before.png"
     }
 
     ImageSlide {
@@ -184,43 +180,43 @@ Shawn Rutledge<br/>
 //        sourceFile: "examples/mouseHandler.qml"
 //    }
 
-    Slide {
-        title: "Touch Event Delivery in Qt < 5.8"
-        textFormat: Text.StyledText
-        content: [
-            "each item under the touchpoint gets a touch event (and ignores by default)",
-            "if not accepted, the item gets a synthetic mouse event",
-            "continue with next item (in reverse paint order) if still not accepted",
-            "problem: duplicate logic for mouse and touch",
-            "grabbing and stealing across real touch events and synth-mouse events",
-            "tablet events? fuhgetaboutit"
-        ]
-        Image {
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            source: "images/touch_mouse_event.png"
-        }
-    }
+//    Slide {
+//        title: "Touch Event Delivery in Qt < 5.8"
+//        textFormat: Text.StyledText
+//        content: [
+//            "each item under the touchpoint gets a touch event (and ignores by default)",
+//            "if not accepted, the item gets a synthetic mouse event",
+//            "continue with next item (in reverse paint order) if still not accepted",
+//            "problem: duplicate logic for mouse and touch",
+//            "grabbing and stealing across real touch events and synth-mouse events",
+//            "tablet events? fuhgetaboutit"
+//        ]
+//        Image {
+//            anchors.right: parent.right
+//            anchors.verticalCenter: parent.verticalCenter
+//            source: "images/touch_mouse_event.png"
+//        }
+//    }
 
-    Slide {
-        title: "QQuickPointerEvent delivery in QtQuick"
-        textFormat: Text.StyledText
-        bulletSpacing: 0.6
-        content: [
-            "wrapper for the original event, providing uniform API",
-            "each QQuickItem->private->extra has a vector of QQuickPointerHandler objects",
-            "<i>single</i> delivery code path - but still deliver the original event to original Item virtuals"
-        ]
-        Image {
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                bottom: parent.bottom
-                bottomMargin: -30
-            }
-            fillMode: Image.PreserveAspectFit
-            source: "images/pointerevent-delivery.png"
-        }
-    }
+//    Slide {
+//        title: "QQuickPointerEvent delivery in QtQuick"
+//        textFormat: Text.StyledText
+//        bulletSpacing: 0.6
+//        content: [
+//            "wrapper for the original event, providing uniform API",
+//            "each QQuickItem->private->extra has a vector of QQuickPointerHandler objects",
+//            "<i>single</i> delivery code path - but still deliver the original event to original Item virtuals"
+//        ]
+//        Image {
+//            anchors {
+//                horizontalCenter: parent.horizontalCenter
+//                bottom: parent.bottom
+//                bottomMargin: -30
+//            }
+//            fillMode: Image.PreserveAspectFit
+//            source: "images/pointerevent-delivery.png"
+//        }
+//    }
 
     Slide {
         title: "Conceptual Changes: Handlers vs. Areas"
@@ -260,9 +256,14 @@ Shawn Rutledge<br/>
             "so far, an Item must grab a press to be able to get an update<br/>this leads us to monolithic Areas and childMouseEventFilter and grab-stealing",
             "PointerHandlers: we want to mostly let events propagate; exclusive grab should be less common",
             "virtual bool wantsEventPoint(QQuickEventPoint *)",
+            "if wantsPointerEvent() returns true, virtual handlePointerEventImpl() will be called",
             "signals press(eventPoint), update(eventPoint), release(eventPoint) might allow setting accepted to false<br/>means wantsEventPoint() will return false, ungrab if grabbed",
-            "if wantsPointerEvent() returns true, virtual handlePointerEventImpl() will be called"
         ]
+    }
+
+    ImageSlide {
+        title: "Existing QEvent hierarchy"
+        source: "images/event-hierarchy-before.png"
     }
 
     ImageSlide {
@@ -294,17 +295,17 @@ Shawn Rutledge<br/>
 //        sourceFile: "fling-animation-with-velocity-calculator.qml"
 //    }
 
-    CustomCodeSlide {
-        title: "Pressing Multiple Buttons"
-        sourceFile: "examples/MultiButton.qml"
-        live: false
-//        sourceFile: "examples/multibuttons.qml"
-        Loader {
-            anchors.right: parent.right
-            anchors.rightMargin: -40
-            source: "examples/multibuttons.qml"
-        }
-    }
+//    CustomCodeSlide {
+//        title: "Pressing Multiple Buttons"
+//        sourceFile: "examples/MultiButton.qml"
+//        live: false
+////        sourceFile: "examples/multibuttons.qml"
+//        Loader {
+//            anchors.right: parent.right
+//            anchors.rightMargin: -40
+//            source: "examples/multibuttons.qml"
+//        }
+//    }
 
     Slide {
         title: "Stuff left to work on"
@@ -318,7 +319,7 @@ Shawn Rutledge<br/>
             "monitor without grabbing",
             "grab pre-emptively at any time",
             "get ready for public C++ API (create private-impl classes etc.)",
-            "how to manipulate inner Handlers? attached objects?",
+            "how to manipulate inner Handlers? attached properties?",
             "research Reactive Programming more: any good ideas? are we doing it all wrong then?"
             // TODO where did Reactive originate?  most popular frameworks now?
         ]
