@@ -7,6 +7,7 @@ Rectangle {
     border.color: "#9f9d9a"; border.width: 1; radius: height / 4; antialiasing: true
     property alias label: label.text
     property alias pressed: tap.isPressed
+    property alias cancellationPolicy: tap.cancellationPolicy
     signal clicked
 
     gradient: Gradient {

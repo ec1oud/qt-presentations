@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Particles 2.0
 import QtQuick.Layouts 1.0
+import Qt.labs.handlers 1.0
 
 Item {
     width: 800
@@ -13,17 +14,20 @@ Item {
             id: balloonsButton
             label: "Launch Balloons"
             Layout.fillWidth: true
+            cancellationPolicy: TapHandler.DragThreshold
         }
         Text { text: "the goons"; font.pointSize: 12 }
         MultiButton {
             id: missilesButton
             label: "Launch Missiles"
             Layout.fillWidth: true
+            cancellationPolicy: TapHandler.OutOfBounds
         }
         MultiButton {
             id: fightersButton
             label: "Launch Fighters"
             Layout.fillWidth: true
+            cancellationPolicy: TapHandler.ReleaseOutOfBounds
         }
     }
     ParticleSystem {
