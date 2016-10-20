@@ -96,8 +96,9 @@ Item {
                     title: qsTr("GroupBox")
                     ColumnLayout {
                         anchors.fill: parent
-                        CheckBox { text: qsTr("check") }
-                        CheckBox { text: qsTr("box") }
+                        RadioButton { text: qsTr("KQED") }
+                        RadioButton { text: qsTr("KCSM") }
+                        RadioButton { text: qsTr("KREV") }
                     }
                 }
 

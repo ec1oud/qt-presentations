@@ -3,25 +3,23 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 
-Item { // typically ApplicationWindow
-    id: window
-    width: 640
-    height: 1280
-    visible: true
+Frame { // typically ApplicationWindow
+    id: window; width: 300; height: 400
 
+    font.pointSize: 18
     Material.accent: group.checkedButton.color //Material.Green
 
     Column {
-        id: column; anchors.right: parent.right; width: slider.width
+        id: column; width: slider.width
         RadioButton { text: "Lime";       property var color: Material.Lime }
-        RadioButton { text: "DeepOrange"; property var color: Material.DeepOrange; checked: true }
+        RadioButton { text: "DeepOrange"; property var color: Material.DeepOrange }
         RadioButton { text: "Indigo";     property var color: Material.Indigo }
     }
 
     Drawer {
         id: drawer
-        width: window.width * 0.33
-        height: window.height
+        width: 200
+        height: 1200
 
         // Material.accent is inherited from ApplicationWindow
         Material.theme: Material.Dark

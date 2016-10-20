@@ -49,7 +49,7 @@ Shawn Rutledge<br/>
             "Pointing devices: touch, Wacom tablets",
             "Linux/X11 and OS X",
             "Qt Quick Controls and Dialogs",
-            "Future: maybe printing, maybe some new graphical Items, PDF, etc.",
+            "Future: some new graphical Items, maybe printing, PDF, etc.",
         ]
     }
 
@@ -157,7 +157,7 @@ In one case, we were able to reduce the creation time of a control b 30% by repl
 
 Controls 1 handles accessibility via attached properties, whereas Controls 2 does it in C++ conditionally, and accessibility can be disabled if appropriate.
 
-We have used these findings to guide the development of Qt Quick Controls 2, with some of them even being enforced by CI thanks to some auto tests.
+Controls 2: some of these benchmarks are enforced by CI.
 "
     }
 
@@ -170,7 +170,7 @@ We have used these findings to guide the development of Qt Quick Controls 2, wit
             "Possible to mix and match Controls 1 with Controls 2",
             "Custom styles have full control"
         ]
-        notes: "The C++ foundation allows us to inherit style attributes from parent to children. We’ve used the same system for font and locale inheritance.
+        notes: "The C++ foundation allows us to inherit style, font and locale attributes from parent to children.
 
 Using file selectors, we load the correct style at startup, when the first Qt Quick Controls 2 import is found by the QML engine. Besides being faster, this is not too different from Qt Quick Controls 1. However, since we add our custom selectors (material, universal) to QFileSelector, it means that you can also use these selectors in your application to provide efficiently-loaded, style-specific variants of certain parts of your UI.
 
@@ -178,7 +178,7 @@ Each style is 100% cross-platform. For example, you can use the Material style o
 
 Being able to mix and match Controls 1 and 2 was one of the release/acceptance criteria. We modified the QML engine to allow importing two different major versions of the same QML namespace.
 
-In Controls 1, the style panel (?) would determine the layout, whereas in Controls 2, you have full control over it. In Controls 1, the style object was in a separate context, which meant that you could not modify properties of the control. In Controls 2, a style for a control is the control, so it can set default values for any properties of the control.
+In Controls 1, the style panel would determine the layout, whereas in Controls 2, you have full control over it. In Controls 1, the style object was in a separate context, which meant that you could not modify properties of the control. In Controls 2, a style for a control is the control, so it can set default values for any properties of the control.
 "
     }
 
@@ -227,7 +227,7 @@ J P Nurmi<br/>
         anchors.right: rightLogo.left;
     }
 
-    property bool bottomRuleVisible: currentSlide < 4 || currentSlide === presentation.slides.length - 1
+    property bool bottomRuleVisible: currentSlide < 5 || currentSlide === presentation.slides.length - 1
 
     Rectangle {
         id: rule

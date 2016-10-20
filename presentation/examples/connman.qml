@@ -56,7 +56,7 @@ Rectangle {
             // TODO
         }
 
-        id: swipeView; currentIndex: 0; anchors.fill: parent
+        id: swipeView; currentIndex: 0; anchors.fill: parent; font.pointSize: 18
     }
 
     PageIndicator {
