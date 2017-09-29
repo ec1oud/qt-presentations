@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2016 The Qt Company Ltd.
+** Copyright (C) 2017 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the manual tests of the Qt Toolkit.
@@ -38,26 +38,44 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.8
+import QtQuick 2.10
 import Qt.labs.handlers 1.0
 
-Rectangle {
-    id: root; color: "aqua"; width: 640; height: 320; clip: true
+Item {
+    width: 640
+    height: 480
 
-    Image {
-        id: image
-        source: "images/map.svgz"; asynchronous: true
-        width: root.width; height: root.height; sourceSize.width: 640
+    Rectangle {
+        id: map
+        color: "aqua"
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
+        width: image.width
+        height: image.height
 
-        PinchHandler {
-            id: pinch
-            minimumScale: 0.8; maximumScale: 10
-            onActiveChanged: if (!active) reRenderIfNecessary()
+        Image {
+            id: image
+            anchors.centerIn: parent
+            fillMode: Image.PreserveAspectFit
+            source: "images/map.svgz"
+            Component.onCompleted: { width = implicitWidth; height = implicitHeight }
         }
     }
 
+    PinchHandler {
+        id: pinch
+        target: map
+        minimumScale: 0.1
+        maximumScale: 10
+        onActiveChanged: if (!active) reRenderIfNecessary()
+    }
+
+    DragHandler {
+        target: map
+    }
+
     function reRenderIfNecessary() {
-        var newSourceWidth = image.width * pinch.scale
+        var newSourceWidth = image.sourceSize.width * pinch.scale
         var ratio = newSourceWidth / image.sourceSize.width
         if (ratio > 1.1 || ratio < 0.9)
             image.sourceSize.width = newSourceWidth
