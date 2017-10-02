@@ -22,6 +22,7 @@ Presentation {
         fillMode: Image.PreserveAspectFit
         source: "resources/top-banner.png"
         visible: currentSlide === 0
+        smooth: true
     }
 
     Slide {
@@ -30,13 +31,10 @@ Presentation {
         centeredTextFormat: Text.RichText
         centeredText: "<html>
 <H1>Pointer Handlers in Qt Quick</H1>
-
-<H2>Qt World Summit 2016</H2>
-
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
-<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/>
-<tt>wip/pointerhandler</tt> branch of qtdeclarative</html>"
+<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.
+</html>"
     }
 
     Slide {
@@ -46,8 +44,8 @@ Shawn Rutledge<br/>
             "The Qt Company - Oslo",
             "Pointing devices: touch, Wacom tablets",
             "Linux/X11 and macOS",
+            "QtPDF",
             "Qt Quick Controls and Dialogs",
-            "Future: maybe some new graphical Items, PDF, maybe printing, etc.",
         ]
     }
 
@@ -331,26 +329,28 @@ Shawn Rutledge<br/>
         centeredTextFormat: Text.RichText
         centeredText: "<html>
 <H1>Pointer Handlers in Qt Quick</H1>
-
-<H2>Qt World Summit 2016</H2>
-
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/>
-Follow progress: wip/pointerhandler branch of qtdeclarative<br/>
-This presentation: <tt>https://github.com/ec1oud/qt-presentations/tree/pointerhandlers</tt><br/><br/>
+This presentation: <tt>https://github.com/ec1oud/qt-presentations/tree/pointerhandlers</tt>
 </html>"
     }
 
     SlideCounter { id: slideCounter }
 
     Clock {
+        id: clock
         anchors.top: undefined
-        anchors.verticalCenter: slideCounter.verticalCenter
-        anchors.right: rightLogo.left;
+        anchors.bottom: undefined
+        anchors.left: undefined
+        anchors.verticalCenter: rule.verticalCenter
+        anchors.right: slideCounter.right
+        anchors.rightMargin: 0
+        width: slideCounter.width
+        horizontalAlignment: Text.AlignRight
     }
 
-    property bool bottomStuffVisible: currentSlide < 3 || currentSlide === presentation.slides.length - 1
+    property bool bottomStuffVisible: currentSlide < 4
 
     Rectangle {
         id: rule
@@ -358,7 +358,8 @@ This presentation: <tt>https://github.com/ec1oud/qt-presentations/tree/pointerha
         color: "#f3f3f4"; height: 5
         anchors.bottom: leftLogo.top
         anchors.left: parent.left; anchors.leftMargin: 65
-        anchors.right: slideCounter.right
+        anchors.right: clock.left
+        anchors.rightMargin: 12
         anchors.bottomMargin: 16
     }
 
@@ -370,7 +371,9 @@ This presentation: <tt>https://github.com/ec1oud/qt-presentations/tree/pointerha
             left: rule.left
             rightMargin: 20
         }
+        height: 78 * parent.height / 1080
         fillMode: Image.PreserveAspectFit
+        smooth: true
         source: "resources/bottom-logo-left.png"
     }
 
@@ -381,7 +384,9 @@ This presentation: <tt>https://github.com/ec1oud/qt-presentations/tree/pointerha
             right: slideCounter.left
             rightMargin: 20
         }
+        width: 226; height: 34
         fillMode: Image.PreserveAspectFit
+        smooth: true
         source: "resources/bottom-logo-right.png"
     }
 
