@@ -30,7 +30,7 @@ Presentation {
         titleColor: "white"
         centeredTextFormat: Text.RichText
         centeredText: "<html>
-<H1>Pointer Handlers in Qt Quick</H1>
+<H1>Pointer Handlers Tech Preview in Qt Quick</H1>
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.
@@ -187,79 +187,39 @@ Rectangle {
         ]
     }
 
-    CustomCodeSlide {
+    QmlSlide {
         title: "DragHandler"
         sourceFile: "examples/flingAnimation.qml"
     }
 
-    CustomCodeSlide {
+    QmlSlide {
         title: "DragHandler"
         sourceFile: "examples/joystick.qml"
     }
 
-    CustomCodeSlide {
+    QmlSlide {
         title: "TapHandler"
         sourceFile: "examples/tapHandler.qml"
     }
 
-    CustomCodeSlide {
+    QmlSlide {
         title: "TapHandler - multiple instances"
         sourceFile: "examples/multiTapHandler.qml"
     }
 
-    CustomCodeSlide {
+    QmlSlide {
         title: "PinchHandler"
         sourceFile: "examples/pinchHandler.qml"
     }
 
-    CustomCodeSlide {
+    QmlSlide {
         title: "PinchHandler on a map"
         sourceFile: "examples/map.qml"
     }
 
-    // TODO photo surface
-
-//    CustomCodeSlide {
+//    QmlSlide {
 //        title: "MouseHandler"
 //        sourceFile: "examples/mouseHandler.qml"
-//    }
-
-//    Slide {
-//        title: "Touch Event Delivery in Qt < 5.8"
-//        textFormat: Text.StyledText
-//        content: [
-//            "each item under the touchpoint gets a touch event (and ignores by default)",
-//            "if not accepted, the item gets a synthetic mouse event",
-//            "continue with next item (in reverse paint order) if still not accepted",
-//            "problem: duplicate logic for mouse and touch",
-//            "grabbing and stealing across real touch events and synth-mouse events",
-//            "tablet events? fuhgetaboutit"
-//        ]
-//        Image {
-//            anchors.right: parent.right
-//            anchors.verticalCenter: parent.verticalCenter
-//            source: "resources/touch_mouse_event.png"
-//        }
-//    }
-
-//    Slide {
-//        title: "QQuickPointerEvent delivery in QtQuick"
-//        textFormat: Text.StyledText
-//        bulletSpacing: 0.6
-//        content: [
-//            "wrapper for the original event, providing uniform API",
-//            "each QQuickItem->private->extra has a vector of QQuickPointerHandler objects",
-//            "<i>single</i> delivery code path - but still deliver the original event to original Item virtuals"
-//        ]
-//        Image {
-//            anchors {
-//                horizontalCenter: parent.horizontalCenter
-//                bottom: parent.bottom
-//                bottomMargin: -30
-//            }
-//            fillMode: Image.PreserveAspectFit
-//            source: "resources/pointerevent-delivery.png"
-//        }
 //    }
 
     Slide {
@@ -267,29 +227,15 @@ Rectangle {
         textFormat: Text.StyledText
 //        bulletSpacing: 0.6
         content: [
-            "either an Handler or an Item can be the grabber",
+            "either an Handler or an Item can be the exclusive grabber",
+            "any number of Handlers can be passive grabbers",
             "if number of touchpoints changes: ignore the grab,<br/>start over with event delivery",
-//            "don't need parent-filtering: Handler gives up the grab when<br/>constraints aren't satisfied: start over with delivery",
-//            "define a vector of Items in visitation-order before we start delivery",
-//            "prefix the old-style child-filtering Items to that vector",
-            "Handler gives up the grab when constraints aren't satisfied",
+            "Handler gives up exclusive grab when constraints aren't satisfied",
             "mouse event -> QQuickPointerEvent with one point inside",
             "PointerHandler receives the complete event",
-            "PointerHandler can explicitly accept, grab/ungrab"
+            "PointerHandler accepts event: stop propagation",
+            "grab/ungrab are independent"
         ]
-        /*
-        Image {
-            anchors {
-                verticalCenter: parent.verticalCenter
-                right: parent.right
-                rightMargin: -30
-            }
-            height: parent.height * 0.7
-            fillMode: Image.PreserveAspectFit
-            source: "resources/whiteboard-cutout.jpg"
-            z: -1
-        }
-        */
     }
 
     Slide {
@@ -297,11 +243,10 @@ Rectangle {
         textFormat: Text.StyledText
 //        bulletSpacing: 0.6
         content: [
-            "so far, an Item must grab a press to be able to get an update<br/>this leads us to monolithic Areas and childMouseEventFilter and grab-stealing",
+            "an Item must grab a press to be able to get an update<br/>this leads us to monolithic Areas and childMouseEventFilter and grab-stealing",
             "PointerHandlers: we want to mostly let events propagate; exclusive grab should be less common",
             "virtual bool wantsEventPoint(QQuickEventPoint *)",
             "if wantsPointerEvent() returns true, virtual handlePointerEventImpl() will be called",
-            "signals press(eventPoint), update(eventPoint), release(eventPoint) might allow setting accepted to false<br/>means wantsEventPoint() will return false, ungrab if grabbed",
         ]
     }
 
@@ -311,7 +256,7 @@ Rectangle {
     }
 
     ImageSlide {
-        title: "WIP event hierarchy for PointerHandlers Tech Preview"
+        title: "Event hierarchy for PointerHandlers Tech Preview"
         source: "resources/event-hierarchy-qt5.8.png"
     }
 
@@ -320,52 +265,31 @@ Rectangle {
         source: "resources/pointer-handlers-classes.png"
     }
 
-//    TextSlide {
-//        title: "QQuickPointerEvent"
-//        sourceFile: "src/quick/items/qquickevents_p_p.h"
-//    }
-
-//    Slide {
-//        title: "Velocity"
-//        content: [
-//            "every event should have valid velocity values",
-//            "we plan to synthesize it when creating QQuickPointerEvents",
-//            "future FlickHandler won't need to calculate it like Flickable does"
-//        ]
-//    }
-
-//    TextSlide {
-//        title: "Fling Animation using VelocityCalculator"
-//        sourceFile: "fling-animation-with-velocity-calculator.qml"
-//    }
-
-//    CustomCodeSlide {
-//        title: "Pressing Multiple Buttons"
-//        sourceFile: "examples/MultiButton.qml"
+    CustomCodeSlide {
+        title: "Pressing Multiple Buttons"
+        sourceFile: "examples/MultiButton.qml"
 //        live: false
-////        sourceFile: "examples/multibuttons.qml"
-//        Loader {
-//            anchors.right: parent.right
-//            anchors.rightMargin: -40
-//            source: "examples/multibuttons.qml"
-//        }
-//    }
+//        sourceFile: "examples/multibuttons.qml"
+        Loader {
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            source: "examples/multibuttons.qml"
+        }
+    }
 
     Slide {
         title: "Stuff left to work on"
         textFormat: Text.StyledText
         bulletSpacing: 0.6
         content: [
+            "PointHandler",
             "FlickHandler",
             "scroll & wheel events",
-            "native gestures",
-            "validate the weak (non-exclusive) grab concept",
-            "monitor without grabbing",
-            "grab pre-emptively at any time",
+            "finish defining the passive grab concept",
+            "monitor without grabbing?",
             "get ready for public C++ API (create private-impl classes etc.)",
             "how to manipulate inner Handlers? attached properties?",
-            "research Reactive Programming more: any good ideas? are we doing it all wrong then?"
-            // TODO where did Reactive originate?  most popular frameworks now?
+            "possible renaming"
         ]
     }
 
@@ -375,6 +299,7 @@ Rectangle {
         centeredTextFormat: Text.RichText
         centeredText: "<html>
 <H1>Pointer Handlers in Qt Quick</H1>
+status: Tech Preview in Qt 5.10<br/><br/>
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/>
@@ -435,5 +360,4 @@ This presentation: <tt>https://github.com/ec1oud/qt-presentations/tree/pointerha
         smooth: true
         source: "resources/bottom-logo-right.png"
     }
-
 }

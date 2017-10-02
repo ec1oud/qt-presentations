@@ -9,14 +9,14 @@ Item {
     ColumnLayout {
         anchors.right: parent.right
         spacing: 20
-        Text { text: "protagonist"; font.pointSize: 12 }
+        Text { text: "protagonist"; font.pointSize: 12; font.weight: Font.Bold }
         MultiButton {
             id: balloonsButton
             label: "Launch Balloons"
             Layout.fillWidth: true
             gesturePolicy: TapHandler.WithinBounds
         }
-        Text { text: "the goons"; font.pointSize: 12 }
+        Text { text: "the goons"; font.pointSize: 12; font.weight: Font.Bold }
         MultiButton {
             id: missilesButton
             label: "Launch Missile"
@@ -35,7 +35,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.leftMargin: 150
-        ImageParticle { source: "resources/balloon.png" }
+        ImageParticle { source: "resources/balloon.png"; rotation: 1 }
         Emitter { anchors.bottom: parent.bottom; enabled: balloonsButton.pressed; lifeSpan: 5000; size: 64
             maximumEmitted: 99
             emitRate: 50; velocity: PointDirection { x: 10; y: -150; yVariation: 30; xVariation: 50 } } }
