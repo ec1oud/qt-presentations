@@ -1,24 +1,17 @@
-This is a slide presentation system written in QML, forked from
+This is a repository of various Qt-related presentations given as 
+talks at various conferences.  It depends on
+https://github.com/ec1oud/qml-presentation-system
+which is a fork of
 http://code.qt.io/cgit/qt-labs/qml-presentation-system.git/
-and containing branches with various Qt-related presentations,
-and modifications which helped to create them.
-
-If you want to create unrelated presentations, you'd better use
-the original rather than this fork.
 
 # Requirements
 
-* Qt 5.9
-  * qtbase, qtcharts, qtquickcontrols, qtquickcontrols2
-  * qtdeclarative: wip/pointerhandler branch plus latest uncommitted patches
+* Qt 5.10
+  * qtbase, qtdeclarative
 
 # Running
 
-Do 'make install' in the root directory to install the files to QTDIR/imports.
+Install the QML Presentation System.
 
-Then 
-
-cd presentation; qmake; make; ./present to run the presentation
-
-The "present" executable optionally takes a number of the slide to start on.
+Then `cd presentation; qml main.qml` or `qml main.qml -- 3` to start on slide 3, for example.
 
