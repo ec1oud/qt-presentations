@@ -1,7 +1,5 @@
-import QtQml 2.2
-import QtQuick 2.0
-import QtQuick.Window 2.1
-import Qt.labs.presentation.helper 1.0
+import QtQuick 2.10
+import Qt.labs.handlers 1.0
 
 Rectangle {
     id: root
@@ -10,46 +8,75 @@ Rectangle {
     visible: true
     property alias currentSlide: slides.currentSlide
 
-    PointingFilter {
-        id: pointingFilter
-        target: root.Window.window
-//        Component.onCompleted: target = root.Window.window
-//        target: root.visible ? root.Window.window : null
-    }
+    Item {
+        id: glassPane
+        objectName: "glassPane"
+        z: 10000
+        anchors.fill: parent
 
-    Repeater {
-        model: pointingFilter.touchPoints === undefined ? 0 : pointingFilter.touchPoints.length
-        AnimatedSprite {
-            source: "images/fingersprite.png"
-            width: frameWidth
-            height: frameHeight
-            frameWidth: 43
-            frameHeight: 64
-            frameCount: 3
-            frameRate: 5
-            x: pointingFilter.touchPoints[index].x - 19
-            y: pointingFilter.touchPoints[index].y - 12
-            z: 10000
+        PointHandler {
+            id: handler1
+            objectName: "point 1"
+            acceptedDevices: PointerDevice.TouchScreen | PointerDevice.TouchPad
+            target: AnimatedSprite {
+                objectName: "sprite 1"
+                source: "resources/fingersprite.png"
+                visible: handler1.active
+                running: visible // workaround: running defaults to true, but we don't see it animating otherwise
+                x: handler1.point.position.x
+                y: handler1.point.position.y
+                width: frameWidth
+                height: frameHeight
+                frameWidth: 43
+                frameHeight: 64
+                frameCount: 3
+                frameRate: 5
+                parent: glassPane
+            }
+        }
+
+        PointHandler {
+            id: handler2
+            objectName: "point 2"
+            acceptedDevices: PointerDevice.TouchScreen | PointerDevice.TouchPad
+            target: AnimatedSprite {
+                objectName: "sprite 2"
+                source: "resources/fingersprite.png"
+                visible: handler2.active
+                running: visible // workaround: running defaults to true, but we don't see it animating otherwise
+                x: handler2.point.position.x
+                y: handler2.point.position.y
+                width: frameWidth
+                height: frameHeight
+                frameWidth: 43
+                frameHeight: 64
+                frameCount: 3
+                frameRate: 5
+                parent: glassPane
+            }
+        }
+
+        PointHandler {
+            id: handler3
+            objectName: "point 3"
+            acceptedDevices: PointerDevice.TouchScreen | PointerDevice.TouchPad
+            target: AnimatedSprite {
+                objectName: "sprite 3"
+                source: "resources/fingersprite.png"
+                visible: handler3.active
+                running: visible // workaround: running defaults to true, but we don't see it animating otherwise
+                x: handler3.point.position.x
+                y: handler3.point.position.y
+                width: frameWidth
+                height: frameHeight
+                frameWidth: 43
+                frameHeight: 64
+                frameCount: 3
+                frameRate: 5
+                parent: glassPane
+            }
         }
     }
-
-//    Instantiator {
-//        model: pointingFilter.touchPoints
-//        delegate: AnimatedSprite {
-//            source: "images/fingersprite.png"
-//            width: frameWidth
-//            height: frameHeight
-//            frameWidth: 43
-//            frameHeight: 64
-//            frameCount: 3
-//            frameRate: 5
-//            x: modelData.x - 19
-//            y: modelData.y - 12
-//            z: 10000
-//            parent: root
-//        }
-//        onObjectAdded: console.log("i " + index + " o " + object)
-//    }
 
     Slides {
         id: slides
