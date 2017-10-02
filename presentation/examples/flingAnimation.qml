@@ -38,47 +38,36 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.8
+import QtQuick 2.10
 import Qt.labs.handlers 1.0
+import "resources"
 
 Rectangle {
-    id: root
     width: 480; height: 480
     color: "#22222222"
 
-    Image {
-        id: knob
-        source: "resources/redball.png"
-        DragHandler {
-            id: dragHandler
-            xAxis {
-                minimum: 10
-                maximum: root.width - 10 - knob.width
-            }
-            yAxis {
-                minimum: 10
-                maximum: root.height - 10 - knob.height
-            }
-        }
+    Repeater {
+        model: 2
 
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            verticalCenter: parent.verticalCenter
+        Image {
+            id: ball
+            source: "resources/redball.png"
+            width: 80; height: 80; x: 80 + index * 240; y: 240
+
+            DragHandler {
+                id: dragHandler
+                onActiveChanged: if (!active) anim.restart(point.velocity)
+            }
+
+            Rectangle {
+                visible: dragHandler.active
+                anchors.fill: parent
+                anchors.margins: -5
+                radius: width / 2
+                opacity: 0.25
+            }
+
+            MomentumAnimation { id: anim; target: ball }
         }
-        states: [
-            State {
-                when: dragHandler.active
-                AnchorChanges {
-                    target: knob
-                    anchors.horizontalCenter: undefined
-                    anchors.verticalCenter: undefined
-                }
-            }
-        ]
-        transitions: [
-            Transition {
-                AnchorAnimation { easing.type: Easing.OutElastic }
-            }
-        ]
     }
 }

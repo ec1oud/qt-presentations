@@ -39,46 +39,33 @@
 ****************************************************************************/
 
 import QtQuick 2.8
-import Qt.labs.handlers 1.0
 
-Rectangle {
+ParallelAnimation {
     id: root
-    width: 480; height: 480
-    color: "#22222222"
+    property Item target: null
+    property int duration: 500
+    property vector2d velocity: Qt.vector2d(0,0)
 
-    Image {
-        id: knob
-        source: "resources/redball.png"
-        DragHandler {
-            id: dragHandler
-            xAxis {
-                minimum: 10
-                maximum: root.width - 10 - knob.width
-            }
-            yAxis {
-                minimum: 10
-                maximum: root.height - 10 - knob.height
-            }
-        }
+    function restart(vel) {
+        stop()
+        velocity = vel
+        start()
+    }
 
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            verticalCenter: parent.verticalCenter
-        }
-        states: [
-            State {
-                when: dragHandler.active
-                AnchorChanges {
-                    target: knob
-                    anchors.horizontalCenter: undefined
-                    anchors.verticalCenter: undefined
-                }
-            }
-        ]
-        transitions: [
-            Transition {
-                AnchorAnimation { easing.type: Easing.OutElastic }
-            }
-        ]
+    NumberAnimation {
+        id: xAnim
+        target: root.target
+        property: "x"
+        to: target.x + velocity.x / duration * 100000
+        duration: root.duration
+        easing.type: Easing.OutQuad
+    }
+    NumberAnimation {
+        id: yAnim
+        target: root.target
+        property: "y"
+        to: target.y + velocity.y / duration * 100000
+        duration: root.duration
+        easing.type: Easing.OutQuad
     }
 }

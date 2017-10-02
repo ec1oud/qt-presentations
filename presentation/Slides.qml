@@ -41,7 +41,7 @@ Shawn Rutledge<br/>
         title: "About me"
         content: [
             "Qt user since ~2004",
-            "The Qt Company - Oslo",
+            "The Qt Company - Oslo since 2011",
             "Pointing devices: touch, Wacom tablets",
             "Linux/X11 and macOS",
             "QtPDF",
@@ -65,30 +65,66 @@ Shawn Rutledge<br/>
         ]
     }
 
-//    Slide {
-//        // TODO examples
-//        title: "What's wrong with existing mouse & touch handling"
-//        content: [
-//        ]
-//    }
-
-    CustomCodeSlide {
-        title: "Flickable and MouseArea: hover and grab"
-        sourceFile: "examples/Flick.qml"
-    }
-
-    CustomCodeSlide {
-        title: "Flickable: filter, grab, steal or prevent"
-        sourceFile: "examples/Flickable2.qml"
-    }
-
-    ImageSlide {
-        title: "Many parallel event delivery paths (and some missing)"
-        source: "resources/event-delivery-before.png"
+    Slide {
+        title: "What's wrong with MouseArea"
+        content: [
+            "handles touch via emulated mouse events only",
+            "you can only press one at a time",
+            "clumsiness with event accept/reject, preventStealing etc.",
+            "a full-blown Item with nothing to render",
+            "large, monolithic, can't change behavior"
+        ]
     }
 
     Slide {
-        title: "Goals: what we need to fix"
+        title: "What's wrong with MultiPointTouchArea"
+        content: [
+            "not a good MouseArea replacement: nested-object verbosity",
+            "a full-blown Item with nothing to render",
+            "difficult to implement custom gesture recognition",
+        ]
+
+        Text {
+            text: "
+Rectangle {
+    property alias pressed: touch1.pressed
+    signal tapped
+    MultiPointTouchArea {
+        anchors.fill: parent
+        touchPoints: [
+            TouchPoint {
+                id: touch1
+                onPressedChanged: if (!pressed) root.tapped
+            } ]
+    }
+}
+"
+            color: "SaddleBrown"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: parent.height - rule.y
+            font.family: "Inconsolata"
+            font.pointSize: parent.baseFontSize * 0.7
+        }
+    }
+
+//    CustomCodeSlide {
+//        title: "Flickable and MouseArea: hover and grab"
+//        sourceFile: "examples/Flick.qml"
+//    }
+
+//    CustomCodeSlide {
+//        title: "Flickable: filter, grab, steal or prevent"
+//        sourceFile: "examples/Flickable2.qml"
+//    }
+
+//    ImageSlide {
+//        title: "Many parallel event delivery paths (and some missing)"
+//        source: "resources/event-delivery-before.png"
+//    }
+
+    Slide {
+        title: "Goals for Pointer Handlers"
         content: [
             "make it easy to handle mouse, touch and stylus agnostically or in device-specific ways",
             "common event delivery code for mouse and touch in QQuickWindow",
@@ -120,7 +156,7 @@ Shawn Rutledge<br/>
         title: "Handler objects"
         content: [
             "but no more than one attached object of a given type per Item... so let's have 'child' objects",
-            ' Rectangle { TapHandler { id: th } color: th.isPressed ? "red" : "blue" }',
+            ' Rectangle { TapHandler { id: th } color: th.pressed ? "red" : "blue" }',
             ' Rectangle { DragHandler { } }',
             ' Image { PinchHandler { } }'
         ]
@@ -129,21 +165,31 @@ Shawn Rutledge<br/>
     Slide {
         title: "Features"
         content: [
+            "declarative handlers for gestures (tap, drag, pinch etc.)",
             "easy stuff is easy",
             "plain QObject 'child' is lighter than Item or attached",
-            "multiple small, lightweight, understandable handlers instead of monolithic MouseArea etc.",
-            "default target, use its bounds"
+            "multiple small, lightweight, understandable handlers",
+            "default target, use its bounds",
+            "actual multi-touch support",
         ]
     }
 
     Slide {
         title: "Features"
         content: [
-            "preferred: declarative handlers for gestures (tap, drag, pinch etc.)",
-            "but also: some for mouse only, some for touch only",
+            "filter events by:",
+            " device type",
+            " pointer type",
+            " button",
+            " keyboard modifiers",
             "subclass Handlers in C++ for the less-mainstream cases",
             "it's completely different, so minimizes compatibility risks"
         ]
+    }
+
+    CustomCodeSlide {
+        title: "DragHandler"
+        sourceFile: "examples/flingAnimation.qml"
     }
 
     CustomCodeSlide {

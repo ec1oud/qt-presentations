@@ -43,36 +43,19 @@ import Qt.labs.handlers 1.0
 import QtQuick.Controls 2.0
 
 Item {
-    width: 480
-    height: 320
-
     Rectangle {
-        id: rect
-        anchors.fill: parent; anchors.margins: 40
-        border.width: 3; border.color: "transparent"
-        color: handler.isPressed ? "lightsteelblue" : "#22222222"
+        color: handler.pressed ? "lightsteelblue" : "#22222222"
 
         TapHandler {
             id: handler
-            acceptedButtons: (leftAllowedCB.checked ? Qt.LeftButton : Qt.NoButton) |
-                             (middleAllowedCB.checked ? Qt.MiddleButton : Qt.NoButton) |
-                             (rightAllowedCB.checked ? Qt.RightButton : Qt.NoButton)
-            onCanceled: {
-                console.log("canceled @ " + pos)
-                borderBlink.blinkColor = "red"
-                borderBlink.start()
-            }
+            acceptedButtons: checkboxes.state
+            onCanceled: tapAnimation.blink(Qt.NoButton)
             onTapped: {
                 if (tapCount > 1) {
                     tapCountLabel.text = tapCount
                     flashAnimation.start()
                 } else {
-                    switch (point.event.button) {
-                        case Qt.LeftButton: borderBlink.blinkColor = "green"; break;
-                        case Qt.MiddleButton: borderBlink.blinkColor = "orange"; break;
-                        case Qt.RightButton: borderBlink.blinkColor = "magenta"; break;
-                    }
-                    borderBlink.start()
+                    tapAnimation.blink(point.pressedButtons); // TODO
                 }
             }
         }
@@ -80,8 +63,7 @@ Item {
         Text {
             id: tapCountLabel
             anchors.centerIn: parent
-            font.pixelSize: 72
-            font.weight: Font.Black
+            font { pixelSize: 72; weight: Font.Black }
             SequentialAnimation {
                 id: flashAnimation
                 PropertyAction { target: tapCountLabel; property: "visible"; value: true }
@@ -105,31 +87,51 @@ Item {
         }
 
         SequentialAnimation {
-            id: borderBlink
+            id: tapAnimation
             property color blinkColor: "blue"
             loops: 3
-            ScriptAction { script: rect.border.color = borderBlink.blinkColor }
+            function blink(button) {
+                switch (button) {
+                    case Qt.LeftButton: blinkColor = "green"; break;
+                    case Qt.MiddleButton: blinkColor = "orange"; break;
+                    case Qt.RightButton: blinkColor = "magenta"; break;
+                    default: blinkColor = "red"; break;
+                }
+                restart();
+            }
+            ScriptAction { script: rect.border.color = tapAnimation.blinkColor }
             PauseAnimation { duration: 100 }
             ScriptAction { script: rect.border.color = "transparent" }
             PauseAnimation { duration: 100 }
         }
+
+        id: rect
+        anchors.fill: parent; anchors.margins: 40
+        border.width: 3; border.color: "transparent"
     }
 
     Row {
+        id: checkboxes
+        property int state: (leftAllowedCB.checked ? Qt.LeftButton : Qt.NoButton) |
+                            (middleAllowedCB.checked ? Qt.MiddleButton : Qt.NoButton) |
+                            (rightAllowedCB.checked ? Qt.RightButton : Qt.NoButton)
         spacing: 6
-        Text { text: "accepted mouse clicks:"; anchors.verticalCenter: leftAllowedCB.verticalCenter }
+        Label { text: "accepted mouse clicks:"; anchors.verticalCenter: leftAllowedCB.verticalCenter }
         CheckBox {
             id: leftAllowedCB
             checked: true
-            text: "left click"
+            text: "left"
         }
         CheckBox {
             id: middleAllowedCB
-            text: "middle click"
+            text: "middle"
         }
         CheckBox {
             id: rightAllowedCB
-            text: "right click"
+            text: "right"
         }
     }
+
+    width: 480
+    height: 320
 }
