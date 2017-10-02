@@ -57,7 +57,7 @@ Item {
             id: image
             anchors.centerIn: parent
             fillMode: Image.PreserveAspectFit
-            source: "images/map.svgz"
+            source: "resources/map.svgz"
             Component.onCompleted: { width = implicitWidth; height = implicitHeight }
         }
     }

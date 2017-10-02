@@ -48,7 +48,7 @@ Rectangle {
 
     Image {
         id: knob
-        source: "images/redball.png"
+        source: "resources/redball.png"
         anchors {
             horizontalCenter: parent.horizontalCenter
             verticalCenter: parent.verticalCenter

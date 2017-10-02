@@ -10,7 +10,7 @@ Rectangle {
     property alias label: label.text
 
     Image {
-        id: knob; source: "../images/fader-knob.png"
+        id: knob; source: "../resources/fader-knob.png"
         x: slot.x - width / 2 + slot.width / 2; z: 2
         transformOrigin: Item.Center
         MouseArea {

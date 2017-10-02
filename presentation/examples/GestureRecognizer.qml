@@ -38,7 +38,7 @@ ListView {
                 clip: true
                 width: parent.width; height: parent.height
                 Image {
-                    source: "images/guyenne-classic.png"
+                    source: "resources/guyenne-classic.png"
                     x: -index * parent.width
                 }
             }
@@ -46,7 +46,7 @@ ListView {
                 clip: true
                 width: parent.width; height: parent.height
                 Image {
-                    source: "images/guyenne-classic.png"
+                    source: "resources/guyenne-classic.png"
                     x: -2 * parent.width
                     y: -4 * parent.height
                 }

@@ -20,7 +20,7 @@ Presentation {
             right: parent.right
         }
         fillMode: Image.PreserveAspectFit
-        source: "images/top-banner.png"
+        source: "resources/top-banner.png"
         visible: currentSlide === 0
     }
 
@@ -86,7 +86,7 @@ Shawn Rutledge<br/>
 
     ImageSlide {
         title: "Many parallel event delivery paths (and some missing)"
-        source: "images/event-delivery-before.png"
+        source: "resources/event-delivery-before.png"
     }
 
     Slide {
@@ -194,7 +194,7 @@ Shawn Rutledge<br/>
 //        Image {
 //            anchors.right: parent.right
 //            anchors.verticalCenter: parent.verticalCenter
-//            source: "images/touch_mouse_event.png"
+//            source: "resources/touch_mouse_event.png"
 //        }
 //    }
 
@@ -214,7 +214,7 @@ Shawn Rutledge<br/>
 //                bottomMargin: -30
 //            }
 //            fillMode: Image.PreserveAspectFit
-//            source: "images/pointerevent-delivery.png"
+//            source: "resources/pointerevent-delivery.png"
 //        }
 //    }
 
@@ -242,7 +242,7 @@ Shawn Rutledge<br/>
             }
             height: parent.height * 0.7
             fillMode: Image.PreserveAspectFit
-            source: "images/whiteboard-cutout.jpg"
+            source: "resources/whiteboard-cutout.jpg"
             z: -1
         }
         */
@@ -263,17 +263,17 @@ Shawn Rutledge<br/>
 
     ImageSlide {
         title: "Existing QEvent hierarchy"
-        source: "images/event-hierarchy-before.png"
+        source: "resources/event-hierarchy-before.png"
     }
 
     ImageSlide {
         title: "WIP event hierarchy for PointerHandlers Tech Preview"
-        source: "images/event-hierarchy-qt5.8.png"
+        source: "resources/event-hierarchy-qt5.8.png"
     }
 
     ImageSlide {
         title: "Handler hierarchy so far"
-        source: "images/pointer-handlers-classes.png"
+        source: "resources/pointer-handlers-classes.png"
     }
 
 //    TextSlide {
@@ -371,7 +371,7 @@ This presentation: <tt>https://github.com/ec1oud/qt-presentations/tree/pointerha
             rightMargin: 20
         }
         fillMode: Image.PreserveAspectFit
-        source: "images/bottom-logo-left.png"
+        source: "resources/bottom-logo-left.png"
     }
 
     Image {
@@ -382,7 +382,7 @@ This presentation: <tt>https://github.com/ec1oud/qt-presentations/tree/pointerha
             rightMargin: 20
         }
         fillMode: Image.PreserveAspectFit
-        source: "images/bottom-logo-right.png"
+        source: "resources/bottom-logo-right.png"
     }
 
 }

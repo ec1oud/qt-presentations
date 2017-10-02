@@ -30,7 +30,7 @@ Item { width: 800; height: 800
         property real defaultSize: 200
         model: FolderListModel {
             id: folderModel
-            showDirs: false; folder: "images/"; nameFilters: ["*.jpg", "*.JPG"]
+            showDirs: false; folder: "resources/"; nameFilters: ["*.jpg", "*.JPG"]
         }
     }
 }
