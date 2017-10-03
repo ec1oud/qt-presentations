@@ -217,6 +217,16 @@ Rectangle {
         sourceFile: "examples/map.qml"
     }
 
+    CustomCodeSlide {
+        title: "DragHandler and TapHandler together"
+        sourceFile: "examples/Slider.qml"
+        Loader {
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            source: "examples/sliders.qml"
+        }
+    }
+
 //    QmlSlide {
 //        title: "MouseHandler"
 //        sourceFile: "examples/mouseHandler.qml"
@@ -275,6 +285,11 @@ Rectangle {
             anchors.rightMargin: 0
             source: "examples/multibuttons.qml"
         }
+    }
+
+    QmlSlide {
+        title: "PointHandler"
+        sourceFile: "examples/crosshairs.qml"
     }
 
     Slide {

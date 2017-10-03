@@ -1,65 +1,137 @@
-import QtQuick 2.6
-import QtGraphicalEffects 1.0
+/****************************************************************************
+**
+** Copyright (C) 2017 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
+**
+** This file is part of the manual tests of the Qt Toolkit.
+**
+** $QT_BEGIN_LICENSE:BSD$
+** You may use this file under the terms of the BSD license as follows:
+**
+** "Redistribution and use in source and binary forms, with or without
+** modification, are permitted provided that the following conditions are
+** met:
+**   * Redistributions of source code must retain the above copyright
+**     notice, this list of conditions and the following disclaimer.
+**   * Redistributions in binary form must reproduce the above copyright
+**     notice, this list of conditions and the following disclaimer in
+**     the documentation and/or other materials provided with the
+**     distribution.
+**   * Neither the name of The Qt Company Ltd nor the names of its
+**     contributors may be used to endorse or promote products derived
+**     from this software without specific prior written permission.
+**
+**
+** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+**
+** $QT_END_LICENSE$
+**
+****************************************************************************/
 
-Rectangle {
-    id: slider
-    width: 150; height: 600; color: "#ddd"
+import QtQuick 2.8
+import Qt.labs.handlers 1.0
+import "resources"
+
+Item {
+    id: root
     property int value: 50
-    property int minimumValue: 0
     property int maximumValue: 99
     property alias label: label.text
+    property alias tapEnabled: tap.enabled
+    property alias pressed: tap.pressed
+    signal tapped
 
-    Image {
-        id: knob; source: "../resources/fader-knob.png"
-        x: slot.x - width / 2 + slot.width / 2; z: 2
-        transformOrigin: Item.Center
-        MouseArea {
-            id: dragArea
-            anchors.fill: parent
-            anchors.margins: -20
-            drag.target: parent
-            drag.axis: Drag.YAxis
-            drag.minimumY: slot.y
-            drag.maximumY: slot.height + slot.y - parent.height
-            // multiPointTouchEnabled: true // Qt 5.6 - planned
-        }
-        property real multiplier: slider.maximumValue / (dragArea.drag.maximumY - dragArea.drag.minimumY)
-        onYChanged: slider.value = slider.maximumValue - (y - dragArea.drag.minimumY) * multiplier
-        Component.onCompleted: y = dragArea.drag.maximumY - slider.value / multiplier
+    DragHandler {
+        id: dragHandler
+        target: knob
+        xAxis.enabled: false
+        yAxis.minimum: slot.y
+        yAxis.maximum: slot.height + slot.y - knob.height
     }
 
-    RectangularGlow {
-        anchors.fill: knob; z: 1; visible: dragArea.pressed
-        glowRadius: 10; color: "cyan"; opacity: 0.7
-        cornerRadius: glowRadius
+    Image {
+        id: knob
+        source: "resources/mixer-knob.png"
+        x: slot.x - width / 2 + slot.width / 2
+        z: 1
+        height: root.width / 2
+        width: implicitWidth / implicitHeight * height
+        property bool programmatic: false
+        property real multiplier: root.maximumValue / (dragHandler.yAxis.maximum - dragHandler.yAxis.minimum)
+        onYChanged: if (!programmatic) root.value = root.maximumValue - (knob.y - dragHandler.yAxis.minimum) * multiplier
+        transformOrigin: Item.Center
+        function setValue(value) { knob.y = dragHandler.yAxis.maximum - value / knob.multiplier }
+        TapHandler {
+            id: tap
+            gesturePolicy: TapHandler.DragThreshold
+            onTapped: {
+                tapFlash.start()
+                root.tapped
+            }
+        }
     }
 
     Rectangle {
         id: slot
-        anchors {
-            top: parent.top; bottom: parent.bottom
-            margins: 10; topMargin: 40; bottomMargin: 46
-            horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.margins: 10
+        anchors.topMargin: 30
+        anchors.bottomMargin: 30
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: 10
+        color: "black"
+        radius: width / 2
+        smooth: true
+    }
+
+    Rectangle {
+        // RectangularGlow is better, but that's a different module
+        id: glow
+        anchors.fill: knob
+        anchors.margins: -5
+        anchors.leftMargin: -2
+        anchors.horizontalCenterOffset: 1
+        radius: 5
+        color: "#4400FFFF"
+        opacity: tap.pressed || tapFlash.running ? 1 : 0
+        FlashAnimation on visible {
+            id: tapFlash
         }
-        width: 10; radius: width / 2
-        color: "black"; antialiasing: true
     }
 
     Text {
-        font.family: "LCD"; font.pixelSize: 36; color: "red"
+        font.pointSize: 16
+        color: "red"
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        text: slider.value
+        text: root.value
     }
 
     Text {
         id: label
-        font.family: "LCD"
-        font.pixelSize: 24
+        font.pointSize: 12
         color: "red"
         anchors.top: parent.top
         anchors.topMargin: 5
         anchors.horizontalCenter: parent.horizontalCenter
-        text: "Balloons"
+    }
+
+    Component.onCompleted: onHeightChanged()
+
+    onHeightChanged: {
+        knob.programmatic = true
+        knob.setValue(root.value)
+        knob.programmatic = false
     }
 }
