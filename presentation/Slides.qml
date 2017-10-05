@@ -289,7 +289,8 @@ Rectangle {
             "monitor without grabbing?",
             "get ready for public C++ API (create private-impl classes etc.)",
             "how to manipulate inner Handlers? attached properties?",
-            "possible renaming"
+            "possible renaming",
+            "focus on native gestures?"
         ]
     }
 
