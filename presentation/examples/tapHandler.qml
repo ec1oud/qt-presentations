@@ -84,7 +84,7 @@ Item {
                                 (middleAllowedCB.checked ? Qt.MiddleButton : Qt.NoButton) |
                                 (rightAllowedCB.checked ? Qt.RightButton : Qt.NoButton)
             spacing: 6
-            Label { text: "accepted mouse clicks:" }
+            Label { text: "acceptedButtons:" }
             CheckBox {
                 id: leftAllowedCB
                 checked: true
@@ -107,7 +107,7 @@ Item {
                                  TapHandler.ReleaseWithinBounds)
 
             spacing: 6
-            Label { text: "gesture policy:" }
+            Label { text: "gesturePolicy:" }
             RadioButton {
                 id: policyDragThresholdRB
                 text: "drag threshold"

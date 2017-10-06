@@ -53,11 +53,10 @@ Rectangle {
         antialiasing: true
 
         Text {
-            anchors.centerIn: parent
-            text: "Pinch with 2 fingers to scale, rotate and translate"
+            anchors.centerIn: parent; font.pointSize: 18
+            text: "Pinch with 2 fingers"
                 + "\ncurrent rotation: " + pinch2.rotation.toFixed(1)
                 + "\nscale: " + pinch2.scale.toFixed(1)
-                + "\ntranslation: " + pinch2.translation
         }
 
         PinchHandler {
@@ -82,9 +81,10 @@ Rectangle {
         antialiasing: true
 
         Text {
-            anchors.centerIn: parent
-            text: "Pinch with 3 fingers to scale, rotate and translate"
+            anchors.centerIn: parent; font.pointSize: 18
+            text: "Pinch with 3 fingers"
                 + "\ncurrent rotation " + pinch3.rotation.toFixed(1)
+                + "\nscale: " + pinch3.scale.toFixed(1)
         }
 
         PinchHandler {

@@ -119,7 +119,7 @@ Item {
 
     Row {
         spacing: 6
-        Label { text: "accepted mouse clicks:"; anchors.verticalCenter: leftAllowedCB.verticalCenter }
+        Label { text: "acceptedButtons:"; anchors.verticalCenter: leftAllowedCB.verticalCenter }
         CheckBox {
             id: leftAllowedCB
             checked: true

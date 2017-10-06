@@ -155,8 +155,9 @@ Rectangle {
     Slide {
         title: "Handler objects"
         content: [
-            "but no more than one attached object of a given type per Item... so let's have 'child' objects",
+            "more flexible: 'child' objects",
             ' Rectangle { TapHandler { id: th } color: th.pressed ? "red" : "blue" }',
+            ' Rectangle { TapHandler { acceptedDevices: PointerDevice.TouchScreen; onTapped: ... } }',
             ' Rectangle { DragHandler { } }',
             ' Image { PinchHandler { } }'
         ]

@@ -49,7 +49,7 @@ Item {
 
 //    Instantiator {
 //        model: 10
-//        defaultParent: root // TODO not added yet in 5.10 but mandatory for this
+//        defaultParent: root // TODO not added yet in 5.10
 
         PointHandler {
             id: handler
