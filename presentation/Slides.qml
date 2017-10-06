@@ -198,6 +198,16 @@ Rectangle {
         sourceFile: "examples/joystick.qml"
     }
 
+    CustomCodeSlide {
+        title: "Fake Flickable"
+        sourceFile: "examples/resources/FakeFlickable.qml"
+        Loader {
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            source: "examples/fakeFlickable.qml"
+        }
+    }
+
     QmlSlide {
         title: "TapHandler"
         sourceFile: "examples/tapHandler.qml"
