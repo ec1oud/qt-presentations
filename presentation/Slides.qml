@@ -208,6 +208,11 @@ Rectangle {
     }
 
     QmlSlide {
+        title: "TapHandler - non-rectangular areas"
+        sourceFile: "examples/tapSectors.qml"
+    }
+
+    QmlSlide {
         title: "PinchHandler"
         sourceFile: "examples/pinchHandler.qml"
     }
