@@ -219,11 +219,6 @@ Rectangle {
     }
 
     QmlSlide {
-        title: "TapHandler - non-rectangular areas"
-        sourceFile: "examples/tapSectors.qml"
-    }
-
-    QmlSlide {
         title: "PinchHandler"
         sourceFile: "examples/pinchHandler.qml"
     }
@@ -274,6 +269,11 @@ Rectangle {
             "virtual bool wantsEventPoint(QQuickEventPoint *)",
             "if wantsPointerEvent() returns true, virtual handlePointerEventImpl() will be called",
         ]
+    }
+
+    QmlSlide {
+        title: "TapHandler - non-rectangular areas"
+        sourceFile: "examples/tapSectors.qml"
     }
 
     ImageSlide {
