@@ -55,16 +55,7 @@ Rectangle {
             width: 80; height: 80; x: 80 + index * 240; y: 240
 
             DragHandler {
-                id: dragHandler
                 onActiveChanged: if (!active) anim.restart(point.velocity)
-            }
-
-            Rectangle {
-                visible: dragHandler.active
-                anchors.fill: parent
-                anchors.margins: -5
-                radius: width / 2
-                opacity: 0.25
             }
 
             MomentumAnimation { id: anim; target: ball }
