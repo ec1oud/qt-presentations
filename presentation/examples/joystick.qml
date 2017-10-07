@@ -42,7 +42,6 @@ import QtQuick 2.8
 import Qt.labs.handlers 1.0
 
 Image {
-    id: root; width: 480; height: 480
     source: "resources/joystick-outer-case-pov.png"
     property real margin: 50
 
@@ -81,4 +80,6 @@ Image {
             }
         ]
     }
+
+    id: root; width: 480; height: 480
 }

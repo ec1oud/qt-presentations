@@ -44,6 +44,7 @@ import Qt.labs.handlers 1.0
 Item {
     id: root
     default property alias data: __contentItem.data
+    clip: true
 
     Item {
         id: __contentItem

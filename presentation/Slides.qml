@@ -248,7 +248,7 @@ Rectangle {
         textFormat: Text.StyledText
 //        bulletSpacing: 0.6
         content: [
-            "either an Handler or an Item can be the exclusive grabber",
+            "either a Handler or an Item can be the exclusive grabber",
             "any number of Handlers can be passive grabbers",
             "if number of touchpoints changes: ignore the grab,<br/>start over with event delivery",
             "Handler gives up exclusive grab when constraints aren't satisfied",
@@ -335,7 +335,7 @@ status: Tech Preview in Qt 5.10<br/><br/>
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/>
-This presentation: <tt>https://github.com/ec1oud/qt-presentations/tree/pointerhandlers</tt>
+This presentation:<br/><tt>https://github.com/ec1oud/qt-presentations/tree/pointerhandlers</tt>
 </html>"
     }
 
