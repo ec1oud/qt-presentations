@@ -41,10 +41,10 @@
 import QtQuick 2.8
 import Qt.labs.handlers 1.0
 
-Rectangle {
-    id: root
-    width: 480; height: 480
-    color: "#22222222"
+Image {
+    id: root; width: 480; height: 480
+    source: "resources/joystick-outer-case-pov.png"
+    property real margin: 50
 
     Image {
         id: knob
@@ -52,12 +52,12 @@ Rectangle {
         DragHandler {
             id: dragHandler
             xAxis {
-                minimum: 10
-                maximum: root.width - 10 - knob.width
+                minimum: margin
+                maximum: root.width - margin - knob.width
             }
             yAxis {
-                minimum: 10
-                maximum: root.height - 10 - knob.height
+                minimum: margin
+                maximum: root.height - margin - knob.height
             }
         }
 
