@@ -53,7 +53,7 @@ Shawn Rutledge<br/>
         title: "Agenda"
         bulletSpacing: 0.6
         content: [
-            "What's wrong with existing mouse & touch handling",
+            "Existing mouse & touch handling",
             "Goals",
             "Introduction to PointerHandlers",
             "Demos of several PointerHandlers",
@@ -62,6 +62,18 @@ Shawn Rutledge<br/>
             "Weak and strong grabbing",
             "Remaining work",
             "Q&A"
+        ]
+    }
+
+    Slide {
+        title: "Event delivery"
+        content: [
+            "Event delivery on press",
+            "How to receive updates after press?",
+            "Exclusive grab",
+            "setFiltersChildMouseEvents(), childMouseEventFilter()",
+            "Stealing the grab",
+            "Passive grab"
         ]
     }
 
@@ -147,7 +159,9 @@ Rectangle {
         title: "Idea: handler objects"
         content: [
             "the original idea: make mouse/touch more like the Keys attached prop",
-            ' Keys.onLeftPressed: console.log("move left")'
+            ' Keys.onLeftPressed: console.log("move left")',
+            ' Keys.onAPressed? doesn\'t exist',
+            ' Keys.onPressed: { switch (event.key) { ... } }'
 //            ' so maybe color: Mouse.onLeftButtonPressed ? "red" : "blue" ?'
         ]
     }
@@ -169,8 +183,8 @@ Rectangle {
             "declarative handlers for gestures (tap, drag, pinch etc.)",
             "easy stuff is easy",
             "plain QObject 'child' is lighter than Item or attached",
-            "multiple small, lightweight, understandable handlers",
             "default target, use its bounds",
+            "multiple small, lightweight, understandable handlers",
             "actual multi-touch support",
         ]
     }
@@ -313,10 +327,10 @@ Rectangle {
         textFormat: Text.StyledText
         bulletSpacing: 0.6
         content: [
+            "finish defining the passive grab concept",
             "PointHandler",
             "FlickHandler",
             "scroll & wheel events",
-            "finish defining the passive grab concept",
             "monitor without grabbing?",
             "get ready for public C++ API (create private-impl classes etc.)",
             "how to manipulate inner Handlers? attached properties?",
