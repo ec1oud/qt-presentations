@@ -13,6 +13,11 @@ Presentation {
     width: 1920
     height: 1080
 
+    Shortcut {
+        sequence: "Ctrl+Q"
+        onActivated: Qt.quit()
+    }
+
     Image {
         anchors {
             top: parent.top
@@ -116,7 +121,7 @@ Rectangle {
             anchors.bottom: parent.bottom
             anchors.bottomMargin: parent.height - rule.y
             font.family: "Inconsolata"
-            font.pointSize: parent.baseFontSize * 0.7
+            font.pointSize: parent.baseFontSize * 0.5
         }
     }
 
