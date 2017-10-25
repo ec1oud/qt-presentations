@@ -3,6 +3,7 @@ import QtQuick.Shapes 1.0
 import Qt.labs.handlers 1.0
 
 Item {
+    layer { enabled: true; samples: 16 } // Antialiasing
     Shape {
         TapHandler { id: urTap }
         ShapePath {
