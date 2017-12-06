@@ -3,7 +3,7 @@ import QtQuick.Shapes 1.0
 import Qt.labs.handlers 1.0
 
 Item {
-    layer { enabled: true; samples: 16 } // Antialiasing
+    layer { enabled: true; samples: 8 } // Antialiasing by applying MSAA only to this layer
     Shape {
         containsMode: Shape.FillContains // Qt 5.11
         TapHandler { id: urTap }

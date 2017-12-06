@@ -47,38 +47,34 @@ Item {
     width: 480
     height: 480
 
-//    Instantiator {
-//        model: 10
-//        defaultParent: root // TODO not added yet in 5.10
-
-        PointHandler {
-            id: handler
-            target: Shape {
-                id: crosshairs
-                x: handler.point.position.x - width / 2
-                y: handler.point.position.y - height / 2
-                width: 300; height: 300
-                // visible: handler.pressed
-                rotation: handler.point.rotation
-                ShapePath {
-                    strokeColor: "red"
-                    fillColor: "transparent"
-                    strokeWidth: 3
-                    startX: crosshairs.width / 2; startY: 0
-                    PathLine { x: crosshairs.width / 2; y: crosshairs.height }
-                    PathMove { x: 0; y: crosshairs.height / 2 }
-                    PathLine { x: crosshairs.width; y: crosshairs.height / 2 }
-                }
-                ShapePath {
-                    strokeColor: "lightgray"
-                    strokeWidth: 5
-                    startX: crosshairs.width / 2; startY: crosshairs.height / 2
-                    PathLine {
-                        relativeX: handler.point.velocity.x * 50
-                        relativeY: handler.point.velocity.y * 50
-                    }
-                }
+    Shape {
+        id: crosshairs
+        x: handler.point.position.x - width / 2
+        y: handler.point.position.y - height / 2
+        width: 300; height: 300
+        // visible: handler.pressed
+        rotation: handler.point.rotation
+        ShapePath {
+            strokeColor: "red"
+            fillColor: "transparent"
+            strokeWidth: 3
+            startX: crosshairs.width / 2; startY: 0
+            PathLine { x: crosshairs.width / 2; y: crosshairs.height }
+            PathMove { x: 0; y: crosshairs.height / 2 }
+            PathLine { x: crosshairs.width; y: crosshairs.height / 2 }
+        }
+        ShapePath {
+            strokeColor: "lightgray"
+            strokeWidth: 5
+            startX: crosshairs.width / 2; startY: crosshairs.height / 2
+            PathLine {
+                relativeX: handler.point.velocity.x * 50
+                relativeY: handler.point.velocity.y * 50
             }
         }
-//    }
+    }
+
+    PointHandler {
+        id: handler
+    }
 }
