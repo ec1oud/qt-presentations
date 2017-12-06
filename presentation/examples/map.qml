@@ -42,24 +42,15 @@ import QtQuick 2.10
 import Qt.labs.handlers 1.0
 
 Item {
+    id: root
     width: 640
-    height: 480
+    height: 356
 
-    Rectangle {
+    Image {
         id: map
-        color: "aqua"
-        x: (parent.width - width) / 2
-        y: (parent.height - height) / 2
-        width: image.width
-        height: image.height
-
-        Image {
-            id: image
-            anchors.centerIn: parent
-            fillMode: Image.PreserveAspectFit
-            source: "resources/map.svgz"
-            Component.onCompleted: { width = implicitWidth; height = implicitHeight }
-        }
+        fillMode: Image.PreserveAspectFit
+        source: "resources/worldmap-osm.png"
+        Component.onCompleted: { width = root.width; height = root.height }
     }
 
     PinchHandler {
@@ -67,17 +58,9 @@ Item {
         target: map
         minimumScale: 0.1
         maximumScale: 10
-        onActiveChanged: if (!active) reRenderIfNecessary()
     }
 
     DragHandler {
         target: map
-    }
-
-    function reRenderIfNecessary() {
-        var newSourceWidth = image.sourceSize.width * pinch.scale
-        var ratio = newSourceWidth / image.sourceSize.width
-        if (ratio > 1.1 || ratio < 0.9)
-            image.sourceSize.width = newSourceWidth
     }
 }
