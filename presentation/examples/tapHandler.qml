@@ -12,9 +12,9 @@ Item {
             acceptedButtons: allowedButtons.state
             gesturePolicy: cancellationPolicy.state
             longPressThreshold: 0.5 // seconds
-            onLongPressed: borderAnimation.blink("blue")
-            onCanceled: borderAnimation.blink("red")
+            onLongPressed: tapCounter.flash("long\npress")
             onTapped: tapCounter.flash(tapCount)
+            onCanceled: borderAnimation.blink("red")
         }
 
         Circle {
@@ -29,7 +29,7 @@ Item {
             id: tapCounter
             anchors.centerIn: parent
             font { pixelSize: 72; weight: Font.Black }
-            function flash(value) { text = value; flashAnimation.start() }
+            function flash(value) { text = value; flashAnimation.start(); borderAnimation.blink("blue"); }
             SequentialAnimation {
                 id: flashAnimation
                 PropertyAction { target: tapCounter; property: "visible"; value: true }
