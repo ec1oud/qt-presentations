@@ -5,6 +5,7 @@ import Qt.labs.handlers 1.0
 Item {
     layer { enabled: true; samples: 16 } // Antialiasing
     Shape {
+        containsMode: Shape.FillContains // Qt 5.11
         TapHandler { id: urTap }
         ShapePath {
             fillColor: urTap.pressed ? "steelblue" : "lightgray"
@@ -12,6 +13,7 @@ Item {
         }
     }
     Shape {
+        containsMode: Shape.FillContains
         TapHandler { id: ulTap }
         ShapePath {
             fillColor: ulTap.pressed ? "steelblue" : "lightgray"
@@ -19,6 +21,7 @@ Item {
         }
     }
     Shape {
+        containsMode: Shape.FillContains
         TapHandler { id: lrTap }
         ShapePath {
             fillColor: lrTap.pressed ? "steelblue" : "lightgray"
@@ -26,6 +29,7 @@ Item {
         }
     }
     Shape {
+        containsMode: Shape.FillContains
         TapHandler { id: llTap }
         ShapePath {
             fillColor: llTap.pressed ? "steelblue" : "lightgray"
