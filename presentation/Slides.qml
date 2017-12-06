@@ -25,17 +25,20 @@ Presentation {
             right: parent.right
         }
         fillMode: Image.PreserveAspectFit
-        source: "resources/top-banner.png"
+        source: "resources/firstslide.jpg"
         visible: currentSlide === 0
         smooth: true
     }
 
     Slide {
         id: title
+        textColor: "white"
         titleColor: "white"
         centeredTextFormat: Text.RichText
+        centeredTextStyle: Text.Outline
+        centeredTextStyleColor: "black"
         centeredText: "<html>
-<H1>Pointer Handlers Tech Preview in Qt Quick</H1>
+<H1>Pointer Handlers Tech Preview in Qt Quick 5.10</H1>
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.
@@ -399,16 +402,16 @@ This presentation:<br/><tt>https://github.com/ec1oud/qt-presentations/tree/point
         source: "resources/bottom-logo-left.png"
     }
 
-    Image {
-        id: rightLogo
-        anchors {
-            verticalCenter: slideCounter.verticalCenter
-            right: slideCounter.left
-            rightMargin: 20
-        }
-        width: 226; height: 34
-        fillMode: Image.PreserveAspectFit
-        smooth: true
-        source: "resources/bottom-logo-right.png"
-    }
+//    Image {
+//        id: rightLogo
+//        anchors {
+//            verticalCenter: slideCounter.verticalCenter
+//            right: slideCounter.left
+//            rightMargin: 20
+//        }
+//        width: 226; height: 34
+//        fillMode: Image.PreserveAspectFit
+//        smooth: true
+//        source: "resources/bottom-logo-right.png"
+//    }
 }
