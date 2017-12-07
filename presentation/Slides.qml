@@ -67,7 +67,7 @@ Shawn Rutledge<br/>
             "Demos of several PointerHandlers",
 //            "Event delivery",
             "Conceptual comparison",
-            "Weak and strong grabbing",
+            "Passive and exclusive grabbing",
             "Remaining work",
             "Q&A"
         ]
@@ -80,8 +80,8 @@ Shawn Rutledge<br/>
             "How to receive updates after press?",
             "Exclusive grab",
             "setFiltersChildMouseEvents(), childMouseEventFilter()",
-            "Stealing the grab",
-            "Passive grab"
+            "Passive grab",
+            "Grab transfer negotiation"
         ]
     }
 
@@ -293,6 +293,14 @@ Rectangle {
         ]
     }
 
+    Slide {
+        title: "Bilateral grab transfer negotiation"
+        content: [
+            "Items: setKeepTouchGrab(), setKeepMouseGrab()",
+            "PointerHandlers: approveGrabTransition()"
+        ]
+    }
+
     QmlSlide {
         title: "TapHandler - non-rectangular areas"
         sourceFile: "examples/tapSectors.qml"
@@ -335,15 +343,14 @@ Rectangle {
         textFormat: Text.StyledText
         bulletSpacing: 0.6
         content: [
-            "finish defining the passive grab concept",
-            "PointHandler",
             "FlickHandler",
             "scroll & wheel events",
-            "monitor without grabbing?",
-            "get ready for public C++ API (create private-impl classes etc.)",
+            "hover",
+            "native gestures",
+            "event propagation barrier",
             "how to manipulate inner Handlers? attached properties?",
-            "possible renaming",
-            "focus on native gestures?"
+            "get ready for public C++ API (create private-impl classes etc.)",
+            "renaming",
         ]
     }
 
