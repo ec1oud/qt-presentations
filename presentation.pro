@@ -1,2 +1,3 @@
 TEMPLATE = subdirs
-SUBDIRS = qps presentation
+SUBDIRS = qps
+OTHER_FILES += presentation/*.qml presentation/examples/*.qml

@@ -30,16 +30,13 @@ Presentation {
         smooth: true
     }
 
-    Slide {
+    HtmlSlide {
         id: title
-        textColor: "white"
-        titleColor: "white"
-        centeredTextFormat: Text.RichText
-        centeredTextStyle: Text.Outline
-        centeredTextStyleColor: "black"
-        centeredText: "<html>
-<H1>Pointer Handlers: released in 5.12</H1>
-Shawn Rutledge<br/>
+        htmlItem.y: parent.height * 0.2
+        text: "<html>
+<H1>TableView and DelegateChooser</H1>
+<H2>new in 5.12</H2>
+<p>Shawn Rutledge</p>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.
 </html>"
@@ -51,6 +48,7 @@ Shawn Rutledge<br/>
             "Qt user since ~2004",
             "The Qt Company - Oslo since 2011",
             "Pointing devices: touch, Wacom tablets",
+            "Qt Quick Input Handlers",
             "Linux/X11 and macOS",
             "QtPDF",
             "Qt Quick Controls and Dialogs",
@@ -59,298 +57,95 @@ Shawn Rutledge<br/>
 
     Slide {
         title: "Agenda"
-        bulletSpacing: 0.6
         content: [
-            "Existing mouse & touch handling",
-            "Goals",
-            "Introduction to PointerHandlers",
-            "Demos of several PointerHandlers",
-//            "Event delivery",
-            "Conceptual comparison",
-            "Passive and exclusive grabbing",
-            "Remaining work",
-            "Q&A"
+            "Review of Qt Quick Controls 1.x TableView",
+            "Introduction to Qt Quick TableView",
+            "qps and refactoring",
+            "Building up features",
+            "Remaining work"
         ]
     }
 
-    Slide {
-        title: "Event delivery"
-        content: [
-            "Event delivery on press",
-            "How to receive updates after press?",
-            "Exclusive grab",
-            "setFiltersChildMouseEvents(), childMouseEventFilter()",
-            "Passive grab",
-            "Grab transfer negotiation"
-        ]
-    }
+    HtmlSlide {
+        title: "Qt Quick Controls 1.x TableView"
+        text: "<html>
+        <H1>Qt Quick Controls 1.x TableView</H1>
+        <H2>advantages:</H2>
+<li>looks native on desktop</li>
+<li>TableColumn API<li>
+        <H2>disadvantages:</H2>
+<li>performance (too many Items and Loaders)</li>
+<li>loads all columns when instantiating a row<li>
+<li>depends on data roles in the model<li>
+        <H2>architecture:</H2>
+<li>QML declarations define the columns<li>
+        </html>"
 
-    Slide {
-        title: "What's wrong with MouseArea"
-        content: [
-            "handles touch via emulated mouse events only",
-            "you can only press one at a time",
-            "clumsiness with event accept/reject, preventStealing etc.",
-            "a full-blown Item with nothing to render",
-            "large, monolithic, can't change behavior"
-        ]
-    }
-
-    Slide {
-        title: "What's wrong with MultiPointTouchArea"
-        content: [
-            "not a good MouseArea replacement: nested-object verbosity",
-            "a full-blown Item with nothing to render",
-            "difficult to implement custom gesture recognition",
-        ]
-
-        Text {
-            text: "
-Rectangle {
-    property alias pressed: touch1.pressed
-    signal tapped
-    MultiPointTouchArea {
-        anchors.fill: parent
-        touchPoints: [
-            TouchPoint {
-                id: touch1
-                onPressedChanged: if (!pressed) root.tapped
-            } ]
-    }
-}
-"
-            color: "SaddleBrown"
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: parent.height - rule.y
-            font.family: "Inconsolata"
-            font.pointSize: parent.baseFontSize * 0.5
+        Loader {
+            x: parent.width * 0.45
+            y: parent.height * 0.2
+            width: parent.width - x - 20
+            height: parent.height * 0.6
+            source: parent.visible ? "examples/TableView1.qml" : ""
         }
     }
 
-//    CustomCodeSlide {
-//        title: "Flickable and MouseArea: hover and grab"
-//        sourceFile: "examples/Flick.qml"
-//    }
+    HtmlSlide {
+        title: "The New Qt Quick TableView"
+        text: "<html>
+        <H1>The New Qt Quick TableView</H1>
+        <H2>advantages:</H2>
+<li>instantiates only the visible delegates</li>
+<li>pools and reuses delegate instances<li>
+<li>suitable for models that work with QTableView<li>
+        <H2>disadvantages:</H2>
+<li>isn't a drop-in replacement for QQC1 TableView</li>
+        <H2>architecture:</H2>
+<li>like a 2-dimensional ListView<li>
+<li>the model (or proxy) defines columns, not data roles<li>
+<li>styling is entirely up to you (as with ListView)<li>
+        </html>"
 
-//    CustomCodeSlide {
-//        title: "Flickable: filter, grab, steal or prevent"
-//        sourceFile: "examples/Flickable2.qml"
-//    }
-
-//    ImageSlide {
-//        title: "Many parallel event delivery paths (and some missing)"
-//        source: "resources/event-delivery-before.png"
-//    }
-
-    Slide {
-        title: "Goals for Pointer Handlers"
-        content: [
-            "make it easy to handle mouse, touch and stylus agnostically or in device-specific ways",
-            "common event delivery code for mouse and touch in QQuickWindow",
-            "both QML and C++ APIs",
-            "guarantee that events always have velocity",
-        ]
-    }
-
-    Slide {
-        title: "Forward-looking goals"
-        content: [
-            "proper support for Wacom tablets: draw paths in Qt Quick",
-            "refine APIs so that they'll work for Qt 6",
-            "plan on multiple seats/users and support for multiple mice etc. in Qt 6",
-            "reduce the need for touch -> mouse synthesis"
-        ]
-    }
-
-    Slide {
-        title: "Idea: handler objects"
-        content: [
-            "the original idea: make mouse/touch more like the Keys attached prop",
-            ' Keys.onLeftPressed: console.log("move left")',
-            ' Keys.onAPressed? doesn\'t exist',
-            ' Keys.onPressed: { switch (event.key) { ... } }'
-//            ' so maybe color: Mouse.onLeftButtonPressed ? "red" : "blue" ?'
-        ]
-    }
-
-    Slide {
-        title: "Handler objects"
-        content: [
-            "more flexible: 'child' objects",
-            ' Rectangle { TapHandler { id: th } color: th.pressed ? "red" : "blue" }',
-            ' Rectangle { TapHandler { acceptedDevices: PointerDevice.TouchScreen; onTapped: ... } }',
-            ' Rectangle { DragHandler { } }',
-            ' Image { PinchHandler { } }'
-        ]
-    }
-
-    Slide {
-        title: "Features"
-        content: [
-            "declarative handlers for gestures (tap, drag, pinch etc.)",
-            "easy stuff is easy",
-            "plain QObject 'child' is lighter than Item or attached",
-            "default target, use its bounds",
-            "multiple small, lightweight, understandable handlers",
-            "actual multi-touch support",
-        ]
-    }
-
-    Slide {
-        title: "Features"
-        content: [
-            "filter events by:",
-            " device type",
-            " pointer type",
-            " button",
-            " keyboard modifiers",
-            "subclass Handlers in C++ for the less-mainstream cases",
-            "it's completely different, so minimizes compatibility risks"
-        ]
-    }
-
-    QmlSlide {
-        title: "DragHandler"
-        sourceFile: "examples/flingAnimation.qml"
-    }
-
-    QmlSlide {
-        title: "DragHandler"
-        sourceFile: "examples/joystick.qml"
+//        TableView2 {
+//            x: parent.width * 0.45
+//            y: parent.height * 0.2
+//            width: parent.width - x - 20
+//            height: parent.height * 0.6
+//        }
+        Loader {
+            x: parent.width * 0.45
+            y: parent.height * 0.2
+            width: parent.width - x - 20
+            height: parent.height * 0.6
+            clip: true
+            source: parent.visible ? "examples/TableView2.qml" : ""
+        }
     }
 
     CustomCodeSlide {
-        title: "Fake Flickable"
-        sourceFile: "examples/resources/FakeFlickable.qml"
-        Loader {
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-            source: "examples/fakeFlickable.qml"
-        }
+        title: "TableView API"
+        sourceFile: "tableview.h"
     }
-
-    QmlSlide {
-        title: "TapHandler"
-        sourceFile: "examples/tapHandler.qml"
-    }
-
-    QmlSlide {
-        title: "TapHandler - multiple instances"
-        sourceFile: "examples/multiTapHandler.qml"
-    }
-
-    QmlSlide {
-        title: "PinchHandler"
-        sourceFile: "examples/pinchHandler.qml"
-    }
-
-    QmlSlide {
-        title: "PinchHandler on a map"
-        sourceFile: "examples/map.qml"
-    }
-
-    CustomCodeSlide {
-        title: "DragHandler and TapHandler together"
-        sourceFile: "examples/Slider.qml"
-        Loader {
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-            source: "examples/sliders.qml"
-        }
-    }
-
-//    QmlSlide {
-//        title: "MouseHandler"
-//        sourceFile: "examples/mouseHandler.qml"
-//    }
 
     Slide {
-        title: "Conceptual Changes: Handlers vs. Areas"
+        title: "qps"
         textFormat: Text.StyledText
-//        bulletSpacing: 0.6
         content: [
-            "either a Handler or an Item can be the exclusive grabber",
-            "any number of Handlers can be passive grabbers",
-            "if number of touchpoints changes: ignore the grab,<br/>start over with event delivery",
-            "Handler gives up exclusive grab when constraints aren't satisfied",
-            "mouse event -> QQuickPointerEvent with one point inside",
-            "PointerHandler receives the complete event",
-            "PointerHandler accepts event: stop propagation",
-            "grab/ungrab are independent"
+            "Qt 'top' / process explorer application (started ~1997)",
+            "part of LXQt desktop now https://github.com/lxqt/qps",
+            "my fork for this presentation: https://github.com/ec1oud/qps",
         ]
     }
-
-    Slide {
-        title: "Wanting vs. grabbing"
-        textFormat: Text.StyledText
-//        bulletSpacing: 0.6
-        content: [
-            "an Item must grab a press to be able to get an update<br/>this leads us to monolithic Areas and childMouseEventFilter and grab-stealing",
-            "PointerHandlers: we want to mostly let events propagate; exclusive grab should be less common",
-            "virtual bool wantsEventPoint(QQuickEventPoint *)",
-            "if wantsPointerEvent() returns true, virtual handlePointerEventImpl() will be called",
-        ]
-    }
-
-    Slide {
-        title: "Bilateral grab transfer negotiation"
-        content: [
-            "Items: setKeepTouchGrab(), setKeepMouseGrab()",
-            "PointerHandlers: approveGrabTransition()"
-        ]
-    }
-
-    QmlSlide {
-        title: "TapHandler - non-rectangular areas"
-        sourceFile: "examples/tapSectors.qml"
-    }
-
-    ImageSlide {
-        title: "Existing QEvent hierarchy"
-        source: "resources/event-hierarchy-before.png"
-    }
-
-    ImageSlide {
-        title: "Event hierarchy for PointerHandlers Tech Preview"
-        source: "resources/event-hierarchy-qt5.8.png"
-    }
-
-    ImageSlide {
-        title: "Handler hierarchy so far"
-        source: "resources/pointer-handlers-classes.png"
-    }
-
-    CustomCodeSlide {
-        title: "Pressing Multiple Buttons"
-        sourceFile: "examples/MultiButton.qml"
-//        live: false
-//        sourceFile: "examples/multibuttons.qml"
-        Loader {
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-            source: "examples/multibuttons.qml"
-        }
-    }
-
-    QmlSlide {
-        title: "PointHandler"
-        sourceFile: "examples/crosshairs.qml"
-    }
-
     Slide {
         title: "Stuff left to work on"
         textFormat: Text.StyledText
         bulletSpacing: 0.6
         content: [
-            "FlickHandler",
-            "scroll & wheel events",
-            "hover",
-            "native gestures",
-            "event propagation barrier",
-            "how to manipulate inner Handlers? attached properties?",
-            "get ready for public C++ API (create private-impl classes etc.)",
-            "renaming",
+            "Header view",
+            "Resizing columns",
+            "Decorations and styling",
+            "QML TableModel (QTBUG-70334)",
+            "QML ProxyModel (QTPM-1327)"
         ]
     }
 
@@ -359,12 +154,12 @@ Rectangle {
         titleColor: "white"
         centeredTextFormat: Text.RichText
         centeredText: "<html>
-<H1>Pointer Handlers in Qt Quick</H1>
-status: upcoming release in Qt 5.12<br/><br/>
-Shawn Rutledge<br/>
+<H1>TableView and DelegateChooser</H1>
+<H2>new in 5.12</H2>
+<p>Shawn Rutledge</p>
 <tt>shawn.rutledge@qt.io</tt><br/>
-<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/>
-This presentation:<br/><tt>https://github.com/ec1oud/qt-presentations/tree/pointerhandlers</tt>
+<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.
+This presentation:<br/><tt>https://github.com/ec1oud/qt-presentations/tree/tableview</tt>
 </html>"
     }
 
