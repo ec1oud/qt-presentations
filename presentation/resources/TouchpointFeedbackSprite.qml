@@ -1,9 +1,7 @@
 /****************************************************************************
 **
-** Copyright (C) 2017 The Qt Company Ltd.
+** Copyright (C) 2018 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
-**
-** This file is part of the manual tests of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:BSD$
 ** Commercial License Usage
@@ -48,8 +46,7 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.8
-import Qt.labs.handlers 1.0
+import QtQuick 2.12
 
 PointHandler {
     id: handler
