@@ -38,7 +38,7 @@ Presentation {
         centeredTextStyle: Text.Outline
         centeredTextStyleColor: "black"
         centeredText: "<html>
-<H1>Pointer Handlers Tech Preview in Qt Quick 5.10</H1>
+<H1>Pointer Handlers: released in 5.12</H1>
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.
@@ -360,7 +360,7 @@ Rectangle {
         centeredTextFormat: Text.RichText
         centeredText: "<html>
 <H1>Pointer Handlers in Qt Quick</H1>
-status: Tech Preview in Qt 5.10<br/><br/>
+status: upcoming release in Qt 5.12<br/><br/>
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/>
