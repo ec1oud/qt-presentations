@@ -1,2 +1,2 @@
 TEMPLATE = subdirs
-SUBDIRS = presentation
+SUBDIRS = qps presentation

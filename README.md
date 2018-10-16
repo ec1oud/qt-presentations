@@ -5,6 +5,7 @@ which is a fork of
 http://code.qt.io/cgit/qt-labs/qml-presentation-system.git/
 Each presentation has its own git branch, so check out the one you want to see.
 Also, init any submodules that may be required on that branch.
+The TableView presentation depends on qps as a submodule.
 
 # Requirements
 

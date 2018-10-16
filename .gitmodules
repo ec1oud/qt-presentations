@@ -1,0 +1,3 @@
+[submodule "qps"]
+	path = qps
+	url = https://github.com/ec1oud/qps.git
