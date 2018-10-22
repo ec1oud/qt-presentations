@@ -60,8 +60,8 @@ Presentation {
         content: [
             "Review of Qt Quick Controls 1.x TableView",
             "Introduction to Qt Quick TableView",
-            "qps and refactoring",
-            "Building up features",
+            "Comparison of model-view relationships",
+            "Demo & walkthrough: refactoring of qps",
             "Remaining work"
         ]
     }
