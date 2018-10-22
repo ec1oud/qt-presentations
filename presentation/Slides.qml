@@ -102,7 +102,7 @@ Presentation {
 <li>isn't a drop-in replacement for QQC1 TableView</li>
         <H2>architecture:</H2>
 <li>like a 2-dimensional ListView<li>
-<li>the model (or proxy) defines columns, not data roles<li>
+<li>model (or proxy) defines columns, not data roles<li>
 <li>styling is entirely up to you (as with ListView)<li>
         </html>"
 
@@ -122,9 +122,34 @@ Presentation {
         }
     }
 
-    CustomCodeSlide {
-        title: "TableView API"
-        sourceFile: "tableview.h"
+//    CustomCodeSlide {
+//        title: "TableView API"
+//        sourceFile: "tableview.h"
+//    }
+
+    ImageSlide {
+        title: "Class Diagram"
+        source: "resources/model-and-view-classes.png"
+    }
+
+    ImageSlide {
+        title: "Three Views Sharing a Model"
+        source: "resources/model-and-view-collaboration.png"
+    }
+
+    ImageSlide {
+        title: "How QTableView accesses the model"
+        source: "resources/model-and-view-collaboration-qtableview.png"
+    }
+
+    ImageSlide {
+        title: "How ListView accesses the model"
+        source: "resources/model-and-view-collaboration-listview.png"
+    }
+
+    ImageSlide {
+        title: "How TableView accesses the model"
+        source: "resources/model-and-view-collaboration-tableview.png"
     }
 
     Slide {
