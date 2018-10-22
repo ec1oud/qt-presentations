@@ -60,8 +60,8 @@ Presentation {
         content: [
             "Review of Qt Quick Controls 1.x TableView",
             "Introduction to Qt Quick TableView",
-            "qps and refactoring",
-            "Building up features",
+            "Comparison of model-view relationships",
+            "Demo & walkthrough: refactoring of qps",
             "Remaining work"
         ]
     }
@@ -183,7 +183,7 @@ Presentation {
 <H2>new in 5.12</H2>
 <p>Shawn Rutledge</p>
 <tt>shawn.rutledge@qt.io</tt><br/>
-<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.
+<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/>
 This presentation:<br/><tt>https://github.com/ec1oud/qt-presentations/tree/tableview</tt>
 </html>"
     }
