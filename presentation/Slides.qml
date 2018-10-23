@@ -34,8 +34,8 @@ Presentation {
         id: title
         htmlItem.y: parent.height * 0.2
         text: "<html>
-<H1>TableView and DelegateChooser</H1>
-<H2>new in 5.12</H2>
+<H1>Widgets Best Practices</H1>
+<H2>AKA live-coding a QTableView with Designer</H2>
 <p>Shawn Rutledge</p>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.
@@ -58,98 +58,20 @@ Presentation {
     Slide {
         title: "Agenda"
         content: [
-            "Review of Qt Quick Controls 1.x TableView",
-            "Introduction to Qt Quick TableView",
-            "Comparison of model-view relationships",
-            "Demo & walkthrough: refactoring of qps",
-            "Remaining work"
+            "Review of relevant API and collaboration",
+            "qps",
+            "Live-coding a process viewer"
         ]
     }
 
-    HtmlSlide {
-        title: "Qt Quick Controls 1.x TableView"
-        text: "<html>
-        <H1>Qt Quick Controls 1.x TableView</H1>
-        <H2>advantages:</H2>
-<li>looks native on desktop</li>
-<li>TableColumn API<li>
-        <H2>disadvantages:</H2>
-<li>performance (too many Items and Loaders)</li>
-<li>loads all columns when instantiating a row<li>
-<li>depends on data roles in the model<li>
-        <H2>architecture:</H2>
-<li>QML declarations define the columns<li>
-        </html>"
-
-        Loader {
-            x: parent.width * 0.45
-            y: parent.height * 0.2
-            width: parent.width - x - 20
-            height: parent.height * 0.6
-            source: parent.visible ? "examples/TableView1.qml" : ""
-        }
-    }
-
-    HtmlSlide {
-        title: "The New Qt Quick TableView"
-        text: "<html>
-        <H1>The New Qt Quick TableView</H1>
-        <H2>advantages:</H2>
-<li>instantiates only the visible delegates</li>
-<li>pools and reuses delegate instances<li>
-<li>suitable for models that work with QTableView<li>
-        <H2>disadvantages:</H2>
-<li>isn't a drop-in replacement for QQC1 TableView</li>
-        <H2>architecture:</H2>
-<li>like a 2-dimensional ListView<li>
-<li>model (or proxy) defines columns, not data roles<li>
-<li>styling is entirely up to you (as with ListView)<li>
-        </html>"
-
-//        TableView2 {
-//            x: parent.width * 0.45
-//            y: parent.height * 0.2
-//            width: parent.width - x - 20
-//            height: parent.height * 0.6
-//        }
-        Loader {
-            x: parent.width * 0.45
-            y: parent.height * 0.2
-            width: parent.width - x - 20
-            height: parent.height * 0.6
-            clip: true
-            source: parent.visible ? "examples/TableView2.qml" : ""
-        }
-    }
-
-//    CustomCodeSlide {
-//        title: "TableView API"
-//        sourceFile: "tableview.h"
+//    ImageSlide {
+//        title: "Class Diagram"
+//        source: "resources/model-and-view-classes.png"
 //    }
-
-    ImageSlide {
-        title: "Class Diagram"
-        source: "resources/model-and-view-classes.png"
-    }
-
-    ImageSlide {
-        title: "Three Views Sharing a Model"
-        source: "resources/model-and-view-collaboration.png"
-    }
 
     ImageSlide {
         title: "How QTableView accesses the model"
         source: "resources/model-and-view-collaboration-qtableview.png"
-    }
-
-    ImageSlide {
-        title: "How ListView accesses the model"
-        source: "resources/model-and-view-collaboration-listview.png"
-    }
-
-    ImageSlide {
-        title: "How TableView accesses the model"
-        source: "resources/model-and-view-collaboration-tableview.png"
     }
 
     Slide {
@@ -158,34 +80,27 @@ Presentation {
         content: [
             "Qt 'top' / process explorer application (started ~1997)",
             "part of LXQt desktop now https://github.com/lxqt/qps",
-            "my fork for this presentation: https://github.com/ec1oud/qps",
-        ]
-    }
-    Slide {
-        title: "Stuff left to work on"
-        textFormat: Text.StyledText
-        bulletSpacing: 0.6
-        content: [
-            "Header view",
-            "Resizing columns",
-            "Decorations and styling",
-            "QML TableModel (QTBUG-70334)",
-            "QML ProxyModel (QTPM-1327)"
+            "my fork for this presentation: https://github.com/ec1oud/qps/tree/widgets-rewrite",
         ]
     }
 
     Slide {
-        id: lastSlide
         titleColor: "white"
         centeredTextFormat: Text.RichText
         centeredText: "<html>
-<H1>TableView and DelegateChooser</H1>
-<H2>new in 5.12</H2>
+<H1>Widgets Best Practices</H1>
+<H2>AKA live-coding a QTableView with Designer</H2>
 <p>Shawn Rutledge</p>
 <tt>shawn.rutledge@qt.io</tt><br/>
-<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.
-This presentation:<br/><tt>https://github.com/ec1oud/qt-presentations/tree/tableview</tt>
+<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/>
+This presentation:<br/><tt>https://github.com/ec1oud/qt-presentations/tree/widgets-QtWS2018</tt><br/>
+The code:<br/><tt>https://github.com/ec1oud/qps/tree/widgets-rewrite</tt>
 </html>"
+    }
+
+    ImageSlide {
+        id: lastSlide
+        source: "resources/lastslide.jpg"
     }
 
     SlideCounter { id: slideCounter }
