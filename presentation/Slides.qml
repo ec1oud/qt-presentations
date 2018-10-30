@@ -9,6 +9,7 @@ Presentation {
     mouseNavigation: false
     fontFamily: "TitilliumWeb"
     fontScale: 0.7
+    property bool autoScaleImages: true
 
     width: 1920
     height: 1080
@@ -130,26 +131,31 @@ Presentation {
     ImageSlide {
         title: "Class Diagram"
         source: "resources/model-and-view-classes.png"
+        autoScale: autoScaleImages
     }
 
     ImageSlide {
         title: "Three Views Sharing a Model"
         source: "resources/model-and-view-collaboration.png"
+        autoScale: autoScaleImages
     }
 
     ImageSlide {
         title: "How QTableView accesses the model"
         source: "resources/model-and-view-collaboration-qtableview.png"
+        autoScale: autoScaleImages
     }
 
     ImageSlide {
         title: "How ListView accesses the model"
         source: "resources/model-and-view-collaboration-listview.png"
+        autoScale: autoScaleImages
     }
 
     ImageSlide {
         title: "How TableView accesses the model"
         source: "resources/model-and-view-collaboration-tableview.png"
+        autoScale: autoScaleImages
     }
 
     Slide {
