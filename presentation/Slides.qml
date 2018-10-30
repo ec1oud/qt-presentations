@@ -82,7 +82,7 @@ Presentation {
         </html>"
 
         Loader {
-            x: parent.width * 0.45
+            x: parent.width * 0.5
             y: parent.height * 0.2
             width: parent.width - x - 20
             height: parent.height * 0.6
@@ -113,7 +113,7 @@ Presentation {
 //            height: parent.height * 0.6
 //        }
         Loader {
-            x: parent.width * 0.45
+            x: parent.width * 0.5
             y: parent.height * 0.2
             width: parent.width - x - 20
             height: parent.height * 0.6
@@ -168,6 +168,7 @@ Presentation {
         content: [
             "Header view",
             "Resizing columns",
+            "Selection",
             "Decorations and styling",
             "QML TableModel (QTBUG-70334)",
             "QML ProxyModel (QTPM-1327)"
