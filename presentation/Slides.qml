@@ -9,6 +9,7 @@ Presentation {
     mouseNavigation: false
     fontFamily: "TitilliumWeb"
     fontScale: 0.7
+    property bool autoScaleImages: true
 
     width: 1920
     height: 1080
@@ -72,6 +73,7 @@ Presentation {
     ImageSlide {
         title: "How QTableView accesses the model"
         source: "resources/model-and-view-collaboration-qtableview.png"
+        autoScale: autoScaleImages
     }
 
     Slide {
@@ -101,6 +103,8 @@ The code:<br/><tt>https://github.com/ec1oud/qps/tree/widgets-rewrite</tt>
     ImageSlide {
         id: lastSlide
         source: "resources/lastslide.jpg"
+        autoScale: autoScaleImages
+        fullScreen: true
     }
 
     SlideCounter { id: slideCounter }
@@ -117,7 +121,7 @@ The code:<br/><tt>https://github.com/ec1oud/qps/tree/widgets-rewrite</tt>
         horizontalAlignment: Text.AlignRight
     }
 
-    property bool bottomStuffVisible: currentSlide < 4
+    property bool bottomStuffVisible: currentSlide < 3
 
     Rectangle {
         id: rule
