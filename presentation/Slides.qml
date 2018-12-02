@@ -100,13 +100,6 @@ The code:<br/><tt>https://github.com/ec1oud/qps/tree/widgets-rewrite</tt>
 </html>"
     }
 
-    ImageSlide {
-        id: lastSlide
-        source: "resources/lastslide.jpg"
-        autoScale: autoScaleImages
-        fullScreen: true
-    }
-
     SlideCounter { id: slideCounter }
 
     Clock {
