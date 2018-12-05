@@ -191,7 +191,8 @@ Presentation {
 <p>Shawn Rutledge</p>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/>
-This presentation:<br/><tt>https://github.com/ec1oud/qt-presentations/tree/tableview</tt>
+This presentation:<br/><tt>https://github.com/ec1oud/qt-presentations/tree/tableview</tt><br/>
+The code:<br/><tt>https://github.com/ec1oud/qps</tt>
 </html>"
     }
 
