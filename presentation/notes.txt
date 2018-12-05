@@ -1,9 +1,13 @@
 glog -n8 widgets-rewrite
 
 git checkout widget-talk-begin
+git clean -dfx
 
 make a widget app
+create in /home/rutledge/dev/qps
+qtableview
 make sure it's not a shadow build
+
 
 add to .pro:
 + SOURCES +=
@@ -21,4 +25,15 @@ make it work.
 
 Next steps:
 
-git next-show widget-talk-begin widgets-rewrite
+git-next-show widget-talk-begin widgets-rewrite
+
+---------
+The QtQuick TableView talk:
+
+cd ~/dev/qps/qtquick
+git checkout talk-begin
+open ~/dev/qps/qtquick in Creator
+make -j10; and qml -I . examples/table.qml
+git next-build-show-current talk-begin tableview-talk; make; and qmlr -I . examples/table.qml
+
+Mention at the beginning that it's a sequence of git commits

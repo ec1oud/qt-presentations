@@ -59,8 +59,8 @@ Presentation {
     Slide {
         title: "Agenda"
         content: [
-            "Review of relevant API and collaboration",
             "qps",
+            "Review of relevant API and collaboration",
             "Live-coding a process viewer"
         ]
     }
@@ -70,12 +70,6 @@ Presentation {
 //        source: "resources/model-and-view-classes.png"
 //    }
 
-    ImageSlide {
-        title: "How QTableView accesses the model"
-        source: "resources/model-and-view-collaboration-qtableview.png"
-        autoScale: autoScaleImages
-    }
-
     Slide {
         title: "qps"
         textFormat: Text.StyledText
@@ -84,6 +78,12 @@ Presentation {
             "part of LXQt desktop now https://github.com/lxqt/qps",
             "my fork for this presentation: https://github.com/ec1oud/qps/tree/widgets-rewrite",
         ]
+    }
+
+    ImageSlide {
+        title: "How QTableView accesses the model"
+        source: "resources/model-and-view-collaboration-qtableview.png"
+        autoScale: autoScaleImages
     }
 
     Slide {
