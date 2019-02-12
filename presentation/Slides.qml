@@ -26,7 +26,7 @@ Presentation {
             right: parent.right
         }
         fillMode: Image.PreserveAspectFit
-        source: "resources/firstslide.jpg"
+        source: "resources/firstslide.png"
         visible: currentSlide === 0
         smooth: true
     }
