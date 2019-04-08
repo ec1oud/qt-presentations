@@ -220,6 +220,16 @@ Rectangle {
         sourceFile: "examples/joystick.qml"
     }
 
+    QmlSlide {
+        title: "WheelHandler"
+        sourceFile: "examples/pinchAndWheel.qml"
+    }
+
+    QmlSlide {
+        title: "WheelHandler"
+        sourceFile: "examples/Slider.qml"
+    }
+
     CustomCodeSlide {
         title: "Fake Flickable"
         sourceFile: "examples/resources/FakeFlickable.qml"
@@ -227,6 +237,29 @@ Rectangle {
             anchors.right: parent.right
             anchors.rightMargin: 0
             source: "examples/fakeFlickable.qml"
+        }
+    }
+
+    QmlSlide {
+        title: "BoundaryRule"
+        sourceFile: "examples/resources/LeftDrawer.qml"
+        expandContent: true
+    }
+
+    Slide {
+        title: "BoundaryRule behavior"
+        textFormat: Text.StyledText
+//        bulletSpacing: 0.6
+        content: [
+            "implements programmable 'springiness'",
+            "subclass of <tt>QQmlPropertyValueInterceptor</tt>",
+            "bandpass filter on responsiveness, with easing curves on both ends",
+            "modulates the derivative of motion"
+        ]
+        Loader {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            source: "resources/BoundaryRuleCurve.qml"
         }
     }
 
@@ -259,11 +292,6 @@ Rectangle {
             source: "examples/sliders.qml"
         }
     }
-
-//    QmlSlide {
-//        title: "MouseHandler"
-//        sourceFile: "examples/mouseHandler.qml"
-//    }
 
     Slide {
         title: "Conceptual Changes: Handlers vs. Areas"

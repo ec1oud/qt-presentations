@@ -1,6 +1,6 @@
-import QtQuick 2.10
+import QtQuick 2.14
 import QtQuick.Window 2.3
-import Qt.labs.handlers 1.0
+
 import "resources"
 
 Window {

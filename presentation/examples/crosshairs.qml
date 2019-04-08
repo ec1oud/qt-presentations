@@ -38,9 +38,9 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.10
+import QtQuick 2.14
 import QtQuick.Shapes 1.0
-import Qt.labs.handlers 1.0
+
 
 Item {
     id: root

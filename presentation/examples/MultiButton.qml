@@ -1,5 +1,5 @@
-import QtQuick 2.10
-import Qt.labs.handlers 1.0
+import QtQuick 2.14
+
 
 Rectangle {
     id: root

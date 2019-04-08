@@ -1,6 +1,6 @@
-import QtQuick 2.10
+import QtQuick 2.14
 import QtQuick.Shapes 1.0
-import Qt.labs.handlers 1.0
+
 
 Item {
     layer { enabled: true; samples: 8 } // Antialiasing by applying MSAA only to this layer
