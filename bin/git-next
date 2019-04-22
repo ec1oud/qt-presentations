@@ -1,0 +1,42 @@
+#!/bin/sh
+# from https://stackoverflow.com/questions/2121230/git-how-to-move-back-and-forth-between-commits/23172256#23172256
+# use this for code walkthroughs: check out the next patch and show its commit summary, between past and future one-line summaries
+# ideally you should give 2 arguments: the tag or sha1 that is (or was) the starting point, and the branch you are showing (e.g. master or whatever)
+# if there is just 1 argument, it should be the branch
+# in some cases no args are necessary
+BRANCH=`git show-ref | grep $(git show-ref -s -- HEAD) | sed 's|.*/\(.*\)|\1|' | grep -v HEAD | sort | uniq`
+CURHASH=`git log -n1 --pretty=format:"%h"`
+if [ $# -eq 0 ]
+then
+	FROM=${CURHASH}
+elif [ $# -eq 1 ]
+then
+	BRANCH=${1}
+	FROM=${CURHASH}
+elif [ $# -eq 2 ]
+then
+	BRANCH=${2}
+	FROM=${1}
+fi
+HEADHASH=`git rev-parse $BRANCH`
+NEXT=`git rev-list --topo-order HEAD..$HEADHASH --pretty=format:"%h" | tail -1`
+echo "checking out next patch on branch $BRANCH with hash $HEADHASH which will be $NEXT"
+git checkout $NEXT
+echo "iterating $FROM..$BRANCH and highlighting $NEXT"
+clear
+for h in `git log --reverse --pretty=format:"%h" "${FROM}..${BRANCH}"`
+do
+	if [ "$NEXT" = "$h" ]
+	then
+		echo
+		git log --pretty=format:" ❱ %C(green bold)%s%Creset%x09%h" -n1 $h
+		git log --line-prefix="     " --pretty=format:"%b" -n1 $h
+		echo
+		echo "Future:"
+	elif [ "$CURHASH" = "$h" ]
+	then
+		git log --pretty=format:" ✔  %s%x09%h" -n1 $h
+	else
+		git log --pretty=format:" -  %s%x09%h" -n1 $h
+	fi
+done
