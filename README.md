@@ -6,7 +6,7 @@ http://code.qt.io/cgit/qt-labs/qml-presentation-system.git/
 
 # Requirements
 
-* Qt 5.10
+* Qt 5.14
   * qtbase, qtdeclarative
 
 # Running
