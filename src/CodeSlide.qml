@@ -125,7 +125,7 @@ Slide {
             id: itemDelegate
 
             height: lineLabel.height
-            width: parent.width
+            width: listView.width
 
             Rectangle {
                 id: lineLabelBackground
