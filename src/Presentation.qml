@@ -138,6 +138,7 @@ Item {
     }
 
     // directly type in the slide number: depends on root having focus
+/* commented out because the enter key has other uses in some examples to be used on slides
     Keys.onPressed: {
         if (event.key >= Qt.Key_0 && event.key <= Qt.Key_9)
             _userNum = 10 * _userNum + (event.key - Qt.Key_0)
@@ -147,6 +148,7 @@ Item {
             _userNum = 0;
         }
     }
+*/
 
     // navigate with arrow keys
     Shortcut { sequence: StandardKey.MoveToNextLine; enabled: root.arrowNavigation; onActivated: goToNextSlide() }

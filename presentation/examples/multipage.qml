@@ -47,14 +47,15 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Layouts 1.14
+import QtQml 2.15
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
 import QtQuick.Pdf 5.15
-import QtQuick.Shapes 1.14
+import QtQuick.Shapes 1.15
 
 Rectangle { // ApplicationWindow IRL
-    id: root; width: 600; height: 800; color: "lightgrey"; clip: true
+    id: root; width: 600; height: 800; color: "lightgrey"
 
     PdfDocument {
         id: document
@@ -66,24 +67,10 @@ Rectangle { // ApplicationWindow IRL
         // onPasswordRequired: passwordDialog.open()
     }
 
-    PdfMultiPageView {
-        id: view
+    SplitView {
         anchors.fill: parent; anchors.topMargin: header.height; anchors.bottomMargin: footer.height
-        anchors.leftMargin: searchDrawer.position * searchDrawer.width
-        document: root.document
-        searchString: searchField.text
-        onCurrentPageChanged: currentPageSB.value = view.currentPage + 1
-    }
-
-    Drawer {
-        id: searchDrawer
-        edge: Qt.LeftEdge
-        modal: false; dim: false; clip: true
-        width: 300; height: view.height; y: header.height
         ListView {
-            id: searchResultsList
-            anchors.fill: parent
-            anchors.margins: 2
+            id: searchResultsList; clip: true
             model: view.searchModel
             ScrollBar.vertical: ScrollBar { }
             delegate: ItemDelegate {
@@ -93,33 +80,18 @@ Rectangle { // ApplicationWindow IRL
                     view.searchModel.currentResult = indexOnPage
                 }
                 width: parent ? parent.width : 0
-                RowLayout {
-                    anchors.fill: parent
-                    spacing: 0
-                    Label {
-                        text: "Page " + (page + 1) + ": "
-                    }
-                    Label {
-                        text: contextBefore
-                        elide: Text.ElideLeft
-                        horizontalAlignment: Text.AlignRight
-                        Layout.fillWidth: true
-                        Layout.preferredWidth: parent.width / 2
-                    }
-                    Label {
-                        font.bold: true
-                        text: view.searchString
-                        width: implicitWidth
-                    }
-                    Label {
-                        text: contextAfter
-                        elide: Text.ElideRight
-                        Layout.fillWidth: true
-                        Layout.preferredWidth: parent.width / 2
-                    }
+                Label {
+                    text: "Page " + (page + 1) + ": " + contextBefore.substring(contextBefore.length - 10) + "<b>" + view.searchString + "</b>" + contextAfter
+                    elide: Text.ElideRight
                 }
                 highlighted: ListView.isCurrentItem
             }
+        }
+        PdfMultiPageView {
+            id: view; clip: true
+            document: root.document
+            searchString: searchField.text
+            onCurrentPageChanged: currentPageSB.value = view.currentPage + 1
         }
     }
 
@@ -235,7 +207,7 @@ Rectangle { // ApplicationWindow IRL
                 placeholderText: "search"
                 Layout.minimumWidth: 150
                 Layout.fillWidth: true
-                onAccepted: searchDrawer.open()
+                onAccepted: searchResultsList.SplitView.preferredWidth = 250
                 Image {
                     visible: searchField.text !== ""
                     source: "resources/edit-clear.svg"
@@ -247,7 +219,10 @@ Rectangle { // ApplicationWindow IRL
                         rightMargin: 5
                     }
                     TapHandler {
-                        onTapped: searchField.clear()
+                        onTapped: {
+                            searchField.clear()
+                            searchResultsList.SplitView.preferredWidth = 0
+                        }
                     }
                 }
                 Shortcut {
