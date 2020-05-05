@@ -67,7 +67,7 @@ this presentation is on github:<br/><tt>ec1oud/qt-presentations</tt> branch qtpd
         title: "History"
         textFormat: Text.RichText
         content: [
-            "xpdf and poppler",
+            "xpdf (1995); Poppler and Qt binding (2005)",
             "hackathon in Dec 2014: Qt wrapper for PDFium (working with Qt 5.4)",
             "QtPDF available since ~ Qt 5.10 (widgets only)",
             "<tt>https://www.qt.io/blog/2017/01/30/new-qtpdf-qtlabs-module</tt>",
