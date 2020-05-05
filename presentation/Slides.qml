@@ -59,6 +59,18 @@ Shawn Rutledge<br/>
     }
 
     Slide {
+        title: "History"
+        textFormat: Text.StyledText
+        content: [
+            "xpdf and poppler",
+            "hackathon in Dec 2014: Qt wrapper for PDFium (working with Qt 5.4)",
+            "QtPDF available since Qt 5.10 (widgets only)",
+            "build system change (gyp to gn)",
+            "source is now in qtwebengine/src/pdf"
+        ]
+    }
+
+    Slide {
         title: "Goals"
         textFormat: Text.StyledText
         content: [
@@ -82,6 +94,11 @@ Shawn Rutledge<br/>
         sourceFile: "examples/withdoc.qml"
     }
 
+    CustomCodeSlide {
+        title: "Getting real"
+        sourceFile: "examples/multipage.qml"
+    }
+
 //    ImageSlide {
 //        title: "Existing QEvent hierarchy"
 //        source: "images/event-hierarchy-before.png"
@@ -93,6 +110,8 @@ Shawn Rutledge<br/>
 //        bulletSpacing: 0.6
         content: [
             "bookmarks",
+            "arbitrary page numbers",
+            "thumbnails",
             "sharing document instance with PDF image plugin",
             "password-protected PDFs",
             "image cache improvements in Qt Quick",
