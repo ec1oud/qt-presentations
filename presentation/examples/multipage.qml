@@ -106,7 +106,7 @@ Rectangle { // ApplicationWindow IRL
                 action: Action {
                     shortcut: StandardKey.ZoomIn
                     enabled: view.renderScale < 10
-                    icon.source: "resources/zoom-in.svg"
+                    icon.source: "resources/zoom-in.pdf"
                     onTriggered: view.renderScale *= Math.sqrt(2)
                 }
             }
@@ -114,33 +114,33 @@ Rectangle { // ApplicationWindow IRL
                 action: Action {
                     shortcut: StandardKey.ZoomOut
                     enabled: view.renderScale > 0.1
-                    icon.source: "resources/zoom-out.svg"
+                    icon.source: "resources/zoom-out.pdf"
                     onTriggered: view.renderScale /= Math.sqrt(2)
                 }
             }
             ToolButton {
                 action: Action {
-                    icon.source: "resources/zoom-fit-best.svg"
+                    icon.source: "resources/zoom-fit-best.pdf"
                     onTriggered: view.scaleToPage(view.width, view.height)
                 }
             }
             ToolButton {
                 action: Action {
                     shortcut: "Ctrl+L"
-                    icon.source: "resources/rotate-left.svg"
+                    icon.source: "resources/rotate-left.pdf"
                     onTriggered: view.pageRotation -= 90
                 }
             }
             ToolButton {
                 action: Action {
                     shortcut: "Ctrl+R"
-                    icon.source: "resources/rotate-right.svg"
+                    icon.source: "resources/rotate-right.pdf"
                     onTriggered: view.pageRotation += 90
                 }
             }
             ToolButton {
                 action: Action {
-                    icon.source: "resources/go-previous-view-page.svg"
+                    icon.source: "resources/go-previous-view-page.pdf"
                     enabled: view.backEnbled
                     onTriggered: view.back()
                 }
@@ -165,7 +165,7 @@ Rectangle { // ApplicationWindow IRL
             }
             ToolButton {
                 action: Action {
-                    icon.source: "resources/go-next-view-page.svg"
+                    icon.source: "resources/go-next-view-page.pdf"
                     enabled: view.forwardEnabled
                     onTriggered: view.forward()
                 }
@@ -176,7 +176,7 @@ Rectangle { // ApplicationWindow IRL
             ToolButton {
                 action: Action {
                     shortcut: StandardKey.Copy
-                    icon.source: "resources/edit-copy.svg"
+                    icon.source: "resources/edit-copy.pdf"
                     enabled: view.selectedText !== ""
                     onTriggered: view.copySelectionToClipboard()
                 }
@@ -194,7 +194,7 @@ Rectangle { // ApplicationWindow IRL
             anchors.fill: parent; anchors.rightMargin: 4
             ToolButton {
                 action: Action {
-                    icon.source: "resources/go-up-search.svg"
+                    icon.source: "resources/go-up-search.pdf"
                     shortcut: StandardKey.FindPrevious
                     onTriggered: view.searchBack()
                 }
@@ -210,7 +210,7 @@ Rectangle { // ApplicationWindow IRL
                 onAccepted: searchResultsList.SplitView.preferredWidth = 250
                 Image {
                     visible: searchField.text !== ""
-                    source: "resources/edit-clear.svg"
+                    source: "resources/edit-clear.pdf"
                     anchors {
                         right: parent.right
                         top: parent.top
@@ -232,7 +232,7 @@ Rectangle { // ApplicationWindow IRL
             }
             ToolButton {
                 action: Action {
-                    icon.source: "resources/go-down-search.svg"
+                    icon.source: "resources/go-down-search.pdf"
                     shortcut: StandardKey.FindNext
                     onTriggered: view.searchForward()
                 }
