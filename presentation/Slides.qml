@@ -7,7 +7,7 @@ Presentation {
     id: presentation
     anchors.fill: parent
     mouseNavigation: false
-    fontFamily: "TitilliumWeb"
+    fontFamily: "Titillium Web"
     fontScale: 0.7
 
     width: 1920
