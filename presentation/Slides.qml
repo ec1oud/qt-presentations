@@ -55,7 +55,12 @@ Presentation {
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/>
-<tt>src/pdf in qtwebengine</html>"
+QtPDF: <tt>src/pdf in qtwebengine</tt><br/>
+this presentation is on github:<br/><tt>ec1oud/qt-presentations</tt> branch qtpdf</html>"
+        Image {
+            anchors.bottom: parent.bottom
+            source: "images/qr.png"
+        }
     }
 
     Slide {
