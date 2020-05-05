@@ -105,15 +105,14 @@ this presentation is on github:<br/><tt>ec1oud/qt-presentations</tt> branch qtpd
         sourceFile: "examples/multipage.qml"
     }
 
-//    ImageSlide {
-//        title: "Existing QEvent hierarchy"
-//        source: "images/event-hierarchy-before.png"
-//    }
+    CustomCodeSlide {
+        title: "Getting silly"
+        sourceFile: "examples/borderimage.qml"
+    }
 
     Slide {
         title: "Stuff left to work on"
         textFormat: Text.StyledText
-//        bulletSpacing: 0.6
         content: [
             "bookmarks",
             "arbitrary page numbers",
