@@ -65,11 +65,12 @@ this presentation is on github:<br/><tt>ec1oud/qt-presentations</tt> branch qtpd
 
     Slide {
         title: "History"
-        textFormat: Text.StyledText
+        textFormat: Text.RichText
         content: [
             "xpdf and poppler",
             "hackathon in Dec 2014: Qt wrapper for PDFium (working with Qt 5.4)",
-            "QtPDF available since Qt 5.10 (widgets only)",
+            "QtPDF available since ~ Qt 5.10 (widgets only)",
+            "<tt>https://www.qt.io/blog/2017/01/30/new-qtpdf-qtlabs-module</tt>",
             "build system change (gyp to gn)",
             "source is now in qtwebengine/src/pdf"
         ]
