@@ -18,6 +18,7 @@ Presentation {
         fillMode: Image.PreserveAspectFit
         sourceSize.width: 1920
         source: "images/QTVTC20 Slide Master.pdf"
+        currentFrame: 1
         visible: currentSlide === 0
         antialiasing: true
         smooth: true
@@ -28,8 +29,8 @@ Presentation {
         fillMode: Image.PreserveAspectFit
         sourceSize.width: 1920
         source: "images/QTVTC20 Slide Master.pdf"
-        currentFrame: 1
-        visible: currentSlide === 1
+        currentFrame: 2
+        visible: currentSlide === 1 || currentSlide === 2
         antialiasing: true
         smooth: true
     }
@@ -40,6 +41,17 @@ Presentation {
         sourceSize.width: 1920
         source: "images/QTVTC20 Slide Master.pdf"
         currentFrame: 3
+        visible: currentSlide === 7
+        antialiasing: true
+        smooth: true
+    }
+
+    Image {
+        anchors.fill: parent
+        fillMode: Image.PreserveAspectFit
+        sourceSize.width: 1920
+        source: "images/QTVTC20 Slide Master.pdf"
+        currentFrame: 4
         visible: currentSlide === presentation.slides.length - 1
         antialiasing: true
         smooth: true
