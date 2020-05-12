@@ -41,7 +41,7 @@ Presentation {
         sourceSize.width: 1920
         source: "images/QTVTC20 Slide Master.pdf"
         currentFrame: 3
-        visible: currentSlide === 7
+        visible: currentSlide === presentation.slides.length - 2 || currentSlide === presentation.slides.length - 3
         antialiasing: true
         smooth: true
     }
@@ -134,6 +134,10 @@ this presentation is on github:<br/><tt>ec1oud/qt-presentations</tt> branch qtpd
             "image cache improvements in Qt Quick",
             "tiled rendering?"
         ]
+    }
+
+    Slide {
+        title: "Questions?"
     }
 
     Slide {
