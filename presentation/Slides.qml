@@ -1,5 +1,5 @@
 import Qt.labs.presentation 1.0
-import QtQuick 2.5
+import QtQuick 2.15
 
 import "examples"
 
@@ -9,6 +9,7 @@ Presentation {
     mouseNavigation: false
     fontFamily: "TitilliumWeb"
     fontScale: 0.7
+    titleMargin: 30
 
     width: 1920
     height: 1080
@@ -19,26 +20,23 @@ Presentation {
     }
 
     Image {
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-        }
+        anchors.fill: parent
+        sourceSize.width: 1920
         fillMode: Image.PreserveAspectFit
-        source: "resources/firstslide.jpg"
-        visible: currentSlide === 0
+        source: "resources/template.pdf"
+        currentFrame: Math.min(currentSlide, frameCount - 1)
+//        visible: currentSlide === 0
         smooth: true
     }
 
     Slide {
         id: title
-        textColor: "white"
+        textColor: "black"
         titleColor: "white"
         centeredTextFormat: Text.RichText
-        centeredTextStyle: Text.Outline
-        centeredTextStyleColor: "black"
         centeredText: "<html>
-<H1>Pointer Handlers: released in 5.12</H1>
+<H1>Input Handling Update</H1>
+<H2>What's Coming Up in Qt 6</H2>
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.
@@ -53,7 +51,7 @@ Shawn Rutledge<br/>
             "Pointing devices: touch, Wacom tablets",
             "Linux/X11 and macOS",
             "QtPDF",
-            "Qt Quick Controls and Dialogs",
+            "Qt Quick, Controls and Dialogs",
         ]
     }
 
@@ -61,71 +59,28 @@ Shawn Rutledge<br/>
         title: "Agenda"
         bulletSpacing: 0.6
         content: [
-            "Existing mouse & touch handling",
             "Goals",
-            "Introduction to PointerHandlers",
-            "Demos of several PointerHandlers",
-//            "Event delivery",
-            "Conceptual comparison",
-            "Passive and exclusive grabbing",
+            "API changes",
+            "Qt Quick",
+            "Demos",
             "Remaining work",
             "Q&A"
         ]
     }
 
     Slide {
-        title: "Event delivery"
+        title: "Goals"
         content: [
-            "Event delivery on press",
-            "How to receive updates after press?",
-            "Exclusive grab",
-            "setFiltersChildMouseEvents(), childMouseEventFilter()",
-            "Passive grab",
-            "Grab transfer negotiation"
+            "Every QInputEvent carries a QInputDevice*",
+            "Qt Quick items and handlers keep working the same",
+            "Widgets keep working the same",
+            "Common event delivery code for all QPointerEvents",
+            "Qt Quick delivery simplified: no more wrappers",
+            "Flickable handles touch (including replay)",
+            "Unblock the fixing of some old bugs",
+            "Wacom tablets supported better",
+            "Multi-seat"
         ]
-    }
-
-    Slide {
-        title: "What's wrong with MouseArea"
-        content: [
-            "handles touch via emulated mouse events only",
-            "you can only press one at a time",
-            "clumsiness with event accept/reject, preventStealing etc.",
-            "a full-blown Item with nothing to render",
-            "large, monolithic, can't change behavior"
-        ]
-    }
-
-    Slide {
-        title: "What's wrong with MultiPointTouchArea"
-        content: [
-            "not a good MouseArea replacement: nested-object verbosity",
-            "a full-blown Item with nothing to render",
-            "difficult to implement custom gesture recognition",
-        ]
-
-        Text {
-            text: "
-Rectangle {
-    property alias pressed: touch1.pressed
-    signal tapped
-    MultiPointTouchArea {
-        anchors.fill: parent
-        touchPoints: [
-            TouchPoint {
-                id: touch1
-                onPressedChanged: if (!pressed) root.tapped
-            } ]
-    }
-}
-"
-            color: "SaddleBrown"
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: parent.height - rule.y
-            font.family: "Inconsolata"
-            font.pointSize: parent.baseFontSize * 0.5
-        }
     }
 
 //    CustomCodeSlide {
@@ -143,227 +98,91 @@ Rectangle {
 //        source: "resources/event-delivery-before.png"
 //    }
 
-    Slide {
-        title: "Goals for Pointer Handlers"
-        content: [
-            "make it easy to handle mouse, touch and stylus agnostically or in device-specific ways",
-            "common event delivery code for mouse and touch in QQuickWindow",
-            "both QML and C++ APIs",
-            "guarantee that events always have velocity",
-        ]
-    }
+//    QmlSlide {
+//        title: "DragHandler"
+//        sourceFile: "examples/flingAnimation.qml"
+//    }
 
-    Slide {
-        title: "Forward-looking goals"
-        content: [
-            "proper support for Wacom tablets: draw paths in Qt Quick",
-            "refine APIs so that they'll work for Qt 6",
-            "plan on multiple seats/users and support for multiple mice etc. in Qt 6",
-            "reduce the need for touch -> mouse synthesis"
-        ]
-    }
-
-    Slide {
-        title: "Idea: handler objects"
-        content: [
-            "the original idea: make mouse/touch more like the Keys attached prop",
-            ' Keys.onLeftPressed: console.log("move left")',
-            ' Keys.onAPressed? doesn\'t exist',
-            ' Keys.onPressed: { switch (event.key) { ... } }'
-//            ' so maybe color: Mouse.onLeftButtonPressed ? "red" : "blue" ?'
-        ]
-    }
-
-    Slide {
-        title: "Handler objects"
-        content: [
-            "more flexible: 'child' objects",
-            ' Rectangle { TapHandler { id: th } color: th.pressed ? "red" : "blue" }',
-            ' Rectangle { TapHandler { acceptedDevices: PointerDevice.TouchScreen; onTapped: ... } }',
-            ' Rectangle { DragHandler { } }',
-            ' Image { PinchHandler { } }'
-        ]
-    }
-
-    Slide {
-        title: "Features"
-        content: [
-            "declarative handlers for gestures (tap, drag, pinch etc.)",
-            "easy stuff is easy",
-            "plain QObject 'child' is lighter than Item or attached",
-            "default target, use its bounds",
-            "multiple small, lightweight, understandable handlers",
-            "actual multi-touch support",
-        ]
-    }
-
-    Slide {
-        title: "Features"
-        content: [
-            "filter events by:",
-            " device type",
-            " pointer type",
-            " button",
-            " keyboard modifiers",
-            "subclass Handlers in C++ for the less-mainstream cases",
-            "it's completely different, so minimizes compatibility risks"
-        ]
-    }
-
-    QmlSlide {
-        title: "DragHandler"
-        sourceFile: "examples/flingAnimation.qml"
-    }
-
-    QmlSlide {
-        title: "DragHandler"
-        sourceFile: "examples/joystick.qml"
-    }
-
-    QmlSlide {
-        title: "WheelHandler"
-        sourceFile: "examples/pinchAndWheel.qml"
-    }
-
-    QmlSlide {
-        title: "WheelHandler"
-        sourceFile: "examples/Slider.qml"
-    }
-
-    CustomCodeSlide {
-        title: "Fake Flickable"
-        sourceFile: "examples/resources/FakeFlickable.qml"
-        Loader {
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-            source: "examples/fakeFlickable.qml"
-        }
-    }
-
-    QmlSlide {
-        title: "BoundaryRule"
-        sourceFile: "examples/resources/LeftDrawer.qml"
-        expandContent: true
-    }
-
-    Slide {
-        title: "BoundaryRule behavior"
-        textFormat: Text.StyledText
-//        bulletSpacing: 0.6
-        content: [
-            "implements programmable 'springiness'",
-            "subclass of <tt>QQmlPropertyValueInterceptor</tt>",
-            "bandpass filter on responsiveness, with easing curves on both ends",
-            "modulates the derivative of motion"
-        ]
-        Loader {
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            source: "resources/BoundaryRuleCurve.qml"
-        }
-    }
-
-    QmlSlide {
-        title: "TapHandler"
-        sourceFile: "examples/tapHandler.qml"
-    }
-
-    QmlSlide {
-        title: "TapHandler - multiple instances"
-        sourceFile: "examples/multiTapHandler.qml"
-    }
-
-    QmlSlide {
-        title: "PinchHandler"
-        sourceFile: "examples/pinchHandler.qml"
-    }
-
-    QmlSlide {
-        title: "PinchHandler on a map"
-        sourceFile: "examples/map.qml"
-    }
-
-    CustomCodeSlide {
-        title: "DragHandler and TapHandler together"
-        sourceFile: "examples/Slider.qml"
-        Loader {
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-            source: "examples/sliders.qml"
-        }
-    }
-
-    Slide {
-        title: "Conceptual Changes: Handlers vs. Areas"
-        textFormat: Text.StyledText
-//        bulletSpacing: 0.6
-        content: [
-            "either a Handler or an Item can be the exclusive grabber",
-            "any number of Handlers can be passive grabbers",
-            "if number of touchpoints changes: ignore the grab,<br/>start over with event delivery",
-            "Handler gives up exclusive grab when constraints aren't satisfied",
-            "mouse event -> QQuickPointerEvent with one point inside",
-            "PointerHandler receives the complete event",
-            "PointerHandler accepts event: stop propagation",
-            "grab/ungrab are independent"
-        ]
-    }
-
-    Slide {
-        title: "Wanting vs. grabbing"
-        textFormat: Text.StyledText
-//        bulletSpacing: 0.6
-        content: [
-            "an Item must grab a press to be able to get an update<br/>this leads us to monolithic Areas and childMouseEventFilter and grab-stealing",
-            "PointerHandlers: we want to mostly let events propagate; exclusive grab should be less common",
-            "virtual bool wantsEventPoint(QQuickEventPoint *)",
-            "if wantsPointerEvent() returns true, virtual handlePointerEventImpl() will be called",
-        ]
-    }
-
-    Slide {
-        title: "Bilateral grab transfer negotiation"
-        content: [
-            "Items: setKeepTouchGrab(), setKeepMouseGrab()",
-            "PointerHandlers: approveGrabTransition()"
-        ]
-    }
-
-    QmlSlide {
-        title: "TapHandler - non-rectangular areas"
-        sourceFile: "examples/tapSectors.qml"
+    ImageSlide {
+        title: "Qt 5 QEvent hierarchy"
+        autoScale: true
+        source: "resources/event-hierarchy-before.pdf"
     }
 
     ImageSlide {
-        title: "Existing QEvent hierarchy"
-        source: "resources/event-hierarchy-before.png"
+        title: "Qt Quick Event Hierarchy"
+        autoScale: true
+        source: "resources/event-hierarchy-qt5.15.pdf"
     }
 
     ImageSlide {
-        title: "Event hierarchy for PointerHandlers Tech Preview"
-        source: "resources/event-hierarchy-qt5.8.png"
+        title: "Qt 6 Event Hierarchy"
+        autoScale: true
+//        fullScreen: true
+        source: "resources/event-hierarchy-qt6.pdf"
     }
 
-    ImageSlide {
-        title: "Handler hierarchy so far"
-        source: "resources/pointer-handlers-classes.png"
-    }
-
-    CustomCodeSlide {
-        title: "Pressing Multiple Buttons"
-        sourceFile: "examples/MultiButton.qml"
-//        live: false
-//        sourceFile: "examples/multibuttons.qml"
-        Loader {
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-            source: "examples/multibuttons.qml"
+    CodeSlide {
+        title: "Agnosticism"
+        margins: 105
+        code:
+"
+bool event(QEvent *ev) override
+{
+    if (ev->isPointerEvent() && static_cast<QPointerEvent *>(event)->isPressEvent()) {
+        for (QEventPoint *point : event->points()) {
+            if (reactToPress(point->position()))
+                point->setExclusiveGrabber(this);
         }
+        retun true;
     }
+    return false;
+}
+"
+    }
+
+    CodeSlide {
+        title: "Is it a synthesized mouse event?"
+        margins: 105
+        code:
+            "
+void mousePressEvent(QMouseEvent *event) override
+{
+    qDebug()
+        // The oldest API - unusable
+        << \"spontaneous\" << event->spontaneous()
+
+        // Qt::MouseEventSource : since Qt 5.4
+        << \"source\" << event->source()
+        << \"actual mouse?\" << (event->source() == Qt::MouseEventNotSynthesized)
+        << \"perhaps from touch or tablet?\" << (event->source() == Qt::MouseEventSynthesizedByQt)
+
+        // Similar to the QML Pointer Handlers acceptedDevices API (since 5.10)
+        << \"device type\" << event->pointingDevice()->type()
+        << \"from touchscreen?\" << (event->pointingDevice()->type() == QInputDevice::DeviceType::TouchScreen)
+        << \"from touchpad?\" << (event->pointingDevice()->type() == QInputDevice::DeviceType::TouchPad)
+
+        // Similar to the QML Pointer Handlers acceptedPointerTypes API (since 5.10)
+        << \"pointer type\" << event->pointingDevice()->pointerType()
+        << \"from finger?\" << (event->pointingDevice()->pointerType() == QPointingDevice::PointerType::Finger)
+        << \"from eraser?\" << (event->pointingDevice()->pointerType() == QPointingDevice::PointerType::Eraser);
+}
+"
+    }
+
+//    CustomCodeSlide {
+//        title: "Pressing Multiple Buttons"
+//        sourceFile: "examples/MultiButton.qml"
+//        Loader {
+//            anchors.right: parent.right
+//            anchors.rightMargin: 0
+//            source: "examples/multibuttons.qml"
+//        }
+//    }
 
     QmlSlide {
         title: "PointHandler"
-        sourceFile: "examples/crosshairs.qml"
+        sourceFile: "examples/crosshairs.qml" // TODO velocity vectors, pressure etc.
     }
 
     Slide {
@@ -371,14 +190,10 @@ Rectangle {
         textFormat: Text.StyledText
         bulletSpacing: 0.6
         content: [
-            "FlickHandler",
-            "scroll & wheel events",
-            "hover",
-            "native gestures",
-            "event propagation barrier",
-            "how to manipulate inner Handlers? attached properties?",
-            "get ready for public C++ API (create private-impl classes etc.)",
-            "renaming",
+            "Flickable: make it flick nicer",
+            "Flickable: event replay",
+            "rename QPointingDevice to QPointerDevice?",
+            "get rid of QPointingDevice::pointerType?"
         ]
     }
 
@@ -387,66 +202,29 @@ Rectangle {
         titleColor: "white"
         centeredTextFormat: Text.RichText
         centeredText: "<html>
-<H1>Pointer Handlers in Qt Quick</H1>
-status: upcoming release in Qt 5.12<br/><br/>
+<H1>Input Handling Update</H1>
+<H2>What's Coming Up in Qt 6</H2>
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
-<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/>
-This presentation:<br/><tt>https://github.com/ec1oud/qt-presentations/tree/pointerhandlers</tt>
+<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.
 </html>"
     }
 
     SlideCounter { id: slideCounter }
 
-    Clock {
-        id: clock
-        anchors.top: undefined
-        anchors.bottom: undefined
-        anchors.left: undefined
-        anchors.verticalCenter: rule.verticalCenter
-        anchors.right: slideCounter.right
-        anchors.rightMargin: 0
-        width: slideCounter.width
-        horizontalAlignment: Text.AlignRight
-    }
-
     property bool bottomStuffVisible: currentSlide < 4
-
-    Rectangle {
-        id: rule
-        visible: bottomStuffVisible
-        color: "#f3f3f4"; height: 5
-        anchors.bottom: leftLogo.top
-        anchors.left: parent.left; anchors.leftMargin: 65
-        anchors.right: clock.left
-        anchors.rightMargin: 12
-        anchors.bottomMargin: 16
-    }
 
     Image {
         id: leftLogo
         visible: bottomStuffVisible
         anchors {
-            verticalCenter: slideCounter.verticalCenter
-            left: rule.left
-            rightMargin: 20
+            left: parent.left
+            bottom: parent.bottom
+            margins: 20
         }
         height: 78 * parent.height / 1080
         fillMode: Image.PreserveAspectFit
         smooth: true
         source: "resources/bottom-logo-left.png"
     }
-
-//    Image {
-//        id: rightLogo
-//        anchors {
-//            verticalCenter: slideCounter.verticalCenter
-//            right: slideCounter.left
-//            rightMargin: 20
-//        }
-//        width: 226; height: 34
-//        fillMode: Image.PreserveAspectFit
-//        smooth: true
-//        source: "resources/bottom-logo-right.png"
-//    }
 }
