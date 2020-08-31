@@ -72,15 +72,85 @@ Shawn Rutledge<br/>
         title: "Goals"
         content: [
             "Every QInputEvent carries a QInputDevice*",
-            "Qt Quick items and handlers keep working the same",
-            "Widgets keep working the same",
+            " Qt::MouseEventSource was not enough",
+            "Widgets, Qt Quick items and handlers keep working the same",
             "Common event delivery code for all QPointerEvents",
             "Qt Quick delivery simplified: no more wrappers",
-            "Flickable handles touch (including replay)",
-            "Unblock the fixing of some old bugs",
+            "Flickable handles touch (including replay: QTBUG-85607)",
+            "Event objects as lightweight as possible",
+            "Unblock fixing some old bugs",
             "Wacom tablets supported better",
             "Multi-seat"
         ]
+    }
+
+    Slide {
+        title: "Initial conditions - Qt Quick"
+        content: [
+            "QQuickPointerEvent is a QObject wrapper for QTouchEvent, QMouseEvent etc.",
+            "QQuickEventPoint is a wrapper for QTouchEvent::TouchPoint",
+            " but every QQuickSinglePointEvent has one too",
+            "QQuickEventPoint stores state between events: exclusive grabber, passive grabbers",
+            "QQuickEventPoint has a parent pointer (QQuickPointerEvent *event) which is stable",
+            " So it can be passed alone to any function, C++ or QML, and knows its context",
+            "Delivery code is simplified by these wrappers",
+            "Wrappers were meant as a prototype for QInputEvent refactoring"
+        ]
+    }
+
+    ImageSlide {
+        title: "Delivery in Qt < 5.8"
+        autoScale: true
+        source: "resources/event-delivery-before.png"
+    }
+
+    ImageSlide {
+        title: "Qt 5: QEvent hierarchy"
+        autoScale: true
+        source: "resources/event-hierarchy-before.pdf"
+    }
+
+    ImageSlide {
+        title: "Qt 5: Qt Quick Event Hierarchy"
+        autoScale: true
+        source: "resources/event-hierarchy-qt5.15.pdf"
+    }
+
+    ImageSlide {
+        title: "Delivery to Handlers in Qt >= 5.11"
+        autoScale: true
+        source: "resources/qt5-handler-delivery-seq.png"
+    }
+
+    ImageSlide {
+        title: "Qt 6 Event Hierarchy"
+        autoScale: true
+//        fullScreen: true
+        source: "resources/event-hierarchy-qt6.pdf"
+    }
+
+    ImageSlide {
+        title: "Delivery to Handlers in Qt 6"
+        autoScale: true
+        source: "resources/qt6-handler-delivery-seq.png"
+    }
+
+    Slide {
+        title: "Initial conditions - QtGUI"
+        content: [
+            "QTouchEvent::TouchPoint is heap-allocated and has a PIMPL in spite of being temporary",
+            "QPA events (and touchpoints) are special unrelated mostly-duplicate classes",
+            "QPA events are heap-allocated in spite of being temporary",
+            "All QInputEvents are stack-allocated in QGuiApplication, and go out of scope after delivery",
+            "QInputEvent subclasses have duplicated but incompatible API",
+            "QTouchEvent can have multiple points"
+        ]
+    }
+
+    ImageSlide {
+        title: "Design decisions"
+        autoScale: true
+        source: "resources/design-decisions-flowchart.pdf"
     }
 
 //    CustomCodeSlide {
@@ -103,25 +173,6 @@ Shawn Rutledge<br/>
 //        sourceFile: "examples/flingAnimation.qml"
 //    }
 
-    ImageSlide {
-        title: "Qt 5 QEvent hierarchy"
-        autoScale: true
-        source: "resources/event-hierarchy-before.pdf"
-    }
-
-    ImageSlide {
-        title: "Qt Quick Event Hierarchy"
-        autoScale: true
-        source: "resources/event-hierarchy-qt5.15.pdf"
-    }
-
-    ImageSlide {
-        title: "Qt 6 Event Hierarchy"
-        autoScale: true
-//        fullScreen: true
-        source: "resources/event-hierarchy-qt6.pdf"
-    }
-
     CodeSlide {
         title: "Agnosticism"
         margins: 105
@@ -130,9 +181,9 @@ Shawn Rutledge<br/>
 bool event(QEvent *ev) override
 {
     if (ev->isPointerEvent() && static_cast<QPointerEvent *>(event)->isPressEvent()) {
-        for (QEventPoint *point : event->points()) {
-            if (reactToPress(point->position()))
-                point->setExclusiveGrabber(this);
+        for (QEventPoint &point : event->points()) {
+            if (reactToPress(point.position()))
+                point.setExclusiveGrabber(this);
         }
         retun true;
     }

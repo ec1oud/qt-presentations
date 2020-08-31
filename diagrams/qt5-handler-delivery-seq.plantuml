@@ -1,0 +1,29 @@
+@startuml
+QEventLoop -> QWSI : sendWindowSystemEvents
+QWSI -> QGuiApp : processWindowSystemEvent
+note right: QWindowSystemInterfacePrivate::MouseEvent comes in
+QGuiApp -> QGuiApp : processMouseEvent
+QGuiApp -> QGuiApp : notify
+QGuiApp -> QQWindow : event
+QQWindow -> QQWindow : mousePressEvent
+QQWindow -> QQWindow : pointerEventInstance
+QQWindow -> QQWindow : queryPointerEventInstance
+note right QQWindow: usually returns an existing instance
+QQWindow -> QQuickPointerMouseEvent : reset(QEvent *)
+note right: becomes a wrapper
+QQuickPointerMouseEvent -> QQuickEventPoint : reset
+group Pointer Event Delivery
+QQWindow -> QQWindow : deliverPointerEvent(QQuickPointerEvent *)
+QQWindow -> QQWindow : deliverPressOrReleaseEvent
+QQWindow -> QQWindow : pointerTargets (recursive)
+QQWindow -> Item : anyDragHandlerWants
+Item -> DragHandler : wantsEventPoint
+QQWindow -> QQWindow : deliverMatchingPointsToItem
+QQWindow -> Item : handlePointerEvent
+Item -> DragHandler : handlePointerEvent
+DragHandler -> DragHandler : wantsPointerEvent
+DragHandler -> DragHandler : handlePointerEventImpl
+DragHandler -> QQuickEventPoint : setGrabberDragHandler
+DragHandler -> QQuickEventPoint : setAccepted
+end
+@enduml
