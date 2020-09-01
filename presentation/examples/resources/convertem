@@ -1,0 +1,6 @@
+#!/bin/sh
+for s in `ls *.svg`; do
+	p=`basename $s .svg`.pdf
+	echo $s $p
+	rsvg-convert -f pdf -o $p $s
+done
