@@ -185,7 +185,7 @@ bool event(QEvent *ev) override
             if (reactToPress(point.position()))
                 point.setExclusiveGrabber(this);
         }
-        retun true;
+        return true;
     }
     return false;
 }
