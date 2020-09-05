@@ -8,6 +8,7 @@ Presentation {
     anchors.fill: parent
     mouseNavigation: false
     fontFamily: "TitilliumWeb"
+    codeFontFamily: "Source Code Pro"
     fontScale: 0.7
     titleMargin: 30
 
@@ -23,7 +24,7 @@ Presentation {
         anchors.fill: parent
         sourceSize.width: 1920
         fillMode: Image.PreserveAspectFit
-        source: "resources/template.pdf"
+        source: "./resources/template.pdf"
         currentFrame: Math.min(currentSlide, frameCount - 1)
 //        visible: currentSlide === 0
         smooth: true
@@ -62,7 +63,7 @@ Shawn Rutledge<br/>
             "Goals",
             "API changes",
             "Qt Quick",
-            "Demos",
+            "Demo",
             "Remaining work",
             "Q&A"
         ]
@@ -70,6 +71,7 @@ Shawn Rutledge<br/>
 
     Slide {
         title: "Goals"
+        bulletSpacing: 0.6
         content: [
             "Every QInputEvent carries a QInputDevice*",
             " Qt::MouseEventSource was not enough",
@@ -101,38 +103,38 @@ Shawn Rutledge<br/>
     ImageSlide {
         title: "Delivery in Qt < 5.8"
         autoScale: true
-        source: "resources/event-delivery-before.png"
+        source: Qt.resolvedUrl("resources/event-delivery-before.png")
     }
 
     ImageSlide {
         title: "Qt 5: QEvent hierarchy"
         autoScale: true
-        source: "resources/event-hierarchy-before.pdf"
+        source: Qt.resolvedUrl("resources/event-hierarchy-before.pdf")
     }
 
     ImageSlide {
         title: "Qt 5: Qt Quick Event Hierarchy"
         autoScale: true
-        source: "resources/event-hierarchy-qt5.15.pdf"
+        source: Qt.resolvedUrl("resources/event-hierarchy-qt5.15.pdf")
     }
 
     ImageSlide {
         title: "Delivery to Handlers in Qt >= 5.11"
         autoScale: true
-        source: "resources/qt5-handler-delivery-seq.png"
+        source: Qt.resolvedUrl("resources/qt5-handler-delivery-seq.png")
     }
 
     ImageSlide {
         title: "Qt 6 Event Hierarchy"
         autoScale: true
 //        fullScreen: true
-        source: "resources/event-hierarchy-qt6.pdf"
+        source: Qt.resolvedUrl("resources/event-hierarchy-qt6.pdf")
     }
 
     ImageSlide {
         title: "Delivery to Handlers in Qt 6"
         autoScale: true
-        source: "resources/qt6-handler-delivery-seq.png"
+        source: Qt.resolvedUrl("resources/qt6-handler-delivery-seq.png")
     }
 
     Slide {
@@ -150,7 +152,7 @@ Shawn Rutledge<br/>
     ImageSlide {
         title: "Design decisions"
         autoScale: true
-        source: "resources/design-decisions-flowchart.pdf"
+        source: Qt.resolvedUrl("resources/design-decisions-flowchart.pdf")
     }
 
 //    CustomCodeSlide {
@@ -233,7 +235,7 @@ void mousePressEvent(QMouseEvent *event) override
 
     QmlSlide {
         title: "PointHandler"
-        sourceFile: "examples/crosshairs.qml" // TODO velocity vectors, pressure etc.
+        sourceFile: "examples/singlePointHandlerProperties.qml"
     }
 
     Slide {

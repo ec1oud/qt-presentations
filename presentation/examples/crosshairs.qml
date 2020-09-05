@@ -64,13 +64,20 @@ Item {
             PathLine { x: crosshairs.width; y: crosshairs.height / 2 }
         }
         ShapePath {
-            strokeColor: "lightgray"
+            strokeColor: "lightsteelblue"
             strokeWidth: 5
             startX: crosshairs.width / 2; startY: crosshairs.height / 2
             PathLine {
                 relativeX: handler.point.velocity.x * 50
                 relativeY: handler.point.velocity.y * 50
             }
+        }
+        Text {
+            anchors.centerIn: parent
+            text: 'seat: ' + handler.point.device.seatName + '\ndevice: ' + handler.point.device.name +
+                  '\nid: ' + handler.point.id.toString(16) + " uid: " + handler.point.uniqueId.numericId +
+                  '\npos: (' + handler.point.position.x.toFixed(2) + ', ' + handler.point.position.y.toFixed(2) + ')' +
+                  '\nmodifiers: ' + handler.point.modifiers.toString(16)
         }
     }
 
