@@ -3,33 +3,61 @@ QEventLoop -> QWSI : sendWindowSystemEvents
 activate QGuiApp
 QWSI -> QGuiApp : processWindowSystemEvent
 note right: QWindowSystemInterfacePrivate::MouseEvent comes in
-participant "QEventPoint" as activePoint << activePoint >>
-QGuiApp -> QPointingDevice : activePoint(0)
-QPointingDevice --> QGuiApp : activePoint
+QGuiApp -> QGuiApp : processMouseEvent
+participant "QEventPoint"
+participant "QPointingDevPriv_EventPointData" << persistent >>
+QGuiApp -> QPointingDevice : pointById
+QPointingDevice -> QPointingDevPriv_EventPointData : ctor
+activate QPointingDevPriv_EventPointData
+QPointingDevPriv_EventPointData -> QEventPoint : ctor
+activate QEventPoint
+QPointingDevice --> QGuiApp : QPointingDevPriv_EventPointData
 activate QMouseEvent
 QGuiApp -> QMouseEvent : ctor
-activate QEventPoint
-QMouseEvent -> QEventPoint : ctor
 QGuiApp -> activePoint : updateFrom(QEventPoint)
 group Pointer Event Delivery
 QGuiApp -> QGuiApp : processMouseEvent
 QGuiApp -> QGuiApp : notify
 QGuiApp -> QQWindow : event
-QQWindow -> QQWindow : mousePressEvent
-QQWindow -> QQWindow : deliverPressOrReleaseEvent
-QQWindow -> QQWindow : pointerTargets (recursive)
-QQWindow -> Item : anyPointerHandlerWants
+QQWindow -> QQDeliveryAgent : event
+QQDeliveryAgent -> QQDeliveryAgent : handleMouseEvent
+QQDeliveryAgent -> QQDeliveryAgent : deliverPointerEvent
+QQDeliveryAgent -> QQDeliveryAgent : deliverPressOrReleaseEvent
+QQDeliveryAgent -> QQDeliveryAgent : pointerTargets (recursive)
+QQDeliveryAgent -> Item : anyPointerHandlerWants
 Item -> DragHandler : wantsEventPoint
-QQWindow -> QQWindow : deliverMatchingPointsToItem
-QQWindow -> Item : handlePointerEvent
+QQDeliveryAgent -> QQDeliveryAgent : deliverMatchingPointsToItem
+QQDeliveryAgent -> QQDeliveryAgent : localizePointerEvent
+QQDeliveryAgent -> Item : handlePointerEvent
+note right: handlers go first
 Item -> DragHandler : handlePointerEvent
 DragHandler -> DragHandler : wantsPointerEvent
 DragHandler -> DragHandler : handlePointerEventImpl
-DragHandler -> QEventPoint : setGrabberPointerHandler
-DragHandler -> QEventPoint : setAccepted
+DragHandler -> DragHandler : setPassiveGrab
+DragHandler -> QMouseEvent : addPassiveGrabber
+QMouseEvent -> QPointingDevice : addPassiveGrabber
+QPointingDevice -> QPointingDevice : grabChanged
+QPointingDevice -> QQDeliveryAgent : onGrabChanged
+QQDeliveryAgent -> DragHandler : onGrabChanged
+DragHandler -> DragHandler : grabChanged
+QQDeliveryAgent -> QQDeliveryAgent : sendFilteredPointerEvent
+note right: item parent filtering
+QQDeliveryAgent -> QQDeliveryAgent : localizePointerEvent
+QQDeliveryAgent -> QGuiApp : sendEvent
+note right: then the item itself
+QGuiApp -> Item : event
+Item -> Item : mousePressEvent
+QQDeliveryAgent -> QMouseEvent : setExclusiveGrabber
+note right: if Item subclass allows the event to remain accepted
+QMouseEvent -> QPointingDevice : setExclusiveGrabber
+QPointingDevice -> QPointingDevice : queryPointById
+QPointingDevice -> QPointingDevPriv_EventPointData : exclusiveGrabber = item
+QPointingDevice -> QPointingDevice : grabChanged
+QPointingDevice -> QQDeliveryAgent : onGrabChanged
+QQDeliveryAgent -> QPointingDevice : queryPointById
+QPointingDevice --> QQDeliveryAgent : QPointingDevPriv_EventPointData
+QQDeliveryAgent -> QPointingDevPriv_EventPointData : exclusiveGrabberContext = agent
 end
-QGuiApp -> activePoint : copyGrabbersFrom(QEventPoint)
-return
 deactivate QGuiApp
 destroy QMouseEvent
 destroy QEventPoint
