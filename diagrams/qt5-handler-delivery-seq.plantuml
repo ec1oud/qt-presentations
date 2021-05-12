@@ -16,14 +16,14 @@ group Pointer Event Delivery
 QQWindow -> QQWindow : deliverPointerEvent(QQuickPointerEvent *)
 QQWindow -> QQWindow : deliverPressOrReleaseEvent
 QQWindow -> QQWindow : pointerTargets (recursive)
-QQWindow -> Item : anyDragHandlerWants
+QQWindow -> Item : anyPointerHandlerWants
 Item -> DragHandler : wantsEventPoint
 QQWindow -> QQWindow : deliverMatchingPointsToItem
 QQWindow -> Item : handlePointerEvent
 Item -> DragHandler : handlePointerEvent
 DragHandler -> DragHandler : wantsPointerEvent
 DragHandler -> DragHandler : handlePointerEventImpl
-DragHandler -> QQuickEventPoint : setGrabberDragHandler
+DragHandler -> QQuickEventPoint : setGrabberPointerHandler
 DragHandler -> QQuickEventPoint : setAccepted
 end
 @enduml
