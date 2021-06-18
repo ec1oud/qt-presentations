@@ -36,8 +36,7 @@ Presentation {
         titleColor: "white"
         centeredTextFormat: Text.RichText
         centeredText: "<html>
-<H1>Input Handling Update</H1>
-<H2>What's Coming Up in Qt 6</H2>
+<H1>Interactive UIs in Qt Quick 3D</H1>
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.
@@ -50,7 +49,7 @@ Shawn Rutledge<br/>
             "Qt user since ~2004",
             "The Qt Company - Oslo since 2011",
             "Pointing devices: touch, Wacom tablets",
-            "Linux/X11 and macOS",
+            "Linux/X11, Wayland, and macOS",
             "QtPDF",
             "Qt Quick, Controls and Dialogs",
         ]
@@ -60,119 +59,50 @@ Shawn Rutledge<br/>
         title: "Agenda"
         bulletSpacing: 0.6
         content: [
-            "Goals",
-            "API changes",
-            "Qt Quick",
-            "Demo",
+            "Intro",
+            "Fixed content in 3D apps",
+            "3D content in 2D apps",
+            "2D content in 3D apps",
+            "Interactive 3D apps",
+            "Event delivery details",
             "Remaining work",
             "Q&A"
         ]
     }
 
     Slide {
-        title: "Goals"
+        title: "Disclaimers"
         bulletSpacing: 0.6
         content: [
-            "Every QInputEvent carries a QInputDevice*",
-            " Qt::MouseEventSource was not enough",
-            "Widgets, Qt Quick items and handlers keep working the same",
-            "Common event delivery code for all QPointerEvents",
-            "Qt Quick delivery simplified: no more wrappers",
-            "Flickable handles touch (including replay: QTBUG-85607)",
-            "Event objects as lightweight as possible",
-            "Unblock fixing some old bugs",
-            "Wacom tablets supported better",
-            "Multi-seat"
+            "I didn't implement Qt Quick 3D, only event delivery",
+            "This presentation contains features we haven't shipped"
         ]
     }
 
     Slide {
-        title: "Initial conditions - Qt Quick"
+        title: "Intro"
+        bulletSpacing: 0.6
         content: [
-            "QQuickPointerEvent is a QObject wrapper for QTouchEvent, QMouseEvent etc.",
-            "QQuickEventPoint is a wrapper for QTouchEvent::TouchPoint",
-            " but every QQuickSinglePointEvent has one too",
-            "QQuickEventPoint stores state between events: exclusive grabber, passive grabbers",
-            "QQuickEventPoint has a parent pointer (QQuickPointerEvent *event) which is stable",
-            " So it can be passed alone to any function, C++ or QML, and knows its context",
-            "Delivery code is simplified by these wrappers",
-            "Wrappers were meant as a prototype for QInputEvent refactoring"
+            "What is a 3D interactive application?",
+            "What sort of applications need 3D?"
         ]
     }
 
-    ImageSlide {
-        title: "Delivery in Qt < 5.8"
-        autoScale: true
-        source: Qt.resolvedUrl("resources/event-delivery-before.png")
+    QmlSlide {
+        title: "Minimal Model Viewer"
+        sourceFile: "examples/modelViewer.qml"
+        verticalMargin: 80
     }
 
-    ImageSlide {
-        title: "Qt 5: QEvent hierarchy"
-        autoScale: true
-        source: Qt.resolvedUrl("resources/event-hierarchy-before.pdf")
+    CustomCodeSlide {
+        title: "Minimal Model Viewer"
+        sourceFile: "examples/modelViewer.qml"
     }
-
-    ImageSlide {
-        title: "Qt 5: Qt Quick Event Hierarchy"
-        autoScale: true
-        source: Qt.resolvedUrl("resources/event-hierarchy-qt5.15.pdf")
-    }
-
-    ImageSlide {
-        title: "Delivery to Handlers in Qt >= 5.11"
-        autoScale: true
-        source: Qt.resolvedUrl("resources/qt5-handler-delivery-seq.png")
-    }
-
-    ImageSlide {
-        title: "Qt 6 Event Hierarchy"
-        autoScale: true
-//        fullScreen: true
-        source: Qt.resolvedUrl("resources/event-hierarchy-qt6.pdf")
-    }
-
-    ImageSlide {
-        title: "Delivery to Handlers in Qt 6"
-        autoScale: true
-        source: Qt.resolvedUrl("resources/qt6-handler-delivery-seq.png")
-    }
-
-    Slide {
-        title: "Initial conditions - QtGUI"
-        content: [
-            "QTouchEvent::TouchPoint is heap-allocated and has a PIMPL in spite of being temporary",
-            "QPA events (and touchpoints) are special unrelated mostly-duplicate classes",
-            "QPA events are heap-allocated in spite of being temporary",
-            "All QInputEvents are stack-allocated in QGuiApplication, and go out of scope after delivery",
-            "QInputEvent subclasses have duplicated but incompatible API",
-            "QTouchEvent can have multiple points"
-        ]
-    }
-
-    ImageSlide {
-        title: "Design decisions"
-        autoScale: true
-        source: Qt.resolvedUrl("resources/design-decisions-flowchart.pdf")
-    }
-
-//    CustomCodeSlide {
-//        title: "Flickable and MouseArea: hover and grab"
-//        sourceFile: "examples/Flick.qml"
-//    }
-
-//    CustomCodeSlide {
-//        title: "Flickable: filter, grab, steal or prevent"
-//        sourceFile: "examples/Flickable2.qml"
-//    }
 
 //    ImageSlide {
-//        title: "Many parallel event delivery paths (and some missing)"
-//        source: "resources/event-delivery-before.png"
-//    }
-
-//    QmlSlide {
-//        title: "DragHandler"
-//        sourceFile: "examples/flingAnimation.qml"
+//        title: "Design decisions"
+//        autoScale: true
+//        source: Qt.resolvedUrl("resources/design-decisions-flowchart.pdf")
 //    }
 
     CodeSlide {
@@ -194,50 +124,6 @@ bool event(QEvent *ev) override
 "
     }
 
-    CodeSlide {
-        title: "Is it a synthesized mouse event?"
-        margins: 105
-        code:
-            "
-void mousePressEvent(QMouseEvent *event) override
-{
-    qDebug()
-        // The oldest API - unusable
-        << \"spontaneous\" << event->spontaneous()
-
-        // Qt::MouseEventSource : since Qt 5.4
-        << \"source\" << event->source()
-        << \"actual mouse?\" << (event->source() == Qt::MouseEventNotSynthesized)
-        << \"perhaps from touch or tablet?\" << (event->source() == Qt::MouseEventSynthesizedByQt)
-
-        // Similar to the QML Pointer Handlers acceptedDevices API (since 5.10)
-        << \"device type\" << event->pointingDevice()->type()
-        << \"from touchscreen?\" << (event->pointingDevice()->type() == QInputDevice::DeviceType::TouchScreen)
-        << \"from touchpad?\" << (event->pointingDevice()->type() == QInputDevice::DeviceType::TouchPad)
-
-        // Similar to the QML Pointer Handlers acceptedPointerTypes API (since 5.10)
-        << \"pointer type\" << event->pointingDevice()->pointerType()
-        << \"from finger?\" << (event->pointingDevice()->pointerType() == QPointingDevice::PointerType::Finger)
-        << \"from eraser?\" << (event->pointingDevice()->pointerType() == QPointingDevice::PointerType::Eraser);
-}
-"
-    }
-
-//    CustomCodeSlide {
-//        title: "Pressing Multiple Buttons"
-//        sourceFile: "examples/MultiButton.qml"
-//        Loader {
-//            anchors.right: parent.right
-//            anchors.rightMargin: 0
-//            source: "examples/multibuttons.qml"
-//        }
-//    }
-
-    QmlSlide {
-        title: "PointHandler"
-        sourceFile: "examples/singlePointHandlerProperties.qml"
-    }
-
     Slide {
         title: "Stuff left to work on"
         textFormat: Text.StyledText
@@ -251,12 +137,20 @@ void mousePressEvent(QMouseEvent *event) override
     }
 
     Slide {
+        title: "Suggestions for the community"
+        textFormat: Text.StyledText
+        bulletSpacing: 0.6
+        content: [
+            "Design standard toolbar icons for 3D applications"
+        ]
+    }
+
+    Slide {
         id: lastSlide
         titleColor: "white"
         centeredTextFormat: Text.RichText
         centeredText: "<html>
-<H1>Input Handling Update</H1>
-<H2>What's Coming Up in Qt 6</H2>
+<H1>Interactive UIs in Qt Quick 3D</H1>
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.

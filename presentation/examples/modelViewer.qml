@@ -10,7 +10,7 @@ import QtQuick3D.AssetUtils
 View3D {
     id: view3D; width: 800; height: 600
 
-    environment: SceneEnvironment { backgroundMode: SceneEnvironment.Color; clearColor: "#333" }
+//    environment: SceneEnvironment { backgroundMode: SceneEnvironment.Color; clearColor: "#333" }
     DirectionalLight { }
     DirectionalLight { eulerRotation.x: 180 }
     PerspectiveCamera { id: camera }
@@ -70,7 +70,7 @@ View3D {
 
     FileDialog {
         id: fileDialog; title: "3D model to open"
-        nameFilters: ["STL files (*.stl)", "glTF files (*.gltf *.glb)", "All files (*)"]
+        nameFilters: ["glTF files (*.gltf *.glb)", "STL files (*.stl)", "All files (*)"]
         onAccepted: loader.source = currentFile
         Settings {
             category: "QtQuick3D.Examples.RuntimeLoader"
