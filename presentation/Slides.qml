@@ -39,7 +39,9 @@ Presentation {
 <H1>Interactive UIs in Qt Quick 3D</H1>
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
-<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.
+<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/><br/>
+<tt>https://github.com/ec1oud/qtquick3d-input-demo</tt><br/>
+<tt>https://github.com/ec1oud/qt-presentations : qtquick3d-interactive-ui</tt> branch<br/>
 </html>"
         Rectangle {
             anchors.fill: parent
@@ -133,15 +135,87 @@ Shawn Rutledge<br/>
 //    }
 
     QmlSlide {
-        title: "2D content in 3D apps"
+        title: "2D content in a 3D app"
         sourceFile: "examples/qtquick3d-input-demo/digital-assistant/scene.qml"
         verticalMargin: 80
     }
 
     QmlSlide {
-        title: "Interactive 3D apps"
+        title: "Interactive 3D app"
         sourceFile: "examples/qtquick3d-input-demo/mixer/view.qml"
         verticalMargin: 80
+    }
+
+    Slide {
+        title: "Preparing third-party GLTF for QQ3D"
+        bulletSpacing: 0.6
+        content: [
+            "Download something interesting (http://skfb.ly/ etc.)",
+            "Import into Blender",
+            "Split meshes of interactive elements into separate objects",
+            "Set origins of rotable elements to centers",
+            "Set 3D cursor to origin",
+            "Move/rotate interactive controls to 'zero'",
+            "Re-export to gltf / glb",
+            "$ balsam myfile.glb",
+            "write a QML viewer and look at Myfile.qml in it"
+        ]
+    }
+
+    ImageSlide {
+        title: "Blender: lasso vertices, select linked vertices"
+        autoScale: true
+        source: Qt.resolvedUrl("resources/blender-select-linked.png")
+    }
+
+    ImageSlide {
+        title: "Blender: set origin"
+        autoScale: true
+        source: Qt.resolvedUrl("resources/blender-set-origin.png")
+    }
+
+    ImageSlide {
+        title: "Blender: rotate an object"
+        autoScale: true
+        source: Qt.resolvedUrl("resources/blender-rotate-object.png")
+    }
+
+    CustomCodeSlide {
+        title: "Balsam output"
+        sourceFile: "resources/Mixetta-balsam.qml"
+    }
+
+    Slide {
+        title: "Make Balsam output interactive"
+        bulletSpacing: 0.6
+        content: [
+            "Simplify the QML (reduce nesting etc.)",
+            "Rotatable element? convert quaternion to Euler angles",
+            " QQuaternion::toEulerAngles()",
+            "Make Models pickable",
+            "Add handlers to them",
+            "Make bindings to rotate, drag etc.",
+            " DragHandler.persistentTranslation",
+            " WheelHandler.rotation",
+            " TapHandler.pressed",
+            " PinchHandler.scale",
+            " PinchHandler.persistentTranslation is missing so far"
+        ]
+        Image {
+            source: "resources/quaternion-converter.png"
+            width: 447 * 2
+            height: 116 * 2
+            sourceSize.width: width
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.margins: 400
+            anchors.topMargin: 550
+        }
+    }
+
+    CustomCodeSlide {
+        title: "Rigging Balsam output"
+        sourceFile: "resources/mixetta.diff"
     }
 
     Slide {
@@ -149,10 +223,10 @@ Shawn Rutledge<br/>
         textFormat: Text.StyledText
         bulletSpacing: 0.6
         content: [
-            "Flickable: make it flick nicer",
-            "Flickable: event replay",
-            "rename QPointingDevice to QPointerDevice?",
-            "get rid of QPointingDevice::pointerType?"
+            "Ensure that we can really use handlers in 3D",
+            "Hover bugs",
+            "WasdController stealing events",
+            "Controls stealing events"
         ]
     }
 
@@ -161,6 +235,8 @@ Shawn Rutledge<br/>
         textFormat: Text.StyledText
         bulletSpacing: 0.6
         content: [
+            "Play with it!",
+            "Imagine new use cases",
             "Design standard toolbar icons for 3D applications"
         ]
     }
@@ -173,7 +249,9 @@ Shawn Rutledge<br/>
 <H1>Interactive UIs in Qt Quick 3D</H1>
 Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
-<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.
+<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/><br/>
+<tt>https://github.com/ec1oud/qtquick3d-input-demo</tt><br/>
+<tt>https://github.com/ec1oud/qt-presentations : qtquick3d-interactive-ui</tt> branch<br/>
 </html>"
     }
 
