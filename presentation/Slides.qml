@@ -141,6 +141,12 @@ Shawn Rutledge<br/>
         verticalMargin: 80
     }
 
+    ImageSlide {
+        title: "Event Delivery to Subscene (simplified)"
+        autoScale: true
+        source: Qt.resolvedUrl("resources/subscene-delivery-seq.png")
+    }
+
     QmlSlide {
         title: "Virtual Screen on a Model"
         sourceFile: "examples/qtquick3d-input-demo/digital-assistant/scene.qml"
