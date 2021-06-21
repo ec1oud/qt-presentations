@@ -221,8 +221,8 @@ Shawn Rutledge<br/>
             sourceSize.width: width
             anchors.right: parent.right
             anchors.top: parent.top
-            anchors.margins: 400
-            anchors.topMargin: 550
+            anchors.margins: 300
+            anchors.topMargin: 650
         }
     }
 
@@ -257,6 +257,16 @@ Shawn Rutledge<br/>
             "Play with it!",
             "Imagine new use cases",
             "Design standard toolbar icons for 3D applications"
+        ]
+    }
+
+    Slide {
+        title: "Other demo videos"
+        textFormat: Text.StyledText
+        bulletSpacing: 0.6
+        content: [
+            "Hackathon spaceship: https://d.tube/#!/v/ecloud/QmWJVDywsnaK8WCFTb8bMLUwEKmxvfBQVw8G3ATepbGhqB",
+            "Digital assistant: https://d.tube/#!/v/ecloud/QmVATRbK6pDpwXwS1sTfUagpVCtdGye1v66mgonfvYTDGF"
         ]
     }
 
