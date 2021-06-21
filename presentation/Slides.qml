@@ -111,6 +111,12 @@ Shawn Rutledge<br/>
         ]
     }
 
+    QmlSlide {
+        title: "Minimal Model Viewer"
+        sourceFile: "examples/modelViewer.qml"
+        verticalMargin: 80
+    }
+
     ImageSlide {
         title: "Most-common QML Types"
         autoScale: true
@@ -124,18 +130,19 @@ Shawn Rutledge<br/>
     }
 
     QmlSlide {
-        title: "Minimal Model Viewer"
-        sourceFile: "examples/modelViewer.qml"
+        title: "2D content in a 3D app: Item2D"
+        sourceFile: "examples/item2d.qml"
         verticalMargin: 80
     }
 
-//    CustomCodeSlide {
-//        title: "Minimal Model Viewer"
-//        sourceFile: "examples/modelViewer.qml"
-//    }
+    QmlSlide {
+        title: "Materials with shared Textures"
+        sourceFile: "examples/defaultMaterial.qml"
+        verticalMargin: 80
+    }
 
     QmlSlide {
-        title: "2D content in a 3D app"
+        title: "Virtual Screen on a Model"
         sourceFile: "examples/qtquick3d-input-demo/digital-assistant/scene.qml"
         verticalMargin: 80
     }
@@ -216,6 +223,12 @@ Shawn Rutledge<br/>
     CustomCodeSlide {
         title: "Rigging Balsam output"
         sourceFile: "resources/mixetta.diff"
+    }
+
+    QmlSlide {
+        title: "Ray Picking"
+        sourceFile: "examples/rayPicking.qml"
+        horizontalMargin: 100
     }
 
     Slide {
