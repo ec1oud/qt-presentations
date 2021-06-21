@@ -1,0 +1,131 @@
+
+\beamertemplatenavigationsymbolsempty
+
+\usepackage[utf8x]{inputenc}
+\usepackage{beamerthemeAir}
+\usepackage{bookman}
+% \beamertemplateballitem
+
+%\usepackage[svgnames]{xcolor}
+\usepackage{listings}
+\usepackage{color}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+\lstset{
+    language=C++,
+    frame=lines,
+    breaklines=true,
+    tabsize=4,
+    extendedchars=true,
+    columns=fixed,
+    numbers=left,
+    stepnumber=1,
+    numbersep=5pt,
+    numberstyle=\scriptsize,
+    basicstyle=\ttfamily\scriptsize,
+    keywordstyle=\color{blue}, % \color{blue}
+    identifierstyle={\color{Black}},
+    commentstyle=\color{Green},
+    stringstyle=\color{red},
+    backgroundcolor={\color{white}},
+    showstringspaces=false,
+    morekeywords = {
+        Q_OBJECT, Q_PROPERTY, Q_INTERFACES, Q_SLOTS, Q_SIGNALS, foreach, qobject_cast
+        }
+}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+\lstset{
+    language=JavaScript,
+%    frame=lines,
+    breaklines=true,
+    tabsize=4,
+    extendedchars=true,
+    columns=fixed,
+    numbers=left,
+    stepnumber=1,
+    numbersep=5pt,
+    numberstyle=\scriptsize,
+    basicstyle=\ttfamily\scriptsize,
+%     keywordstyle=\color{blue},
+%     identifierstyle={\color{black}},
+%     commentstyle=\color{green},
+%     stringstyle=\color{red},
+%     backgroundcolor={\color{white}},
+    showstringspaces=false,
+}
+\usepackage{algorithmicx}
+\usepackage{multirow}
+\usepackage{pdfpages}
+
+\usepackage{soul}
+\renewcommand<>{\hl}[1]{\sethlcolor{airlightblue}\only#2{\beameroriginal{\hl}}{#1}}
+\makeatletter
+\newcommand\SoulColor{%
+  \let\set@color\beamerorig@set@color
+  \let\reset@color\beamerorig@reset@color}
+\makeatother
+\SoulColor
+
+\setbeamercovered{dynamic}
+
+\AtBeginSection[] {
+\begin{frame}<beamer>
+\frametitle{Next up...}
+\tableofcontents[currentsection]
+\end{frame}}
+
+\makeatletter
+    \newenvironment{withoutheadline}{
+        \setbeamertemplate{headline}{\vskip \headheight}
+    }{}
+\makeatother
+\makeatletter
+    \newenvironment{withoutfootline}{
+        \setbeamertemplate{footline}{\vskip \headheight}
+    }{}
+\makeatother
+
+
+\setbeamertemplate{title page}{%
+\noindent
+
+\vspace{.25\textheight}
+
+\centering
+{\huge\bfseries\textcolor{airdarkblue}{\inserttitle}}
+
+\vspace{.1\textheight}
+
+\noindent\centering
+{\large\insertsubtitle}
+
+\vspace{.35\textheight}
+
+\noindent
+\begin{minipage}{.5\textwidth}
+ \insertauthor
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+ \begin{flushright}
+  \href{mailto:\authoremail}{\authoremail}
+ \end{flushright}
+\end{minipage}
+
+}
+

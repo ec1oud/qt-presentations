@@ -1,0 +1,143 @@
+\documentclass[t,compress,aspectratio=169]{beamer}
+\include{preamble}
+
+\title{Your Title}
+\subtitle{a short little subtitle}
+\author{Your Name}
+\newcommand{\authoremail}{your@email.org}
+
+% Pick a page header image (alternatively create another square image and set that)
+% \pgfdeclareimage[height=.1\paperheight]{pageheader}{categories/cassette.jpg}
+% \pgfdeclareimage[height=.1\paperheight]{pageheader}{categories/cursor.jpg}
+% \pgfdeclareimage[height=.1\paperheight]{pageheader}{categories/desktop.jpg}
+% \pgfdeclareimage[height=.1\paperheight]{pageheader}{categories/disc.jpg}
+% \pgfdeclareimage[height=.1\paperheight]{pageheader}{categories/gears.jpg}
+\pgfdeclareimage[height=.1\paperheight]{pageheader}{categories/handshake.jpg}
+% \pgfdeclareimage[height=.1\paperheight]{pageheader}{categories/headphones.jpg}
+% \pgfdeclareimage[height=.1\paperheight]{pageheader}{categories/mouse.jpg}
+% \pgfdeclareimage[height=.1\paperheight]{pageheader}{categories/thumbsup.jpg}
+% \pgfdeclareimage[height=.1\paperheight]{pageheader}{categories/touch.jpg}
+
+\begin{document}
+
+\usebackgroundtemplate{\includegraphics[height=\paperheight]{1920x1080-akademy}}
+\begin{withoutheadline}
+\begin{withoutfootline}
+\begin{frame}
+\titlepage
+\end{frame}
+\end{withoutfootline}
+\end{withoutheadline}
+\usebackgroundtemplate{\includegraphics[height=\paperheight]{1920x1080-noakademy}}
+
+%==============================================================================
+\section{Your First Section}
+
+\subsection{Some Subsection}
+
+\begin{frame}
+    \frametitle{The First Slide}
+    \begin{description}
+        \item[Something] Something Something
+        \pause
+        \item[More] More things
+        \pause
+        \item[Etcetera] Further information
+    \end{description}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Second Slide}
+    \begin{description}
+        \item[Whatever] Stuff
+        \pause
+        \item[Stuff] Further stuff
+        \pause
+        \item[Thangs] Even stuffer
+    \end{description}
+\end{frame}
+
+\subsection{Other things}
+
+\begin{frame}
+    \frametitle{The Third Slide}
+    \begin{itemize}
+        \item Something Something
+        \item More things
+        \item Further information
+    \end{itemize}
+\end{frame}
+
+
+
+%==============================================================================
+\section{The Demo}
+\subsection{The Demo}
+\begin{frame}
+ \frametitle{Live Demonstration}
+    \vspace{2.5cm}
+    \begin{block}{}
+        \centering\begin{Huge}Demo time!\end{Huge}
+    \end{block}
+\end{frame}
+
+
+%==============================================================================
+\section{The End}
+\subsection{The End}
+\begin{frame}
+    \frametitle{The End}
+    \vspace{0.3cm}
+    \begin{block}{}
+        \centering\begin{Huge}Question Time\end{Huge}
+    \end{block}
+    \vspace{1.1cm}
+    \begin{tiny}
+        \begin{block}{Addresses and such}
+            \begin{description}
+                \item[Project Name] \url{http://your.url/}\\ \url{http://another.url/}\\ irc: \#channelname on freenode
+                \item[Author] Your Name\\irc: yournick on freenode
+                \item[Author] Other Name\\irc: theirnick on freenode
+                \item[Author] More People\\irc: othernick on freenode
+            \end{description}
+        \end{block}
+    \end{tiny}
+\end{frame}
+
+
+% \appendix
+% 
+% \section{Appendix}
+% 
+% \subsection{BoF}
+
+
+% \begin{frame}
+%     \frametitle{Components}
+%     \begin{columns}
+%         \begin{column}{0.5\textwidth}
+%             \bigskip
+%             \begin{itemize}
+%                 \item Leaves
+%                     \begin{itemize}
+%                         \item Behavior
+%                         \item Reference
+%                     \end{itemize}
+%                 \item Composites
+%                     \begin{itemize}
+%                         \item Sequence
+%                         \item Selector
+%                         \item ...
+%                     \end{itemize}
+%                 \item Decorators
+%             \end{itemize}
+%         \end{column}
+%         \begin{column}{0.41\textwidth}
+%             \begin{center}
+%                 \noindent\includegraphics[width=\textwidth]{behavior-tree.pdf}
+%             \end{center}
+%         \end{column}
+%     \end{columns}
+% \end{frame}
+
+\end{document}

@@ -3,4 +3,4 @@ TARGET = present
 TEMPLATE = app
 SOURCES += main.cpp ../tools/printslides/slideview.cpp
 HEADERS += ../tools/printslides/slideview.h
-OTHER_FILES = *.qml examples/*.qml
+OTHER_FILES = *.qml examples/*.qml examples/*/*.qml

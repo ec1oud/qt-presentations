@@ -8,7 +8,7 @@ import QtQuick3D.Helpers
 import QtQuick3D.AssetUtils
 
 View3D {
-    id: view3D; width: 800; height: 600
+    id: view3D; width: 2048; height: 2048; y: 100
 
 //    environment: SceneEnvironment { backgroundMode: SceneEnvironment.Color; clearColor: "#333" }
     DirectionalLight { }

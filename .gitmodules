@@ -1,0 +1,3 @@
+[submodule "presentation/examples/qtquick3d-input-demo"]
+	path = presentation/examples/qtquick3d-input-demo
+	url = https://github.com/ec1oud/qtquick3d-input-demo

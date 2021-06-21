@@ -1,0 +1,132 @@
+\usetheme{Rochester}
+
+\definecolor{airorange}{rgb}{.953 ,.502 ,.04}
+\definecolor{airdarkblue}{HTML}{2F5896}
+\definecolor{airlightblue}{HTML}{0099d5}
+\definecolor{airgray}{HTML}{8790A0}
+\definecolor{airlightgray}{HTML}{BECBE1}
+\definecolor{airblue}{HTML}{4684E1}
+
+\setbeamercolor*{normal text}{fg=black,bg=white}
+
+\DeclareOption{overlystylish}
+{
+  \def\beamer@cta@do{
+    \setbeamertemplate{background canvas}[vertical shading][bottom=black,top=black,middle=blue!50!black]
+  }
+}
+\ProcessOptions
+
+\@ifundefined{beamer@cta@do}{}{\beamer@cta@do}
+
+\mode<presentation>
+
+\setbeamercolor*{example text}{fg=gray!65!black}
+
+\setbeamercolor*{structure}{fg=airdarkblue}
+
+\setbeamercolor{palette primary}{use={structure,normal text},fg=structure.fg,bg=normal text.bg!75!black}
+\setbeamercolor{palette secondary}{use={structure,normal text},fg=structure.fg,bg=normal text.bg!60!black}
+\setbeamercolor{palette tertiary}{use={structure,normal text},fg=structure.fg,bg=normal text.bg!45!black}
+\setbeamercolor{palette quaternary}{use={structure,normal text},fg=structure.fg,bg=normal text.bg!30!black}
+
+\setbeamercolor*{block body}{bg=normal text.bg!90!black}
+\setbeamercolor*{block body alerted}{bg=normal text.bg!90!red}
+\setbeamercolor*{block body example}{bg=normal text.bg!90!green}
+\setbeamercolor*{block title}{use={normal text},fg=normal text.fg!75!normal text.fg,bg=normal text.bg!75!airlightgray}
+\setbeamercolor*{block title alerted}{use={normal text,alerted text},fg=alerted text.fg!75!normal text.fg,bg=normal text.bg!75!airlightgray}
+\setbeamercolor*{block title example}{use={normal text,example text},fg=example text.fg!75!normal text.fg,bg=normal text.bg!75!airlightgray}
+
+\setbeamercolor{item projected}{fg=airlightgray}
+
+\setbeamercolor*{sidebar}{parent=palette primary}
+
+\setbeamercolor{palette sidebar primary}{use=normal text,fg=normal text.fg}
+\setbeamercolor{palette sidebar secondary}{use=structure,fg=structure.fg}
+\setbeamercolor{palette sidebar tertiary}{use=normal text,fg=normal text.fg}
+\setbeamercolor{palette sidebar quaternary}{use=structure,fg=structure.fg}
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+\mode
+<all>
+
+\RequirePackage{pgf}
+
+\pgfdeclareimage[width=1.0\paperwidth]{1920x1080-akademy}{1920x1080-akademy}
+\pgfdeclareimage[width=1.0\paperwidth]{1920x1080-noakademy}{1920x1080-noakademy}
+\pgfdeclareimage[width=0.9\paperwidth]{framebackground}{just-bg}
+%\pgfdeclareimage[width=1.0\paperwidth]{freedom-is-the-new-cool}{freedom-is-the-new-cool}
+\usebackgroundtemplate{\includegraphics[height=\paperheight]{1920x1080dark}}
+
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamercovered{transparent}
+
+\beamer@headheight=0.11\paperwidth
+
+\setbeamercolor*{Title bar}{fg=black}
+\setbeamercolor*{Location bar}{fg=airlightgray,bg=}
+\setbeamercolor*{frametitle}{parent=Title bar}
+% \setbeamercolor*{block title}{bg=black,fg=white}
+% \setbeamercolor*{block body}{bg=white,fg=airgray}
+\setbeamercolor*{section in head/foot}{bg=black,fg=airlightblue}
+
+% \usecolortheme[named=airorange]{structure}
+
+\setbeamerfont{section in head/foot}{size=\tiny,series=\normalfont}
+\setbeamerfont{frametitle}{size=\Large}
+
+\setbeamertemplate{sidebar right}{default}
+{
+  %no navigation symbols in the sidebar for us, we have them elsewhere
+}
+
+
+%\setbeamertemplate{headline}
+\setbeamertemplate{frametitle}
+{
+  \vskip-0.25\beamer@headheight
+  \vskip-\baselineskip
+  \vskip-0.2cm
+  \hskip0.7cm\usebeamerfont*{frametitle}\insertframetitle
+  \vskip-0.10em
+  \hskip0.5cm\usebeamerfont*{framesubtitle}\insertframesubtitle
+}
+
+\setbeamertemplate{headline}
+{
+  \linethickness{0.0pt}
+%  \linethickness{0.25pt}
+
+  \framelatex{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.1\beamer@headheight]{Title bar}
+    \usebeamerfont{section in head/foot}%
+%     \insertsectionnavigationhorizontal{\paperwidth}{\hskip0.22cm}{\hskip0.22cm}%
+    \vspace{\baselineskip}
+    \vskip2pt
+    
+  \end{beamercolorbox}}
+
+  \framelatex{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=.55\beamer@headheight]{Title bar}%
+     \hspace{0.85\paperwidth}\pgfuseimage{pageheader}
+  \end{beamercolorbox}}
+  
+  \framelatex{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=.35\beamer@headheight]{Title bar}%
+  \end{beamercolorbox}}
+}
+
+\setbeamertemplate{footline}
+{
+  \linethickness{0.0pt}
+  \framelatex{
+  \begin{beamercolorbox}[leftskip=0pt,wd=\paperwidth,ht=0.3\beamer@headheight,sep=4pt]{Location bar}
+    \usebeamerfont{section in head/foot}%
+    \usebeamertemplate***{navigation symbols}
+    \insertshorttitle~|~\insertshortauthor\hfill
+    \insertframenumber/\inserttotalframenumber
+  \end{beamercolorbox}}
+}
+
