@@ -41,7 +41,8 @@ Shawn Rutledge<br/>
 <tt>shawn.rutledge@qt.io</tt><br/>
 <tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/><br/>
 <tt>https://github.com/ec1oud/qtquick3d-input-demo</tt><br/>
-<tt>https://github.com/ec1oud/qt-presentations : qtquick3d-interactive-ui</tt> branch<br/>
+<tt>https://github.com/ec1oud/qt-presentations<br/>
+qtquick3d-interactive-ui</tt> branch<br/>
 </html>"
         Rectangle {
             anchors.fill: parent
@@ -98,7 +99,9 @@ Shawn Rutledge<br/>
         bulletSpacing: 0.6
         content: [
             "I didn't implement Qt Quick 3D, only event delivery",
-            "This presentation contains features we haven't shipped"
+            "This presentation contains features we haven't shipped",
+            " https://codereview.qt-project.org/c/qt/qtdeclarative/+/341515",
+            " https://codereview.qt-project.org/c/qt/qtquick3d/+/338190"
         ]
     }
 
@@ -129,6 +132,12 @@ Shawn Rutledge<br/>
         source: Qt.resolvedUrl("resources/qq3d-tool-workflow.svg")
     }
 
+    ImageSlide {
+        title: "Qt Creator's 3D Design Tab"
+        autoScale: true
+        source: Qt.resolvedUrl("resources/qt-creator-3d-design.jpg")
+    }
+
     QmlSlide {
         title: "2D content in a 3D app: Item2D"
         sourceFile: "examples/item2d.qml"
@@ -142,9 +151,15 @@ Shawn Rutledge<br/>
     }
 
     ImageSlide {
-        title: "Event Delivery to Subscene (simplified)"
+        title: "Mouse Press: Delivery to Subscene"
         autoScale: true
-        source: Qt.resolvedUrl("resources/subscene-delivery-seq.png")
+        source: Qt.resolvedUrl("resources/subscene-delivery-mouse-press-seq.png")
+    }
+
+    ImageSlide {
+        title: "Mouse Drag: Delivery to Subscene"
+        autoScale: true
+        source: Qt.resolvedUrl("resources/subscene-delivery-mouse-drag-seq.png")
     }
 
     QmlSlide {
@@ -212,7 +227,8 @@ Shawn Rutledge<br/>
             " WheelHandler.rotation",
             " TapHandler.pressed",
             " PinchHandler.scale",
-            " PinchHandler.persistentTranslation is missing so far"
+            " PinchHandler.persistentTranslation is missing so far",
+            " HandlerPoint.modelPosition and worldPosition (QVector3D)"
         ]
         Image {
             source: "resources/quaternion-converter.png"
@@ -232,6 +248,12 @@ Shawn Rutledge<br/>
     }
 
     QmlSlide {
+        title: "Pointer Handler Bindings in 3D"
+        sourceFile: "examples/hoverTapDragPinch3d.qml"
+        horizontalMargin: 100
+    }
+
+    QmlSlide {
         title: "Ray Picking"
         sourceFile: "examples/rayPicking.qml"
         horizontalMargin: 100
@@ -242,8 +264,11 @@ Shawn Rutledge<br/>
         textFormat: Text.StyledText
         bulletSpacing: 0.6
         content: [
-            "Ensure that we can really use handlers in 3D",
+            "Consensus that we can really use handlers in 3D",
+            "Handlers in 3D don't break Designer",
+            "Convert 2D mouse deltas to 3D deltas (e.g. for dragging)",
             "Hover bugs",
+            "Picking bugs (?)",
             "WasdController stealing events",
             "Controls stealing events"
         ]

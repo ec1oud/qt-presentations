@@ -1,0 +1,54 @@
+@startuml
+participant "QPointingDevicePrivate"
+participant "EventPointData"
+activate QGuiApp
+QGuiApp -> QGuiApp : processMouseEvent
+note right: QPA mouse move with button still pressed
+QGuiApp -> QPointingDevicePrivate : pointById
+QPointingDevicePrivate --> QGuiApp : EventPointData
+QGuiApp -> QMouseEvent : ctor
+activate QMouseEvent
+QGuiApp -> QQuickWindow : event
+activate QQuickWindow
+participant "QQDeliveryAgent"
+participant "TapHandler"
+QQuickWindow -> QPointingDevicePrivate : pointById
+QPointingDevicePrivate --> QQuickWindow : EventPointData
+activate EventPointData
+QQuickWindow -> EventPointData : get exclusiveGrabberContext
+QQuickWindow -> EventPointData : get passiveGrabbersContext(s)
+deactivate EventPointData
+QQuickWindow -> subscene_QQDeliveryAgent : event
+activate subscene_QQDeliveryAgent
+group Subscene Event Delivery
+subscene_QQDeliveryAgent -> subscene_QQDeliveryAgent : deliverPointerEvent
+subscene_QQDeliveryAgent -> ViewportTransformHelper : map(scenePosition)
+activate ViewportTransformHelper
+deactivate ViewportTransformHelper
+note right: EventPoint transformed for subscene
+subscene_QQDeliveryAgent -> subscene_QQDeliveryAgent : deliverUpdatedPoints
+note right: finds the grabbers; exclusive grabber goes first
+subscene_QQDeliveryAgent -> subscene_QQDeliveryAgent : deliverMatchingPointsToItem
+subscene_QQDeliveryAgent -> Item : event
+activate Item
+deactivate Item
+subscene_QQDeliveryAgent -> DragHandler : handlePointerEvent
+activate DragHandler
+deactivate DragHandler
+deactivate subscene_QQDeliveryAgent
+end
+QQuickWindow -> QQDeliveryAgent : event
+activate QQDeliveryAgent
+group Event Delivery in Window's DeliveryAgent
+QQDeliveryAgent -> QQDeliveryAgent : deliverPointerEvent
+QQDeliveryAgent -> QQDeliveryAgent : deliverUpdatedPoints
+note right: finds the passive grabber
+QQDeliveryAgent -> TapHandler : handlePointerEvent
+activate TapHandler
+deactivate TapHandler
+deactivate QQDeliveryAgent
+end
+deactivate QQuickWindow
+deactivate QGuiApp
+destroy QMouseEvent
+@enduml

@@ -37,13 +37,13 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="0.94867185"
-     inkscape:cx="696.23653"
-     inkscape:cy="388.43779"
-     inkscape:window-width="3840"
-     inkscape:window-height="2135"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
+     inkscape:cx="650.91001"
+     inkscape:cy="105.93758"
+     inkscape:window-width="3764"
+     inkscape:window-height="2081"
+     inkscape:window-x="98"
+     inkscape:window-y="48"
+     inkscape:window-maximized="0"
      inkscape:current-layer="layer1"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -1517,8 +1517,8 @@
     <image
        xlink:href="stl-benchy.png"
        style="stroke-width:4.09542"
-       y="113.23586"
-       x="10.711989"
+       y="53.621899"
+       x="5.3971686"
        id="image79"
        preserveAspectRatio="none"
        height="17.670012"
@@ -1650,18 +1650,18 @@
     </g>
     <path
        class="st0"
-       d="m -12.131167,64.497875 c -2.570854,-0.08994 -6.078609,-1.29667 -6.805643,-3.043052 -0.633345,-1.59273 -0.01124,-3.447793 2.953109,-4.766948 1.757625,-0.760763 4.418422,-0.978124 6.4683597,-0.790744 2.911886,0.269827 5.6851107,1.821334 5.6888583,1.825082 l 0.00375,2.181104 v 0.146156 c 0,0 -0.9031718,-0.84321 -2.0311997,-1.521526 -1.0605711,-0.64084 -2.0349474,-1.090552 -3.9649619,-1.270437 -0.4497124,-0.04122 -1.2217184,-0.146156 -2.4659214,0.03748 -0.502179,0.07495 -1.210476,0.131166 -2.806954,0.858201 -0.517169,0.254837 -0.993114,0.528412 -1.360379,0.846958 -0.191127,0.164894 -0.453459,0.400993 -0.637092,0.595868 -0.45346,0.592121 -0.693306,1.034338 -0.57713,1.836325 0.134913,0.603364 0.393498,0.981871 1.143018,1.559002 0.326041,0.251089 0.363517,0.247341 0.505926,0.326041 1.341641,0.715792 2.413455,0.978124 3.946224,1.172999"
+       d="m -12.131167,87.440833 c -2.570854,-0.08994 -6.078609,-1.29667 -6.805643,-3.043052 -0.633345,-1.59273 -0.01124,-3.447793 2.953109,-4.766948 1.757625,-0.760763 4.418422,-0.978124 6.4683597,-0.790744 2.911886,0.269827 5.6851107,1.821334 5.6888583,1.825082 l 0.00375,2.181104 v 0.146156 c 0,0 -0.9031718,-0.84321 -2.0311997,-1.521526 -1.0605711,-0.64084 -2.0349474,-1.090552 -3.9649619,-1.270437 -0.4497124,-0.04122 -1.2217184,-0.146156 -2.4659214,0.03748 -0.502179,0.07495 -1.210476,0.131166 -2.806954,0.858201 -0.517169,0.254837 -0.993114,0.528412 -1.360379,0.846958 -0.191127,0.164894 -0.453459,0.400993 -0.637092,0.595868 -0.45346,0.592121 -0.693306,1.034338 -0.57713,1.836325 0.134913,0.603364 0.393498,0.981871 1.143018,1.559002 0.326041,0.251089 0.363517,0.247341 0.505926,0.326041 1.341641,0.715792 2.413455,0.978124 3.946224,1.172999"
        id="path578"
        style="fill:#f1a42b;fill-opacity:0.996338;stroke:none;stroke-width:0.264583" />
     <path
        class="st0"
-       d="m -12.007496,57.564814 c 2.5746019,-0.01499 6.2285129,1.04558 7.1804036,2.758234 0.835715,1.56275 0.4534597,3.440298 -2.3310079,4.875629 -1.6564396,0.82822 -4.2835077,1.158009 -6.3521837,1.049328 -2.938119,-0.149904 -5.902472,-1.585235 -5.909967,-1.588983 l -0.284817,-2.173608 -0.01499,-0.146157 c 0,0 1.008105,0.805734 2.222328,1.435331 1.143018,0.595869 2.169861,1.004357 4.118613,1.105543 0.457207,0.02248 1.236708,0.09369 2.454679,-0.134914 0.490935,-0.09369 1.1917368,-0.179885 2.6870296,-0.966881 0.4834406,-0.277322 0.9219099,-0.569635 1.2479512,-0.899424 0.1723896,-0.17239 0.4009933,-0.415984 0.5621401,-0.622102 0.3785077,-0.607111 0.5583926,-1.060571 0.3410317,-1.855062 -0.2098656,-0.595869 -0.5209165,-0.963134 -1.3416411,-1.506536 -0.3560221,-0.236099 -0.3934981,-0.232351 -0.5471498,-0.303556 -1.4315836,-0.65583 -2.5333787,-0.876938 -4.0886327,-1.008104"
+       d="m -12.007496,80.507772 c 2.5746019,-0.01499 6.2285129,1.04558 7.1804036,2.758234 0.835715,1.56275 0.4534597,3.440298 -2.3310079,4.875629 -1.6564396,0.82822 -4.2835077,1.158009 -6.3521837,1.049328 -2.938119,-0.149904 -5.902472,-1.585235 -5.909967,-1.588983 l -0.284817,-2.173608 -0.01499,-0.146157 c 0,0 1.008105,0.805734 2.222328,1.435331 1.143018,0.595869 2.169861,1.004357 4.118613,1.105543 0.457207,0.02248 1.236708,0.09369 2.454679,-0.134914 0.490935,-0.09369 1.1917368,-0.179885 2.6870296,-0.966881 0.4834406,-0.277322 0.9219099,-0.569635 1.2479512,-0.899424 0.1723896,-0.17239 0.4009933,-0.415984 0.5621401,-0.622102 0.3785077,-0.607111 0.5583926,-1.060571 0.3410317,-1.855062 -0.2098656,-0.595869 -0.5209165,-0.963134 -1.3416411,-1.506536 -0.3560221,-0.236099 -0.3934981,-0.232351 -0.5471498,-0.303556 -1.4315836,-0.65583 -2.5333787,-0.876938 -4.0886327,-1.008104"
        id="path580"
        style="fill:#f1a42b;fill-opacity:1;stroke-width:0.264583" />
     <g
        id="g598"
        style="stroke-width:7.06007"
-       transform="matrix(0.03747601,0,0,0.03747601,-30.876667,51.68108)">
+       transform="matrix(0.03747601,0,0,0.03747601,-30.876667,74.624038)">
       <path
          class="st1"
          d="m 243.4,237.1 c -2.7,-19.2 -21.1,-33.9 -42.2,-33.9 -38.2,0 -52.5,32.5 -52.5,66.3 0,32.2 14.4,64.7 52.5,64.7 26,0 40.6,-17.9 43.9,-43.3 h 41.2 c -4.3,48.2 -37.6,79.1 -85,79.1 -59.8,0 -95.1,-44.7 -95.1,-100.5 0,-57.4 35.2,-102.1 95.1,-102.1 42.5,0 78.3,24.9 83.4,69.6 h -41.3 z"
@@ -1697,7 +1697,7 @@
        id="TM_2_"
        class="st2"
        style="stroke-width:7.06007"
-       transform="matrix(0.03747601,0,0,0.03747601,-30.876667,51.68108)">
+       transform="matrix(0.03747601,0,0,0.03747601,-30.876667,74.624038)">
       <path
          class="st1"
          d="m 1612.2,347.5 h -7.3 v 18.9 h -6.3 v -18.9 h -7.3 V 342 h 20.9 z"
@@ -1711,7 +1711,7 @@
     </g>
     <image
        xlink:href="fbx_logo.png"
-       y="73.188202"
+       y="93.520996"
        x="-9.8573523"
        id="image681"
        preserveAspectRatio="none"
@@ -1721,46 +1721,35 @@
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="6.9965639"
-       y="88.498177"
+       y="108.83097"
        id="text3481"><tspan
          sodipodi:role="line"
          id="tspan3479"
          style="stroke-width:0.264583px"
          x="6.9965639"
-         y="88.498177">.fbx</tspan></text>
+         y="108.83097">.fbx</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.99857px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="-36.141933"
-       y="105.90701"
+       y="127.23619"
        id="text4981"><tspan
          sodipodi:role="line"
          id="tspan4979"
          style="stroke-width:0.264583px"
          x="-36.141933"
-         y="105.90701">WAVEFRONT .obj</tspan></text>
+         y="127.23619">WAVEFRONT .obj</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="19.926006"
-       y="143.89723"
+       y="139.07124"
        id="text11771"><tspan
          sodipodi:role="line"
          id="tspan11769"
          style="stroke-width:0.264583px"
          x="19.926006"
-         y="143.89723">...</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="60.472824"
-       y="120.16714"
-       id="text14157"><tspan
-         sodipodi:role="line"
-         id="tspan14155"
-         style="stroke-width:0.264583px"
-         x="60.472824"
-         y="120.16714">AssImp</tspan></text>
+         y="139.07124">...</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.99958px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1789,7 +1778,7 @@
        sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 33.812175,141.33828 24.072239,-25.91292 v 0"
+       d="m 33.030088,138.32352 24.854326,-22.89816 v 0"
        id="path38821"
        sodipodi:nodetypes="ccc" />
     <path
@@ -1885,7 +1874,7 @@
     </g>
     <path
        style="color:#000000;fill:#000000;fill-rule:evenodd"
-       d="m 199.10157,83.433116 -89.28516,31.949694 0.0352,0.26172 89.28321,-31.947744 z"
+       d="m 199.02614,83.542344 -118.107252,24.944446 0.0352,0.26172 118.105302,-24.942496 z"
        id="path11717"
        sodipodi:nodetypes="ccccc" />
     <g
@@ -1905,27 +1894,16 @@
     </g>
     <image
        xlink:href="ds-logo.png"
-       y="147.74927"
-       x="79.818329"
+       y="105.69246"
+       x="172.35854"
        id="image58809"
        preserveAspectRatio="none"
        height="28.575001"
        width="38.099998" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.99958px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="61.328011"
-       y="129.63403"
-       id="text34236"><tspan
-         sodipodi:role="line"
-         style="text-align:start;text-anchor:start;stroke-width:0.264583px"
-         x="61.328011"
-         y="129.63403"
-         id="tspan34234">asset importer library</tspan></text>
     <g
        style="clip-rule:evenodd;fill-rule:evenodd;stroke-width:8.17347;stroke-linejoin:round;stroke-miterlimit:2"
        id="g509"
-       transform="matrix(0.03237099,0,0,0.03237099,-104.55227,15.487305)">
+       transform="matrix(0.03237099,0,0,0.03237099,-104.55227,14.457769)">
       <g
          transform="translate(-7.7861)"
          id="g483"
@@ -2026,18 +2004,18 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="-105.38323"
-       y="46.976448"
+       x="-101.05201"
+       y="70.457779"
        id="text11242"><tspan
          sodipodi:role="line"
          id="tspan11240"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583px"
-         x="-105.38323"
-         y="46.976448">Maya</tspan><tspan
+         x="-101.05201"
+         y="70.457779">Maya</tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583px"
-         x="-105.38323"
-         y="57.559784"
+         x="-101.05201"
+         y="81.041115"
          id="tspan11246" /></text>
     <image
        xlink:href="balsaam-ui.png"
@@ -2051,57 +2029,46 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="-105.1972"
-       y="61.582073"
+       x="-100.86597"
+       y="83.177345"
        id="text25953"><tspan
          sodipodi:role="line"
          id="tspan25951"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583px"
-         x="-105.1972"
-         y="61.582073">3ds Max</tspan><tspan
+         x="-100.86597"
+         y="83.177345">3ds Max</tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583px"
-         x="-105.1972"
-         y="72.165413"
+         x="-100.86597"
+         y="93.760681"
          id="tspan25961" /></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="-105.02769"
-       y="77.241241"
+       x="-101.57101"
+       y="42.487164"
        id="text31704"><tspan
          sodipodi:role="line"
          id="tspan31702"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583px"
-         x="-105.02769"
-         y="77.241241">OpenSCAD</tspan><tspan
+         x="-101.57101"
+         y="42.487164">OpenSCAD</tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583px"
-         x="-105.02769"
-         y="87.824577"
+         x="-101.57101"
+         y="53.070499"
          id="tspan31710" /></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="-104.61842"
-       y="92.718124"
-       id="text37417"><tspan
-         sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583px"
-         x="-104.61842"
-         y="92.718124"
-         id="tspan37421">Art of Illusion</tspan></text>
-    <text
-       xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="-105.91033"
-       y="104.90364"
+       x="-100.24903"
+       y="92.577217"
        id="text54155"><tspan
          sodipodi:role="line"
          id="tspan54153"
          style="stroke-width:0.264583px"
-         x="-105.91033"
-         y="104.90364">...</tspan></text>
+         x="-100.24903"
+         y="92.577217">...</tspan></text>
     <g
        id="g2346"
        transform="matrix(0.054952,0,0,0.054952,223.94334,136.55137)"
@@ -2333,6 +2300,125 @@
          style="stroke-width:0.264583px"
          x="282.2973"
          y="172.37614">.qsbc</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-101.57101"
+       y="54.145638"
+       id="text1431"><tspan
+         sodipodi:role="line"
+         id="tspan1427"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583px"
+         x="-101.57101"
+         y="54.145638">FreeCAD</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583px"
+         x="-101.57101"
+         y="64.728973"
+         id="tspan1429" /></text>
+    <image
+       width="84.052994"
+       height="23.593822"
+       preserveAspectRatio="none"
+       xlink:href="asset-importers.png"
+       id="image2227"
+       x="58.840981"
+       y="109.72184"
+       style="stroke-width:1.79425" />
+    <g
+       id="g19852"
+       transform="translate(-4.5138558,-12.946166)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.11441px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="136.01266"
+         y="127.63962"
+         id="text14157"
+         transform="scale(0.78243512,1.2780612)"><tspan
+           sodipodi:role="line"
+           id="tspan14155"
+           style="stroke-width:0.264583px"
+           x="136.01266"
+           y="127.63962">AssImp</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.10076px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="108.01525"
+         y="173.53419"
+         id="text34236"><tspan
+           sodipodi:role="line"
+           style="text-align:start;text-anchor:start;stroke-width:0.264583px"
+           x="108.01525"
+           y="173.53419"
+           id="tspan34234">importer</tspan></text>
+      <g
+         id="g3631">
+        <path
+           id="rect2253"
+           style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+           d="m 100.39368,153.70114 h 4.68496 9.24033 6.96265 6.96265 v 27.8506 h -6.96265 -6.96265 -9.24033 -4.68496 z"
+           sodipodi:nodetypes="ccccccccccc" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="M 105.5227,181.61651 V 153.81555"
+           id="path2823" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="path3439"
+           sodipodi:type="arc"
+           sodipodi:cx="100.36436"
+           sodipodi:cy="158.32332"
+           sodipodi:rx="2.268899"
+           sodipodi:ry="2.268899"
+           sodipodi:start="1.5707963"
+           sodipodi:end="4.712389"
+           sodipodi:arc-type="slice"
+           d="m 100.36436,160.59222 a 2.268899,2.268899 0 0 1 -1.964927,-1.13445 2.268899,2.268899 0 0 1 0,-2.2689 2.268899,2.268899 0 0 1 1.964927,-1.13445 v 2.2689 z" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="path3625"
+           sodipodi:type="arc"
+           sodipodi:cx="100.36436"
+           sodipodi:cy="176.73051"
+           sodipodi:rx="2.268899"
+           sodipodi:ry="2.268899"
+           sodipodi:start="1.5707963"
+           sodipodi:end="4.712389"
+           sodipodi:arc-type="slice"
+           d="m 100.36436,178.99941 a 2.268899,2.268899 0 0 1 -1.964927,-1.13445 2.268899,2.268899 0 0 1 0,-2.26889 2.268899,2.268899 0 0 1 1.964927,-1.13445 v 2.26889 z" />
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.10076px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="108.15542"
+         y="168.3571"
+         id="text7285"><tspan
+           sodipodi:role="line"
+           style="text-align:start;text-anchor:start;stroke-width:0.264583px"
+           x="108.15542"
+           y="168.3571"
+           id="tspan7283">asset</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.10076px;line-height:125%;font-family:'Alte DIN 1451 Mittelschrift';-inkscape-font-specification:'Alte DIN 1451 Mittelschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="108.01525"
+         y="178.9906"
+         id="text7289"><tspan
+           sodipodi:role="line"
+           style="text-align:start;text-anchor:start;stroke-width:0.264583px"
+           x="108.01525"
+           y="178.9906"
+           id="tspan7287">library</tspan></text>
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 109.4856,139.80737 v -6.17312"
+       id="path19887" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 143.42073,95.453041 28.93781,10.239419"
+       id="path20863"
+       sodipodi:nodetypes="cc" />
   </g>
   <style
      type="text/css"

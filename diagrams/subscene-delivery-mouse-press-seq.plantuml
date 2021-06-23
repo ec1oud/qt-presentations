@@ -1,0 +1,77 @@
+@startuml
+participant "QPointingDevice"
+participant "QPointingDevPriv_EventPointData"
+activate QPointingDevice
+activate QGuiApp
+QGuiApp -> QGuiApp : processMouseEvent
+note right: QPA MouseEvent comes in
+participant "QEventPoint"
+QGuiApp -> QMouseEvent : ctor
+activate QMouseEvent
+activate QEventPoint
+activate QPointingDevPriv_EventPointData
+group Event Delivery in Window's DeliveryAgent
+QGuiApp -> QQWindow : event
+activate QQWindow
+QQWindow -> QQDeliveryAgent : event
+activate QQDeliveryAgent
+QQDeliveryAgent -> QQDeliveryAgent : ...
+QQDeliveryAgent -> QQ3DViewport : event
+activate QQ3DViewport
+QQ3DViewport -> QQ3DViewport : internalPick
+note right: hit-test the 3D Model; find the 2D subscene's root Item
+QQ3DViewport -> QQ3DDefaultMaterial : diffuseMap()->sourceItem()
+activate QQ3DDefaultMaterial
+deactivate QQ3DDefaultMaterial
+QQ3DViewport -> TapHandler : setModelPosition
+activate TapHandler
+QQ3DViewport -> TapHandler : setWorldPosition
+QQ3DViewport -> TapHandler : handlePointerEvent
+note right: TapHandler on a 3D Model
+group Subscene Event Delivery
+TapHandler -> QMouseEvent : addPassiveGrabber
+deactivate TapHandler
+QMouseEvent -> QPointingDevice : addPassiveGrabber
+QPointingDevice -> QPointingDevPriv_EventPointData : passiveGrabbers.append(handler)
+QPointingDevice -> QPointingDevice : grabChanged
+QPointingDevice -> QQDeliveryAgent : onGrabChanged
+QQDeliveryAgent -> QPointingDevPriv_EventPointData : passiveGrabbersContext.append(agent)
+note left: remember that window's agent\nhandles this grab
+QQ3DViewport -> subscene_QQDeliveryAgent : event
+activate subscene_QQDeliveryAgent
+subscene_QQDeliveryAgent -> Item : anyPointerHandlerWants
+Item -> DragHandler : wantsEventPoint
+activate DragHandler
+subscene_QQDeliveryAgent -> subscene_QQDeliveryAgent : deliverMatchingPointsToItem
+subscene_QQDeliveryAgent -> Item : handlePointerEvent
+note right: handlers go first
+Item -> DragHandler : handlePointerEvent
+DragHandler -> QMouseEvent : addPassiveGrabber
+deactivate DragHandler
+subscene_QQDeliveryAgent -> QPointingDevPriv_EventPointData : passiveGrabbersContext.append(agent)
+note left: remember that subscene agent\nhandles this grab
+subscene_QQDeliveryAgent -> Item : event
+activate Item
+note right: then the item itself
+Item -> Item : mousePressEvent
+subscene_QQDeliveryAgent -> QMouseEvent : setExclusiveGrabber
+note right: if Item subclass allows the event to remain accepted
+QMouseEvent -> QPointingDevice : setExclusiveGrabber
+deactivate Item
+QPointingDevice -> QPointingDevPriv_EventPointData : exclusiveGrabber = item
+QPointingDevice -> subscene_QQDeliveryAgent : onGrabChanged
+subscene_QQDeliveryAgent -> QPointingDevPriv_EventPointData : exclusiveGrabberContext = agent
+note left: remember that subscene agent\nhandles this grab
+QQ3DViewport -> ViewportTransformHelper : ctor
+activate ViewportTransformHelper
+note left: remember how to transform from scene to subscene coordinates
+QQ3DViewport -> subscene_QQDeliveryAgent : setSceneTransform(ViewportTransformHelper)
+end
+deactivate subscene_QQDeliveryAgent
+deactivate QQ3DViewport
+end
+deactivate QQDeliveryAgent
+deactivate QGuiApp
+destroy QMouseEvent
+destroy QEventPoint
+@enduml
