@@ -20,8 +20,7 @@ View3D {
                 diffuseMap: Texture {
                     sourceItem: BusyBox {
                         id: leftBusybox
-                        layer.enabled: true // to make a Texture available
-                        layer.textureSize: Qt.size(512, 512) // <-- suitable resolution
+                        layer.textureSize: Qt.size(512, 512) // <-- optional: choose suitable resolution
                     }
                 }
             }
