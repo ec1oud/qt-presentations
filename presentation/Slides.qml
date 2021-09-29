@@ -146,7 +146,7 @@ qtquick3d-interactive-ui</tt> branch<br/>
 
     QmlSlide {
         title: "Materials with shared Textures"
-        sourceFile: "examples/defaultMaterial.qml"
+        sourceFile: "examples/sharedSource.qml"
         verticalMargin: 80
     }
 
