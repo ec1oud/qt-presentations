@@ -26,7 +26,8 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.14
+import QtQuick
+import Qt.labs.animation
 import "resources"
 
 Item {
@@ -54,7 +55,7 @@ Item {
         invertible: false   // Don't let the system "natural scrolling" setting affect this
         rotationScale: -0.5 // But make it go consistently in the same direction as the fingers or wheel, a bit slow
         target: knob
-        propertyName: "y"
+        property: "y"
     }
 
     Rectangle {
