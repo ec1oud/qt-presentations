@@ -19,7 +19,7 @@ Presentation {
         sequence: "Ctrl+Q"
         onActivated: Qt.quit()
     }
-
+/*
     Image {
         anchors.fill: parent
         sourceSize.width: 1920
@@ -137,16 +137,29 @@ qtquick3d-interactive-ui</tt> branch<br/>
         autoScale: true
         source: Qt.resolvedUrl("resources/qt-creator-3d-design.jpg")
     }
-
+*/
     QmlSlide {
         title: "2D content in a 3D app: Item2D"
         sourceFile: "examples/item2d.qml"
         verticalMargin: 80
+        expandContent: loadedItem ? loadedItem.maximize : false
     }
 
     QmlSlide {
         title: "Materials with shared Textures"
         sourceFile: "examples/sharedSource.qml"
+        verticalMargin: 80
+    }
+
+    QmlSlide {
+        title: "PointerHandler-based custom controls work in 3D"
+        sourceFile: "examples/BusyBox.qml"
+        verticalMargin: 80
+    }
+
+    QmlSlide {
+        title: "Controls in shared Texture"
+        sourceFile: "examples/sharedSourceControls.qml"
         verticalMargin: 80
     }
 
@@ -162,6 +175,12 @@ qtquick3d-interactive-ui</tt> branch<br/>
         source: Qt.resolvedUrl("resources/subscene-delivery-mouse-drag-seq.png")
     }
 
+    ImageSlide {
+        title: "Demos"
+        autoScale: true
+        source: Qt.resolvedUrl("resources/ivi_surface_id1.svg")
+    }
+/*
     QmlSlide {
         title: "Virtual Screen on a Model"
         sourceFile: "examples/qtquick3d-input-demo/digital-assistant/scene.qml"
@@ -308,7 +327,7 @@ Shawn Rutledge<br/>
 <tt>https://github.com/ec1oud/qt-presentations : qtquick3d-interactive-ui</tt> branch<br/>
 </html>"
     }
-
+*/
     SlideCounter { id: slideCounter; visible: currentSlide > 0 }
 
     property bool bottomStuffVisible: currentSlide < 4

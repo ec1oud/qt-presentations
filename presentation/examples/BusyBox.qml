@@ -1,4 +1,5 @@
 import QtQuick
+import Qt.labs.animation
 
 Rectangle {
     id: root
@@ -12,7 +13,79 @@ Rectangle {
     antialiasing: true
 
     property alias topButtonPressed: upperButton.pressed
+    property alias rawSliderValue: slider.value
     property real sliderValue: slider.value / 100
+
+    component DragAnywhereSlider: Item {
+        id: root
+        property int value: 50
+        property int maximumValue: 99
+        width: 100
+        height: 240
+
+        DragHandler {
+            id: dragHandler
+            target: knob
+            xAxis.enabled: false
+            yAxis.minimum: slot.y
+            yAxis.maximum: slot.height + slot.y - knob.height
+        }
+
+        WheelHandler {
+            id: wheelHandler
+            acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+            invertible: false
+            rotationScale: -0.5
+            target: knob
+            property: "y"
+        }
+
+        Rectangle {
+            id: slot
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.margins: 10
+            anchors.topMargin: 30
+            anchors.bottomMargin: 30
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: 10
+            color: "black"
+            radius: width / 2
+            smooth: true
+        }
+
+        Rectangle {
+            id: knob
+            objectName: "Slider Knob"
+            width: parent.width - 2
+            height: 30
+            radius: 5
+            color: "beige"
+            border.width: 3
+            border.color: hover.hovered ? "orange" : "black"
+            property bool programmatic: false
+            property real multiplier: root.maximumValue / (dragHandler.yAxis.maximum - dragHandler.yAxis.minimum)
+            onYChanged: if (!programmatic) root.value = root.maximumValue - (knob.y - dragHandler.yAxis.minimum) * multiplier
+            transformOrigin: Item.Center
+            function setValue(value) { knob.y = dragHandler.yAxis.maximum - value / knob.multiplier }
+            HoverHandler {
+                id: hover
+                objectName: "Slider"
+            }
+            BoundaryRule on y {
+                id: ybr
+                minimum: slot.y
+                maximum: slot.height + slot.y - knob.height
+            }
+        }
+
+        Component.onCompleted: {
+            knob.programmatic = true
+            knob.setValue(root.value)
+            knob.programmatic = false
+        }
+    }
+
 
     component HoverTapButton: Rectangle {
         id: htbutton
@@ -113,6 +186,7 @@ Rectangle {
                 focus: true
             }
         }
+
         DragAnywhereSlider { id: slider }
     }
 }

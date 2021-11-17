@@ -8,20 +8,18 @@ View3D {
     DirectionalLight { eulerRotation.y: -45 }
     PerspectiveCamera { z: 600 }
 
-    Node {
+    Model {
         objectName: "left object"
         x: -120; z: 400
         eulerRotation.x: -15
         eulerRotation.y: 10
-        Model {
-            source: "#Cube"
-            pickable: true // <-- important!
-            materials: DefaultMaterial {
-                diffuseMap: Texture {
-                    sourceItem: BusyBox {
-                        id: leftBusybox
-                        layer.textureSize: Qt.size(512, 512) // <-- optional: choose suitable resolution
-                    }
+        source: "#Cube"
+        pickable: true // <-- important!
+        materials: DefaultMaterial {
+            diffuseMap: Texture {
+                sourceItem: BusyBox {
+                    id: leftBusybox
+                    layer.textureSize: Qt.size(512, 512) // <-- optional: choose suitable resolution
                 }
             }
         }
