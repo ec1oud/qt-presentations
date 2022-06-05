@@ -67,7 +67,7 @@ void SlideView::updateStatus(QQuickView::Status status) {
     m_slidesLeft = slides.size();
     qDebug() << "SlideCount: " << m_slidesLeft;
     m_printer.setPageSize(QPageSize(QSizeF(1445, 822), QPageSize::Point));
-    qDebug() << "Printer's Page rect size (and suggested resolution of your presentation): " << m_printer.pageRect().size();
+    qDebug() << "Printer's Page rect size (and suggested resolution of your presentation): " << m_printer.pageRect(QPrinter::Point).size();
 //    m_printer.setOrientation(QPrinter::Landscape);
     m_printer.setFullPage(true);
     m_printer.setOutputFileName("slides.pdf");
@@ -112,8 +112,8 @@ void SlideView::printCurrentSlide() {
     if (m_printedSlides > 0)
         m_printer.newPage();
     qDebug() << "Printing slide#" << m_printedSlides + 1 << "Resolution:" << pix.size();
-    QRect pageRect = m_printer.pageRect();
-    QSize targetSize = pix.size();
+    QRect pageRect = m_printer.pageRect(QPrinter::Point).toRect();
+//    QSize targetSize = pix.size();
 //    targetSize.scale(pageRect.width(), pageRect.height(), Qt::KeepAspectRatio);
 
     m_painter.drawImage(pageRect.topLeft(), pix);
