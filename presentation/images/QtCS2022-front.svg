@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg2"
+   width="614.40002"
+   height="345.60001"
+   viewBox="0 0 614.40002 345.60001"
+   sodipodi:docname="QtCS2022-front.svg"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   inkscape:export-filename="QtCS2022-front.pdf"
+   inkscape:export-xdpi="37.3"
+   inkscape:export-ydpi="37.3"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6" />
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="2.6113771"
+     inkscape:cx="264.99428"
+     inkscape:cy="188.59781"
+     inkscape:window-width="3840"
+     inkscape:window-height="2135"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g8" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Image"
+     id="g8">
+    <image
+       width="614.40002"
+       height="345.60001"
+       preserveAspectRatio="none"
+       xlink:href="20200801-17.09.23.jpg"
+       id="image10" />
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:48px;line-height:125%;font-family:'Titillium Web';-inkscape-font-specification:'Titillium Web, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="299.84882"
+       y="44.717258"
+       id="text170"><tspan
+         sodipodi:role="line"
+         id="tspan168"
+         x="299.84882"
+         y="44.717258"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:48px;font-family:'Titillium Web';-inkscape-font-specification:'Titillium Web, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#02ff0b;fill-opacity:1">Qt Contributors' Summit 2022</tspan><tspan
+         sodipodi:role="line"
+         x="299.84882"
+         y="104.71726"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:48px;font-family:'Titillium Web';-inkscape-font-specification:'Titillium Web, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#02ff0b;fill-opacity:1"
+         id="tspan954">QtPDF Module</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.4834px;line-height:125%;font-family:'Titillium Web';-inkscape-font-specification:'Titillium Web, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.300001;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       x="170.19049"
+       y="163.33348"
+       id="text958"
+       transform="scale(0.99877709,1.0012244)"><tspan
+         sodipodi:role="line"
+         id="tspan956"
+         x="170.19049"
+         y="163.33348"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.300001;stroke-dasharray:none;stroke-opacity:1">QtPDF: src/pdf in qtwebengine</tspan><tspan
+         sodipodi:role="line"
+         x="170.19049"
+         y="185.18773"
+         id="tspan960"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.300001;stroke-dasharray:none;stroke-opacity:1">github: ec1oud/qt-presentations      branch qtpdf</tspan></text>
+  </g>
+</svg>

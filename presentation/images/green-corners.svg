@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1920"
+   height="1080"
+   viewBox="0 0 507.99999 285.75"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   sodipodi:docname="green-corners.svg"
+   inkscape:export-filename="green-corners.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.68695889"
+     inkscape:cx="903.25638"
+     inkscape:cy="619.3966"
+     inkscape:window-width="3840"
+     inkscape:window-height="2135"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect186"
+       style="fill:#41cd52;stroke:none;stroke-width:0.079375;stroke-linecap:round;stroke-linejoin:bevel;fill-opacity:1"
+       d="M 0 0 L -32.568776 32.568776 L 32.56841 32.56841 L 0 0 z "
+       transform="rotate(-45)" />
+    <path
+       id="path368"
+       style="fill:#41cd52;fill-opacity:1;stroke:none;stroke-width:0.079375;stroke-linecap:round;stroke-linejoin:bevel"
+       d="m 507.97693,285.74395 v -46.05921 l -46.05869,46.05921 z" />
+  </g>
+</svg>

@@ -17,7 +17,7 @@ Presentation {
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
         sourceSize.width: 1920
-        source: "images/QTVTC20 Slide Master.pdf"
+        source: "images/QtCS2022-front.pdf"
         currentFrame: 1
         visible: currentSlide === 0
         antialiasing: true
@@ -28,51 +28,15 @@ Presentation {
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
         sourceSize.width: 1920
-        source: "images/QTVTC20 Slide Master.pdf"
-        currentFrame: 2
-        visible: currentSlide === 1 || currentSlide === 2
-        antialiasing: true
-        smooth: true
-    }
-
-    Image {
-        anchors.fill: parent
-        fillMode: Image.PreserveAspectFit
-        sourceSize.width: 1920
-        source: "images/QTVTC20 Slide Master.pdf"
-        currentFrame: 3
-        visible: currentSlide === presentation.slides.length - 2 || currentSlide === presentation.slides.length - 3
-        antialiasing: true
-        smooth: true
-    }
-
-    Image {
-        anchors.fill: parent
-        fillMode: Image.PreserveAspectFit
-        sourceSize.width: 1920
-        source: "images/QTVTC20 Slide Master.pdf"
-        currentFrame: 4
-        visible: currentSlide === presentation.slides.length - 1
+        source: "images/green-corners.pdf"
+        currentFrame: 0
+        visible: currentSlide > 0
         antialiasing: true
         smooth: true
     }
 
     Slide {
         id: title
-        titleColor: "white"
-        centeredTextFormat: Text.RichText
-        centeredText: "<html>
-<H1>Qt PDF</H1>
-
-Shawn Rutledge<br/>
-<tt>shawn.rutledge@qt.io</tt><br/>
-<tt>ecloud</tt> on <tt>#qt-labs</tt>, <tt>#qt-quick</tt> etc.<br/>
-QtPDF: <tt>src/pdf in qtwebengine</tt><br/>
-this presentation is on github:<br/><tt>ec1oud/qt-presentations</tt> branch qtpdf</html>"
-        Image {
-            anchors.bottom: parent.bottom
-            source: "images/qr.png"
-        }
     }
 
     Slide {
@@ -84,7 +48,10 @@ this presentation is on github:<br/><tt>ec1oud/qt-presentations</tt> branch qtpd
             "QtPDF available since ~ Qt 5.10 (widgets only)",
             "<tt>https://www.qt.io/blog/2017/01/30/new-qtpdf-qtlabs-module</tt>",
             "build system change (gyp to gn)",
-            "source is now in qtwebengine/src/pdf"
+            "source is now in qtwebengine/src/pdf",
+            "https://www.youtube.com/watch?v=y6-Khqrrz_U Qt Virtual Tech Con 2020",
+            "Tech Preview in 6.3 (mostly the same as in 5.15)",
+            "fully supported and more new features in 6.4"
         ]
     }
 
@@ -108,11 +75,6 @@ this presentation is on github:<br/><tt>ec1oud/qt-presentations</tt> branch qtpd
     }
 
     CustomCodeSlide {
-        title: "Metadata, text selection, zoom"
-        sourceFile: "examples/withdoc.qml"
-    }
-
-    CustomCodeSlide {
         title: "Getting real"
         sourceFile: "examples/multipage.qml"
     }
@@ -122,8 +84,20 @@ this presentation is on github:<br/><tt>ec1oud/qt-presentations</tt> branch qtpd
         sourceFile: "examples/borderimage.qml"
     }
 
+    ImageSlide {
+        title: "Modularity"
+        source: Qt.resolvedUrl("images/item-stack.pdf")
+    }
+
+    ImageSlide {
+        title: "Architecture"
+        fullScreen: true
+        autoScale: true
+        source: Qt.resolvedUrl("images/qtpdf-classes.pdf")
+    }
+
     Slide {
-        title: "Stuff left to work on"
+        title: "New stuff in 6.4"
         textFormat: Text.StyledText
         content: [
             "bookmarks",
@@ -131,17 +105,40 @@ this presentation is on github:<br/><tt>ec1oud/qt-presentations</tt> branch qtpd
             "thumbnails",
             "sharing document instance with PDF image plugin",
             "password-protected PDFs",
-            "image cache improvements in Qt Quick",
-            "tiled rendering?"
+            "API cleanup",
+            "widget improvements (more coming in 6.5, probably)"
         ]
     }
 
     Slide {
-        title: "Questions?"
+        title: "Stuff left to work on"
+        textFormat: Text.StyledText
+        content: [
+            "image cache improvements in Qt Quick",
+            "Android support",
+            "tiled rendering?",
+            "annotations?"
+        ]
+    }
+
+    Slide {
+        title: "Stuff the community could help with"
+        textFormat: Text.StyledText
+        content: [
+            "XFA?",
+            "use Poppler in Qt Quick, same API?",
+            "?"
+        ]
+    }
+
+    CustomCodeSlide {
+        title: "Primitive vector elements in the scene graph (SVG, could be PDF?)"
+        sourceFile: "examples/svgview.qml"
     }
 
     Slide {
         id: lastSlide
+        title: "Discussion"
     }
 
     SlideCounter { id: slideCounter }

@@ -1,0 +1,86 @@
+
+digraph "QPdfDocument"
+{
+	// LATEX_PDF_SIZE
+	edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+	node [fontname="FreeSans",fontsize="10",shape=record];
+
+	QObject [label="{QObject}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$d9/d5b/classQObject.html",tooltip="\\inmodule QtCore"];
+
+	subgraph cluster_0 {
+		color=white;
+		QPdfDocument [label="{QPdfDocument\n|+ pageCount\l+ password\l+ status\l|+ load()\l+ status()\l+ load()\l+ setPassword()\l+ password()\l+ metaData()\l+ error()\l+ pageCount()\l+ pageSize(int page)\l+ render(int page, QSize size, options)\land more...\l}",height=0.2,width=0.4,color="black", fillcolor="blanchedalmond", style="filled", fontcolor="black",tooltip="The QPdfDocument class loads a PDF document and renders pages from it."];
+		QQuickPdfDocument [label="{QQuickPdfDocument\n|+ source\l+ maxPageWidth\l+ maxPageHeight\l+ error\l+ title\l+ subject\l+ author\l+ keywords\l+ producer\l+ creator\l+ creationDate\l+ modificationDate\l|+ QQuickPdfDocument()\l+ ~QQuickPdfDocument()\l+ classBegin()\l+ componentComplete()\l+ source()\l+ setSource()\l+ resolvedSource()\l+ error()\l+ title()\l+ author()\land 9 more...\l}",height=0.2,width=0.4,color="black", fillcolor="wheat", style="filled", fontcolor="black",tooltip=" "];
+		QmlExtendedDoc [label="{QmlExtended\<QPdfDocument\>}",height=0.2,width=0.4,color="black", fillcolor="burlywood", style="filled", fontcolor="black",tooltip="fake inheritance for QML only"];
+	}
+
+	QObject -> QQuickPdfDocument [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+	QObject -> QPdfDocument [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+	QQuickPdfDocument -> QmlExtendedDoc [dir="back",color="brown",fontsize="10",style="solid",arrowtail="diamond",fontname="FreeSans"];
+	QmlExtendedDoc -> QPdfDocument [dir="back",color="brown",fontsize="10",style="solid",arrowtail="diamond",fontname="FreeSans"];
+
+	QFile [label="{QFile}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="\\inmodule QtCore"];
+	QFile -> QPdfFile [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+	QPdfFile [label="{QPdfFile\n||+ QPdfFile()\l+ document()\l}",height=0.2,width=0.4,color="black", fillcolor="grey90", style="filled",URL="$dd/dbb/classQPdfFile.html",tooltip=" "];
+	QIODevice -> QFile [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+	QIODevice [label="{QIODevice}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled",URL="$d2/d0c/classQIODevice.html",tooltip="\\inmodule QtCore \\reentrant"];
+	QObject -> QIODevice [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+	QQuickPdfDocument -> QPdfFile [dir="back",color="brown",fontsize="10",style="solid",arrowtail="diamond",fontname="FreeSans",label="m_carrierFile"];
+
+	QImageIOHandler [label="{QImageIOHandler\n||+ device()\l+ setDevice(QIODevice *)\l+ read()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="The QImageIOHandler class defines the common image I/O interface for all image formats in Qt."];
+	QImageIOHandler -> QPdfIOHandler [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+	QPdfIOHandler [label="{QPdfIOHandler\n||+ canRead()\l+ currentImageNumber()\l+ currentImageRect()\l+ imageCount()\l+ read()\l+ option()\l+ setOption()\l+ supportsOption()\l+ jumpToImage()\l+ jumpToNextImage()\l+ canRead()\l}",height=0.2,width=0.4,color="black", fillcolor="lightsteelblue", style="filled",URL="$d6/d82/classQPdfIOHandler.html",tooltip=" "];
+	QPdfIOHandler -> QPdfFile [color="orange",fontsize="10",style="solid",arrowhead="none",fontname="FreeSans",label="casts"];
+	QPdfIOHandler -> QPdfDocument [color="orange",fontsize="10",style="solid",fontname="FreeSans",label="gets and uses"];
+
+	// ---- models
+	QAbstractItemModel [label="{QAbstractItemModel}",height=0.2,width=0.4,color="black", fillcolor="ivory", style="filled", fontcolor="black",tooltip="\\inmodule QtCore"];
+	QObject -> QAbstractItemModel [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+	QObject [label="{QObject}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$d9/d5b/classQObject.html",tooltip="\\inmodule QtCore"];
+	QAbstractItemModel -> QAbstractListModel [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+	QAbstractListModel [label="{QAbstractListModel}",height=0.2,width=0.4,color="black", fillcolor="lemonchiffon", style="filled",URL="$d5/d2d/classQAbstractListModel.html",tooltip="\\inmodule QtCore"];
+	QAbstractListModel -> QPdfLinkModel [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+	QPdfLinkModel [label="{QPdfLinkModel\n|+ document\l+ page\l|+ document()\l+ roleNames()\l+ rowCount()\l+ data()\l+ page()\l+ setDocument()\l+ setPage()\l}",height=0.2,width=0.4,color="black", fillcolor="aquamarine", style="filled",URL="$d9/d3c/classQPdfLinkModel.html",tooltip=" "];
+	QPdfLinkModel -> QQuickPdfLinkModel [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+	QQuickPdfLinkModel [label="{QQuickPdfLinkModel\n|+ document\l|+ document()\l+ setDocument()\l}",height=0.2,width=0.4,color="black", fillcolor="aquamarine", style="filled",URL="$d8/db0/classQQuickPdfLinkModel.html",tooltip=" "];
+	QAbstractListModel -> QPdfSearchModel [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+	QPdfSearchModel [label="{QPdfSearchModel\n|+ document\l+ searchString\l|+ resultsOnPage()\l+ resultAtIndex()\l+ document()\l+ searchString()\l+ roleNames()\l+ rowCount()\l+ data()\l+ setSearchString()\l+ setDocument()\l# updatePage()\l# timerEvent()\l}",height=0.2,width=0.4,color="black", fillcolor="azure", style="filled",URL="$d6/d5b/classQPdfSearchModel.html",tooltip="The QPdfSearchModel class searches for a string in a PDF document and holds the results."];
+	QPdfSearchModel -> QQuickPdfSearchModel [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+	QQuickPdfSearchModel [label="{QQuickPdfSearchModel\n|+ document\l+ currentPage\l+ currentResult\l+ currentPageBoundingPolygons\l+ currentResultBoundingPolygons\l+ currentResultBoundingRect\l|+ document()\l+ setDocument()\l+ boundingPolygonsOnPage()\l+ currentPage()\l+ setCurrentPage()\l+ currentResult()\l+ setCurrentResult()\l+ currentPageBoundingPolygons()\l+ currentResultBoundingPolygons()\l+ currentResultBoundingRect()\l}",height=0.2,width=0.4,color="black", fillcolor="azure", style="filled",URL="$d9/df3/classQQuickPdfSearchModel.html",tooltip=" "];
+	QAbstractItemModel -> QPdfBookmarkModel [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+	QPdfBookmarkModel [label="{QPdfBookmarkModel\n|+ document\l+ structureMode\l|+ QPdfBookmarkModel()\l+ document()\l+ setDocument()\l+ structureMode()\l+ setStructureMode()\l+ data()\l+ index()\l+ parent()\l+ rowCount()\l+ columnCount()\l+ roleNames()\l}",height=0.2,width=0.4,color="black", fillcolor="mistyrose", style="filled",URL="$d1/d54/classQPdfBookmarkModel.html",tooltip=" "];
+	QPdfBookmarkModel -> QQuickPdfBookmarkModel [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+	QQuickPdfBookmarkModel [label="{QQuickPdfBookmarkModel\n|+ document\l|+ document()\l+ setDocument()\l}",height=0.2,width=0.4,color="black", fillcolor="mistyrose", style="filled",URL="$dc/d3e/classQQuickPdfBookmarkModel.html",tooltip=" "];
+	QAbstractListModel -> QPdfLinkModel0 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="FreeSans"];
+	QPdfLinkModel0 [label="{anonymous pageModel\n|+ roleNames()\l+ rowCount()\l+ data()\l}",height=0.2,width=0.4,color="black", fillcolor="beige", style="filled",URL="$d9/d3c/classQPdfLinkModel.html",tooltip=" "];
+	QPdfDocument -> QPdfLinkModel0 [dir="back",color="brown",fontsize="10",style="solid",arrowtail="diamond",fontname="FreeSans"];
+
+
+	// ---- pdfium
+	//subgraph cluster_1 {
+	//	color=white;
+		FPDF_DOCUMENT [label="FPDF_DOCUMENT",fillcolor="tan", style="filled"];
+		FPDF_PAGE [label="FPDF_PAGE",fillcolor="peachpuff", style="filled"];
+		FPDF_BITMAP [label="FPDF_BITMAP",fillcolor="darksalmon", style="filled"];
+		FPDF_TEXTPAGE [label="FPDF_TEXTPAGE",fillcolor="lightcyan", style="filled"];
+		FPDF_BOOKMARK [label="FPDF_BOOKMARK",fillcolor="rosybrown", style="filled"];
+		FPDF_LINK [label="FPDF_LINK",fillcolor="darkseagreen", style="filled"];
+		FPDF_PAGELINK [label="FPDF_PAGELINK",fillcolor="palegoldenrod", style="filled"];
+		FPDF_DEST [label="FPDF_DEST",fillcolor="darksalmon", style="filled"];
+		FPDF_ACTION [label="FPDF_ACTION",fillcolor="darksalmon", style="filled"];
+	//}
+	QPdfDocument -> FPDF_DOCUMENT [dir="back",color="brown",fontsize="10",style="solid",arrowtail="diamond",fontname="FreeSans"];
+	QPdfDocument -> FPDF_BITMAP [color="orange",fontsize="10",style="solid",fontname="FreeSans",label="uses"];
+	QPdfDocument -> FPDF_PAGE [color="orange",fontsize="10",style="solid",fontname="FreeSans",label="uses"];
+	QPdfDocument -> FPDF_TEXTPAGE [color="orange",fontsize="10",style="solid",fontname="FreeSans",label="uses"];
+	QPdfLinkModel -> FPDF_PAGE [color="orange",fontsize="10",style="solid",fontname="FreeSans",label="uses"];
+	QPdfLinkModel -> FPDF_PAGELINK [color="orange",fontsize="10",style="solid",fontname="FreeSans",label="uses"];
+	QPdfLinkModel -> FPDF_LINK [color="orange",fontsize="10",style="solid",fontname="FreeSans",label="uses"];
+	QPdfLinkModel -> FPDF_TEXTPAGE [color="orange",fontsize="10",style="solid",fontname="FreeSans",label="uses"];
+	QPdfLinkModel -> FPDF_DEST [color="orange",fontsize="10",style="solid",fontname="FreeSans",label="uses"];
+	QPdfLinkModel -> FPDF_ACTION [color="orange",fontsize="10",style="solid",fontname="FreeSans",label="uses"];
+	QPdfSearchModel -> FPDF_PAGE [color="orange",fontsize="10",style="solid",fontname="FreeSans",label="uses"];
+	QPdfSearchModel -> FPDF_TEXTPAGE [color="orange",fontsize="10",style="solid",fontname="FreeSans",label="uses"];
+	QPdfBookmarkModel -> FPDF_BOOKMARK [color="orange",fontsize="10",style="solid",fontname="FreeSans",label="uses"];
+	QPdfBookmarkModel -> FPDF_DEST [color="orange",fontsize="10",style="solid",fontname="FreeSans",label="uses"];
+}

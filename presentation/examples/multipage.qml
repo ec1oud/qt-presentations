@@ -361,7 +361,7 @@ Rectangle { // ApplicationWindow IRL
             Label {
                 id: statusLabel
                 property size implicitPointSize: document.pagePointSize(view.currentPage)
-                text: "page " + (currentPageSB.value) + " of " + document.pageCount +
+                text: "page " + currentPageSB.displayText + " : " + (currentPageSB.value) + " of " + document.pageCount +
                       " scale " + view.renderScale.toFixed(2)
                 visible: document.pageCount > 0
             }

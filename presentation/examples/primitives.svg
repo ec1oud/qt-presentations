@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="362.15207"
+   height="305.14145"
+   viewBox="0 0 95.819405 80.735343"
+   version="1.1"
+   id="svg17441"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs17438" />
+  <g
+     id="layer1"
+     transform="translate(-46.468811,-57.625919)">
+    <g
+       id="g17636">
+      <ellipse
+         style="fill:#c2ff70;fill-opacity:1;stroke:#000000;stroke-width:0.132292;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path17592"
+         cx="106.15002"
+         cy="114.96122"
+         rx="34.841026"
+         ry="19.837372" />
+      <text
+         xml:space="preserve"
+         style="font-size:12.7px;line-height:125%;font-family:Georgia;-inkscape-font-specification:'Georgia, Italic';letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;fill:#000082;stroke:none;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-weight:normal;font-style:italic;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+         x="96.395195"
+         y="121.55555"
+         id="text8620"><tspan
+           id="tspan8618"
+           style="stroke-width:0.265;-inkscape-font-specification:'Georgia, Italic';font-family:Georgia;font-weight:normal;font-style:italic;font-stretch:normal;font-variant:normal;font-size:12.7px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000082;fill-opacity:1;stroke:none;stroke-miterlimit:4;stroke-dasharray:none"
+           x="96.395195"
+           y="121.55555">Ellipse</tspan></text>
+    </g>
+    <rect
+       style="fill:#60b8ee;fill-opacity:0.735794;stroke:#da3e00;stroke-width:4;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:4, 16;stroke-dashoffset:0;stroke-opacity:0.556991"
+       id="rect17524"
+       width="91.819405"
+       height="45.94651"
+       x="48.468811"
+       y="59.625919" />
+    <path
+       style="fill:#c25e70;fill-opacity:0.605072;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:1, 3;stroke-dashoffset:0;stroke-opacity:1"
+       id="path17886"
+       d="M 125.29342,563.55594 52.48321,582.09826 0.01998641,528.31392 20.366976,455.98727 93.17719,437.44495 l 52.46322,53.78434 z"
+       transform="matrix(0.26458333,0,0,0.26458333,54.595971,-15.783106)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.5784px;line-height:125%;font-family:'Comic Sans MS';-inkscape-font-specification:'Comic Sans MS, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="54.46278"
+       y="78.429649"
+       id="text4628"
+       transform="scale(0.99863387,1.001368)"><tspan
+         id="tspan4626"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.5784px;font-family:'Comic Sans MS';-inkscape-font-specification:'Comic Sans MS, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583px"
+         x="54.46278"
+         y="78.429649">Rectangle</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666667px;line-height:125%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;fill:#2b5e70;fill-opacity:0.605072;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.33869943"
+       x="-111.02268"
+       y="94.993782"
+       id="text13656"
+       transform="rotate(-75)"><tspan
+         id="tspan13654"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#2b5e70;fill-opacity:0.605072;stroke-width:0.264583px;stroke:#000000;stroke-opacity:0.33869943;font-size:8.46666667px"
+         x="-111.02268"
+         y="94.993782">Path</tspan></text>
+  </g>
+</svg>
