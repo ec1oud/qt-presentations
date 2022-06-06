@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2020 The Qt Company Ltd.
+** Copyright (C) 2022 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the examples of the Qt Toolkit.
@@ -47,20 +47,19 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-import QtQml 2.15
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Pdf 5.15
-import QtQuick.Shapes 1.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Dialogs
+import QtQuick.Layouts
+import QtQuick.Pdf
 
 Rectangle { // ApplicationWindow IRL
     id: root; width: 600; height: 800; color: "lightgrey"
 
     PdfDocument {
         id: document
-        source: Qt.resolvedUrl("qpdfwriter.pdf")
-        onStatusChanged: {
+        source: Qt.resolvedUrl("nexus7-manual-page-numbers.pdf")
+        onStatusChanged: (status) => {
             // if (status === PdfDocument.Error) errorDialog.open()
             view.document = (status === PdfDocument.Ready ? document : undefined)
         }
@@ -69,29 +68,129 @@ Rectangle { // ApplicationWindow IRL
 
     SplitView {
         anchors.fill: parent; anchors.topMargin: header.height; anchors.bottomMargin: footer.height
-        ListView {
-            id: searchResultsList; clip: true
-            model: view.searchModel
-            ScrollBar.vertical: ScrollBar { }
-            delegate: ItemDelegate {
-                onClicked: {
-                    searchResultsList.currentIndex = index
-                    view.goToLocation(page, location, 0)
-                    view.searchModel.currentResult = indexOnPage
+        Item {
+            SplitView.preferredWidth: sidebarOpenAction.checked ? 250 : 0
+            visible: sidebarOpenAction.checked
+
+            TabBar {
+                id: sidebarTabs
+                x: -width
+                rotation: -90
+                transformOrigin: Item.TopRight
+                currentIndex: 2 // bookmarks by default
+                TabButton { text: qsTr("Info") }
+                TabButton { text: qsTr("Search Results") }
+                TabButton { text: qsTr("Bookmarks") }
+                TabButton { text: qsTr("Pages") }
+            }
+
+            GroupBox {
+                anchors.fill: parent
+                anchors.leftMargin: sidebarTabs.height
+
+                StackLayout {
+                    anchors.fill: parent
+                    currentIndex: sidebarTabs.currentIndex
+                    component InfoField: TextInput {
+                        width: parent.width
+                        selectByMouse: true
+                        readOnly: true
+                        wrapMode: Text.WordWrap
+                    }
+                    Column {
+                        spacing: 6
+                        width: parent.width - 6
+                        Label { font.bold: true; text: qsTr("Title") }
+                        InfoField { text: document.title }
+                        Label { font.bold: true; text: qsTr("Author") }
+                        InfoField { text: document.author }
+                        Label { font.bold: true; text: qsTr("Subject") }
+                        InfoField { text: document.subject }
+                        Label { font.bold: true; text: qsTr("Keywords") }
+                        InfoField { text: document.keywords }
+                        Label { font.bold: true; text: qsTr("Producer") }
+                        InfoField { text: document.producer }
+                        Label { font.bold: true; text: qsTr("Creator") }
+                        InfoField { text: document.creator }
+                        Label { font.bold: true; text: qsTr("Creation date") }
+                        InfoField { text: document.creationDate }
+                        Label { font.bold: true; text: qsTr("Modification date") }
+                        InfoField { text: document.modificationDate }
+                    }
+                    ListView {
+                        id: searchResultsList; clip: true
+                        model: view.searchModel
+                        ScrollBar.vertical: ScrollBar { }
+                        delegate: ItemDelegate {
+                            onClicked: {
+                                searchResultsList.currentIndex = index
+                                view.goToLocation(page, location, 0)
+                                view.searchModel.currentResult = indexOnPage
+                            }
+                            width: parent ? parent.width : 0
+                            Label {
+                                text: "Page " + (page + 1) + ": " + contextBefore.substring(contextBefore.length - 10) + "<b>" + view.searchString + "</b>" + contextAfter
+                                elide: Text.ElideRight
+                            }
+                            highlighted: ListView.isCurrentItem
+                        }
+                    }
+                    TreeView {
+                        id: bookmarksTree
+                        width: parent.width - 6
+                        columnWidthProvider: function() { return width }
+                        delegate: TreeViewDelegate {
+                            required property int page
+                            required property point location
+                            required property real zoom
+                            onClicked: view.goToLocation(page, location, zoom)
+                        }
+                        model: PdfBookmarkModel { document: document }
+                        ScrollBar.vertical: ScrollBar { }
+                    }
+                    GridView {
+                        id: thumbnailsView
+                        model: document.pageModel
+                        cellWidth: width / 2
+                        cellHeight: cellWidth + 10
+                        delegate: Item {
+                            required property int index
+                            required property string label
+                            required property size pointSize
+                            width: thumbnailsView.cellWidth
+                            height: thumbnailsView.cellHeight
+                            Rectangle {
+                                id: paper
+                                width: image.width
+                                height: image.height
+                                x: (parent.width - width) / 2
+                                y: (parent.height - height - pageNumber.height) / 2
+                                Image {
+                                    id: image
+                                    source: document.source
+                                    currentFrame: index
+                                    asynchronous: true
+                                    fillMode: Image.PreserveAspectFit
+                                    sourceSize { width: 64; height: 64 }
+                                }
+                            }
+                            Text {
+                                id: pageNumber
+                                anchors.bottom: parent.bottom
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                text: label
+                            }
+                            TapHandler { onTapped: view.goToPage(index) }
+                        }
+                    }
                 }
-                width: parent ? parent.width : 0
-                Label {
-                    text: "Page " + (page + 1) + ": " + contextBefore.substring(contextBefore.length - 10) + "<b>" + view.searchString + "</b>" + contextAfter
-                    elide: Text.ElideRight
-                }
-                highlighted: ListView.isCurrentItem
             }
         }
         PdfMultiPageView {
             id: view; clip: true
             document: root.document
             searchString: searchField.text
-            onCurrentPageChanged: currentPageSB.value = view.currentPage + 1
+            onCurrentPageChanged: currentPageSB.value = view.currentPage
         }
     }
 
@@ -150,17 +249,25 @@ Rectangle { // ApplicationWindow IRL
             }
             SpinBox {
                 id: currentPageSB
-                from: 1
-                to: document.pageCount
+                from: 0
+                to: document.pageCount - 1
                 editable: true
-                onValueModified: view.goToPage(value - 1)
+                onValueModified: view.goToPage(value)
+                textFromValue: function(value) { return document.pageLabel(value) }
+                valueFromText: function(text) {
+                    for (var i = 0; i < document.pageCount; ++i) {
+                        if (document.pageLabel(i).toLowerCase().indexOf(text.toLowerCase()) === 0)
+                            return i
+                    }
+                    return spinBox.value
+                }
                 Shortcut {
                     sequence: "Ctrl+S" // StandardKey.MoveToPreviousPage IRL
-                    onActivated: view.goToPage(currentPageSB.value - 2)
+                    onActivated: view.goToPage(currentPageSB.value - 1)
                 }
                 Shortcut {
                     sequence: "Ctrl+D" // StandardKey.MoveToNextPage IRL
-                    onActivated: view.goToPage(currentPageSB.value)
+                    onActivated: view.goToPage(currentPageSB.value + 1)
                 }
             }
             ToolButton {
@@ -192,6 +299,17 @@ Rectangle { // ApplicationWindow IRL
         RowLayout {
             id: footerRow
             anchors.fill: parent; anchors.rightMargin: 4
+            ToolButton {
+                action: Action {
+                    id: sidebarOpenAction
+                    checkable: true
+                    checked: true
+                    icon.source: checked ? "resources/sidebar-collapse-left.pdf" : "resources/sidebar-expand-left.pdf"
+                }
+                ToolTip.visible: enabled && hovered
+                ToolTip.delay: 2000
+                ToolTip.text: "open sidebar"
+            }
             ToolButton {
                 action: Action {
                     icon.source: "resources/go-up-search.pdf"
