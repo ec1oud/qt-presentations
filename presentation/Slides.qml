@@ -17,38 +17,28 @@ Presentation {
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
         sourceSize.width: 1920
-        source: "images/QtCS2022-front.pdf"
-        currentFrame: 1
-        visible: currentSlide === 0
-        antialiasing: true
-        smooth: true
-    }
-
-    Image {
-        anchors.fill: parent
-        fillMode: Image.PreserveAspectFit
-        sourceSize.width: 1920
         source: "images/green-corners.pdf"
         currentFrame: 0
-        visible: currentSlide > 0
+//        visible: currentSlide > 0
         antialiasing: true
         smooth: true
     }
 
     Slide {
         id: title
+        title: "QtPdf 6.4 Update"
     }
 
     Slide {
         title: "History"
         textFormat: Text.RichText
         content: [
-            "xpdf (1995); Poppler and Qt binding (2005)",
+            "xpdf (1995); Poppler (GPL) and Qt binding (2005)",
             "hackathon in Dec 2014: Qt wrapper for PDFium (working with Qt 5.4)",
             "QtPDF available since ~ Qt 5.10 (widgets only)",
             "<tt>https://www.qt.io/blog/2017/01/30/new-qtpdf-qtlabs-module</tt>",
-            "build system change (gyp to gn)",
-            "source is now in qtwebengine/src/pdf",
+            "build system change (gyp to gn); source is now in qtwebengine/src/pdf",
+            "NavBlue paid for QtQuick support in 5.14 (2019)",
             "https://www.youtube.com/watch?v=y6-Khqrrz_U Qt Virtual Tech Con 2020",
             "Tech Preview in 6.3 (mostly the same as in 5.15)",
             "fully supported and more new features in 6.4"
@@ -74,14 +64,25 @@ Presentation {
         sourceFile: "examples/simplest.qml"
     }
 
-    CustomCodeSlide {
-        title: "Getting real"
-        sourceFile: "examples/multipage.qml"
+//    CustomCodeSlide {
+//        title: "Getting real"
+//        sourceFile: "examples/multipage.qml"
+//    }
+
+    Slide {
+        title: "Packaged multi-page viewer example"
     }
 
-    CustomCodeSlide {
-        title: "Getting silly"
-        sourceFile: "examples/borderimage.qml"
+//    CustomCodeSlide {
+//        title: "Getting silly"
+//        sourceFile: "examples/borderimage.qml"
+//    }
+
+    ImageSlide {
+        title: "Viewer Components"
+        fullScreen: true
+//        autoScale: true
+        source: Qt.resolvedUrl("images/qml-types.pdf")
     }
 
     ImageSlide {
@@ -89,12 +90,12 @@ Presentation {
         source: Qt.resolvedUrl("images/item-stack.pdf")
     }
 
-    ImageSlide {
-        title: "Architecture"
-        fullScreen: true
-        autoScale: true
-        source: Qt.resolvedUrl("images/qtpdf-classes.pdf")
-    }
+//    ImageSlide {
+//        title: "C++ Classes and QML Wrappers"
+//        fullScreen: true
+//        autoScale: true
+//        source: Qt.resolvedUrl("images/qtpdf-classes.pdf")
+//    }
 
     Slide {
         title: "New stuff in 6.4"
@@ -114,32 +115,33 @@ Presentation {
         title: "Stuff left to work on"
         textFormat: Text.StyledText
         content: [
+            "Android support (QTBUG-83459)",
+            "known bugs",
             "image cache improvements in Qt Quick",
-            "Android support",
             "tiled rendering?",
             "annotations?"
         ]
     }
 
-    Slide {
-        title: "Stuff the community could help with"
-        textFormat: Text.StyledText
-        content: [
-            "XFA?",
-            "use Poppler in Qt Quick, same API?",
-            "?"
-        ]
-    }
+//    Slide {
+//        title: "Stuff the community could help with"
+//        textFormat: Text.StyledText
+//        content: [
+//            "XFA?",
+//            "use Poppler in Qt Quick, same API?",
+//            "?"
+//        ]
+//    }
 
-    CustomCodeSlide {
-        title: "Primitive vector elements in the scene graph (SVG, could be PDF?)"
-        sourceFile: "examples/svgview.qml"
-    }
+//    CustomCodeSlide {
+//        title: "Primitive vector elements in the scene graph (SVG, could be PDF?)"
+//        sourceFile: "examples/svgview.qml"
+//    }
 
-    Slide {
-        id: lastSlide
-        title: "Discussion"
-    }
+//    Slide {
+//        id: lastSlide
+//        title: "Discussion"
+//    }
 
     SlideCounter { id: slideCounter }
 
