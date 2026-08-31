@@ -1,3 +1,4 @@
+../qps/src/proc.cpp
 blockquotes.md
 text.qml
 rect.qml

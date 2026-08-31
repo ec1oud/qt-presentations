@@ -32,14 +32,22 @@ Window {
         onSourceChanged: console.log(background.current + ": changed to", source, "of", background.filenames)
 
         function load() {
-            const currentType = currentFilename.length ? currentFilename.split(".")[1] : ""
-            console.log("load", background.current, background.currentFilename, background.currentType)
+            const dottedParts = background.currentFilename.length ? currentFilename.split(".") : []
+            const currentType = dottedParts.length ? dottedParts[dottedParts.length - 1] : ""
+            console.log("load", background.current, currentType)
             switch (currentType) {
             case "qml":
                 loader.setSource("presentation/" + currentFilename)
                 break
             case "md":
-                loader.setSource("components/MarkdownSlide.qml", { "source": "../presentation/" + currentFilename })
+                loader.setSource("components/MarkdownSlide.qml",
+                                 { "source": "../presentation/" + currentFilename })
+                break
+            case "h":
+            case "cpp":
+                loader.setSource("components/CodeSlide.qml",
+                                 { "source": "../presentation/" + currentFilename,
+                                     "language": "C++" })
                 break
             }
         }
