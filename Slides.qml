@@ -4,12 +4,13 @@ Window {
     id: background
     width: 1920
     height: 1080
-    title: `${current + 1} of ${filenames.length} : ${currentFilename}`
+    title: slideHeading.text
     visible: true
 
     property list<string> filenames: listEdit.text.split("\n")
     property int current: 0
     property string currentFilename: filenames[current]
+    property real fontSize: width * 0.015
 
     Shortcut {
         sequence: StandardKey.MoveToPreviousPage
@@ -53,15 +54,28 @@ Window {
         }
     }
 
-    Image {
+    Row {
         anchors.right: parent.right
-        anchors.top: parent.top
+        anchors.bottom: parent.bottom
         anchors.margins: 2
-        source: "images/pencil.png"
-        TapHandler {
-            onTapped: slideSorter.visible = !slideSorter.visible
+        spacing: 6
+
+        Text {
+            id: slideHeading
+            font.pixelSize: editIcon.height
+            text: `${current + 1} of ${filenames.length} : ${currentFilename}`
         }
+
+        Image {
+            id: editIcon
+            source: "images/pencil.png"
+            TapHandler {
+                onTapped: slideSorter.visible = !slideSorter.visible
+            }
+        }
+
     }
+
 
     Window {
         id: slideSorter
