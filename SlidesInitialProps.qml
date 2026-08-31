@@ -1,15 +1,13 @@
 import QtQuick
 
-Window {
+Rectangle {
     id: background
     width: 1920
     height: 1080
-    title: `${current + 1} of ${filenames.length} : ${currentFilename}`
-    visible: true
-
     property list<string> filenames: listEdit.text.split("\n")
     property int current: 0
     property string currentFilename: filenames[current]
+    property string currentType: currentFilename.length ? currentFilename.split(".")[1] : ""
 
     Shortcut {
         sequence: StandardKey.MoveToPreviousPage
@@ -23,26 +21,29 @@ Window {
         onActivated: ++current
     }
 
-    onCurrentFilenameChanged: loader.load()
-    Component.onCompleted: loader.load()
-
     Loader {
-        id: loader
         anchors.fill: parent
-        onSourceChanged: console.log(background.current + ": changed to", source, "of", background.filenames)
 
-        function load() {
-            const currentType = currentFilename.length ? currentFilename.split(".")[1] : ""
-            console.log("load", background.current, background.currentFilename, background.currentType)
+        source:
             switch (currentType) {
             case "qml":
-                loader.setSource("presentation/" + currentFilename)
+                "presentation/" + currentFilename
                 break
             case "md":
-                loader.setSource("components/MarkdownSlide.qml", { "source": "../presentation/" + currentFilename })
+                "components/MarkdownSlide.qml"
                 break
+            default:
+                ""
             }
-        }
+
+        initialProperties: // https://codereview.qt-project.org/c/qt/qtdeclarative/+/750155
+            switch (currentType) {
+            case "md":
+                return { "source" : "../presentation/" + currentFilename }
+                break
+            default:
+                ""
+            }
     }
 
     Image {
