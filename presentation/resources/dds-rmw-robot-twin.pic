@@ -1,0 +1,32 @@
+.PS
+
+boxwid = 2
+boxht = 0.4
+
+# first column: dogzilla robot
+up;
+RFastdds: box "Fast DDS";
+RRmw: box "ROS MiddleWare (RMW)"
+RQtros: box "Qt ROS2" "generated modules" shaded "palegreen";
+RQml: box "QML daemon" shaded "palegreen";
+move 0.25; Rlabel: "dogzillad";
+
+RobotBox: box with .nw at (Rlabel.nw.x - 0.1, Rlabel.nw.y + 0.1) \
+              with .se at (RFastdds.se.x + 0.1, RFastdds.se.y - 0.1) \
+              wid 2.2 ht 2.2;
+
+# second column: digital twin
+DFastdds: box "Fast DDS" at RFastdds.s + (4.0, 0.2);
+DRmw: box "ROS MiddleWare (RMW)";
+DQtros: box "Qt ROS2" "generated modules" shaded "palegreen";
+DQqd: box "Qt Quick 3D" shaded "palegreen";
+DQml: box "QML scene" shaded "palegreen";
+move 0.25; Dlabel: "Digital Twin";
+
+DigitwinBox: box with .nw at (Dlabel.nw.x - 0.1, Dlabel.nw.y + 0.1) \
+              with .se at (DFastdds.se.x + 0.1, DFastdds.se.y - 0.1) \
+              wid 2.2 ht 2.6;
+
+line <-> from RFastdds.e to DFastdds.w "DDS pub/sub topics" above
+
+.PE
