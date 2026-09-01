@@ -44,6 +44,10 @@ Window {
                 loader.setSource("components/MarkdownSlide.qml",
                                  { "source": "../presentation/" + currentFilename })
                 break
+            case "svg":
+                loader.setSource("components/SvgSlide.qml",
+                                 { "source": "../presentation/" + currentFilename })
+                break
             case "h":
             case "cpp":
                 loader.setSource("components/CodeSlide.qml",
