@@ -1,5 +1,5 @@
-.ps 7
-.vs 9
+.ps 14
+.vs 15
 .PS
 
 # Every element of the ROS graph in the dogzilla demo, labelled with the QML type
@@ -8,21 +8,21 @@
 # Cross-checked against dogzilla/doc/rosgraph.dot exported from rqt_graph.
 # Topic names in the middle are relative to the /dogzilla namespace.
 
-boxwid = 1.85
-boxht = 0.24
-gap = 1.85              # clear space between the columns, where the topic name goes
-pitch = 0.33            # vertical distance between rows
-pad = 0.10              # padding inside the process boxes
+boxwid = 2.5
+boxht = 0.3
+gap = 4              # clear space between the columns, where the topic name goes
+pitch = 0.35            # vertical distance between rows
+pad = 0.2              # padding inside the process boxes
 lx = 0                  # centre of the dogzillad column
 rx = boxwid + gap       # centre of the digitwin column
 mx = (lx + rx) / 2      # middle of the gap: topic names and group headings
-tl = 0.075              # how far above the arrow the topic name sits
+tl = 0.12              # how far above the arrow the topic name sits
 
 # A matched pair: publisher on the robot, subscriber in the twin.
 # $1 dogzillad type, $2 twin type, $3 topic
 define row {
-	L: box $1 at (lx, y) shaded "palegreen";
-	R: box $2 at (rx, y) shaded "palegreen";
+	L: box $1 at (lx, y) shaded "darkseagreen2";
+	R: box $2 at (rx, y) shaded "darkseagreen2";
 	arrow from L.e to R.w;
 	$3 at (mx, y + tl);
 	y = y - pitch;
@@ -30,8 +30,8 @@ define row {
 
 # Same, but the traffic flows right to left: the twin commands the robot.
 define lrow {
-	L: box $1 at (lx, y) shaded "palegreen";
-	R: box $2 at (rx, y) shaded "palegreen";
+	L: box $1 at (lx, y) shaded "lightcyan";
+	R: box $2 at (rx, y) shaded "lightcyan";
 	arrow from R.w to L.e;
 	$3 at (mx, y + tl);
 	y = y - pitch;
@@ -39,8 +39,8 @@ define lrow {
 
 # Request/response pairs (actions, services): traffic both ways.
 define birow {
-	L: box $1 at (lx, y) shaded "palegreen";
-	R: box $2 at (rx, y) shaded "palegreen";
+	L: box $1 at (lx, y) shaded "lavenderblush2";
+	R: box $2 at (rx, y) shaded "lavenderblush2";
 	arrow <-> from L.e to R.w;
 	$3 at (mx, y + tl);
 	y = y - pitch;
@@ -48,7 +48,7 @@ define birow {
 
 # Published by the robot, but nothing in the twin subscribes.
 define stub {
-	L: box $1 at (lx, y) shaded "palegreen";
+	L: box $1 at (lx, y) shaded "mintcream";
 	arrow from L.e right gap * 0.3;
 	$2 at (L.e + (gap * 0.18, tl));
 	$3 ljust at L.e + (gap * 0.36, 0);
@@ -58,7 +58,7 @@ define stub {
 # Group heading, centred in the gap.
 define head {
 	$1 at (mx, y);
-	y = y - pitch * 0.85;
+	y = y - pitch;
 }
 
 y = 0
@@ -76,7 +76,7 @@ row("StringPublisher", "StringSubscriber", "/speech/state")
 stub("TwistPublisher", "/vel", "\fIno subscriber in the twin\fP")
 stub("StaticTransformBroadcaster", "/tf_static", "\fIlatched for tf2 listeners\fP")
 
-y = y - pitch * 0.15
+y = y - pitch * 0.2
 head("\fIcommands: twin \[->] robot\fP")
 
 lrow("TwistSubscriber", "TwistPublisher", "/cmd_vel")
@@ -84,7 +84,7 @@ lrow("PoseStampedSubscriber", "PoseStampedPublisher", "/body_pose/command")
 lrow("BoolSubscriber", "BoolPublisher", "/speech/listen")
 lrow("StringSubscriber", "StringPublisher", "/motion/library")
 
-y = y - pitch * 0.15
+y = y - pitch * 0.2
 head("\fIactions and services: both directions\fP")
 
 birow("SpeakActionServer", "SpeakActionClient", "/speech/speak")
@@ -92,30 +92,25 @@ birow("PlayMotionActionServer", "PlayMotionActionClient", "/motion/play")
 birow("TriggerServiceServer", "TriggerServiceClient", "/speech/stop")
 
 # Written out rather than birow(), for the two-line label.
-y = y - pitch * 0.25
-LP: box "Ros2.Parameter \[mu]3" at (lx, y) shaded "palegreen";
-RP: box "Ros2.RemoteParameter \[mu]3" at (rx, y) shaded "palegreen";
+y = y - pitch * 0.35
+LP: box "Ros2.Parameter \[mu]3" at (lx, y) shaded "beige";
+RP: box "Ros2.RemoteParameter \[mu]3" at (rx, y) shaded "beige";
 arrow <-> from LP.e to RP.w;
-"audio.master, audio.mic," at (mx, y + tl + 0.10)
+"audio.master,  audio.mic," at (mx, y + tl + 0.18)
 "motors.engaged" at (mx, y + tl)
 y = y - pitch
 
 # The process boxes, sized to enclose their column. pic has no two-corner box, so
 # the extent is computed: top leaves room for the two header lines.
-top = boxht / 2 + 0.40
+top = boxht / 2 + 0.1
 boty = y + pitch - boxht / 2 - pad
 bw = boxwid + 2 * pad
-bh = top - boty
+bh = top - boty - pad
 
 RobotBox: box wid bw ht bh at (lx, (top + boty) / 2);
-"\fBdogzillad\fP" at (lx, boxht / 2 + 0.30)
-"/dogzilla/dogzillad" at (lx, boxht / 2 + 0.17)
+"\fBdogzillad\fP" at (lx, boxht / 2 - 0.2)
 
 DigitwinBox: box wid bw ht bh at (rx, (top + boty) / 2);
-"\fBDigital Twin\fP" at (rx, boxht / 2 + 0.30)
-"/digitwin" at (rx, boxht / 2 + 0.17)
-
-"\fItopic names are relative to the /dogzilla namespace; parameters travel over" at (mx, boty - 0.16)
-"\fI/parameter_events plus the node's parameter services\fP" at (mx, boty - 0.28)
+"\fBDigital Twin\fP" at (rx, boxht / 2 - 0.2)
 
 .PE
