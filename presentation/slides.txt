@@ -2,6 +2,7 @@ dogzilla-components.svg
 dogzilla-components-qt.svg
 dds-rmw-robot-twin.svg
 dds-rmw-robot-twin.pdf
+ros-elements-robot-twin.svg
 ../qps/src/proc.cpp
 blockquotes.md
 text.qml
