@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg2"
+   width="598.40002"
+   height="252.8"
+   viewBox="0 0 598.40002 252.8"
+   sodipodi:docname="dds-rmw-robot-twin.pdf"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6" />
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <g
+     id="g8"
+     inkscape:groupmode="layer"
+     inkscape:label="dds-rmw-robot-twin"
+     transform="matrix(1.3333333,0,0,-1.3333333,0,252.8)">
+    <g
+       id="g10"
+       transform="scale(0.1)">
+      <path
+         d="M 84,84 H 1524 V 372 H 84 Z"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path12" />
+      <g
+         id="g14"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,60.8898,20.6)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text18"><tspan
+             x="0 5.4099998 9.8500004 13.74 16.52 19.02 26.24 33.459999"
+             y="0"
+             sodipodi:role="line"
+             id="tspan16">Fast DDS</tspan></text>
+      </g>
+      <path
+         d="M 84,372 H 1524 V 660 H 84 Z"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path20" />
+      <g
+         id="g22"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,27.675,49.4)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text26"><tspan
+             x="0 6.27 13.4898 21.549801 30.4398 33.219799 38.219799 43.219799 45.999802 50.4398 59.079639 63.519642 66.84964 71.289642 73.789642 77.119644 83.789642 92.679642 102.11964"
+             y="0"
+             sodipodi:role="line"
+             id="tspan24">ROSMiddleWare (RMW)</tspan></text>
+      </g>
+      <path
+         d="M 84,660 H 1524 V 948 H 84 Z"
+         style="fill:#98fb98;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path28" />
+      <path
+         d="M 84,660 H 1524 V 948 H 84 Z"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path30" />
+      <g
+         id="g32"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,62.125,84.2)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text38"><tspan
+             x="0 7.2199998 10 12.5 18.76992 25.989922 31.549921"
+             y="0"
+             sodipodi:role="line"
+             id="tspan34">Qt ROS2</tspan><tspan
+             x="-19.355101 -14.3551 -9.9151001 -4.9151001 -0.47510001 2.8548999 7.2948999 10.0749 14.5149 19.5149 22.0149 29.794901 34.794899 39.794899 44.794899 47.574902 52.0149"
+             y="12"
+             sodipodi:role="line"
+             id="tspan36">generated modules</tspan></text>
+      </g>
+      <path
+         d="m 84,948 h 1440 v 288 H 84 Z"
+         style="fill:#98fb98;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path40" />
+      <path
+         d="m 84,948 h 1440 v 288 H 84 Z"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path42" />
+      <g
+         id="g44"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,52.2102,107)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text50"><tspan
+             x="0 7.2199998 16.110001 22.219999 24.719999 29.719999 34.16 38.599998 46.380001 51.380001"
+             y="0"
+             sodipodi:role="line"
+             id="tspan46">QML daemon</tspan><tspan
+             x="9.57969 14.57969 19.579691 24.579691 29.01969 31.79969 34.579689 37.359692 41.79969"
+             y="-32.400002"
+             sodipodi:role="line"
+             id="tspan48">dogzillad</tspan></text>
+      </g>
+      <path
+         d="M 12,12 H 1596 V 1596 H 12 Z"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path52" />
+      <path
+         d="M 2964,84 H 4404 V 372 H 2964 Z"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path54" />
+      <g
+         id="g56"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,348.89,20.6)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text60"><tspan
+             x="0 5.4099998 9.8500004 13.74 16.52 19.02 26.24 33.459999"
+             y="0"
+             sodipodi:role="line"
+             id="tspan58">Fast DDS</tspan></text>
+      </g>
+      <path
+         d="M 2964,372 H 4404 V 660 H 2964 Z"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path62" />
+      <g
+         id="g64"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,315.675,49.4)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text68"><tspan
+             x="0 6.27 13.4898 21.549801 30.4398 33.219799 38.219799 43.219799 45.999802 50.4398 59.079655 63.519653 66.849655 71.289658 73.789658 77.119652 83.789658 92.679657 102.11965"
+             y="0"
+             sodipodi:role="line"
+             id="tspan66">ROSMiddleWare (RMW)</tspan></text>
+      </g>
+      <path
+         d="M 2964,660 H 4404 V 948 H 2964 Z"
+         style="fill:#98fb98;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path70" />
+      <path
+         d="M 2964,660 H 4404 V 948 H 2964 Z"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path72" />
+      <g
+         id="g74"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,350.125,84.2)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text80"><tspan
+             x="0 7.2199998 10 12.5 18.769926 25.989927 31.549927"
+             y="0"
+             sodipodi:role="line"
+             id="tspan76">Qt ROS2</tspan><tspan
+             x="-19.355101 -14.3551 -9.9151001 -4.9151001 -0.47510001 2.8548999 7.2948999 10.0749 14.5149 19.5149 22.0149 29.794901 34.794899 39.794899 44.794899 47.574902 52.0149"
+             y="12"
+             sodipodi:role="line"
+             id="tspan78">generated modules</tspan></text>
+      </g>
+      <path
+         d="m 2964,948 h 1440 v 288 H 2964 Z"
+         style="fill:#98fb98;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path82" />
+      <path
+         d="m 2964,948 h 1440 v 288 H 2964 Z"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path84" />
+      <g
+         id="g86"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,342.57,107)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text90"><tspan
+             x="0 7.2199998 10 12.5 19.719999 24.719999 27.5 31.940001 36.939999 39.439999 44.439999"
+             y="0"
+             sodipodi:role="line"
+             id="tspan88">Qt Quick 3D</tspan></text>
+      </g>
+      <path
+         d="m 2964,1236 h 1440 v 288 H 2964 Z"
+         style="fill:#98fb98;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path92" />
+      <path
+         d="m 2964,1236 h 1440 v 288 H 2964 Z"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path94" />
+      <g
+         id="g96"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,344.935,135.8)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text102"><tspan
+             x="0 7.2199998 16.110001 22.219999 24.719999 28.610001 33.049999 37.490002 42.490002"
+             y="0"
+             sodipodi:role="line"
+             id="tspan98">QML scene</tspan><tspan
+             x="-1.82969 5.3903098 8.17031 13.17031 15.95031 18.73031 23.170309 25.95031 28.45031 33.760162 40.980164 43.760162"
+             y="-32.400002"
+             sodipodi:role="line"
+             id="tspan100">Digital Twin</tspan></text>
+      </g>
+      <path
+         d="M 2892,12 H 4476 V 1884 H 2892 Z"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path104" />
+      <path
+         d="m 1524,228 72,18 v -36"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path106" />
+      <path
+         d="m 1524,228 72,18 v -36 z"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path108" />
+      <path
+         d="m 2964,228 -72,-18 v 36"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path110" />
+      <path
+         d="m 2964,228 -72,-18 v 36 z"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path112" />
+      <path
+         d="m 1596.25,228.25 h 1296"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path114" />
+      <g
+         id="g116"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,184.12,26.6)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text120"><tspan
+             x="0 7.2199998 14.44 20 22.5 27.5 32.5 37.5 40.279999 44.169998 49.169998 54.169998 56.669998 59.450001 64.449997 69.449997 72.230003 76.669998"
+             y="0"
+             sodipodi:role="line"
+             id="tspan118">DDS pub/sub topics</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

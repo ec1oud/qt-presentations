@@ -24,6 +24,11 @@ Window {
         onActivated: ++current
     }
 
+    Shortcut {
+        sequence: StandardKey.Quit
+        onActivated: Qt.quit()
+    }
+
     onCurrentFilenameChanged: loader.load()
     Component.onCompleted: loader.load()
 
@@ -46,6 +51,10 @@ Window {
                 break
             case "svg":
                 loader.setSource("components/SvgSlide.qml",
+                                 { "source": "../presentation/" + currentFilename })
+                break
+            case "pdf":
+                loader.setSource("components/PdfSlide.qml",
                                  { "source": "../presentation/" + currentFilename })
                 break
             case "h":
