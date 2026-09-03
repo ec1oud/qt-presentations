@@ -2,7 +2,9 @@ dogzilla-components.svg
 dogzilla-components-qt.svg
 dds-rmw-robot-twin.pdf
 ros-elements-robot-twin.pdf
-../qps/src/proc.cpp
+dogzillad-main.qml show
+PreviewScene.qml show: left run: right
+Dogzilla.qml show: left run: right
 blockquotes.md
 text.qml
 rect.qml

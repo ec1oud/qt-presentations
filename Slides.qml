@@ -39,6 +39,7 @@ Window {
 
         function load() {
             const dottedParts = background.currentFilename.length ? currentFilename.split(".") : []
+            const actualFilename = background.currentFilename.length ? currentFilename.split(" ")[0] : []
             const currentType = dottedParts.length ? dottedParts[dottedParts.length - 1] : ""
             console.log("load", background.current, currentType)
             switch (currentType) {
@@ -62,6 +63,16 @@ Window {
                 loader.setSource("components/CodeSlide.qml",
                                  { "source": "../presentation/" + currentFilename,
                                      "language": "C++" })
+                break
+            case "qml show":
+                loader.setSource("components/CodeSlide.qml",
+                                 { "source": "../presentation/" + actualFilename,
+                                     "language": "qml" })
+                break
+            case "qml show: left run: right": // TODO sub-parsing; actually run the QML alongside
+                loader.setSource("components/CodeSlide.qml",
+                                 { "source": "../presentation/" + actualFilename,
+                                     "language": "qml" })
                 break
             }
         }
