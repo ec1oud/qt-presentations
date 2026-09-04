@@ -17,6 +17,9 @@ Flickable {
         wrapMode: Text.Wrap
         textFormat: Text.MarkdownText
         textDocument.source: flick.source
+        baseUrl: flick.source
         font.pixelSize: fontSize // from Slides.qml
+        transformOrigin: Item.TopLeft
+        scale: 1.5
     }
 }

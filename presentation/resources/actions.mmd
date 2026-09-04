@@ -1,0 +1,8 @@
+
+   sequenceDiagram
+    participant c as Action client
+    participant s as Action server
+    c->>s: Sends a goal
+    s-->>c: Provides feedback (periodic)
+    s-->>c: Sends a result
+

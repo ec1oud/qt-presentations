@@ -1,0 +1,22 @@
+.PS
+
+# ROS 2 action protocol: goal, periodic feedback, final result.
+
+boxwid = 1.2
+gap = 3
+step = 0.7
+
+C: box "Action client" at (0, 0) shaded "palegreen"
+S: box "Action server" at (gap, 0) shaded "palegreen"
+
+line dashed from C.s to C.s - (0, 2.4)
+line dashed from S.s to S.s - (0, 2.4)
+
+y = C.s.y - 0.5
+arrow from (C.s.x, y) to (S.s.x, y) "Sends a goal" above
+y = y - step
+arrow dashed from (S.s.x, y) to (C.s.x, y) "Provides feedback (periodic)" above
+y = y - step
+arrow dashed from (S.s.x, y) to (C.s.x, y) "Sends a result" above
+
+.PE

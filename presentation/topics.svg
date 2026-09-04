@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg2"
+   width="713.59998"
+   height="166.39999"
+   viewBox="0 0 713.59998 166.39999"
+   sodipodi:docname="topics.pdf"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6" />
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <g
+     id="g8"
+     inkscape:groupmode="layer"
+     inkscape:label="topics"
+     transform="matrix(1.3333333,0,0,-1.3333333,0,166.4)">
+    <g
+       id="g10"
+       transform="scale(0.1)">
+      <path
+         d="M 12,444 H 1020 V 804 H 12 Z"
+         style="fill:#98fb98;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path12" />
+      <path
+         d="M 12,444 H 1020 V 804 H 12 Z"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path14" />
+      <g
+         id="g16"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,21.7398,60.2)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text20"><tspan
+             x="0 5.5599999 10.56 15.56 18.34 21.120001 25.01 30.01 34.450001 37.779999 40.279999 45.279999 50.279999 55.279999"
+             y="0"
+             sodipodi:role="line"
+             id="tspan18">Publisher node</tspan></text>
+      </g>
+      <path
+         d="M 2172,444 H 3180 V 804 H 2172 Z"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22" />
+      <g
+         id="g24"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,256.335,60.2)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text28"><tspan
+             x="0 5.3099999 10.3102 15.3102 18.0902"
+             y="0"
+             sodipodi:role="line"
+             id="tspan26">Topic</tspan></text>
+      </g>
+      <path
+         d="m 4332,876 h 1008 v 360 H 4332 Z"
+         style="fill:#98fb98;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path30" />
+      <path
+         d="m 4332,876 h 1008 v 360 H 4332 Z"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path32" />
+      <g
+         id="g34"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,451.245,103.4)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text38"><tspan
+             x="0 5.5599999 10.56 15.56 19.450001 23.889999 27.219999 30 35 39.439999 42.77 45.27 50.27 55.27 60.27"
+             y="0"
+             sodipodi:role="line"
+             id="tspan36">Subscriber node</tspan></text>
+      </g>
+      <path
+         d="M 4332,12 H 5340 V 372 H 4332 Z"
+         style="fill:#98fb98;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path40" />
+      <path
+         d="M 4332,12 H 5340 V 372 H 4332 Z"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path42" />
+      <g
+         id="g44"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,451.245,17)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text48"><tspan
+             x="0 5.5599999 10.56 15.56 19.450001 23.889999 27.219999 30 35 39.439999 42.77 45.27 50.27 55.27 60.27"
+             y="0"
+             sodipodi:role="line"
+             id="tspan46">Subscriber node</tspan></text>
+      </g>
+      <path
+         d="m 2172,624 -72,-18 v 36"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path50" />
+      <path
+         d="m 2172,624 -72,-18 v 36 z"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path52" />
+      <path
+         d="m 1020.25,624.25 h 1080"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path54" />
+      <g
+         id="g56"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,120.295,66.2)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text60"><tspan
+             x="0 5.5599999 10.56 15.56 18.34 21.120001 25.01 30.01 34.450001 38.34 40.84 48.619999 53.060001 56.950001 60.84 65.279999 70.279999 74.720001"
+             y="0"
+             sodipodi:role="line"
+             id="tspan58">Publishes messages</tspan></text>
+      </g>
+      <path
+         d="m 4332,1056 -61.2,-42.48 -12.96,33.84"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path62" />
+      <path
+         d="m 4332,1056 -61.2,-42.48 -12.96,33.84 z"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path64" />
+      <path
+         d="m 3180.25,624.25 1084,407"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path66" />
+      <g
+         id="g68"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,338.725,87.8)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text72"><tspan
+             x="0 7.2199998 11.66 14.44 16.9699 21.819901 26.259741 29.589741 33.47974 35.97974 43.759739 48.199741 52.089741 55.97974 60.419739 65.419739 69.859741"
+             y="0"
+             sodipodi:role="line"
+             id="tspan70">Delivers messages</tspan></text>
+      </g>
+      <path
+         d="m 4332,192 -73.44,8.641 12.96,33.839"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path74" />
+      <path
+         d="m 4332,192 -73.44,8.641 12.96,33.839 z"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path76" />
+      <path
+         d="m 3180.25,624.25 1084,-407"
+         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path78" />
+      <g
+         id="g80"
+         transform="scale(10)">
+        <text
+           xml:space="preserve"
+           transform="matrix(1,0,0,-1,338.725,32.6)"
+           style="font-variant:normal;font-weight:normal;font-size:10px;font-family:Times;-inkscape-font-specification:Times-Roman;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           id="text84"><tspan
+             x="0 7.2199998 11.66 14.44 16.9699 21.819901 26.259741 29.589741 33.47974 35.97974 43.759739 48.199741 52.089741 55.97974 60.419739 65.419739 69.859741"
+             y="0"
+             sodipodi:role="line"
+             id="tspan82">Delivers messages</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

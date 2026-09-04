@@ -1,3 +1,6 @@
+topics.md
+services.md
+actions.md
 dogzilla-components.svg
 dogzilla-components-qt.svg
 dds-rmw-robot-twin.pdf

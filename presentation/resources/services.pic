@@ -1,0 +1,19 @@
+.PS
+
+# ROS 2 service protocol: request, then response.
+
+boxwid = 1.2
+gap = 3
+
+C: box "Service client" at (0, 0) shaded "palegreen"
+S: box "Service server" at (gap, 0) shaded "palegreen"
+
+line dashed from C.s to C.s - (0, 1.6)
+line dashed from S.s to S.s - (0, 1.6)
+
+y = C.s.y - 0.5
+arrow from (C.s.x, y) to (S.s.x, y) "Request" above
+y = y - 0.7
+arrow dashed from (S.s.x, y) to (C.s.x, y) "Response" above
+
+.PE

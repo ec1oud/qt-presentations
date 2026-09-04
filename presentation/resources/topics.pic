@@ -1,0 +1,17 @@
+.PS
+
+# ROS 2 topic protocol: a publisher fans out to any number of subscribers.
+
+boxwid = 1.4
+gap = 3
+
+P: box "Publisher node" at (0, 0) shaded "palegreen"
+T: box "Topic" at (gap, 0)
+S1: box "Subscriber node" at (2 * gap, 0.6) shaded "palegreen"
+S2: box "Subscriber node" at (2 * gap, -0.6) shaded "palegreen"
+
+arrow from P.e to T.w "Publishes messages" above
+arrow from T.e to S1.w "Delivers messages" above
+arrow from T.e to S2.w "Delivers messages" below
+
+.PE
