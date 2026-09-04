@@ -5,7 +5,7 @@ Flickable {
     id: flick
     property url source
     property string language
-    property bool diagnosticsEnabled: false
+    property alias diagnosticsEnabled: highlighterLoader.diagnosticsWanted
 
     contentWidth: codeText.contentWidth
     contentHeight: codeText.contentHeight
@@ -19,18 +19,16 @@ Flickable {
         font.family: "monospace"
         font.pixelSize: fontSize // from Slides.qml
 
-        Component.onCompleted: {
+        Loader {
+            id: highlighterLoader
             // missing or unbuilt gq submodule is non-fatal
-            const component = Qt.createComponent(Qt.resolvedUrl("CodeHighlighter.qml"))
-            if (component.status === Component.Error) {
-                console.warn("CodeSlide: syntax highlighting unavailable (is the gq submodule checked out and built?):",
-                             component.errorString())
-                return
-            }
-            component.createObject(codeText, {
-                document: codeText.textDocument,
-                diagnosticsEnabled: Qt.binding(() => flick.diagnosticsEnabled)
-            })
+            source: "CodeHighlighter.qml"
+            // Loader is the creation context for what it loads: make these available
+            property var targetDocument: codeText.textDocument
+            property bool diagnosticsWanted: false
+
+            onStatusChanged: if (status === Loader.Error)
+                console.warn("CodeSlide: syntax highlighting unavailable (is the gq submodule checked out and built?)")
         }
     }
 
