@@ -16,10 +16,6 @@ import QtRos2.Transforms
 Ros2.Node {
     id: root
     nodeName: "dogzillad"   // FQN /dogzilla/dogzillad
-    // Namespace the node so TF lands on /dogzilla/tf_static (QtRos2 remaps
-    // tf2's absolute /tf, /tf_static to follow the namespace). All other
-    // topics below derive their /dogzilla/ prefix from this too, so the
-    // node name is free to describe the program rather than the robot.
     nodeNamespace: "/dogzilla"
 
     TwistPublisher {
@@ -51,7 +47,7 @@ Ros2.Node {
                 "rh_hip_joint",
           ]
         position: controller.jointAngles
-       // could also include velocity, effort
+       // could also include velocity, effort, if we could measure it
    }
 
     BatteryStatePublisher {
@@ -66,9 +62,7 @@ Ros2.Node {
         tty: "/dev/tty1"
     }
 
-    // Ros2Node apparently only allows childEntities as children:
-    // if we don't declare a property, we get
-    // Cannot assign object of type "QQmlConnections" to list property "childEntities"; expected "QRos2Entity"
+    // Ros2Node only allows childEntities as children
     property Controller controller: Controller {
         serialPort: "/dev/ttyAMA0"
         baudRate: 115200
@@ -76,12 +70,6 @@ Ros2.Node {
     }
 
     property UniversalInput univin: UniversalInput {
-        /*!
-            Note: to get xbox mode, hold down the mode button on the controller to
-            switch to the mode where the green LED is lit. The default mode with the
-            red LED is almost as good, but the shoulder axes become binary rather
-            than giving a range of values.
-        */
         onJoyAxisEvent:
             (device, axis, value) => {
                 console.log("axis", axis, value)
@@ -129,8 +117,6 @@ Ros2.Node {
     TwistSubscriber {
         id: cmdVelSub
         topic: `${root.nodeNamespace}/cmd_vel`
-        // TODO declarative multi-binding: either this or univin can comnmand the controller;
-        // or, drive TwistPublisher from univin
         onMessageReceived: (msg) => {
             console.log("--- twist", JSON.stringify(msg), msg.linear)
             controller.sideStepSpeed = msg.linear.y
@@ -144,9 +130,6 @@ Ros2.Node {
         id: poseSub
         topic: `${root.nodeNamespace}/body_pose/command`
         onPoseChanged: {
-            // pose.orientation.rpyDegrees is a ROS vector3 (degrees, double)
-            // eulerAngles is a single-precision QVector3D, and would need QtQuick
-            // header.frameId is available if we later want to validate/transform the frame
             controller.roll = poseSub.pose.orientation.rpyDegrees.x
             controller.pitch = poseSub.pose.orientation.rpyDegrees.y
             controller.yaw = poseSub.pose.orientation.rpyDegrees.z
@@ -154,27 +137,20 @@ Ros2.Node {
     }
 
     // Feedback from the IMU, published symmetric with body_pose/command.
-    // measuredRoll/measuredPitch are tared real degrees (relative to startup, or
-    // to the last controller.tareAttitude()). Yaw is published as 0: the firmware's
-    // yaw is a free-running gyro integral that drifts ~14 deg/s, so the twin's
-    // heading should come from odometry, not here. Referencing the measured*
-    // properties is also how the Controller detects interest and starts IMU polling.
-    // (Same fromEulerAngles pattern the digital twin uses on the command side.)
+    // Controller's yaw drifts too much, so heading must come from odometry.
     PoseStampedPublisher {
         id: posePub
         topic: `${root.nodeNamespace}/body_pose/state`
+        // tared real degrees (since startup / controller.tareAttitude() )
         pose.orientation: Quaternion.fromEulerAngles(controller.measuredRoll,
                                                       controller.measuredPitch,
-                                                      0)
+                                                      0) // yaw
     }
 
     CompressedImagePublisher {
         id: imagePublisher
         topic: `${root.nodeNamespace}/camera/image/compressed`
-        // Best-effort: over a congested Wi-Fi link, drop frames rather than
-        // retransmit/block. Stale video is useless, and reliable delivery of a
-        // high-rate JPEG stream is what clogs the link. The digitwin's
-        // CompressedImageSubscriber must request best-effort too, to match.
+        // Best-effort: drop frames in case of congestion; CompressedImageSubscriber must match qos
         qos: Ros2.QualityOfService.sensorData()
     }
 
@@ -210,7 +186,7 @@ Ros2.Node {
         }
 
         property Timer cameraTimer: Timer {
-            interval: 200 // TODO increase the frequency; how to make it adaptive?
+            interval: 200 // TODO adaptive?
             repeat: true
             running: true // TODO only when the network is up, DDS is ok and some client is listening
             onTriggered: imageCapture.capture()
@@ -223,13 +199,8 @@ Ros2.Node {
     }
 
     // Static base_link -> laser_frame transform, from the URDF laser_Joint origin
-    // (xyz="-0.016732 4.4164E-05 0.10335" rpy="0 0 0"). The lidar.cpp scan already
-    // stamps frame_id="laser_frame", so SLAM (rf2o + slam_toolbox) can resolve it.
-    // StaticTransformBroadcaster wraps tf2_ros and latches the declared transform
-    // on /tf_static (transient_local), so a tf2 listener that starts later (e.g.
-    // the slam node) still receives it. Declared (not sent imperatively) so it is
-    // (re)published from setupConnection once the node is initialized, with no
-    // race against Component.onCompleted.
+    // (xyz="-0.016732 4.4164E-05 0.10335" rpy="0 0 0"). lidar.cpp already stamps f
+    // rame_id="laser_frame", for SLAM to resolve.
     StaticTransformBroadcaster {
         transforms: [{
             "header": { "frameId": "base_link" },
@@ -246,11 +217,9 @@ Ros2.Node {
         onSectorScanned: (msg) => frickenLaserPublisher.publish(msg)
     }
 
-    // Push-to-talk speech-to-text. The digital twin toggles
-    // /dogzilla/speech/listen (true = button pressed, false = released): while
-    // held we silence the fan and capture the mic; on release we stop capture,
-    // transcribe the utterance (whisper, on a worker thread) and append it to
-    // the conversation log on /dogzilla/speech/log as a HEARD line.
+    // Push-to-talk speech-to-text. The digital twin toggles /dogzilla/speech/listen 
+    // (true = button pressed); while held, silence the fan and capture the mic; 
+    // on release, stop capture, transcribe the utterance and append to /dogzilla/speech/log
     property FanController fan: FanController {
         quiet: mic.listening
     }
@@ -263,9 +232,8 @@ Ros2.Node {
         onTranscriptReady: (text, confidence) => {
             console.log("heard:", text, "confidence", confidence);
             root.logChat(root.chatHeard, text, confidence);
-            // Voice command? If the utterance is short and ends with a
-            // taught pose ("please sit"), play it directly -- no LLM round-trip.
-            // Otherwise it's conversation, so hand it to the LLM (async reply below).
+			// If the utterance is short and ends with a taught pose
+			// ("please sit"), play it directly; otherwise, send to the LLM.
             const motion = root.matchMotionCommand(text);
             if (motion) {
                 root.logChat(root.chatSystem, "▶ " + motion, 0.0);
@@ -277,16 +245,11 @@ Ros2.Node {
         onErrorOccurred: (msg) => console.warn("stt:", msg)
     }
 
-    // Remote Ollama LLM: whisper transcripts go in via chat(), and the reply
-    // comes back on responseReceived(), which we route to speak() so the dog
-    // answers out loud (and the line lands in the /speech/log chat the twin
-    // shows). Set apiUrl to your Ollama host (e.g. http://192.168.x.x:11434)
-    // and model to an installed model; both are still placeholders here.
+    // Remote LLM: whisper transcripts go in via chat();
+    // reply is spoken and goes into /speech/log
     property LanguageModel lm: LanguageModel {
-        // set to the actual LLM host IP; empty means chat() is a no-op.
-        apiUrl: "http://laptop.local:11434"
-        model: "qwen3.5:4b"
-        // promptSource: "/usr/share/dogzillad/prompt.txt"
+        apiUrl: "http://laptop.local:11434" // Ollama/llama.cpp host IP
+        model: "qwen3.5:4b"                 // chosen model
         promptSource: Qt.resolvedUrl("prompt.txt")
         onResponseReceived: (text) => {
             // If a twin Speak(use_llm) goal is waiting on this reply, speak it
@@ -299,19 +262,13 @@ Ros2.Node {
         }
     }
 
-    // Text-to-speech (QtTextToSpeech via the offline flite engine -> PipeWire).
-    // The default engine/voice is fine; say() is async (state goes Speaking then
-    // Ready). Non-Ros2 type, so it hangs off a property like the others.
+    // QtTextToSpeech via the offline flite engine -> PipeWire; default engine/voice
+    // say() is async (state goes Speaking then Ready)
     property TextToSpeech tts: TextToSpeech {
         onErrorOccurred: (reason, msg) => console.warn("tts:", msg)
-        // TTS returned to Ready: succeed the goal whose speech was actually
-        // playing. We key off speakingGoal, not activeSpeak, because Ready is
-        // ALSO the state after stop() -- so a stop() from a supersede/cancel
-        // would otherwise land here and falsely succeed the *next* goal (which
-        // is only "thinking", not speaking). Clearing speakingGoal before every
-        // stop() makes those stray Ready transitions no-ops.
         onStateChanged: {
             if (tts.state === TextToSpeech.Ready && root.speakingGoal) {
+                // there was a goal, and it succeeded
                 root.speakingGoal.succeed({ spokenText: root.activeSpokenText, completed: true });
                 if (root.activeSpeak === root.speakingGoal)
                     root.activeSpeak = null;
@@ -322,21 +279,16 @@ Ros2.Node {
 
     // Speak text and record it in the chat log. The single entry point for the
     // robot's voice: the Speak action and the autonomous STT->LLM path both call
-    // this, so every spoken line is logged exactly once. The chat log keeps the
-    // original text (the twin's ChatView renders markdown), but TTS gets a
-    // stripped copy -- flite/QTextToSpeech have no emphasis/SSML support, so an
-    // LLM's "**bold**" would otherwise be read aloud as "asterisk asterisk".
+    // this, so every spoken line is logged exactly once.
     function speak(text: string) {
         if (!text)
             return;
-        tts.say(stripForSpeech(text));
-        logChat(chatSpoken, text, 0.0);
+        tts.say(stripForSpeech(text)); // strip markdown so it doesn't say "asterisk" etc.
+        logChat(chatSpoken, text, 0.0); // markdown is good for the log
     }
 
-    // Drop markdown so it isn't spoken literally. QtCore-only (plain JS RegExp):
-    // dogzillad is a headless QCoreApplication, so QTextDocument (QtGui) is out.
-    // Handles the inline markup an LLM typically emits; the log keeps the raw
-    // text for rich display in the twin.
+    // Drop typical LLM-reply markdown so it isn't spoken literally. 
+    // QtCore-only JS: it's a headless QCoreApplication, can't use QTextDocument.
     function stripForSpeech(md: string): string {
         return md
             .replace(/```[\s\S]*?```/g, " ")         // fenced code blocks
@@ -354,16 +306,14 @@ Ros2.Node {
             .trim();
     }
 
-    // Append one line to the conversation log on /dogzilla/speech/log. Imperative
-    // (not a binding): each call is a distinct event. header.stamp is auto-filled
-    // by the publisher from the node clock, so we omit it here.
+    // Append one line to the conversation log on /dogzilla/speech/log.
+    // header.stamp is auto-filled by the publisher from the node clock
     function logChat(source: int, text: string, confidence: real) {
         speechLog.publish({ "source": source, "text": text, "confidence": confidence });
     }
 
-    // Mirror of dogzilla_interfaces/ChatMessage's source constants: the QtRos2
-    // wrapper doesn't surface ROS message constants to QML, so keep them in sync
-    // with the .msg by hand (HEARD=0, SPOKEN=1, SYSTEM=2).
+    // Mirror of dogzilla_interfaces/ChatMessage's source constants
+    // in sync with the .msg (TODO: make available to QML from the wrapper)
     readonly property int chatHeard: 0
     readonly property int chatSpoken: 1
     readonly property int chatSystem: 2
@@ -379,11 +329,8 @@ Ros2.Node {
     // an active goal can be "thinking" (awaiting the LLM) and not yet speaking.
     property var speakingGoal: null
 
-    // Start executing a Speak goal from the twin. use_llm=false speaks the text
-    // verbatim; use_llm=true asks the LLM first and speaks the reply. The goal
-    // stays active until TTS finishes (succeed) or stopSpeaking() interrupts it
-    // (abort) -- there's no goal-scoped cancel: the twin's stop button hits the
-    // /speech/stop service instead, so it silences autonomous speech too.
+	// Start executing a Speak goal from the twin. Stays active until TTS
+	// finishes (succeed) or is aborted via /speech/stop service (stopSpeaking)
     function beginSpeak(handle, goal) {
         // One voice, one goal: stop anything already speaking before taking over.
         if (activeSpeak && activeSpeak !== handle)
@@ -398,13 +345,10 @@ Ros2.Node {
         }
     }
 
-    // Stop the robot's voice NOW, whatever started it. The single stop authority:
-    // TTS is the one voice, so we stop it directly rather than through a goal --
-    // autonomous STT->LLM speech (speak() with no handle) has no goal to cancel.
-    // If a twin Speak goal is mid-utterance, abort it so the twin sees it finish.
-    // Called by the /speech/stop service and by beginSpeak when superseding.
+	// Stop the robot's voice NOW, whatever started it, directly rather than
+	// through a goal (autonomous STT->LLM speech has no goal to cancel).
     function stopSpeaking() {
-        speakingGoal = null;   // before stop(): suppress the stray Ready (see tts.onStateChanged)
+        speakingGoal = null;   // before stop(): suppress the stray Ready
         tts.stop();
         if (activeSpeak) {
             activeSpeak.abort({ spokenText: activeSpokenText, completed: false });
@@ -413,7 +357,7 @@ Ros2.Node {
     }
 
     // Speak text as part of the active goal: publish "speaking" feedback, then
-    // hand off to speak() (TTS + chat log). Empty text completes immediately.
+    // hand off to speak() (TTS + chat log).
     function speakForGoal(text: string) {
         activeSpokenText = text;
         if (!activeSpeak)
@@ -431,10 +375,8 @@ Ros2.Node {
     // ---- PlayMotion action (the twin's teach-pendant playback + "stop") ----
     // Plays a taught trajectory_msgs/JointTrajectory the standard ROS way:
     // time_from_start is each point's ARRIVAL time, and we LINEARLY INTERPOLATE the
-    // joint angles between points (at ~20 Hz) so motion is smooth and timed -- not a
-    // step to each target left to the firmware's fixed-speed slew (which was jerky).
-    // A held pose is just two consecutive points with the same positions. At 115200
-    // baud, 12 servo writes per tick @ 20 Hz is ~15% of the link -- comfortable.
+    // joint angles between points (at ~20 Hz) so motion is smooth and timed.
+    // A held pose is just two consecutive points with the same positions.
     property var activeMotion: null            // the in-flight PlayMotion handle, or null (voice-triggered)
     property bool motionRunning: false         // a motion is playing (with or without a handle)
     property var motionPositions: []           // per-point 12-elem radian arrays (canonical order), incl. the t=0 start pose
@@ -457,9 +399,6 @@ Ros2.Node {
         "rh_lower_leg_joint", "rh_upper_leg_joint", "rh_hip_joint",
     ]
 
-    // Held in a property, not a bare child: the root Ros2.Node only accepts
-    // QRos2NodeChild in its default childEntities list (same reason controller/tts
-    // are properties above), so a bare Timer aborts QML load.
     property Timer motionTimer: Timer {
         interval: 50            // ~20 Hz interpolation
         repeat: true
@@ -614,31 +553,21 @@ Ros2.Node {
     }
 
     // The conversation, for the twin's chat log: HEARD (what the human said, with
-    // STT confidence) and SPOKEN (what the dog said) lines, timestamped. Custom
-    // dogzilla_interfaces/ChatMessage (not the deprecated std_msgs/String), so it
-    // carries source + confidence and is Header-stamped. Default (reliable) QoS:
-    // a chat log is a live stream; the twin accumulates from when it connects.
+    // STT confidence) and SPOKEN (what the dog said) lines, timestamped. 
+    // Custom dogzilla_interfaces/ChatMessage carries source + confidence and is Header-stamped. 
+    // Default (reliable) QoS for live chat log; the twin accumulates from when it connects.
     ChatMessagePublisher {
         id: speechLog
         topic: `${root.nodeNamespace}/speech/log`
     }
 
-    // The twin's "Speak" / "Send" buttons: one Speak goal at a time. The goal's
-    // use_llm flag selects verbatim TTS ("Speak") vs LLM-then-speak ("Send").
-    // The goal isn't cancelled to stop speech -- see /speech/stop below: the
-    // twin's stop button is a service that silences TTS regardless of how the
-    // speech started, so it also stops the autonomous STT->LLM voice, which has
-    // no goal. Replaces the older fire-and-forget /speech/say, /speech/respond.
+    // The twin's "Speak" / "Send" buttons: one Speak goal at a time.
     SpeakActionServer {
         topic: `${root.nodeNamespace}/speech/speak`
         onGoalReceived: (goal, handle) => root.beginSpeak(handle, goal)
     }
 
-    // "Stop the voice": the single authority for silencing TTS, regardless of
-    // how speech started (twin Speak goal or autonomous STT->LLM). std_srvs/
-    // Trigger so the caller gets an ack; the response is declarative. Distinct
-    // from an action cancel, which could only reach a goal the twin itself sent
-    // -- never the robot's own autonomous speech.
+    // "Stop the voice" service
     TriggerServiceServer {
         topic: `${root.nodeNamespace}/speech/stop`
         onRequestReceived: root.stopSpeaking()
@@ -681,29 +610,24 @@ Ros2.Node {
         id: statePub
         topic: `${root.nodeNamespace}/speech/state`
         qos: Ros2.QualityOfService.transientLocal()
-        // Fully declarative: single-field publishers expose one bindable
-        // property (named after the field, `data` for std_msgs/String) that
-        // auto-publishes on change, and latched topics republish the stored
-        // state on connect -- so the initial "idle" is latched for late
-        // twins without an imperative publish. No binding loop: this reads
-        // busy/listening and never writes them back.
+        // declarative single-field publisher exposes one bindable property
+        // that auto-publishes on change, and latched topics republish the 
+        // stored state on connect.
         data: stt.busy ? "transcribing"
             : mic.listening ? "listening" : "idle"
     }
 
     // Audio mixer (wpctl -> PipeWire): "master" is the default sink,
-    // "mic" the default source (capture gain for PTT). dogzillad shares
-    // pi's user session, so no sudo. Each channel is read once at startup
-    // and echoed on set; external changes (alsamixer etc.) are not tracked.
+	// "mic" the default source (capture gain for PTT). Each channel is read once 
+    // at startup and echoed on set; external changes are not tracked.
     property VolumeController volumeCtl: VolumeController {}
 
     // Each mixer channel is one node parameter: settable with feedback
     // (ros2 param set / RemoteParameter; out-of-range requests are rejected
-    // by rclcpp from the declared bounds before we ever see them),
-    // observable via /parameter_events, introspectable with
-    // ros2 param describe. VolumeController is the source of truth: the
-    // value binding publishes its state, and valueEdited routes external
-    // sets back into it.
+	// by rclcpp from the declared bounds before we ever see them), observable
+	// via /parameter_events, introspectable with ros2 param describe.
+	// VolumeController is the source of truth: the value binding publishes its
+	// state, and valueEdited routes external sets back into it.
     Ros2.Parameter {
         name: "audio.master"
         value: volumeCtl.master
@@ -721,13 +645,10 @@ Ros2.Node {
         onValueEdited: (v) => volumeCtl.mic = v
     }
 
-    // Engage (load/stand) or disengage (unload/relax) the leg servos from the
-    // twin, without needing the joystick -- and the teach pendant needs the dog
-    // engaged before playing a motion. A bool node parameter so it's both
-    // settable and observable-with-feedback like audio.*: the value binding
-    // republishes when the joystick Start toggles motorsEngaged (so the twin
-    // stays in sync with the actual state), and valueEdited routes external sets
-    // into the controller. Controller is the source of truth.
+    // Engage (load/stand) or disengage (unload/relax) the leg servos from the twin.
+    // A bool node parameter so it's both settable and observable-with-feedback:
+    // Controller is the source of truth; the value binding republishes when the 
+	// joystick Start toggles motorsEngaged; valueEdited is for external sets
     Ros2.Parameter {
         name: "motors.engaged"
         value: controller.motorsEngaged
@@ -735,24 +656,21 @@ Ros2.Node {
         onValueEdited: (v) => controller.motorsEngaged = v
     }
 
-    // System telemetry (fan level, CPU temperature, CPU load) at 1 Hz, for the
-    // twin's line charts -- e.g. watch PTT silence the fan and the temp/CPU
-    // response.
+    // System telemetry (fan level, CPU temperature, CPU load) at 1 Hz
     property Telemetry telemetry: Telemetry {}
 
-    // fan + cpu via our custom dogzilla_interfaces/StampedTelemetry message. It's
-    // multi-field, so it binds DECLARATIVELY -- no publish() in JS; the publisher
-    // republishes when either metric changes. Because StampedTelemetry leads with a
-    // std_msgs/Header, the generated publisher extends QRos2StampedPublisherBase and
-    // auto-fills header.stamp from the node clock -- no manual timestamping here.
+    // fan + cpu via our custom dogzilla_interfaces/StampedTelemetry message
     // Generated from the dogzilla_interfaces package by qtros2_generate_from_package.
+    // Binding updates cause auto republish. Because StampedTelemetry leads with a
+    // std_msgs/Header, publisher extends QRos2StampedPublisherBase and
+    // auto-fills header.stamp from the node clock.
     StampedTelemetryPublisher {
         topic: `${root.nodeNamespace}/telemetry/system`
         fanLevel: telemetry.fanLevel
         cpuPercent: telemetry.cpuPercent
     }
 
-    // Temperature via the standard sensor_msgs/Temperature -- also declarative.
+    // Temperature via the standard sensor_msgs/Temperature
     TemperaturePublisher {
         topic: `${root.nodeNamespace}/telemetry/temperature`
         temperature: telemetry.temperatureC
