@@ -1,0 +1,3 @@
+[submodule "gq"]
+	path = gq
+	url = https://github.com/ec1oud/guanaquito.git

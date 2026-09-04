@@ -1,11 +1,12 @@
 import QtQuick
 import QtQuick.Controls
-// import org.kde.syntaxhighlighting
+import Lsp
 
 Flickable {
     id: flick
     property url source
     property string language
+    property bool diagnosticsEnabled: false
 
     contentWidth: codeText.contentWidth
     contentHeight: codeText.contentHeight
@@ -19,10 +20,10 @@ Flickable {
         font.family: "monospace"
         font.pixelSize: fontSize // from Slides.qml
 
-        // SyntaxHighlighter {
-        //     textEdit: codeText
-        //     definition: flick.language
-        // }
+        DocumentLSClient {
+            document: codeText.textDocument
+            diagnosticsEnabled: flick.diagnosticsEnabled
+        }
     }
 
     ScrollBar.vertical: ScrollBar { id: scrollBar; width: 24 }
