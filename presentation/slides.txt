@@ -8,6 +8,3 @@ ros-elements-robot-twin.pdf
 dogzillad-main.qml show
 PreviewScene.qml show: left run: right
 Dogzilla.qml show: left run: right
-blockquotes.md
-text.qml
-rect.qml

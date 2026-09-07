@@ -1,0 +1,75 @@
+direction: down
+
+user_app: "User Application" {
+  style.fill: "#d9d9d9"
+  grid-columns: 3
+  grid-gap: 40
+
+  qml_app: "QML / C++ App\n(QtROS2 generated types)" {
+    style.fill: "#f0f0f0"
+  }
+  cpp_app: "C++ App\n(native rclcpp)" {
+    style.fill: "#f0f0f0"
+  }
+  py_app: "Python App\n(native rclpy)" {
+    style.fill: "#f0f0f0"
+  }
+}
+
+qtros2: "qt-ros2-bridge (QtROS2)\n+ Generated QML value types & wrappers\n+ QRos2Node / QRos2Context\n+ Qt event-loop integration\n+ QFuture -> JS Promise bridge" {
+  style.fill: "#93c47d"
+}
+
+rclcpp: "rclcpp (C++ API)\n+ Exec. with std::thread\n+ Intra-Process Comms\n+ Type Adaption" {
+  style.fill: "#f28b82"
+}
+
+rclpy: "rclpy (Python API)\n+ Exec. with Thread\n+ Intra-Process Comms\n+ Type Adaption" {
+  style.fill: "#ffe599"
+}
+
+rcl: "rcl (C API / optional C++ Implementation)\n\n+ Actions        + Time\n+ Parameters     + Console Logging\n+ Names          + Node Lifecycle" {
+  style.fill: "#f6b26b"
+}
+
+rmw: "rmw (C API)\n+ Pub/Sub with QoS    + Services with QoS    + Discovery    + Graph Events" {
+  style.fill: "#f6b26b"
+}
+
+cyclone: "Cyclone DDS" {
+  shape: page
+  style.fill: "#6fa8dc"
+}
+fastdds: "Fast DDS" {
+  shape: page
+  style.fill: "#6fa8dc"
+}
+connext: "Connext DDS" {
+  shape: page
+  style.fill: "#6fa8dc"
+}
+
+ros_to_dds: "ros_to_dds" {
+  style.fill: "#f6b26b"
+}
+
+footnote: "Exactly one RMW / DDS implementation is selected at runtime (RMW_IMPLEMENTATION env var).\n* Intra-Process Comms and Type Adaption could be implemented in the client library, but may not currently exist." {
+  shape: text
+  near: bottom-center
+  style.italic: true
+  style.font-size: 14
+}
+
+user_app -> qtros2
+qtros2 -> rclcpp: uses
+
+rclcpp -> rcl
+rclpy -> rcl
+rcl -> rmw
+
+rmw -> cyclone
+rmw -> fastdds
+rmw -> connext
+
+user_app -> ros_to_dds: "bypasses rcl/rmw"
+ros_to_dds -> fastdds
