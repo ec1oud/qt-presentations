@@ -4,22 +4,34 @@ Flickable {
     id: flick
     property url source
 
-    contentWidth: markdownText.contentWidth
-    contentHeight: markdownText.contentHeight
-    topMargin: fontSize * 2
-    leftMargin: fontSize * 2
-    rightMargin: fontSize * 2
+    contentWidth: Math.max(markdownText.contentWidth, flick.width)
+    contentHeight: Math.max(markdownText.contentHeight, flick.height)
+    onWidthChanged: autoScale()
+    onHeightChanged: autoScale()
+    Component.onCompleted: autoScale()
+
+    function autoScale() {
+        const idealW = width - 200
+        const idealH = height - topMargin - 100
+        markdownText.scale = Math.min(idealW / markdownText.implicitWidth,
+                                      idealH / markdownText.implicitHeight)
+        // console.log(idealW, idealH, markdownText.implicitWidth, markdownText.implicitHeight)
+    }
 
     TextEdit {
         id: markdownText
         readOnly: true
-        width: flick.width
-        wrapMode: Text.Wrap
+        anchors.centerIn: parent
         textFormat: Text.MarkdownText
         textDocument.source: flick.source
         baseUrl: flick.source
         font.pixelSize: fontSize // from Slides.qml
-        transformOrigin: Item.TopLeft
-        scale: 1.5
+        font.family: fontFamily
+
+        // Rectangle {
+        //     anchors.fill: parent
+        //     color: "transparent"
+        //     border.color: "green"
+        // }
     }
 }
