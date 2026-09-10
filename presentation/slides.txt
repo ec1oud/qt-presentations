@@ -1,3 +1,5 @@
+title.qml
+qt.qml
 ros.qml
 rosutil.md
 layers.qml
