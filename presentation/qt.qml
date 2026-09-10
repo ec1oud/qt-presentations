@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick3D
+import "resources/rock" as Rock
 
 Item {
     width: 1920
@@ -35,25 +36,11 @@ Item {
         View3D {
             id: view
             Layout.fillWidth: true; Layout.fillHeight: true
-            PerspectiveCamera { position: Qt.vector3d(0, 200, 300); eulerRotation.x: -30 }
+            PerspectiveCamera { position: Qt.vector3d(0, 10, 18); eulerRotation.x: -30 }
             DirectionalLight { eulerRotation.x: -30 }
-            Model {
-                source: "#Cube"
-                materials: PrincipledMaterial {
-                    baseColorMap: Texture {
-                        sourceItem: Rectangle {
-                            width: 480; height: 480
-                            color: "black"
-                            Image {
-                                anchors.fill: parent
-                                anchors.margins: 20
-                                fillMode: Image.PreserveAspectFit
-                                source: "resources/qt_logo.svg"
-                            }
-                        }
-                    }
-                }
 
+            Rock.Scene {
+                scale: Qt.vector3d(5, 5, 5)
                 Vector3dAnimation on eulerRotation {
                     loops: Animation.Infinite
                     duration: 15000
