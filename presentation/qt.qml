@@ -1,7 +1,9 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Controls.Universal
 import QtQuick.Layouts
 import QtQuick3D
+import QtQuick3D.Helpers
 import "resources/rock" as Rock
 
 Item {
@@ -29,28 +31,70 @@ Item {
     }
 
     RowLayout {
-        anchors.bottom: parent.bottom
-        width: parent.width
-        height: parent.height / 2
+        anchors { fill: parent; margins: 50; topMargin: parent.height / 2 }
 
         View3D {
-            id: view
             Layout.fillWidth: true; Layout.fillHeight: true
-            PerspectiveCamera { position: Qt.vector3d(0, 10, 18); eulerRotation.x: -30 }
-            DirectionalLight { eulerRotation.x: -30 }
+            Node {
+                id: camorg
+                PerspectiveCamera { id: cam; position: Qt.vector3d(0, 200, 300); eulerRotation.x: -30 }
+            }
+            DirectionalLight { eulerRotation.x: -70 }
+
+            OrbitCameraController {
+                anchors.fill: parent
+                origin: camorg; camera: cam
+            }
 
             Rock.Scene {
-                scale: Qt.vector3d(5, 5, 5)
+                scale: Qt.vector3d(100, 100, 100)
                 Vector3dAnimation on eulerRotation {
                     loops: Animation.Infinite
                     duration: 15000
                     from: Qt.vector3d(0, 0, 0)
                     to: Qt.vector3d(360, 0, 360)
+                    paused: !sw1.checked
                 }
+                Model {
+                    source: "#Cube"
+                    position: Qt.vector3d(0, 0, sl1.value / 10)
+                    scale: Qt.vector3d(0.015, 0.01, 0.01)
+                    materials: PrincipledMaterial {
+                        baseColorMap: Texture {
+                            sourceItem: Rectangle {
+                                id: cubeFace
+                                width: 480; height: 480
+                                color: "black"
+                                Image {
+                                    anchors.fill: parent
+                                    anchors.margins: 20
+                                    fillMode: Image.PreserveAspectFit
+                                    source: "resources/qt_logo.svg"
+                                }
+                            }
+                        }
+                        emissiveFactor: Qt.vector3d(0, 0.5, 0)
+                        emissiveMap: Texture {
+                            sourceItem: cubeFace
+                        }
+                    }
+                }
+            }
+        }
+
+        Column {
+            spacing: 20
+            Slider {
+                id: sl1
+                orientation: Qt.Vertical
+                from: 4; to: 10; value: 4.7
+            }
+            Switch {
+                id: sw1
+                checked: true
             }
         }
     }
 }
 
 // TODO show source
-// TODO cool 3D stuff
