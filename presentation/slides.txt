@@ -5,6 +5,7 @@ rosutil.md
 layers.qml
 topics.md
 services.md
+parameters.md
 actions.md
 dogzilla-components.svg
 dogzilla-components-qt.svg

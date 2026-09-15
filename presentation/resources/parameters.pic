@@ -1,0 +1,27 @@
+.PS
+
+# ROS 2 parameter protocol: parameters live on a node and are
+# get/set through built-in services (rcl_interfaces/srv/GetParameters,
+# SetParameters, ...), so this is the same request/response shape as
+# services.pic, just with two scenarios stacked.
+
+boxwid = 1.4
+gap = 3
+
+C: box "Parameter client" at (0, 0) shaded "palegreen"
+N: box "Node" "(parameter services)" at (gap, 0) shaded "palegreen"
+
+line dashed from C.s to C.s - (0, 3.6)
+line dashed from N.s to N.s - (0, 3.6)
+
+y = C.s.y - 0.6
+arrow from (C.s.x, y) to (N.s.x, y) "get_parameters request" above
+y = y - 0.7
+arrow dashed from (N.s.x, y) to (C.s.x, y) "get_parameters response" above
+
+y = y - 1.1
+arrow from (C.s.x, y) to (N.s.x, y) "set_parameters request" above
+y = y - 0.7
+arrow dashed from (N.s.x, y) to (C.s.x, y) "set_parameters response" above
+
+.PE
