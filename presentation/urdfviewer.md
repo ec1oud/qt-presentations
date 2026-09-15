@@ -3,7 +3,7 @@
 But first: *what is URDF?*
 
 - **U**nified **R**obot **D**escription **F**ormat
-- XML schema
+- industry-standard XML schema
 - links and joints
 - visual materials
 - collision volumes
@@ -30,7 +30,7 @@ Arguments:
  urdf or xacro                File to open 
  destination                  Output directory 
 ```
-Demo:
+### Demo:
 
 ```
 urdfviewer -b -u 1000 -p dogzilla ~/dev/qt-robotics/dogzilla/digitwin/urdf/dogzilla.urdf /tmp

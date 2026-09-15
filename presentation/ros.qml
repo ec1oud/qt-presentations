@@ -38,13 +38,13 @@ Item {
   + ROS2: built on top of DDS (Data Distribution Service)
   + or Zenoh
   + discovery
+- motion planning / kinematics
+  + converting between frames of reference
+  + collision checking
 - navigation
   + path planning
   + obstacle avoidance
   + SLAM (Simultaneous Localization and Mapping)
-- motion planning / kinematics
-  + converting between frames of reference
-  + collision checking
 - Ubuntu, Yocto, Windows, ...
 "
     }

@@ -11,7 +11,7 @@ Rectangle {
         font.family: fontFamily
         font.pixelSize: headingFontSize // from Slides.qml
         font.bold: true
-        text: "ROS client API stack"
+        text: "ROS 2 client API stack"
     }
 
     GridLayout {

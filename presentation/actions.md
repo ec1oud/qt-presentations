@@ -8,3 +8,7 @@
 
 ![image](actions.svg)
 
+```
+$ ros2 action list
+```
+

@@ -7,3 +7,9 @@
 
 ![image](topics.svg)
 
+```
+$ ros2 topic list
+$ ros2 topic echo /dogzilla/joint_states
+$ ros2 topic bw /dogzilla/joint_states
+...
+```
