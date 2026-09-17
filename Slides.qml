@@ -76,10 +76,10 @@ Window {
                                  { "source": "../presentation/" + actualFilename,
                                      "language": "qml" })
                 break
-            case "qml show: left run: right": // TODO sub-parsing; actually run the QML alongside
-                loader.setSource("components/CodeSlide.qml",
+            case "qml show: left run: right":
+                loader.setSource("components/QmlAndLoaderSlide.qml",
                                  { "source": "../presentation/" + actualFilename,
-                                     "language": "qml" })
+                                     "show": "left", "run": "right" })
                 break
             }
         }

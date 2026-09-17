@@ -4,7 +4,9 @@ import QtQuick.Controls
 Flickable {
     id: flick
     property url source
-    property string language
+    property string show // "left" or "right"; TODO: use it
+    property string run
+    property real loaderScale: 1.5
     property alias diagnosticsEnabled: highlighterLoader.diagnosticsWanted
 
     contentWidth: codeText.contentWidth
@@ -36,5 +38,24 @@ Flickable {
         }
     }
 
-    ScrollBar.vertical: ScrollBar { id: scrollBar; width: 24 }
+    ScrollBar.vertical: ScrollBar {
+        id: scrollBar
+        width: 24
+        parent: flick.parent
+        anchors {
+            left: flick.left
+            top: flick.top
+            bottom: flick.bottom
+        }
+    }
+
+    Loader {
+        parent: flick.parent
+        y: 60
+        anchors.right: parent.right
+        anchors.margins: 20
+        source: flick.source
+        transformOrigin: Item.TopRight
+        scale: flick.loaderScale
+    }
 }

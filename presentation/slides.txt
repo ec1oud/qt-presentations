@@ -4,6 +4,7 @@ ros.qml
 rosutil.md
 layers.qml
 topics.md
+simplePublisher.qml show: left run: right
 services.md
 parameters.md
 actions.md
