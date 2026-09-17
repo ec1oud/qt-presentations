@@ -9,6 +9,10 @@ Flickable {
 
     contentWidth: codeText.contentWidth
     contentHeight: codeText.contentHeight
+    leftMargin: 40
+    rightMargin: 40
+    topMargin: 40
+    bottomMargin: 40
 
     TextEdit {
         id: codeText

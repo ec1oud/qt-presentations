@@ -1,7 +1,13 @@
 import QtQuick
 // import QtQuick.VectorImage
 
-Image {
-    fillMode: Image.PreserveAspectFit
-    sourceSize.width: 3840
+Item {
+    property alias source: image.source
+    Image {
+        id: image
+        anchors.fill: parent
+        anchors.margins: 40
+        fillMode: Image.PreserveAspectFit
+        sourceSize.width: 3840
+    }
 }
