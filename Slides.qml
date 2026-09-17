@@ -81,9 +81,7 @@ Window {
     }
 
     Row {
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.margins: 2
+        anchors { right: parent.right; bottom: parent.bottom; margins: 2 }
         spacing: 6
 
         Text {
@@ -99,7 +97,22 @@ Window {
                 onTapped: slideSorter.visible = !slideSorter.visible
             }
         }
+    }
 
+    Text {
+        id: clock
+        font.pixelSize: Math.max(parent.height / 30, slideHeading.font.pixelSize)
+        anchors { right: parent.right; top: parent.top; margins: 6 }
+        text: "🕜"
+        Timer {
+            interval: 10000; repeat: true; running: true
+            onTriggered: {
+                const d = new Date()
+                const m = d.getMinutes()
+                clock.text = d.getHours() + ":" + (m < 10 ? "0" + m : m)
+                // clock.text = d.toLocaleTimeString("en_GB") // QTBUG-150479
+            }
+        }
     }
 
 
