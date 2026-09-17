@@ -4,7 +4,7 @@ ros.qml
 rosutil.md
 layers.qml
 topics.md
-simplePublisher.qml show: left run: right
+simpleSubscriber.qml show: left run: right
 services.md
 parameters.md
 actions.md
@@ -19,5 +19,6 @@ PreviewScene.qml show: left run: right
 twin-speech.svg
 speech.svg
 urdfviewer.md
-Dogzilla.qml show: left run: right
+simplePublisher.qml show: left run: right
+Dogzilla.qml show
 
