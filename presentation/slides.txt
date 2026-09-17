@@ -17,6 +17,6 @@ twin-motion.svg
 PreviewScene.qml show: left run: right
 twin-speech.svg
 speech.svg
-Dogzilla.qml show: left run: right
 urdfviewer.md
+Dogzilla.qml show: left run: right
 

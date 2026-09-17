@@ -1,4 +1,4 @@
-# Exporting URDF to a Qt Quick 3D Digital Twin
+# How to write your own Qt Quick 3D Digital Twin
 
 But first: *what is URDF?*
 
