@@ -32,7 +32,12 @@ Window {
     }
 
     onCurrentFilenameChanged: loader.load()
-    Component.onCompleted: loader.load()
+    Component.onCompleted: {
+        loader.load()
+        const lastArg = parseFloat(Application.arguments[Application.arguments.length - 1])
+        if (Number.isInteger(lastArg))
+            current = lastArg
+    }
 
     Loader {
         id: loader
