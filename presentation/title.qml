@@ -31,17 +31,43 @@ Rectangle {
 ## Architecture and Demo
 
 shawn.rutledge @ qt.io
-
-[URL here]
 "
     }
 
     Image {
         source: "resources/qt_logo.svg"
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        anchors.margins: 50
+        anchors { top: parent.top; right: parent.right; margins: 50 }
         sourceSize.height: 100
+    }
+
+    Image {
+        id: docsQR
+        source: "resources/docs-url.png"
+        anchors {
+            left: parent.left
+            bottom: parent.bottom
+            margins: 100
+        }
+    }
+    Text {
+        anchors { top: docsQR.bottom; left: docsQR.left; margins: 8 }
+        color: "white"; font: markdownText.font
+        text: "https://doc-snapshots.qt.io/qtros2/"
+    }
+
+    Image {
+        id: codeQR
+        source: "resources/code-url.png"
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            margins: 100
+        }
+    }
+    Text {
+        anchors { top: codeQR.bottom; right: codeQR.right; margins: 8 }
+        color: "white"; font: markdownText.font
+        text: "https://git.qt.io/qt-robotics"
     }
 }
 
