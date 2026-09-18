@@ -20,6 +20,7 @@ PreviewScene.qml show: left run: right
 twin-speech.svg
 speech.svg
 urdfviewer.md
+collision.qml
 simplePublisher.qml show: left run: right
 Dogzilla.qml show
 
