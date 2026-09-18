@@ -104,7 +104,7 @@ Rectangle {
         }
         Box {
             color: 'aquamarine'
-            title: "Qt ROS 2 Bridge"
+            title: "Qt ROS"
             text: "- Generated QML pubs, subs, servers, clients, ...\n- Generated QML value types\n- Qt event-loop integration"
             // text: "- Generated QML pubs, subs, servers, clients, ...\n- Generated QML value types\n- QRos2Node, QRos2Context\n- Qt event-loop integration"
             Layout.row: 1

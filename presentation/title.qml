@@ -27,7 +27,7 @@ Rectangle {
         transformOrigin: Item.TopLeft
         scale: 1.5
 		text: "
-# Introduction to Qt ROS Bridge
+# Introduction to Qt ROS
 ## Architecture and Demo
 
 shawn.rutledge @ qt.io
@@ -67,7 +67,7 @@ shawn.rutledge @ qt.io
     Text {
         anchors { top: codeQR.bottom; right: codeQR.right; margins: 8 }
         color: "white"; font: markdownText.font
-        text: "https://git.qt.io/qt-robotics"
+        text: "https://github.com/TheQtCompanyRnD/qtros"
     }
 }
 
