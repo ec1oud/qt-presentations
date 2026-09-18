@@ -13,6 +13,7 @@ Window {
     property string fontFamily: "Titillium Web"
     property real fontSize: width * 0.015
     property real headingFontSize: width * 0.03
+    property real slideScale: height / 1080
 
     Shortcut {
         sequence: StandardKey.MoveToPreviousPage
