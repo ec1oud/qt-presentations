@@ -1,5 +1,6 @@
 title.qml
 qt.qml
+declarative.qml show: left run: right
 ros.qml
 rosutil.md
 layers.qml
