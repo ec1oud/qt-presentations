@@ -21,6 +21,7 @@ twin-speech.svg
 speech.svg
 urdfviewer.md
 collision.qml show: left run: right
+simple_arm.urdf
 simplePublisher.qml show: left run: right
 Dogzilla.qml show
 

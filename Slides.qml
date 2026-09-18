@@ -43,7 +43,8 @@ Window {
     Loader {
         id: loader
         anchors.fill: parent
-        onSourceChanged: console.log(background.current + ": changed to", source, "of", background.filenames)
+        onSourceChanged: console.log(background.current + ": changed to", source,
+                                     "for", background.currentFilename, "of", background.filenames)
 
         function load() {
             const dottedParts = background.currentFilename.length ? currentFilename.split(".") : []
@@ -56,6 +57,12 @@ Window {
                 break
             case "md":
                 loader.setSource("components/MarkdownSlide.qml",
+                                 { "source": "../presentation/" + currentFilename })
+                break
+            case "txt":
+            case "urdf":
+            case "xml":
+                loader.setSource("components/TextSlide.qml",
                                  { "source": "../presentation/" + currentFilename })
                 break
             case "svg":
