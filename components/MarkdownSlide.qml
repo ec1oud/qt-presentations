@@ -27,6 +27,7 @@ Flickable {
         baseUrl: flick.source
         font.pixelSize: fontSize // from Slides.qml
         font.family: fontFamily
+        renderType: TextEdit.CurveRendering
 
         // Rectangle {
         //     anchors.fill: parent

@@ -1,9 +1,11 @@
 title.qml
+agenda.md
 qt.qml
 declarative.qml show: left run: right
 ros.qml
 rosutil.md
 layers.qml
+ros-comms.md
 topics.md
 simpleSubscriber.qml show: left run: right
 services.md
@@ -19,9 +21,10 @@ twin-motion.svg
 PreviewScene.qml show: left run: right
 twin-speech.svg
 speech.svg
+urdf.md
+simple_arm.urdf
 urdfviewer.md
 collision.qml show: left run: right
-simple_arm.urdf
 simplePublisher.qml show: left run: right
 Dogzilla.qml show
 
