@@ -1,18 +1,5 @@
 # How to write your own Qt Quick 3D Digital Twin
 
-But first: *what is URDF?*
-
-- **U**nified **R**obot **D**escription **F**ormat
-- industry-standard XML schema
-- links and joints
-- visual materials
-- collision volumes
-- physics: mass, moment of inertia
-
-How to get it: export from your CAD
-
-How to use it:
-
 ```
 $ urdfviewer --help 
 Usage: /home/rutledge/dev/qt-stabilizing-rel/qtbase/bin/urdfviewer [options] urdf or xacro destination 

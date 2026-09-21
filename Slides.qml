@@ -50,13 +50,17 @@ Window {
             const dottedParts = background.currentFilename.length ? currentFilename.split(".") : []
             const actualFilename = background.currentFilename.length ? currentFilename.split(" ")[0] : []
             const currentType = dottedParts.length ? dottedParts[dottedParts.length - 1] : ""
-            console.log("load", background.current, currentType)
+            console.log("load", background.current, actualFilename, currentType)
             switch (currentType) {
             case "qml":
                 loader.setSource("presentation/" + currentFilename)
                 break
             case "md":
                 loader.setSource("components/MarkdownSlide.qml",
+                                 { "source": "../presentation/" + currentFilename })
+                break
+            case "html":
+                loader.setSource("components/HtmlSlide.qml",
                                  { "source": "../presentation/" + currentFilename })
                 break
             case "txt":
