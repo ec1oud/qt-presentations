@@ -11,6 +11,7 @@ simpleSubscriber.qml show: left run: right
 services.md
 parameters.md
 actions.md
+dogzilla.svg
 dogzilla-components.svg
 dogzilla-components-qt.svg
 dds-rmw-robot-twin.pdf
