@@ -4,6 +4,7 @@ qt.qml
 declarative.qml show: left run: right
 ros.qml
 rosutil.md
+rosversions.md
 layers.qml
 ros-comms.md
 topics.md
