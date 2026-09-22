@@ -6,13 +6,6 @@ Rectangle {
     height: 1080
     color: "black"
 
-    Image {
-        source: "resources/ndctechtown-black.png"
-        x: 50; y: 50
-        transformOrigin: Item.TopLeft
-        scale: 0.5 * parent.height / 1080
-    }
-
     TextEdit {
         id: markdownText
         color: "palegreen"
@@ -27,10 +20,25 @@ Rectangle {
         transformOrigin: Item.TopLeft
         scale: 1.5
 		text: "
-# Introduction to Qt ROS
-## Architecture and Demo
+## Introduction to Qt ROS - Architecture and Demo
 
-shawn.rutledge @ qt.io
+# Agenda
+
+Qt, Qt Quick, declarative programming
+
+What is ROS?
+
+ROS API stack
+
+ROS communication patterns
+
+Explanation of demo
+
+ROS communication patterns in the demo code
+
+Generating a Digital Twin from URDF
+
+Collision detection physics
 "
     }
 
@@ -54,21 +62,5 @@ shawn.rutledge @ qt.io
         color: "white"; font: markdownText.font
         text: "https://github.com/ec1oud/qt-presentations/tree/robotics"
     }
-
-    Image {
-        id: codeQR
-        source: "resources/code-url.png"
-        anchors {
-            left: parent.left
-            bottom: parent.bottom
-            margins: 100
-        }
-    }
-    Text {
-        anchors { top: codeQR.bottom; left: codeQR.left; margins: 8 }
-        color: "white"; font: markdownText.font
-        text: "https://github.com/TheQtCompanyRnD/qtros"
-    }
 }
 
-// TODO nice 3D animation
