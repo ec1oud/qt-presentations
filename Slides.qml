@@ -133,6 +133,27 @@ Window {
         }
     }
 
+    Shortcut {
+        sequence: StandardKey.Print
+
+        function zeroPad(num, places) {
+            var zero = places - num.toString().length + 1;
+            return Array(+(zero > 0 && zero)).join("0") + num;
+        }
+
+        function grabThisSlide() {
+            loader.grabToImage(
+                function(result) {
+                    result.saveToFile(`print/slide${zeroPad(background.current, 2)}.png`)
+                    if (background.current < background.slideCount) {
+                        ++background.current
+                        grabThisSlide()
+                    }
+                })
+        }
+
+        onActivated: grabThisSlide()
+    }
 
     Window {
         id: slideSorter
