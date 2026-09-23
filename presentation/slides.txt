@@ -29,4 +29,3 @@ simplePublisher.qml show: left run: right
 end.qml
 twin-speech.svg
 speech.svg
-

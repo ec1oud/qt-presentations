@@ -9,6 +9,7 @@ Window {
 
     property list<string> filenames: listEdit.text.split("\n")
     property int current: 0
+    property int slideCount: filenames.length - 2
     property string currentFilename: filenames[current]
     property string fontFamily: "Titillium Web"
     property real fontSize: width * 0.015
@@ -23,7 +24,7 @@ Window {
 
     Shortcut {
         sequence: StandardKey.MoveToNextPage
-        enabled: current < filenames.length - 1
+        enabled: current < slideCount
         onActivated: ++current
     }
 
@@ -104,7 +105,7 @@ Window {
         Text {
             id: slideHeading
             font.pixelSize: editIcon.height
-            text: `${current + 1} of ${filenames.length} : ${currentFilename}`
+            text: `${current + 1} of ${slideCount + 1} : ${currentFilename}`
         }
 
         Image {
