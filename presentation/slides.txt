@@ -21,12 +21,12 @@ motion-control.svg
 dogzillad-main.qml show
 twin-motion.svg
 PreviewScene.qml show: left run: right
-twin-speech.svg
-speech.svg
 urdf.md
 simple_arm_urdf.qml
 collision.qml show: left run: right
 urdfviewer.md
 simplePublisher.qml show: left run: right
-Dogzilla.qml show
+end.qml
+twin-speech.svg
+speech.svg
 

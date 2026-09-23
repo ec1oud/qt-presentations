@@ -25,12 +25,13 @@ Item {
 		text: "
 # What is Qt?
 - in the beginning: a general-purpose C++ framework and widget toolkit
-  * more modern than Xt, Athena, Motif etc.
+  * containers, network, ...
+  * improvement on Xt, Athena, Motif etc.
 - cross-platform (all the platforms)
-- more recently: exploit the GPU, move beyond C++
 - single-rooted C++ inheritance (QObject base)
 - properties with accessors and notifier signals; connect()
-- QML, Qt Quick, Qt Quick 3D, many newer modules
+- more recently: exploit the GPU, move beyond C++
+- QML, Qt Quick, 3D, Physics, ...
 "
     }
 
